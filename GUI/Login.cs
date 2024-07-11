@@ -20,7 +20,7 @@
             {
                 Application.Exit();
             }
-            
+
         }
 
         private void linkLabel1_MouseEnter(object sender, EventArgs e)
@@ -41,6 +41,13 @@
             {
                 Application.Exit();
             }
+        }
+
+        private void btn_DangNhap_Click(object sender, EventArgs e)
+        {
+            TrangChu trangChu = new TrangChu();
+            trangChu.Show();
+            this.Hide();
         }
     }
 }

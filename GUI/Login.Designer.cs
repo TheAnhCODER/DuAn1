@@ -59,7 +59,7 @@
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
             panel1.Size = new Size(280, 284);
             panel1.TabIndex = 0;
@@ -92,7 +92,7 @@
             // 
             pictureBox1.Image = Properties.Resources._7cc68991af7c0d22546d;
             pictureBox1.Location = new Point(21, 0);
-            pictureBox1.Margin = new Padding(2, 2, 2, 2);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(237, 194);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -114,7 +114,7 @@
             // 
             panel2.Controls.Add(tbt_TenDangNhap);
             panel2.Location = new Point(284, 103);
-            panel2.Margin = new Padding(2, 2, 2, 2);
+            panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
             panel2.Size = new Size(307, 22);
             panel2.TabIndex = 2;
@@ -122,7 +122,7 @@
             // tbt_TenDangNhap
             // 
             tbt_TenDangNhap.Location = new Point(2, 2);
-            tbt_TenDangNhap.Margin = new Padding(2, 2, 2, 2);
+            tbt_TenDangNhap.Margin = new Padding(2);
             tbt_TenDangNhap.Name = "tbt_TenDangNhap";
             tbt_TenDangNhap.PlaceholderText = "Số điện thoại hoặc email";
             tbt_TenDangNhap.Size = new Size(304, 23);
@@ -132,7 +132,7 @@
             // 
             panel3.Controls.Add(tbt_MatKhau);
             panel3.Location = new Point(284, 153);
-            panel3.Margin = new Padding(2, 2, 2, 2);
+            panel3.Margin = new Padding(2);
             panel3.Name = "panel3";
             panel3.Size = new Size(305, 22);
             panel3.TabIndex = 3;
@@ -140,7 +140,7 @@
             // tbt_MatKhau
             // 
             tbt_MatKhau.Location = new Point(2, 2);
-            tbt_MatKhau.Margin = new Padding(2, 2, 2, 2);
+            tbt_MatKhau.Margin = new Padding(2);
             tbt_MatKhau.Name = "tbt_MatKhau";
             tbt_MatKhau.PasswordChar = '*';
             tbt_MatKhau.PlaceholderText = "Mật khẩu";
@@ -173,18 +173,19 @@
             // 
             btn_DangNhap.Cursor = Cursors.Hand;
             btn_DangNhap.Location = new Point(331, 221);
-            btn_DangNhap.Margin = new Padding(2, 2, 2, 2);
+            btn_DangNhap.Margin = new Padding(2);
             btn_DangNhap.Name = "btn_DangNhap";
             btn_DangNhap.Size = new Size(78, 38);
             btn_DangNhap.TabIndex = 7;
             btn_DangNhap.Text = "Đăng nhập";
             btn_DangNhap.UseVisualStyleBackColor = true;
+            btn_DangNhap.Click += btn_DangNhap_Click;
             // 
             // btn_Thoat
             // 
             btn_Thoat.Cursor = Cursors.Hand;
             btn_Thoat.Location = new Point(464, 221);
-            btn_Thoat.Margin = new Padding(2, 2, 2, 2);
+            btn_Thoat.Margin = new Padding(2);
             btn_Thoat.Name = "btn_Thoat";
             btn_Thoat.Size = new Size(78, 38);
             btn_Thoat.TabIndex = 8;
@@ -214,7 +215,7 @@
             pictureBox2.Cursor = Cursors.Hand;
             pictureBox2.Image = Properties.Resources.d06b29da1429b677ef38;
             pictureBox2.Location = new Point(581, 0);
-            pictureBox2.Margin = new Padding(2, 2, 2, 2);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(20, 20);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -241,7 +242,7 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
