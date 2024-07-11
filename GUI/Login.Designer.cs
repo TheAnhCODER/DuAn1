@@ -197,6 +197,7 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.Cursor = Cursors.Hand;
             pictureBox2.Image = Properties.Resources.d06b29da1429b677ef38;
             pictureBox2.Location = new Point(822, 0);
             pictureBox2.Name = "pictureBox2";
