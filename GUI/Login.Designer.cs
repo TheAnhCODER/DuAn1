@@ -66,22 +66,22 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Arial", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
             label2.Location = new Point(30, 369);
             label2.Name = "label2";
-            label2.Size = new Size(339, 36);
+            label2.Size = new Size(349, 45);
             label2.TabIndex = 1;
             label2.Text = "Ứng dụng bán quần áo";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Arial", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 312);
+            label1.Location = new Point(17, 312);
             label1.Name = "label1";
-            label1.Size = new Size(357, 36);
+            label1.Size = new Size(362, 45);
             label1.TabIndex = 1;
             label1.Text = "Chào mừng bạn đến với";
             // 
