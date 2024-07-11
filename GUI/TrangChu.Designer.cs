@@ -30,7 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrangChu));
             panel1 = new Panel();
-            label1 = new Label();
+            tbt_TenUser = new TextBox();
+            lb_Ten = new Label();
             SidePanel = new Panel();
             btn_TaiKhoan = new Button();
             btn_KhuyenMai = new Button();
@@ -58,7 +59,8 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(29, 135, 209);
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(tbt_TenUser);
+            panel1.Controls.Add(lb_Ten);
             panel1.Controls.Add(SidePanel);
             panel1.Controls.Add(btn_TaiKhoan);
             panel1.Controls.Add(btn_KhuyenMai);
@@ -75,15 +77,27 @@
             panel1.Size = new Size(215, 628);
             panel1.TabIndex = 0;
             // 
-            // label1
+            // tbt_TenUser
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(3, 102);
-            label1.Name = "label1";
-            label1.Size = new Size(69, 21);
-            label1.TabIndex = 1;
-            label1.Text = "Xin chào";
+            tbt_TenUser.BackColor = Color.FromArgb(29, 135, 209);
+            tbt_TenUser.BorderStyle = BorderStyle.None;
+            tbt_TenUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            tbt_TenUser.ForeColor = Color.White;
+            tbt_TenUser.Location = new Point(3, 102);
+            tbt_TenUser.Name = "tbt_TenUser";
+            tbt_TenUser.ReadOnly = true;
+            tbt_TenUser.Size = new Size(209, 18);
+            tbt_TenUser.TabIndex = 2;
+            tbt_TenUser.TextAlign = HorizontalAlignment.Center;
+            // 
+            // lb_Ten
+            // 
+            lb_Ten.AutoSize = true;
+            lb_Ten.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lb_Ten.Location = new Point(3, 102);
+            lb_Ten.Name = "lb_Ten";
+            lb_Ten.Size = new Size(0, 21);
+            lb_Ten.TabIndex = 1;
             // 
             // SidePanel
             // 
@@ -95,6 +109,7 @@
             // 
             // btn_TaiKhoan
             // 
+            btn_TaiKhoan.Cursor = Cursors.Hand;
             btn_TaiKhoan.FlatAppearance.BorderSize = 0;
             btn_TaiKhoan.FlatStyle = FlatStyle.Flat;
             btn_TaiKhoan.Font = new Font("Calibri", 16.25F);
@@ -111,6 +126,7 @@
             // 
             // btn_KhuyenMai
             // 
+            btn_KhuyenMai.Cursor = Cursors.Hand;
             btn_KhuyenMai.FlatAppearance.BorderSize = 0;
             btn_KhuyenMai.FlatStyle = FlatStyle.Flat;
             btn_KhuyenMai.Font = new Font("Calibri", 16.25F);
@@ -121,12 +137,13 @@
             btn_KhuyenMai.Name = "btn_KhuyenMai";
             btn_KhuyenMai.Size = new Size(205, 57);
             btn_KhuyenMai.TabIndex = 1;
-            btn_KhuyenMai.Text = "   Khuyến Mãi";
+            btn_KhuyenMai.Text = "    Khuyến Mãi";
             btn_KhuyenMai.UseVisualStyleBackColor = true;
             btn_KhuyenMai.Click += btn_KhuyenMai_Click_1;
             // 
             // btn_ThongKe
             // 
+            btn_ThongKe.Cursor = Cursors.Hand;
             btn_ThongKe.FlatAppearance.BorderSize = 0;
             btn_ThongKe.FlatStyle = FlatStyle.Flat;
             btn_ThongKe.Font = new Font("Calibri", 16.25F);
@@ -143,10 +160,13 @@
             // 
             // btn_HoaDon
             // 
+            btn_HoaDon.Cursor = Cursors.Hand;
             btn_HoaDon.FlatAppearance.BorderSize = 0;
             btn_HoaDon.FlatStyle = FlatStyle.Flat;
             btn_HoaDon.Font = new Font("Calibri", 16.25F);
             btn_HoaDon.ForeColor = Color.White;
+            btn_HoaDon.Image = (Image)resources.GetObject("btn_HoaDon.Image");
+            btn_HoaDon.ImageAlign = ContentAlignment.MiddleLeft;
             btn_HoaDon.Location = new Point(10, 318);
             btn_HoaDon.Name = "btn_HoaDon";
             btn_HoaDon.Size = new Size(205, 57);
@@ -157,6 +177,7 @@
             // 
             // btn_NhanVien
             // 
+            btn_NhanVien.Cursor = Cursors.Hand;
             btn_NhanVien.FlatAppearance.BorderSize = 0;
             btn_NhanVien.FlatStyle = FlatStyle.Flat;
             btn_NhanVien.Font = new Font("Calibri", 16.25F);
@@ -173,6 +194,7 @@
             // 
             // btn_KhachHang
             // 
+            btn_KhachHang.Cursor = Cursors.Hand;
             btn_KhachHang.FlatAppearance.BorderSize = 0;
             btn_KhachHang.FlatStyle = FlatStyle.Flat;
             btn_KhachHang.Font = new Font("Calibri", 16.25F);
@@ -189,6 +211,7 @@
             // 
             // btn_SanPham
             // 
+            btn_SanPham.Cursor = Cursors.Hand;
             btn_SanPham.FlatAppearance.BorderSize = 0;
             btn_SanPham.FlatStyle = FlatStyle.Flat;
             btn_SanPham.Font = new Font("Calibri", 16.25F);
@@ -205,6 +228,7 @@
             // 
             // btn_BanHang
             // 
+            btn_BanHang.Cursor = Cursors.Hand;
             btn_BanHang.FlatAppearance.BorderSize = 0;
             btn_BanHang.FlatStyle = FlatStyle.Flat;
             btn_BanHang.Font = new Font("Calibri", 16.25F);
@@ -335,7 +359,7 @@
         private Button btn_BanHang;
         private Panel SidePanel;
         private Button btn_TaiKhoan;
-        private Label label1;
+        private Label lb_Ten;
         private Panel panel9;
         private BanHangControl banHang1;
         private BanHangControl banHangControl1;
@@ -347,5 +371,6 @@
         private NhanVienControl nhanVienControl1;
         private HoaDonControl hoaDonControl1;
         private PictureBox pictureBox2;
+        private TextBox tbt_TenUser;
     }
 }

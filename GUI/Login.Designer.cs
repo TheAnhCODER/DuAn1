@@ -61,7 +61,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(280, 284);
+            panel1.Size = new Size(280, 333);
             panel1.TabIndex = 0;
             // 
             // label2
@@ -69,7 +69,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(21, 221);
+            label2.Location = new Point(22, 267);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(236, 30);
@@ -81,7 +81,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 187);
+            label1.Location = new Point(12, 219);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(246, 30);
@@ -91,10 +91,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources._7cc68991af7c0d22546d;
-            pictureBox1.Location = new Point(21, 0);
+            pictureBox1.Location = new Point(21, -9);
             pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(237, 194);
+            pictureBox1.Size = new Size(237, 249);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -102,80 +102,86 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.Location = new Point(356, 29);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(150, 32);
+            label3.Size = new Size(161, 32);
             label3.TabIndex = 1;
             label3.Text = "ĐĂNG NHẬP";
             // 
             // panel2
             // 
             panel2.Controls.Add(tbt_TenDangNhap);
-            panel2.Location = new Point(284, 103);
+            panel2.Location = new Point(284, 106);
             panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(307, 22);
+            panel2.Size = new Size(307, 36);
             panel2.TabIndex = 2;
             // 
             // tbt_TenDangNhap
             // 
+            tbt_TenDangNhap.BorderStyle = BorderStyle.None;
+            tbt_TenDangNhap.Font = new Font("Segoe UI", 12F);
             tbt_TenDangNhap.Location = new Point(2, 2);
             tbt_TenDangNhap.Margin = new Padding(2);
             tbt_TenDangNhap.Name = "tbt_TenDangNhap";
             tbt_TenDangNhap.PlaceholderText = "Số điện thoại hoặc email";
-            tbt_TenDangNhap.Size = new Size(304, 23);
+            tbt_TenDangNhap.Size = new Size(303, 22);
             tbt_TenDangNhap.TabIndex = 0;
             // 
             // panel3
             // 
             panel3.Controls.Add(tbt_MatKhau);
-            panel3.Location = new Point(284, 153);
+            panel3.Location = new Point(286, 165);
             panel3.Margin = new Padding(2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(305, 22);
+            panel3.Size = new Size(307, 32);
             panel3.TabIndex = 3;
             // 
             // tbt_MatKhau
             // 
+            tbt_MatKhau.BorderStyle = BorderStyle.None;
+            tbt_MatKhau.Font = new Font("Segoe UI", 12F);
             tbt_MatKhau.Location = new Point(2, 2);
             tbt_MatKhau.Margin = new Padding(2);
             tbt_MatKhau.Name = "tbt_MatKhau";
             tbt_MatKhau.PasswordChar = '*';
             tbt_MatKhau.PlaceholderText = "Mật khẩu";
-            tbt_MatKhau.Size = new Size(302, 23);
+            tbt_MatKhau.Size = new Size(303, 22);
             tbt_MatKhau.TabIndex = 0;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.Location = new Point(284, 85);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(66, 19);
+            label4.Size = new Size(73, 19);
             label4.TabIndex = 4;
             label4.Text = "Tài khoản";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(284, 134);
+            label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(284, 144);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(68, 19);
+            label5.Size = new Size(71, 19);
             label5.TabIndex = 5;
             label5.Text = "Mật khẩu";
             // 
             // btn_DangNhap
             // 
             btn_DangNhap.Cursor = Cursors.Hand;
-            btn_DangNhap.Location = new Point(331, 221);
+            btn_DangNhap.FlatAppearance.BorderSize = 0;
+            btn_DangNhap.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btn_DangNhap.Location = new Point(322, 257);
             btn_DangNhap.Margin = new Padding(2);
             btn_DangNhap.Name = "btn_DangNhap";
-            btn_DangNhap.Size = new Size(78, 38);
+            btn_DangNhap.Size = new Size(82, 40);
             btn_DangNhap.TabIndex = 7;
             btn_DangNhap.Text = "Đăng nhập";
             btn_DangNhap.UseVisualStyleBackColor = true;
@@ -184,10 +190,12 @@
             // btn_Thoat
             // 
             btn_Thoat.Cursor = Cursors.Hand;
-            btn_Thoat.Location = new Point(464, 221);
+            btn_Thoat.FlatAppearance.BorderSize = 0;
+            btn_Thoat.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btn_Thoat.Location = new Point(482, 257);
             btn_Thoat.Margin = new Padding(2);
             btn_Thoat.Name = "btn_Thoat";
-            btn_Thoat.Size = new Size(78, 38);
+            btn_Thoat.Size = new Size(82, 40);
             btn_Thoat.TabIndex = 8;
             btn_Thoat.Text = "Thoát";
             btn_Thoat.UseVisualStyleBackColor = true;
@@ -199,7 +207,7 @@
             llb_QuenMK.AutoSize = true;
             llb_QuenMK.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             llb_QuenMK.LinkColor = Color.Black;
-            llb_QuenMK.Location = new Point(480, 187);
+            llb_QuenMK.Location = new Point(482, 210);
             llb_QuenMK.Margin = new Padding(2, 0, 2, 0);
             llb_QuenMK.Name = "llb_QuenMK";
             llb_QuenMK.Size = new Size(111, 19);
@@ -228,7 +236,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonFace;
-            ClientSize = new Size(600, 284);
+            ClientSize = new Size(600, 333);
             ControlBox = false;
             Controls.Add(pictureBox2);
             Controls.Add(llb_QuenMK);

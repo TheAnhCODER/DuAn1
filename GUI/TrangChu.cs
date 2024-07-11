@@ -20,17 +20,20 @@ namespace GUI
                 int idChucVu = Convert.ToInt32(userInfo.Rows[0]["Id_chucvu"]);
                 PhanQuyenNguoiDung(idChucVu);
             }
+            string loiChao = "Xin chào: "+ userInfo.Rows[0]["Ten_nhan_vien"].ToString();
+            this.tbt_TenUser.Text = loiChao;
+
         }
 
 
         private void PhanQuyenNguoiDung(int idChucVu)
         {
-           
+
             switch (idChucVu)
             {
                 case 1: // Quản lý
                         // Hiển thị toàn bộ chức năng
-                   btn_BanHang.Enabled = true;
+                    btn_BanHang.Enabled = true;
                     btn_HoaDon.Enabled = true;
                     btn_KhachHang.Enabled = true;
                     btn_KhuyenMai.Enabled = true;
@@ -56,7 +59,7 @@ namespace GUI
 
 
 
-                    private void btn_BanHang_Click(object sender, EventArgs e)
+        private void btn_BanHang_Click(object sender, EventArgs e)
         {
             MoveSidePanel(btn_BanHang);
             banHangControl1.BringToFront();
@@ -114,6 +117,9 @@ namespace GUI
             taiKhoanControl1.BringToFront();
         }
 
-        
+        private void TrangChu_Load(object sender, EventArgs e)
+        {
+         
+        }
     }
 }
