@@ -1,0 +1,12 @@
+.vs/
+*.user
+*.suo
+*.csproj.user
+*.dbmdl
+*.jfm
+*.pdb
+*.obj
+*.exe
+*.dll
+bin/
+obj/
