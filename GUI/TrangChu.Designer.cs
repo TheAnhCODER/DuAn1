@@ -99,6 +99,8 @@
             btn_TaiKhoan.FlatStyle = FlatStyle.Flat;
             btn_TaiKhoan.Font = new Font("Calibri", 16.25F);
             btn_TaiKhoan.ForeColor = Color.White;
+            btn_TaiKhoan.Image = (Image)resources.GetObject("btn_TaiKhoan.Image");
+            btn_TaiKhoan.ImageAlign = ContentAlignment.MiddleLeft;
             btn_TaiKhoan.Location = new Point(10, 570);
             btn_TaiKhoan.Name = "btn_TaiKhoan";
             btn_TaiKhoan.Size = new Size(205, 57);
@@ -129,6 +131,8 @@
             btn_ThongKe.FlatStyle = FlatStyle.Flat;
             btn_ThongKe.Font = new Font("Calibri", 16.25F);
             btn_ThongKe.ForeColor = Color.White;
+            btn_ThongKe.Image = (Image)resources.GetObject("btn_ThongKe.Image");
+            btn_ThongKe.ImageAlign = ContentAlignment.MiddleLeft;
             btn_ThongKe.Location = new Point(10, 444);
             btn_ThongKe.Name = "btn_ThongKe";
             btn_ThongKe.Size = new Size(205, 57);
@@ -143,7 +147,7 @@
             btn_HoaDon.FlatStyle = FlatStyle.Flat;
             btn_HoaDon.Font = new Font("Calibri", 16.25F);
             btn_HoaDon.ForeColor = Color.White;
-            btn_HoaDon.Location = new Point(10, 381);
+            btn_HoaDon.Location = new Point(10, 318);
             btn_HoaDon.Name = "btn_HoaDon";
             btn_HoaDon.Size = new Size(205, 57);
             btn_HoaDon.TabIndex = 1;
@@ -159,7 +163,7 @@
             btn_NhanVien.ForeColor = Color.White;
             btn_NhanVien.Image = (Image)resources.GetObject("btn_NhanVien.Image");
             btn_NhanVien.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_NhanVien.Location = new Point(10, 318);
+            btn_NhanVien.Location = new Point(10, 381);
             btn_NhanVien.Name = "btn_NhanVien";
             btn_NhanVien.Size = new Size(205, 57);
             btn_NhanVien.TabIndex = 1;
@@ -189,11 +193,13 @@
             btn_SanPham.FlatStyle = FlatStyle.Flat;
             btn_SanPham.Font = new Font("Calibri", 16.25F);
             btn_SanPham.ForeColor = Color.White;
+            btn_SanPham.Image = (Image)resources.GetObject("btn_SanPham.Image");
+            btn_SanPham.ImageAlign = ContentAlignment.MiddleLeft;
             btn_SanPham.Location = new Point(10, 192);
             btn_SanPham.Name = "btn_SanPham";
             btn_SanPham.Size = new Size(205, 57);
             btn_SanPham.TabIndex = 1;
-            btn_SanPham.Text = "Sản Phẩm";
+            btn_SanPham.Text = " Sản Phẩm";
             btn_SanPham.UseVisualStyleBackColor = true;
             btn_SanPham.Click += btn_SanPham_Click;
             // 

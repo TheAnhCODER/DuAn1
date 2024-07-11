@@ -1,4 +1,7 @@
-﻿namespace GUI
+﻿using BUS.Services;
+using System.Data;
+
+namespace GUI
 {
     public partial class Login : Form
     {
@@ -7,6 +10,7 @@
             InitializeComponent();
         }
 
+        private NhanVienBus nhanVienBUS = new NhanVienBus();
         private void Login_Load(object sender, EventArgs e)
         {
 
@@ -45,9 +49,23 @@
 
         private void btn_DangNhap_Click(object sender, EventArgs e)
         {
-            TrangChu trangChu = new TrangChu();
-            trangChu.Show();
-            this.Hide();
+            string email = tbt_TenDangNhap.Text;
+            string matKhau = tbt_MatKhau.Text;
+            DataTable userInfo;
+
+            if (nhanVienBUS.CheckLogin(email, matKhau, out userInfo))
+            {
+                MessageBox.Show("Đăng nhập thành công!");
+                // Chuyển hướng đến giao diện chính của ứng dụng và truyền thông tin người dùng
+
+                TrangChu trangChu = new TrangChu(userInfo);
+                trangChu.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Đăng nhập thất bại. Vui lòng kiểm tra lại tài khoản và mật khẩu.");
+            }
         }
     }
 }
