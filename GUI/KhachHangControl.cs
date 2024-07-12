@@ -26,5 +26,10 @@ namespace GUI
                 Application.Exit();
             }
         }
+
+        private void KhachHangControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
