@@ -73,9 +73,8 @@
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(310, 1047);
+            panel1.Size = new Size(217, 628);
             panel1.TabIndex = 0;
             // 
             // tbt_TenUser
@@ -84,11 +83,10 @@
             tbt_TenUser.BorderStyle = BorderStyle.None;
             tbt_TenUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             tbt_TenUser.ForeColor = Color.White;
-            tbt_TenUser.Location = new Point(4, 170);
-            tbt_TenUser.Margin = new Padding(4, 5, 4, 5);
+            tbt_TenUser.Location = new Point(3, 102);
             tbt_TenUser.Name = "tbt_TenUser";
             tbt_TenUser.ReadOnly = true;
-            tbt_TenUser.Size = new Size(299, 27);
+            tbt_TenUser.Size = new Size(209, 18);
             tbt_TenUser.TabIndex = 2;
             tbt_TenUser.TextAlign = HorizontalAlignment.Center;
             // 
@@ -96,19 +94,17 @@
             // 
             lb_Ten.AutoSize = true;
             lb_Ten.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lb_Ten.Location = new Point(4, 170);
-            lb_Ten.Margin = new Padding(4, 0, 4, 0);
+            lb_Ten.Location = new Point(3, 102);
             lb_Ten.Name = "lb_Ten";
-            lb_Ten.Size = new Size(0, 32);
+            lb_Ten.Size = new Size(0, 21);
             lb_Ten.TabIndex = 1;
             // 
             // SidePanel
             // 
             SidePanel.BackColor = Color.White;
-            SidePanel.Location = new Point(0, 215);
-            SidePanel.Margin = new Padding(4, 5, 4, 5);
+            SidePanel.Location = new Point(0, 129);
             SidePanel.Name = "SidePanel";
-            SidePanel.Size = new Size(11, 95);
+            SidePanel.Size = new Size(8, 57);
             SidePanel.TabIndex = 1;
             // 
             // btn_TaiKhoan
@@ -120,10 +116,9 @@
             btn_TaiKhoan.ForeColor = Color.White;
             btn_TaiKhoan.Image = (Image)resources.GetObject("btn_TaiKhoan.Image");
             btn_TaiKhoan.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_TaiKhoan.Location = new Point(14, 950);
-            btn_TaiKhoan.Margin = new Padding(4, 5, 4, 5);
+            btn_TaiKhoan.Location = new Point(10, 570);
             btn_TaiKhoan.Name = "btn_TaiKhoan";
-            btn_TaiKhoan.Size = new Size(293, 95);
+            btn_TaiKhoan.Size = new Size(205, 57);
             btn_TaiKhoan.TabIndex = 1;
             btn_TaiKhoan.Text = "Tài Khoản";
             btn_TaiKhoan.UseVisualStyleBackColor = true;
@@ -138,10 +133,9 @@
             btn_KhuyenMai.ForeColor = Color.White;
             btn_KhuyenMai.Image = (Image)resources.GetObject("btn_KhuyenMai.Image");
             btn_KhuyenMai.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_KhuyenMai.Location = new Point(14, 845);
-            btn_KhuyenMai.Margin = new Padding(4, 5, 4, 5);
+            btn_KhuyenMai.Location = new Point(10, 507);
             btn_KhuyenMai.Name = "btn_KhuyenMai";
-            btn_KhuyenMai.Size = new Size(293, 95);
+            btn_KhuyenMai.Size = new Size(205, 57);
             btn_KhuyenMai.TabIndex = 1;
             btn_KhuyenMai.Text = "    Khuyến Mãi";
             btn_KhuyenMai.UseVisualStyleBackColor = true;
@@ -156,10 +150,9 @@
             btn_ThongKe.ForeColor = Color.White;
             btn_ThongKe.Image = (Image)resources.GetObject("btn_ThongKe.Image");
             btn_ThongKe.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_ThongKe.Location = new Point(14, 740);
-            btn_ThongKe.Margin = new Padding(4, 5, 4, 5);
+            btn_ThongKe.Location = new Point(10, 444);
             btn_ThongKe.Name = "btn_ThongKe";
-            btn_ThongKe.Size = new Size(293, 95);
+            btn_ThongKe.Size = new Size(205, 57);
             btn_ThongKe.TabIndex = 1;
             btn_ThongKe.Text = "Thống Kê";
             btn_ThongKe.UseVisualStyleBackColor = true;
@@ -174,10 +167,9 @@
             btn_HoaDon.ForeColor = Color.White;
             btn_HoaDon.Image = (Image)resources.GetObject("btn_HoaDon.Image");
             btn_HoaDon.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_HoaDon.Location = new Point(14, 530);
-            btn_HoaDon.Margin = new Padding(4, 5, 4, 5);
+            btn_HoaDon.Location = new Point(10, 318);
             btn_HoaDon.Name = "btn_HoaDon";
-            btn_HoaDon.Size = new Size(293, 95);
+            btn_HoaDon.Size = new Size(205, 57);
             btn_HoaDon.TabIndex = 1;
             btn_HoaDon.Text = "Hóa Đơn";
             btn_HoaDon.UseVisualStyleBackColor = true;
@@ -192,10 +184,9 @@
             btn_NhanVien.ForeColor = Color.White;
             btn_NhanVien.Image = (Image)resources.GetObject("btn_NhanVien.Image");
             btn_NhanVien.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_NhanVien.Location = new Point(14, 635);
-            btn_NhanVien.Margin = new Padding(4, 5, 4, 5);
+            btn_NhanVien.Location = new Point(10, 381);
             btn_NhanVien.Name = "btn_NhanVien";
-            btn_NhanVien.Size = new Size(293, 95);
+            btn_NhanVien.Size = new Size(205, 57);
             btn_NhanVien.TabIndex = 1;
             btn_NhanVien.Text = "  Nhân Viên";
             btn_NhanVien.UseVisualStyleBackColor = true;
@@ -210,10 +201,9 @@
             btn_KhachHang.ForeColor = Color.White;
             btn_KhachHang.Image = (Image)resources.GetObject("btn_KhachHang.Image");
             btn_KhachHang.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_KhachHang.Location = new Point(14, 425);
-            btn_KhachHang.Margin = new Padding(4, 5, 4, 5);
+            btn_KhachHang.Location = new Point(10, 255);
             btn_KhachHang.Name = "btn_KhachHang";
-            btn_KhachHang.Size = new Size(293, 95);
+            btn_KhachHang.Size = new Size(205, 57);
             btn_KhachHang.TabIndex = 1;
             btn_KhachHang.Text = "    Khách Hàng";
             btn_KhachHang.UseVisualStyleBackColor = true;
@@ -228,10 +218,9 @@
             btn_SanPham.ForeColor = Color.White;
             btn_SanPham.Image = (Image)resources.GetObject("btn_SanPham.Image");
             btn_SanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_SanPham.Location = new Point(14, 320);
-            btn_SanPham.Margin = new Padding(4, 5, 4, 5);
+            btn_SanPham.Location = new Point(10, 192);
             btn_SanPham.Name = "btn_SanPham";
-            btn_SanPham.Size = new Size(293, 95);
+            btn_SanPham.Size = new Size(205, 57);
             btn_SanPham.TabIndex = 1;
             btn_SanPham.Text = " Sản Phẩm";
             btn_SanPham.UseVisualStyleBackColor = true;
@@ -246,10 +235,9 @@
             btn_BanHang.ForeColor = Color.White;
             btn_BanHang.Image = Properties.Resources.icon_giohang;
             btn_BanHang.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_BanHang.Location = new Point(14, 215);
-            btn_BanHang.Margin = new Padding(4, 5, 4, 5);
+            btn_BanHang.Location = new Point(10, 129);
             btn_BanHang.Name = "btn_BanHang";
-            btn_BanHang.Size = new Size(293, 95);
+            btn_BanHang.Size = new Size(205, 57);
             btn_BanHang.TabIndex = 1;
             btn_BanHang.Text = "Bán Hàng";
             btn_BanHang.UseVisualStyleBackColor = true;
@@ -258,10 +246,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources._7cc68991af7c0d22546d;
-            pictureBox1.Location = new Point(0, -15);
-            pictureBox1.Margin = new Padding(4, 5, 4, 5);
+            pictureBox1.Location = new Point(0, -9);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(311, 180);
+            pictureBox1.Size = new Size(218, 108);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -276,19 +263,18 @@
             panel9.Controls.Add(khachHangControl1);
             panel9.Controls.Add(sanPhamControl1);
             panel9.Controls.Add(banHangControl1);
-            panel9.Location = new Point(309, 0);
-            panel9.Margin = new Padding(4, 5, 4, 5);
+            panel9.Location = new Point(216, 0);
             panel9.Name = "panel9";
-            panel9.Size = new Size(1240, 1047);
+            panel9.Size = new Size(868, 628);
             panel9.TabIndex = 1;
             // 
             // hoaDonControl1
             // 
             hoaDonControl1.AutoValidate = AutoValidate.EnablePreventFocusChange;
             hoaDonControl1.Location = new Point(0, 0);
-            hoaDonControl1.Margin = new Padding(6, 8, 6, 8);
+            hoaDonControl1.Margin = new Padding(4, 5, 4, 5);
             hoaDonControl1.Name = "hoaDonControl1";
-            hoaDonControl1.Size = new Size(1240, 1047);
+            hoaDonControl1.Size = new Size(868, 628);
             hoaDonControl1.TabIndex = 8;
             // 
             // nhanVienControl1
@@ -298,70 +284,70 @@
             nhanVienControl1.BackgroundImageLayout = ImageLayout.Stretch;
             nhanVienControl1.ForeColor = Color.Black;
             nhanVienControl1.Location = new Point(0, 0);
-            nhanVienControl1.Margin = new Padding(6, 8, 6, 8);
+            nhanVienControl1.Margin = new Padding(4, 5, 4, 5);
             nhanVienControl1.Name = "nhanVienControl1";
-            nhanVienControl1.Size = new Size(1240, 1047);
+            nhanVienControl1.Size = new Size(868, 628);
             nhanVienControl1.TabIndex = 7;
             // 
             // taiKhoanControl1
             // 
             taiKhoanControl1.Location = new Point(0, 0);
-            taiKhoanControl1.Margin = new Padding(6, 8, 6, 8);
+            taiKhoanControl1.Margin = new Padding(4, 5, 4, 5);
             taiKhoanControl1.Name = "taiKhoanControl1";
-            taiKhoanControl1.Size = new Size(1240, 1047);
+            taiKhoanControl1.Size = new Size(868, 628);
             taiKhoanControl1.TabIndex = 6;
             // 
             // thongKeControl1
             // 
             thongKeControl1.Location = new Point(0, 0);
-            thongKeControl1.Margin = new Padding(6, 8, 6, 8);
+            thongKeControl1.Margin = new Padding(4, 5, 4, 5);
             thongKeControl1.Name = "thongKeControl1";
-            thongKeControl1.Size = new Size(1240, 1047);
+            thongKeControl1.Size = new Size(868, 628);
             thongKeControl1.TabIndex = 5;
             // 
             // khuyenMaiControl1
             // 
             khuyenMaiControl1.Location = new Point(0, 0);
-            khuyenMaiControl1.Margin = new Padding(6, 8, 6, 8);
+            khuyenMaiControl1.Margin = new Padding(4, 5, 4, 5);
             khuyenMaiControl1.Name = "khuyenMaiControl1";
-            khuyenMaiControl1.Size = new Size(1240, 1047);
+            khuyenMaiControl1.Size = new Size(868, 628);
             khuyenMaiControl1.TabIndex = 4;
             // 
             // khachHangControl1
             // 
+            khachHangControl1.BackColor = Color.White;
             khachHangControl1.Location = new Point(0, 0);
-            khachHangControl1.Margin = new Padding(6, 8, 6, 8);
+            khachHangControl1.Margin = new Padding(4, 5, 4, 5);
             khachHangControl1.Name = "khachHangControl1";
-            khachHangControl1.Size = new Size(1240, 1047);
+            khachHangControl1.Size = new Size(868, 628);
             khachHangControl1.TabIndex = 3;
             // 
             // sanPhamControl1
             // 
             sanPhamControl1.Location = new Point(0, 0);
-            sanPhamControl1.Margin = new Padding(6, 8, 6, 8);
+            sanPhamControl1.Margin = new Padding(4, 5, 4, 5);
             sanPhamControl1.Name = "sanPhamControl1";
-            sanPhamControl1.Size = new Size(1240, 1047);
+            sanPhamControl1.Size = new Size(868, 628);
             sanPhamControl1.TabIndex = 2;
             // 
             // banHangControl1
             // 
             banHangControl1.Location = new Point(0, 0);
-            banHangControl1.Margin = new Padding(6, 8, 6, 8);
+            banHangControl1.Margin = new Padding(4, 5, 4, 5);
             banHangControl1.Name = "banHangControl1";
-            banHangControl1.Size = new Size(1250, 1047);
+            banHangControl1.Size = new Size(875, 628);
             banHangControl1.TabIndex = 0;
             // 
             // TrangChu
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1550, 1047);
+            ClientSize = new Size(1085, 628);
             ControlBox = false;
             Controls.Add(panel9);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
             Name = "TrangChu";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
