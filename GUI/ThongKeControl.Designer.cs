@@ -97,6 +97,7 @@
             // 
             btn_DoanhThu_ThongKe.Cursor = Cursors.Hand;
             btn_DoanhThu_ThongKe.Dock = DockStyle.Top;
+            btn_DoanhThu_ThongKe.Enabled = false;
             btn_DoanhThu_ThongKe.FlatAppearance.BorderSize = 0;
             btn_DoanhThu_ThongKe.FlatStyle = FlatStyle.Flat;
             btn_DoanhThu_ThongKe.Font = new Font("Calibri", 16.25F);

@@ -67,5 +67,34 @@ namespace GUI
                 MessageBox.Show("Đăng nhập thất bại. Vui lòng kiểm tra lại tài khoản và mật khẩu.");
             }
         }
+
+        private void btn_DangNhap_MouseLeave(object sender, EventArgs e)
+        {
+
+            btn_DangNhap.BackColor = Color.White;
+            btn_DangNhap.ForeColor = Color.FromArgb(29, 135, 209);
+            btn_DangNhap.FlatAppearance.BorderColor = Color.FromArgb(29, 135, 209);
+
+        }
+
+        private void btn_DangNhap_MouseEnter(object sender, EventArgs e)
+        {
+            btn_DangNhap.BackColor = Color.FromArgb(29, 135, 209);
+            btn_DangNhap.ForeColor = Color.White;
+        }
+
+        private void btn_Thoat_MouseEnter(object sender, EventArgs e)
+        {
+            btn_Thoat.BackColor = Color.FromArgb(29, 135, 209);
+            btn_Thoat.ForeColor = Color.White;
+        }
+
+        private void btn_Thoat_MouseLeave(object sender, EventArgs e)
+        {
+            btn_Thoat.BackColor = Color.White;
+            btn_Thoat.ForeColor = Color.FromArgb(29, 135, 209);
+            btn_Thoat.FlatAppearance.BorderColor = Color.FromArgb(29, 135, 209);
+        }
+
     }
 }
