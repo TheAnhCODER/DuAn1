@@ -32,7 +32,9 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
+            panel6 = new Panel();
             panel2 = new Panel();
+            textBox1 = new TextBox();
             btn_DoanhThu_ThongKe = new Button();
             panel3 = new Panel();
             button1 = new Button();
@@ -40,7 +42,6 @@
             button2 = new Button();
             panel5 = new Panel();
             button3 = new Button();
-            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -75,13 +76,22 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(29, 135, 209);
+            panel1.Controls.Add(panel6);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(868, 34);
+            panel1.Size = new Size(868, 44);
             panel1.TabIndex = 2;
+            // 
+            // panel6
+            // 
+            panel6.BackColor = Color.White;
+            panel6.Location = new Point(117, 35);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(626, 1);
+            panel6.TabIndex = 7;
             // 
             // panel2
             // 
@@ -92,6 +102,15 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(200, 159);
             panel2.TabIndex = 3;
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(102, 204, 255);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Location = new Point(36, 72);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(115, 23);
+            textBox1.TabIndex = 6;
             // 
             // btn_DoanhThu_ThongKe
             // 
@@ -189,15 +208,6 @@
             button3.Text = " Sản Phẩm";
             button3.UseVisualStyleBackColor = true;
             // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.FromArgb(102, 204, 255);
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(36, 72);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(115, 23);
-            textBox1.TabIndex = 6;
-            // 
             // ThongKeControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -234,5 +244,6 @@
         private Panel panel5;
         private Button button3;
         private TextBox textBox1;
+        private Panel panel6;
     }
 }
