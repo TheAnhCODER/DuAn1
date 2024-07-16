@@ -74,7 +74,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(217, 628);
+            panel1.Size = new Size(220, 628);
             panel1.TabIndex = 0;
             // 
             // tbt_TenUser
@@ -349,7 +349,6 @@
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TrangChu";
-            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TrangChu";
             panel1.ResumeLayout(false);
