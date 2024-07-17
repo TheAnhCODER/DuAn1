@@ -10,8 +10,8 @@ namespace DAL.Responsitories
 {
     public class NhanVienRespo
     {
-        //private string connectionString = "Data Source=DESKTOP-BQH9I25;Initial Catalog=DuAn1;Integrated Security=True";
-        private string connectionString = "Data Source=VUANHDUC\\SQLEXPRESS;Initial Catalog=DuAn1;Integrated Security=True";
+        private string connectionString = "Data Source=DESKTOP-BQH9I25;Initial Catalog=DuAn1;Integrated Security=True";
+       // private string connectionString = "Data Source=VUANHDUC\\SQLEXPRESS;Initial Catalog=DuAn1;Integrated Security=True";
 
         public DataTable CheckLogin(string taikhoan, string matKhau)
         {

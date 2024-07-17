@@ -1,4 +1,5 @@
 ﻿using BUS.Services;
+using DAL.Models;
 using System.Data;
 
 namespace GUI

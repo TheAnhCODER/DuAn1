@@ -20,7 +20,7 @@ namespace GUI
                 int idChucVu = Convert.ToInt32(userInfo.Rows[0]["Id_chucvu"]);
                 PhanQuyenNguoiDung(idChucVu);
             }
-            string loiChao = "Xin chào: "+ userInfo.Rows[0]["Ten_nhan_vien"].ToString();
+            string loiChao = "Xin chào: " + userInfo.Rows[0]["Ten_nhan_vien"].ToString();
             this.tbt_TenUser.Text = loiChao;
 
         }

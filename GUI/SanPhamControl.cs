@@ -26,5 +26,10 @@ namespace GUI
                 Application.Exit();
             }
         }
+
+        private void btn_Them_SanPham_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

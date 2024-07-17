@@ -32,6 +32,7 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
+            panel4 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -62,14 +63,23 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(29, 135, 209);
+            panel1.Controls.Add(panel4);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(868, 34);
+            panel1.Size = new Size(868, 44);
             panel1.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.White;
+            panel4.Location = new Point(118, 35);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(626, 1);
+            panel4.TabIndex = 8;
             // 
             // KhachHangControl
             // 
@@ -91,5 +101,6 @@
         private Label label1;
         private PictureBox pictureBox1;
         private Panel panel1;
+        private Panel panel4;
     }
 }
