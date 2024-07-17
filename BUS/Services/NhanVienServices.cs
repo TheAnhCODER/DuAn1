@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BUS.Services
 {
-    public class NhanVienBus
+    public class NhanVienServices
     {
         private NhanVienRespo nhanVienRespo = new NhanVienRespo();
 

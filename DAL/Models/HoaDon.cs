@@ -11,17 +11,16 @@ namespace DAL.Models
         }
 
         public Guid IdHoadon { get; set; }
-        public string IdKhach { get; set; } = null!;
-        public Guid IdNhanVien { get; set; }
-        public Guid? IdPhieuquatang { get; set; }
-        public int IdPhuongthucthanhtoan { get; set; }
+        public string? SoDienThoai { get; set; }
+        public Guid? IdNhanvien { get; set; }
+        public Guid? IdPhuongthucthanhtoan { get; set; }
         public decimal TongSoTienHoaDon { get; set; }
         public bool TrangThaiThanhToan { get; set; }
+        public DateTime? NgayTao { get; set; }
 
-        public virtual Khach IdKhachNavigation { get; set; } = null!;
-        public virtual NhanVien IdNhanVienNavigation { get; set; } = null!;
-        public virtual PhieuQuaTang? IdPhieuquatangNavigation { get; set; }
-        public virtual PhuongThucThanhToan IdPhuongthucthanhtoanNavigation { get; set; } = null!;
+        public virtual NhanVien? IdNhanvienNavigation { get; set; }
+        public virtual PhuongThucThanhToan? IdPhuongthucthanhtoanNavigation { get; set; }
+        public virtual Khach? SoDienThoaiNavigation { get; set; }
         public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; }
     }
 }

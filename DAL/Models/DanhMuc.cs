@@ -10,7 +10,7 @@ namespace DAL.Models
             SanPhams = new HashSet<SanPham>();
         }
 
-        public int IdDanhMuc { get; set; }
+        public Guid IdDanhMuc { get; set; }
         public string TenDanhMuc { get; set; } = null!;
 
         public virtual ICollection<SanPham> SanPhams { get; set; }

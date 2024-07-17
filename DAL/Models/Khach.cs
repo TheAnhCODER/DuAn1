@@ -11,7 +11,7 @@ namespace DAL.Models
         }
 
         public string SoDienThoai { get; set; } = null!;
-        public string? TenKhachHang { get; set; }
+        public string TenKhachHang { get; set; } = null!;
         public string? DiaChi { get; set; }
 
         public virtual ICollection<HoaDon> HoaDons { get; set; }

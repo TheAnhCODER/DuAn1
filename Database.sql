@@ -122,16 +122,16 @@ CREATE TABLE HoaDon_ChiTiet (
 
 
 
-CREATE PROCEDURE sp_CheckLogin
-    @Email NVARCHAR(255),
-    @MatKhau NVARCHAR(255)
+	CREATE PROCEDURE sp_CheckLogin
+		@Email NVARCHAR(255),
+		@MatKhau NVARCHAR(255)
 
-AS
-BEGIN
-   SELECT Id_nhanvien, Id_chucvu, Ten_nhan_vien
-	FROM NhanVien
-	WHERE Email = @Email AND Mat_khau = @MatKhau or Dien_thoai = @Email and Mat_khau = @MatKhau;
-END
+	AS
+	BEGIN
+	   SELECT Id_nhanvien, Id_chucvu, Ten_nhan_vien
+		FROM NhanVien
+		WHERE Email = @Email AND Mat_khau = @MatKhau or Dien_thoai = @Email and Mat_khau = @MatKhau;
+	END
 
 --drop PROC sp_CheckLogin
 

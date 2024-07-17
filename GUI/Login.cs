@@ -11,7 +11,7 @@ namespace GUI
             InitializeComponent();
         }
 
-        private NhanVienBus nhanVienBUS = new NhanVienBus();
+        private NhanVienServices nhanVienBUS = new NhanVienServices();
         private void Login_Load(object sender, EventArgs e)
         {
 

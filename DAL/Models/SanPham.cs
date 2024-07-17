@@ -11,15 +11,16 @@ namespace DAL.Models
             SanPhamChiTiets = new HashSet<SanPhamChiTiet>();
         }
 
-        public int IdSanPham { get; set; }
-        public int IdThuongHieu { get; set; }
-        public int IdDanhMuc { get; set; }
+        public Guid IdSanPham { get; set; }
+        public Guid? IdThuongHieu { get; set; }
+        public Guid? IdDanhMuc { get; set; }
         public string TenSanPham { get; set; } = null!;
+        public decimal Gia { get; set; }
         public string? MoTa { get; set; }
         public bool TrangThaiSanPham { get; set; }
 
-        public virtual DanhMuc IdDanhMucNavigation { get; set; } = null!;
-        public virtual ThuongHieu IdThuongHieuNavigation { get; set; } = null!;
+        public virtual DanhMuc? IdDanhMucNavigation { get; set; }
+        public virtual ThuongHieu? IdThuongHieuNavigation { get; set; }
         public virtual ICollection<AnhSanPham> AnhSanPhams { get; set; }
         public virtual ICollection<SanPhamChiTiet> SanPhamChiTiets { get; set; }
     }
