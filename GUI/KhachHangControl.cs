@@ -1,10 +1,13 @@
-﻿using System;
+﻿using BUS.Services;
+using DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,9 +15,17 @@ namespace GUI
 {
     public partial class KhachHangControl : UserControl
     {
+        KhachHangServices khachhangServices;
+        private string originalSoDienThoai;
         public KhachHangControl()
         {
             InitializeComponent();
+            khachhangServices = new KhachHangServices();
+
+            // Gán giá trị Tag cho các TextBox
+            tb_sdt_KhachHang.Tag = "Số điện thoại";
+            tb_tenkhachhang_KhachHang.Tag = "Tên khách hàng";
+            tb_diachi_KhachHang.Tag = "Địa chỉ";
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -29,7 +40,168 @@ namespace GUI
 
         private void KhachHangControl_Load(object sender, EventArgs e)
         {
+            List<Khach> danhSachKhach = khachhangServices.CNShow();
 
+            // Hiển thị danh sách lên DataGridView
+            ShowKhachHang(danhSachKhach);
+        }
+
+        private void btn_them_KhachHang_Click(object sender, EventArgs e)
+        {
+            string soDienThoai = tb_sdt_KhachHang.Text;
+            string tenKhachHang = tb_tenkhachhang_KhachHang.Text;
+            string diaChi = tb_diachi_KhachHang.Text;
+
+            // Kiểm tra tất cả các TextBox
+            var validationResults = ValidateTextBoxes(tb_sdt_KhachHang, tb_tenkhachhang_KhachHang, tb_diachi_KhachHang);
+
+            if (!string.IsNullOrEmpty(validationResults))
+            {
+                MessageBox.Show(validationResults, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // Kiểm tra số điện thoại
+            if (!ValidateData(soDienThoai))
+            {
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                string kq = khachhangServices.CNThem(soDienThoai, tenKhachHang, diaChi);
+                MessageBox.Show(kq);
+
+                List<Khach> khaches = khachhangServices.CNShow();
+                ShowKhachHang(khaches);
+            }
+        }
+        public void ShowKhachHang(List<Khach> khach)
+        {
+            dgv_danhsach_KhachHang.Rows.Clear();
+            dgv_danhsach_KhachHang.ColumnCount = 4;
+            int stt = 1;
+            dgv_danhsach_KhachHang.Columns[0].HeaderText = "Số thứ tự";
+            dgv_danhsach_KhachHang.Columns[1].HeaderText = "Số điện thoại";
+            dgv_danhsach_KhachHang.Columns[2].HeaderText = "Tên khách hàng";
+            dgv_danhsach_KhachHang.Columns[3].HeaderText = "Địa chỉ";
+            dgv_danhsach_KhachHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            foreach (var item in khach)
+            {
+                dgv_danhsach_KhachHang.Rows.Add(stt++, item.SoDienThoai, item.TenKhachHang, item.DiaChi);
+            }
+        }
+
+        private void dgv_danhsach_KhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow dtr = dgv_danhsach_KhachHang.Rows[e.RowIndex];
+                originalSoDienThoai = dtr.Cells[1].Value.ToString(); // Lưu giá trị ban đầu
+                tb_sdt_KhachHang.Text = originalSoDienThoai;
+                tb_tenkhachhang_KhachHang.Text = dtr.Cells[2].Value.ToString();
+                tb_diachi_KhachHang.Text = dtr.Cells[3].Value.ToString();
+            }
+        }
+
+        private void btn_sua_KhachHang_Click(object sender, EventArgs e)
+        {
+            string soDienThoai = tb_sdt_KhachHang.Text;
+            string tenKhachHang = tb_tenkhachhang_KhachHang.Text;
+            string diaChi = tb_diachi_KhachHang.Text;
+
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (soDienThoai != originalSoDienThoai)
+                {
+                    MessageBox.Show("Không thể sửa số điện thoại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tb_sdt_KhachHang.Text = originalSoDienThoai; // Khôi phục giá trị ban đầu
+                    return;
+                }
+
+                string kq = khachhangServices.CNSua(soDienThoai, tenKhachHang, diaChi);
+                MessageBox.Show(kq);
+
+                List<Khach> khaches = khachhangServices.CNShow();
+                ShowKhachHang(khaches);
+            }
+
+        }
+
+        private void btn_lammoi_KhachHang_Click(object sender, EventArgs e)
+        {
+            // Xóa các trường nhập liệu
+            tb_sdt_KhachHang.Clear();
+            tb_tenkhachhang_KhachHang.Clear();
+            tb_diachi_KhachHang.Clear();
+
+
+            // Xóa trường tìm kiếm 
+            tb_timkiem_KhachHang.Clear();
+        }
+
+        private void tb_timkiem_KhachHang_TextChanged(object sender, EventArgs e)
+        {
+            List<Khach> khaches = khachhangServices.CNTim(tb_timkiem_KhachHang.Text);
+            ShowKhachHang(khaches);
+        }
+        private bool ValidateData(string soDienThoai)
+        {
+            // Kiểm tra số điện thoại không để trống
+            if (string.IsNullOrWhiteSpace(soDienThoai))
+            {
+                MessageBox.Show("Số điện thoại không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.BeginInvoke(new Action(() => tb_sdt_KhachHang.Select()));
+                return false;
+            }
+
+            // Kiểm tra số điện thoại chỉ chứa số
+            if (!Regex.IsMatch(soDienThoai, @"^\d+$"))
+            {
+                MessageBox.Show("Số điện thoại chỉ được nhập số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.BeginInvoke(new Action(() => tb_sdt_KhachHang.Select()));
+                return false;
+            }
+
+            if (!Regex.IsMatch(soDienThoai, @"^\d{10}$"))
+            {
+                MessageBox.Show("Số điện thoại phải chỉ chứa 10 chữ số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tb_sdt_KhachHang.Select(); // Chọn ô để người dùng dễ sửa lỗi
+                return false;
+            }
+            return true;
+        }
+        private string ValidateTextBoxes(params TextBox[] textBoxes)
+        {
+            bool isAllEmpty = true;
+            List<string> emptyFields = new List<string>();
+
+            foreach (var textBox in textBoxes)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    emptyFields.Add(textBox.Tag.ToString());
+                }
+                else
+                {
+                    isAllEmpty = false;
+                }
+            }
+
+            // Kiểm tra nếu tất cả các trường đều trống
+            if (isAllEmpty)
+            {
+                return "Vui lòng nhập tất cả thông tin.";
+            }
+
+            // Kiểm tra nếu có các trường trống cụ thể
+            if (emptyFields.Count > 0)
+            {
+                return string.Join(" và ", emptyFields) + " không được để trống.";
+            }
+
+            return string.Empty;
         }
     }
 }
