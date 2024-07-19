@@ -59,19 +59,12 @@ CREATE TABLE SanPham (
     id_thuong_hieu UNIQUEIDENTIFIER,
     id_danh_muc UNIQUEIDENTIFIER,
     Ten_san_pham NVARCHAR(255) NOT NULL,
-    Gia DECIMAL(18, 2) NOT NULL,
     Mo_ta NVARCHAR(MAX),
     Trang_thai_san_pham BIT NOT NULL,
     FOREIGN KEY (id_thuong_hieu) REFERENCES ThuongHieu(id_thuong_hieu),
     FOREIGN KEY (id_danh_muc) REFERENCES DanhMuc(id_danh_muc)
 );
 
-CREATE TABLE Anh_SanPham (
-    id_anh_san_pham UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
-    id_san_pham UNIQUEIDENTIFIER,
-    Anh_san_pham NVARCHAR(MAX),
-    FOREIGN KEY (id_san_pham) REFERENCES SanPham(id_san_pham)
-);
 
 CREATE TABLE SanPham_ChiTiet (
     id_sanpham_chitiet UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
@@ -79,7 +72,7 @@ CREATE TABLE SanPham_ChiTiet (
     id_mau_sac UNIQUEIDENTIFIER,
     id_kich_co UNIQUEIDENTIFIER,
     So_luong INT NOT NULL,
-    Trang_thai_san_pham BIT NOT NULL,
+	Gia DECIMAL(18, 2) NOT NULL,
     FOREIGN KEY (id_san_pham) REFERENCES SanPham(id_san_pham),
     FOREIGN KEY (id_mau_sac) REFERENCES MauSac(id_mau_sac),
     FOREIGN KEY (id_kich_co) REFERENCES KichCo(id_kich_co)
@@ -102,7 +95,7 @@ CREATE TABLE HoaDon (
     ID_nhanvien UNIQUEIDENTIFIER,
     id_phuongthucthanhtoan UNIQUEIDENTIFIER,
     Tong_so_tien_hoa_don DECIMAL(18, 2) NOT NULL,
-    Trang_thai_thanh_toan BIT NOT NULL,
+    Trang_thai_thanh_toan int NOT NULL default '0', --0: chua thanh toan, 1: da thanh toan, 2: da huy
 	Ngay_tao DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (So_dien_thoai) REFERENCES Khach(So_dien_thoai),
     FOREIGN KEY (ID_nhanvien) REFERENCES NhanVien(ID_nhanvien),
