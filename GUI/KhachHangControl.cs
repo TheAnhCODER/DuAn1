@@ -26,6 +26,7 @@ namespace GUI
             tb_sdt_KhachHang.Tag = "Số điện thoại";
             tb_tenkhachhang_KhachHang.Tag = "Tên khách hàng";
             tb_diachi_KhachHang.Tag = "Địa chỉ";
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -86,9 +87,25 @@ namespace GUI
             dgv_danhsach_KhachHang.Columns[2].HeaderText = "Tên khách hàng";
             dgv_danhsach_KhachHang.Columns[3].HeaderText = "Địa chỉ";
             dgv_danhsach_KhachHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_danhsach_KhachHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_danhsach_KhachHang.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_danhsach_KhachHang.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_danhsach_KhachHang.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_danhsach_KhachHang.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_danhsach_KhachHang.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_danhsach_KhachHang.Font, FontStyle.Bold);
+            dgv_danhsach_KhachHang.EnableHeadersVisualStyles = false;
+
             foreach (var item in khach)
             {
-                dgv_danhsach_KhachHang.Rows.Add(stt++, item.SoDienThoai, item.TenKhachHang, item.DiaChi);
+                int rowIndex = dgv_danhsach_KhachHang.Rows.Add(stt++, item.SoDienThoai, item.TenKhachHang, item.DiaChi);
+                if ((rowIndex + 1) % 2 != 0) // Các hàng có số lẻ (1, 3, 5, ...)
+                {
+                    dgv_danhsach_KhachHang.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightGray; // Thay đổi màu tại đây
+                }
             }
         }
 

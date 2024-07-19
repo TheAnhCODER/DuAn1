@@ -278,7 +278,7 @@
             pictureBox2.Location = new Point(726, 22);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(45, 39);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
             // 
