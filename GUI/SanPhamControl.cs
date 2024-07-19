@@ -1,5 +1,6 @@
 ﻿using BUS.Services;
 using DAL.Models;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GUI
 {
@@ -20,6 +20,8 @@ namespace GUI
         KichCoServices kichCoServices;
         MauSacServices mauSacServices;
         SanPhamServices sanPhamServices;
+        SanPhamChiTietServices sanPhamChiTietServices;
+
         public SanPhamControl()
         {
             InitializeComponent();
@@ -28,12 +30,20 @@ namespace GUI
             kichCoServices = new KichCoServices();
             mauSacServices = new MauSacServices();
             sanPhamServices = new SanPhamServices();
+            sanPhamChiTietServices = new SanPhamChiTietServices();
             LoadDanhMuc();
             LoadThuongHieu();
             LoadTrangThai();
             LoadThuongHieuTimKiem();
             LoadDanhMucTimKiem();
             LoadTrangThaiTimKiem();
+            LoadKichCo();
+            LoadKichCoTimKiem();
+            LoadMauSac();
+            LoadMauSacTimKiem();
+            LoadSanPhamSPCT();
+            LoadSanPhamTimKiem();
+            LoadSanPhamCT();
             LoadSanPham();
         }
 
@@ -49,22 +59,36 @@ namespace GUI
 
         private void btn_Them_SanPham_Click(object sender, EventArgs e)
         {
-            string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
-            string idThuongHieu = cb_ThuongHieu_SanPham.SelectedValue.ToString();
-            string ten = tb_TenSanPham_SanPham.Text;
-
-            string moTa = tb_MoTa_SanPham.Text;
-            bool trangthaisp = (bool)cb_TrangThaiSP_SanPham.SelectedValue;
-            DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            if (ValidateNotEmpty(tb_TenSanPham_SanPham))
             {
-                string kq = sanPhamServices.CNThem(idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
-                MessageBox.Show(kq);
-                List<SanPham> sanPhams = sanPhamServices.CNShow();
-                ShowSanPham(sanPhams);
-                return;
+                // Thực hiện hành động lưu dữ liệu
+                string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
+                string idThuongHieu = cb_ThuongHieu_SanPham.SelectedValue.ToString();
+                string ten = tb_TenSanPham_SanPham.Text;
+
+                string moTa = tb_MoTa_SanPham.Text;
+                bool trangthaisp = (bool)cb_TrangThaiSP_SanPham.SelectedValue;
+                DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    string kq = sanPhamServices.CNThem(idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
+                    MessageBox.Show(kq);
+                    List<SanPham> sanPhams = sanPhamServices.CNShow();
+                    ShowSanPham(sanPhams);
+                    LoadSanPhamTimKiem();
+                    LoadSanPhamSPCT();
+                    return;
+
+                }
 
             }
+            else
+            {
+                MessageBox.Show("Vui lòng điền tên sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+
         }
 
         private void btn_Them_ThuocTinhSanPham_Click(object sender, EventArgs e)
@@ -75,17 +99,24 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = thuonghieuServices.CNThem(ten);
-                    MessageBox.Show(kq);
-                    List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
-                    ShowThuongHieu(thuongHieus);
-                    LoadThuongHieu();
-                    LoadThuongHieuTimKiem();
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh))
+                    {
 
+                        string kq = thuonghieuServices.CNThem(ten);
+                        MessageBox.Show(kq);
+                        List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
+                        ShowThuongHieu(thuongHieus);
+                        LoadThuongHieu();
+                        LoadThuongHieuTimKiem();
+                        return;
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền tên thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
 
                 }
-
             }
             else if (rb_DanhMuc.Checked)
             {
@@ -93,14 +124,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = danhMucServices.CNThem(ten);
-                    MessageBox.Show(kq);
-                    List<DanhMuc> danhMucs = danhMucServices.CNShow();
-                    ShowDanhMuc(danhMucs);
-                    LoadDanhMuc();
-                    LoadDanhMucTimKiem();
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh))
+                    {
 
+                        string kq = danhMucServices.CNThem(ten);
+                        MessageBox.Show(kq);
+                        List<DanhMuc> danhMucs = danhMucServices.CNShow();
+                        ShowDanhMuc(danhMucs);
+                        LoadDanhMuc();
+                        LoadDanhMucTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền tên thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
 
             }
@@ -110,12 +148,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = mauSacServices.CNThem(ten);
-                    MessageBox.Show(kq);
-                    List<MauSac> mauSacs = mauSacServices.CNShow();
-                    ShowMauSac(mauSacs);
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh))
+                    {
 
+                        string kq = mauSacServices.CNThem(ten);
+                        MessageBox.Show(kq);
+                        List<MauSac> mauSacs = mauSacServices.CNShow();
+                        ShowMauSac(mauSacs);
+                        LoadMauSac();
+                        LoadMauSacTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền tên thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
 
             }
@@ -125,11 +172,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = kichCoServices.CNThem(ten);
-                    MessageBox.Show(kq);
-                    List<KichCo> kichCos = kichCoServices.CNShow();
-                    ShowKichCo(kichCos);
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh))
+                    {
+
+                        string kq = kichCoServices.CNThem(ten);
+                        MessageBox.Show(kq);
+                        List<KichCo> kichCos = kichCoServices.CNShow();
+                        ShowKichCo(kichCos);
+                        LoadKichCo();
+                        LoadKichCoTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền tên thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
         }
@@ -240,19 +297,27 @@ namespace GUI
         {
             if (rb_ThuongHieu.Checked)
             {
+
                 string idThuongHieu = tb_MaThuocTinh.Text;
                 string ten = tb_TenThuocTinh.Text;
                 DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = thuonghieuServices.CNSua(idThuongHieu, ten);
-                    MessageBox.Show(kq);
-                    List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
-                    ShowThuongHieu(thuongHieus);
-                    LoadThuongHieu();
-                    LoadThuongHieuTimKiem();
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    {
 
+                        string kq = thuonghieuServices.CNSua(idThuongHieu, ten);
+                        MessageBox.Show(kq);
+                        List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
+                        ShowThuongHieu(thuongHieus);
+                        LoadThuongHieu();
+                        LoadThuongHieuTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
 
             }
@@ -263,14 +328,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = danhMucServices.CNSua(id, ten);
-                    MessageBox.Show(kq);
-                    List<DanhMuc> danhMucs = danhMucServices.CNShow();
-                    ShowDanhMuc(danhMucs);
-                    LoadDanhMuc();
-                    LoadDanhMucTimKiem();
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    {
 
+                        string kq = danhMucServices.CNSua(id, ten);
+                        MessageBox.Show(kq);
+                        List<DanhMuc> danhMucs = danhMucServices.CNShow();
+                        ShowDanhMuc(danhMucs);
+                        LoadDanhMuc();
+                        LoadDanhMucTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
 
             }
@@ -281,12 +353,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = mauSacServices.CNSua(id, ten);
-                    MessageBox.Show(kq);
-                    List<MauSac> mauSacs = mauSacServices.CNShow();
-                    ShowMauSac(mauSacs);
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    {
 
+                        string kq = mauSacServices.CNSua(id, ten);
+                        MessageBox.Show(kq);
+                        List<MauSac> mauSacs = mauSacServices.CNShow();
+                        ShowMauSac(mauSacs);
+                        LoadMauSacTimKiem();
+                        LoadMauSac();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
 
             }
@@ -297,11 +378,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = kichCoServices.CNSua(id, ten);
-                    MessageBox.Show(kq);
-                    List<KichCo> kichCos = kichCoServices.CNShow();
-                    ShowKichCo(kichCos);
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    {
+
+                        string kq = kichCoServices.CNSua(id, ten);
+                        MessageBox.Show(kq);
+                        List<KichCo> kichCos = kichCoServices.CNShow();
+                        ShowKichCo(kichCos);
+                        LoadKichCoTimKiem();
+                        LoadKichCo();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
         }
@@ -310,14 +401,24 @@ namespace GUI
         {
             if (rb_ThuongHieu.Checked)
             {
+
                 DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    thuonghieuServices.XoaTH(tb_MaThuocTinh.Text);
-                    List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
-                    ShowThuongHieu(thuongHieus);
-                    LoadThuongHieu();
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    {
+
+                        thuonghieuServices.XoaTH(tb_MaThuocTinh.Text);
+                        List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
+                        ShowThuongHieu(thuongHieus);
+                        LoadThuongHieu();
+                        LoadThuongHieuTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
 
             }
@@ -328,13 +429,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = danhMucServices.XoaDM(id);
-                    MessageBox.Show(kq);
-                    List<DanhMuc> danhMucs = danhMucServices.CNShow();
-                    ShowDanhMuc(danhMucs);
-                    LoadDanhMuc();
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    {
 
+                        string kq = danhMucServices.XoaDM(id);
+                        MessageBox.Show(kq);
+                        List<DanhMuc> danhMucs = danhMucServices.CNShow();
+                        ShowDanhMuc(danhMucs);
+                        LoadDanhMuc();
+                        LoadDanhMucTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
 
             }
@@ -345,12 +454,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = mauSacServices.XoaMS(id);
-                    MessageBox.Show(kq);
-                    List<MauSac> mauSacs = mauSacServices.CNShow();
-                    ShowMauSac(mauSacs);
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    {
 
+                        string kq = mauSacServices.XoaMS(id);
+                        MessageBox.Show(kq);
+                        List<MauSac> mauSacs = mauSacServices.CNShow();
+                        ShowMauSac(mauSacs);
+                        LoadMauSac();
+                        LoadMauSacTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
 
             }
@@ -361,11 +479,21 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string kq = kichCoServices.XoaKC(id);
-                    MessageBox.Show(kq);
-                    List<KichCo> kichCos = kichCoServices.CNShow();
-                    ShowKichCo(kichCos);
-                    return;
+                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    {
+
+                        string kq = kichCoServices.XoaKC(id);
+                        MessageBox.Show(kq);
+                        List<KichCo> kichCos = kichCoServices.CNShow();
+                        ShowKichCo(kichCos);
+                        LoadKichCo();
+                        LoadKichCoTimKiem();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
         }
@@ -497,7 +625,6 @@ namespace GUI
                 dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Mã thương hiệu";
                 dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Mã danh mục";
                 dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
-
                 dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
                 dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
                 dgv_DanhSachSP_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -612,22 +739,32 @@ namespace GUI
 
         private void btn_Sua_SP_Click(object sender, EventArgs e)
         {
-            string masp = tb_MaSP_SP.Text;
-            string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
-            string idThuongHieu = cb_ThuongHieu_SanPham.SelectedValue.ToString();
-            string ten = tb_TenSanPham_SanPham.Text;
-
-            string moTa = tb_MoTa_SanPham.Text;
-            bool trangthaisp = (bool)cb_TrangThaiSP_SanPham.SelectedValue;
-            DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            if (ValidateNotEmpty(tb_MaSP_SP, tb_TenSanPham_SanPham))
             {
-                string kq = sanPhamServices.CNSua(masp, idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
-                MessageBox.Show(kq);
-                List<SanPham> sanPhams = sanPhamServices.CNShow();
-                ShowSanPham(sanPhams);
-                return;
 
+                string masp = tb_MaSP_SP.Text;
+                string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
+                string idThuongHieu = cb_ThuongHieu_SanPham.SelectedValue.ToString();
+                string ten = tb_TenSanPham_SanPham.Text;
+
+                string moTa = tb_MoTa_SanPham.Text;
+                bool trangthaisp = (bool)cb_TrangThaiSP_SanPham.SelectedValue;
+                DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    string kq = sanPhamServices.CNSua(masp, idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
+                    MessageBox.Show(kq);
+                    List<SanPham> sanPhams = sanPhamServices.CNShow();
+                    ShowSanPham(sanPhams);
+                    LoadSanPhamTimKiem();
+                    LoadSanPhamSPCT();
+                    return;
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -684,6 +821,439 @@ namespace GUI
                 bool trangThai = (bool)cb_Loc_TTSP.SelectedValue;
                 List<SanPham> sanPhams = sanPhamServices.GetSPByTTSP(trangThai);
                 ShowSanPham(sanPhams);
+            }
+        }
+
+
+
+
+
+
+
+
+
+        // sản phẩm chi tiết
+
+
+
+        private void LoadMauSacTimKiem()
+        {
+            try
+            {
+                List<MauSac> mauSacs = mauSacServices.CNShow();
+
+                cb_MauSac_SPCT_Loc.DataSource = mauSacs;
+                cb_MauSac_SPCT_Loc.DisplayMember = "TenMauSac"; // Thuộc tính tên để hiển thị
+                cb_MauSac_SPCT_Loc.ValueMember = "IdMauSac"; // Thuộc tính giá trị
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadMauSac()
+        {
+            try
+            {
+                List<MauSac> mauSacs = mauSacServices.CNShow();
+                cb_MauSac_SanPhamChiTiet.DataSource = mauSacs;
+                cb_MauSac_SanPhamChiTiet.DisplayMember = "TenMauSac"; // Thuộc tính tên để hiển thị
+                cb_MauSac_SanPhamChiTiet.ValueMember = "IdMauSac"; // Thuộc tính giá trị
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadKichCoTimKiem()
+        {
+            try
+            {
+                List<KichCo> kichCos = kichCoServices.CNShow();
+
+                cb_KíchThuoc_SPCT_Loc.DataSource = kichCos;
+                cb_KíchThuoc_SPCT_Loc.DisplayMember = "KichCo1"; // Thuộc tính tên để hiển thị
+                cb_KíchThuoc_SPCT_Loc.ValueMember = "IdKichCo"; // Thuộc tính giá trị
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadKichCo()
+        {
+            try
+            {
+                List<KichCo> kichCos = kichCoServices.CNShow();
+
+                cb_KichThuoc_SanPhamChiTiet.DataSource = kichCos;
+                cb_KichThuoc_SanPhamChiTiet.DisplayMember = "KichCo1"; // Thuộc tính tên để hiển thị
+                cb_KichThuoc_SanPhamChiTiet.ValueMember = "IdKichCo"; // Thuộc tính giá trị
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+
+        private void LoadSanPhamCT()
+        {
+            try
+            {
+                List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
+                dgv_SanPhamChiTiet.Rows.Clear();
+                dgv_SanPhamChiTiet.ColumnCount = 7;
+                int stt = 1;
+                dgv_SanPhamChiTiet.Columns[0].HeaderText = "Số thứ tự";
+                dgv_SanPhamChiTiet.Columns[1].HeaderText = "Mã sản phẩm chi tiết";
+                dgv_SanPhamChiTiet.Columns[2].HeaderText = "Mã sản phẩm";
+                dgv_SanPhamChiTiet.Columns[3].HeaderText = "Mã màu sắc";
+                dgv_SanPhamChiTiet.Columns[4].HeaderText = "Mã kích cỡ";
+                dgv_SanPhamChiTiet.Columns[5].HeaderText = "Số lượng";
+                dgv_SanPhamChiTiet.Columns[6].HeaderText = "Giá";
+                dgv_SanPhamChiTiet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                foreach (var item in sanPhamChiTiets)
+                {
+
+                    dgv_SanPhamChiTiet.Rows.Add(stt++, item.IdSanphamChitiet, item.IdSanPham, item.IdMauSac, item.IdKichCo, item.SoLuong, item.Gia);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+
+        public void ShowSanPhamCT(List<SanPhamChiTiet> sanPhamChiTiets)
+        {
+            dgv_SanPhamChiTiet.Rows.Clear();
+            dgv_SanPhamChiTiet.ColumnCount = 7;
+            int stt = 1;
+            dgv_SanPhamChiTiet.Columns[0].HeaderText = "Số thứ tự";
+            dgv_SanPhamChiTiet.Columns[1].HeaderText = "Mã sản phẩm chi tiết";
+            dgv_SanPhamChiTiet.Columns[2].HeaderText = "Mã sản phẩm";
+            dgv_SanPhamChiTiet.Columns[3].HeaderText = "Mã màu sắc";
+            dgv_SanPhamChiTiet.Columns[4].HeaderText = "Mã kích cỡ";
+            dgv_SanPhamChiTiet.Columns[5].HeaderText = "Số lượng";
+            dgv_SanPhamChiTiet.Columns[6].HeaderText = "Giá";
+            dgv_SanPhamChiTiet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            foreach (var item in sanPhamChiTiets)
+            {
+
+                dgv_SanPhamChiTiet.Rows.Add(stt++, item.IdSanphamChitiet, item.IdSanPham, item.IdMauSac, item.IdKichCo, item.SoLuong, item.Gia);
+            }
+        }
+
+        private void btn_Them_SanPhamChiTiet_Click(object sender, EventArgs e)
+        {
+
+
+
+
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (ValidateNotEmpty(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
+                {
+                    if (ValidateNumeric(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
+                    {
+                        if (ValidateNumericInt(tb_SoLuong_SanPham))
+                        {
+                            string idSanPham = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
+                            string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
+                            string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
+                            int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
+                            decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
+                            string kq = sanPhamChiTietServices.CNThem(idSanPham, idMauSac, idKichCo, soLuong, gia);
+                            MessageBox.Show(kq);
+                            List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
+                            ShowSanPhamCT(sanPhamChiTiets);
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Số lượng sản phẩm phải là số nguyên.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Số lượng và giá sản phẩm phải là số.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+        }
+
+        private void dgv_SanPhamChiTiet_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_DanhSachSP_SanPham.Rows.Count)
+            {
+                // Lấy dữ liệu từ dòng được chọn để điền vào form
+                int row = e.RowIndex;
+                var rowData = dgv_SanPhamChiTiet.Rows[row]; // Lấy dữ liệu từ dòng đó ra
+
+                // Điền dữ liệu vào các trường trên form
+                tb_MaSPCT.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
+                string idSanPham = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+
+                // Thiết lập SelectedValue của ComboBox san pham
+                if (!string.IsNullOrEmpty(idSanPham))
+                {
+                    cb_SanPham_SanPhamChiTiet.SelectedValue = Guid.Parse(idSanPham);
+                }
+                // Lấy id mau sac từ dòng được chọn
+                string idMauSac = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+
+                // Thiết lập SelectedValue của ComboBox mau sac
+                if (!string.IsNullOrEmpty(idMauSac))
+                {
+                    cb_MauSac_SanPhamChiTiet.SelectedValue = Guid.Parse(idMauSac);
+                }
+                string idKichCo = rowData.Cells[4].Value?.ToString() ?? string.Empty;
+
+                // Thiết lập SelectedValue của ComboBox kich co
+                if (!string.IsNullOrEmpty(idKichCo))
+                {
+                    cb_KichThuoc_SanPhamChiTiet.SelectedValue = Guid.Parse(idKichCo);
+                }
+                tb_SoLuong_SanPham.Text = rowData.Cells[5].Value?.ToString() ?? string.Empty;
+
+                tb_Gia_SanPhamCT.Text = rowData.Cells[6].Value?.ToString() ?? string.Empty;
+            }
+        }
+
+
+
+        private void LoadSanPhamTimKiem()
+        {
+            try
+            {
+                List<SanPham> sanPhams = sanPhamServices.CNShow();
+
+                cb_SanPham_SPCT_Loc.DataSource = sanPhams;
+                cb_SanPham_SPCT_Loc.DisplayMember = "TenSanPham"; // Thuộc tính tên để hiển thị
+                cb_SanPham_SPCT_Loc.ValueMember = "IdSanPham"; // Thuộc tính giá trị
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadSanPhamSPCT()
+        {
+            try
+            {
+                List<SanPham> sanPhams = sanPhamServices.CNShow();
+
+                cb_SanPham_SanPhamChiTiet.DataSource = sanPhams;
+                cb_SanPham_SanPhamChiTiet.DisplayMember = "TenSanPham"; // Thuộc tính tên để hiển thị
+                cb_SanPham_SanPhamChiTiet.ValueMember = "IdSanPham"; // Thuộc tính giá trị
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+
+
+        }
+
+        private void btn_Sua_SanPhamChiTiet_Click(object sender, EventArgs e)
+        {
+
+
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (ValidateNotEmpty(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
+                {
+                    if (ValidateNumeric(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
+                    {
+                        if (ValidateNumericInt(tb_SoLuong_SanPham))
+                        {
+                            string maspct = tb_MaSPCT.Text.ToString();
+                            string idSP = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
+                            string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
+                            string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
+                            int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
+                            decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
+                            string kq = sanPhamChiTietServices.CNSua(maspct, idSP, idMauSac, idKichCo, soLuong, gia);
+                            MessageBox.Show(kq);
+                            List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
+                            ShowSanPhamCT(sanPhamChiTiets);
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Số lượng sản phẩm phải là số nguyên.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Số lượng và giá sản phẩm phải là số.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+        }
+
+
+
+        private void btn_LamMoi_SanPhamChiTiet_Click(object sender, EventArgs e)
+        {
+            tb_MaSPCT.Clear();
+            tb_SoLuong_SanPham.Clear();
+            tb_Gia_SanPhamCT.Clear();
+            LoadSanPhamCT();
+            return;
+        }
+
+        private void cb_KíchThuoc_SPCT_Loc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgv_SanPhamChiTiet.Rows.Clear();
+
+            // Kiểm tra nếu SelectedValue không null và có kiểu Guid
+            if (cb_KíchThuoc_SPCT_Loc.SelectedValue != null && cb_KíchThuoc_SPCT_Loc.SelectedValue is Guid)
+            {
+                Guid maKichThuoc = (Guid)cb_KíchThuoc_SPCT_Loc.SelectedValue;
+                List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.GetSPCTByKichCo(maKichThuoc);
+                ShowSanPhamCT(sanPhamChiTiets);
+            }
+        }
+
+        private void cb_MauSac_SPCT_Loc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgv_SanPhamChiTiet.Rows.Clear();
+
+            // Kiểm tra nếu SelectedValue không null và có kiểu Guid
+            if (cb_MauSac_SPCT_Loc.SelectedValue != null && cb_MauSac_SPCT_Loc.SelectedValue is Guid)
+            {
+                Guid maMauSac = (Guid)cb_MauSac_SPCT_Loc.SelectedValue;
+                List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.GetSPCTByMauSac(maMauSac);
+                ShowSanPhamCT(sanPhamChiTiets);
+            }
+        }
+
+        private void cb_SanPham_SPCT_Loc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgv_SanPhamChiTiet.Rows.Clear();
+
+            // Kiểm tra nếu SelectedValue không null và có kiểu Guid
+            if (cb_SanPham_SPCT_Loc.SelectedValue != null && cb_SanPham_SPCT_Loc.SelectedValue is Guid)
+            {
+                Guid maSP = (Guid)cb_SanPham_SPCT_Loc.SelectedValue;
+                List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.GetSPCTBySanPham(maSP);
+                ShowSanPhamCT(sanPhamChiTiets);
+            }
+        }
+
+        //validates
+
+        // Hàm kiểm tra các TextBox không được null hoặc rỗng
+        public static bool ValidateNotEmpty(params TextBox[] textboxes)
+        {
+            foreach (var textbox in textboxes)
+            {
+                if (string.IsNullOrWhiteSpace(textbox.Text))
+                {
+                    return false; // Trả về false nếu bất kỳ TextBox nào rỗng
+                }
+            }
+            return true; // Trả về true nếu tất cả các TextBox đều không rỗng
+        }
+
+        public static bool IsNumeric(string input)
+        {
+            return int.TryParse(input, out _) || double.TryParse(input, out _) || decimal.TryParse(input, out _);
+        }
+
+        // Hàm kiểm tra chuỗi có phải là số nguyên hay không
+        public static bool IsNumericInt(string input)
+        {
+            return int.TryParse(input, out _);
+        }
+
+        // Hàm kiểm tra các TextBox chứa giá trị số
+        public static bool ValidateNumeric(params TextBox[] textboxes)
+        {
+            foreach (var textbox in textboxes)
+            {
+                if (!IsNumeric(textbox.Text))
+                {
+                    return false; // Trả về false nếu bất kỳ TextBox nào không chứa giá trị số
+                }
+            }
+            return true; // Trả về true nếu tất cả các TextBox đều chứa giá trị số
+        }
+
+        public static bool ValidateNumericInt(params TextBox[] textboxes)
+        {
+            foreach (var textbox in textboxes)
+            {
+                if (!IsNumericInt(textbox.Text))
+                {
+                    return false; // Trả về false nếu bất kỳ TextBox nào không chứa giá trị số
+                }
+            }
+            return true; // Trả về true nếu tất cả các TextBox đều chứa giá trị số
+        }
+
+        private void btn_TaoMaQR_Click(object sender, EventArgs e)
+        {
+            //lay noi dung tu textbox
+            string sanphamCode = tb_MaSPCT.Text;
+            // Kiểm tra nội dung không rỗng
+            if (string.IsNullOrWhiteSpace(sanphamCode))
+            {
+                MessageBox.Show("Vui lòng nhập mã sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Hiển thị hộp thoại chọn thư mục
+            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Lấy đường dẫn thư mục
+                    string selectedPath = folderDialog.SelectedPath;
+
+                    // Tạo QR code
+                    using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+                    {
+                        QRCodeData qrCodeData = qrGenerator.CreateQrCode(sanphamCode, QRCodeGenerator.ECCLevel.Q);
+                        using (QRCode qrCode = new QRCode(qrCodeData))
+                        {
+                            using (Bitmap qrCodeImage = qrCode.GetGraphic(20))
+                            {
+                                // Đặt tên file QR code
+                                string qrCodeFileName = $"{sanphamCode}.png";
+                                string qrCodeFilePath = Path.Combine(selectedPath, qrCodeFileName);
+
+                                // Lưu hình ảnh QR code vào thư mục đã chọn
+                                qrCodeImage.Save(qrCodeFilePath, System.Drawing.Imaging.ImageFormat.Png);
+
+                                MessageBox.Show($"QR code đã được lưu tại: {qrCodeFilePath}");
+                            }
+                        }
+                    }
+                }
             }
         }
     }
