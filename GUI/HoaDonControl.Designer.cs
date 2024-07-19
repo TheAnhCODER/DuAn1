@@ -135,7 +135,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(73, 19);
+            label2.Location = new Point(83, 19);
             label2.Name = "label2";
             label2.Size = new Size(78, 20);
             label2.TabIndex = 8;
@@ -157,7 +157,7 @@
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(15, 44);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(207, 31);
+            comboBox1.Size = new Size(214, 31);
             comboBox1.TabIndex = 10;
             // 
             // dateTimePicker1
