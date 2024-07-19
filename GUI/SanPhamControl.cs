@@ -19,6 +19,7 @@ namespace GUI
         DanhMucServices danhMucServices;
         KichCoServices kichCoServices;
         MauSacServices mauSacServices;
+        SanPhamServices sanPhamServices;
         public SanPhamControl()
         {
             InitializeComponent();
@@ -26,6 +27,14 @@ namespace GUI
             danhMucServices = new DanhMucServices();
             kichCoServices = new KichCoServices();
             mauSacServices = new MauSacServices();
+            sanPhamServices = new SanPhamServices();
+            LoadDanhMuc();
+            LoadThuongHieu();
+            LoadTrangThai();
+            LoadThuongHieuTimKiem();
+            LoadDanhMucTimKiem();
+            LoadTrangThaiTimKiem();
+            LoadSanPham();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -40,7 +49,22 @@ namespace GUI
 
         private void btn_Them_SanPham_Click(object sender, EventArgs e)
         {
+            string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
+            string idThuongHieu = cb_ThuongHieu_SanPham.SelectedValue.ToString();
+            string ten = tb_TenSanPham_SanPham.Text;
 
+            string moTa = tb_MoTa_SanPham.Text;
+            bool trangthaisp = (bool)cb_TrangThaiSP_SanPham.SelectedValue;
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                string kq = sanPhamServices.CNThem(idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
+                MessageBox.Show(kq);
+                List<SanPham> sanPhams = sanPhamServices.CNShow();
+                ShowSanPham(sanPhams);
+                return;
+
+            }
         }
 
         private void btn_Them_ThuocTinhSanPham_Click(object sender, EventArgs e)
@@ -55,7 +79,10 @@ namespace GUI
                     MessageBox.Show(kq);
                     List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
                     ShowThuongHieu(thuongHieus);
+                    LoadThuongHieu();
+                    LoadThuongHieuTimKiem();
                     return;
+
 
                 }
 
@@ -70,6 +97,8 @@ namespace GUI
                     MessageBox.Show(kq);
                     List<DanhMuc> danhMucs = danhMucServices.CNShow();
                     ShowDanhMuc(danhMucs);
+                    LoadDanhMuc();
+                    LoadDanhMucTimKiem();
                     return;
 
                 }
@@ -220,6 +249,8 @@ namespace GUI
                     MessageBox.Show(kq);
                     List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
                     ShowThuongHieu(thuongHieus);
+                    LoadThuongHieu();
+                    LoadThuongHieuTimKiem();
                     return;
 
                 }
@@ -236,6 +267,8 @@ namespace GUI
                     MessageBox.Show(kq);
                     List<DanhMuc> danhMucs = danhMucServices.CNShow();
                     ShowDanhMuc(danhMucs);
+                    LoadDanhMuc();
+                    LoadDanhMucTimKiem();
                     return;
 
                 }
@@ -283,6 +316,7 @@ namespace GUI
                     thuonghieuServices.XoaTH(tb_MaThuocTinh.Text);
                     List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
                     ShowThuongHieu(thuongHieus);
+                    LoadThuongHieu();
                     return;
                 }
 
@@ -298,6 +332,7 @@ namespace GUI
                     MessageBox.Show(kq);
                     List<DanhMuc> danhMucs = danhMucServices.CNShow();
                     ShowDanhMuc(danhMucs);
+                    LoadDanhMuc();
                     return;
 
                 }
@@ -380,6 +415,275 @@ namespace GUI
             {
                 List<KichCo> kichCos = kichCoServices.CNTim(tb_TimKiem_ThuocTinh.Text);
                 ShowKichCo(kichCos);
+            }
+        }
+
+        //form sản phẩm
+
+        private void LoadDanhMucTimKiem()
+        {
+            try
+            {
+                List<DanhMuc> danhMucList = danhMucServices.CNShow();
+
+                cb_Loc_DanhMuc.DataSource = danhMucList;
+                cb_Loc_DanhMuc.DisplayMember = "TenDanhMuc"; // Thuộc tính tên để hiển thị
+                cb_Loc_DanhMuc.ValueMember = "IdDanhMuc"; // Thuộc tính giá trị
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadDanhMuc()
+        {
+            try
+            {
+                List<DanhMuc> danhMucList = danhMucServices.CNShow();
+                cb_DanhMuc_SanPham.DataSource = danhMucList;
+                cb_DanhMuc_SanPham.DisplayMember = "TenDanhMuc"; // Thuộc tính tên để hiển thị
+                cb_DanhMuc_SanPham.ValueMember = "IdDanhMuc"; // Thuộc tính giá trị
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadThuongHieuTimKiem()
+        {
+            try
+            {
+                List<ThuongHieu> thuongHieulist = thuonghieuServices.CNShow();
+
+                cb_Loc_TH.DataSource = thuongHieulist;
+                cb_Loc_TH.DisplayMember = "TenThuongHieu"; // Thuộc tính tên để hiển thị
+                cb_Loc_TH.ValueMember = "IdThuongHieu"; // Thuộc tính giá trị
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadThuongHieu()
+        {
+            try
+            {
+                List<ThuongHieu> thuongHieulist = thuonghieuServices.CNShow();
+                cb_ThuongHieu_SanPham.DataSource = thuongHieulist;
+                cb_ThuongHieu_SanPham.DisplayMember = "TenThuongHieu"; // Thuộc tính tên để hiển thị
+                cb_ThuongHieu_SanPham.ValueMember = "IdThuongHieu"; // Thuộc tính giá trị
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadSanPham()
+        {
+            try
+            {
+                List<SanPham> sanPhams = sanPhamServices.CNShow();
+                dgv_DanhSachSP_SanPham.Rows.Clear();
+                dgv_DanhSachSP_SanPham.ColumnCount = 7;
+                int stt = 1;
+                dgv_DanhSachSP_SanPham.Columns[0].HeaderText = "Số thứ tự";
+                dgv_DanhSachSP_SanPham.Columns[1].HeaderText = "Mã sản phẩm";
+                dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Mã thương hiệu";
+                dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Mã danh mục";
+                dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
+
+                dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
+                dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
+                dgv_DanhSachSP_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                foreach (var item in sanPhams)
+                {
+                    string trangThaiSanPham = item.TrangThaiSanPham ? "Đang kinh doanh" : "Ngưng kinh doanh";
+                    dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, item.IdThuongHieu, item.IdDanhMuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+
+        public void ShowSanPham(List<SanPham> sanPhams)
+        {
+            dgv_DanhSachSP_SanPham.Rows.Clear();
+            dgv_DanhSachSP_SanPham.ColumnCount = 7;
+            int stt = 1;
+            dgv_DanhSachSP_SanPham.Columns[0].HeaderText = "Số thứ tự";
+            dgv_DanhSachSP_SanPham.Columns[1].HeaderText = "Mã sản phẩm";
+            dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Mã thương hiệu";
+            dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Mã danh mục";
+            dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
+
+            dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
+            dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
+            dgv_DanhSachSP_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            foreach (var item in sanPhams)
+            {
+                string trangThaiSanPham = item.TrangThaiSanPham ? "Đang kinh doanh" : "Ngưng kinh doanh";
+                dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, item.IdThuongHieu, item.IdDanhMuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
+            }
+        }
+
+        private void LoadTrangThai()
+        {
+            try
+            {
+                // Tạo danh sách trạng thái dưới dạng Dictionary
+                var trangThaiList = new Dictionary<bool, string>
+                {
+                    { true, "Kinh doanh" },
+                    { false, "Ngưng kinh doanh" }
+                };
+                cb_TrangThaiSP_SanPham.DataSource = new BindingSource(trangThaiList, null);
+                cb_TrangThaiSP_SanPham.DisplayMember = "Value";
+                cb_TrangThaiSP_SanPham.ValueMember = "Key";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void LoadTrangThaiTimKiem()
+        {
+            try
+            {
+                // Tạo danh sách trạng thái dưới dạng Dictionary
+                var trangThaiList = new Dictionary<bool, string>
+                {
+                    { true, "Kinh doanh" },
+                    { false, "Ngưng kinh doanh" }
+                };
+                cb_Loc_TTSP.DataSource = new BindingSource(trangThaiList, null);
+                cb_Loc_TTSP.DisplayMember = "Value";
+                cb_Loc_TTSP.ValueMember = "Key";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
+
+        private void dgv_DanhSachSP_SanPham_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_DanhSachSP_SanPham.Rows.Count)
+            {
+                // Lấy dữ liệu từ dòng được chọn để điền vào form
+                int row = e.RowIndex;
+                var rowData = dgv_DanhSachSP_SanPham.Rows[row]; // Lấy dữ liệu từ dòng đó ra
+
+                // Điền dữ liệu vào các trường trên form
+                tb_MaSP_SP.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
+                string idThuongHieu = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+
+                // Thiết lập SelectedValue của ComboBox thuong hieu
+                if (!string.IsNullOrEmpty(idThuongHieu))
+                {
+                    cb_ThuongHieu_SanPham.SelectedValue = Guid.Parse(idThuongHieu);
+                }
+                // Lấy IdDanhMuc từ dòng được chọn
+                string idDanhMuc = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+
+                // Thiết lập SelectedValue của ComboBox danh mục
+                if (!string.IsNullOrEmpty(idDanhMuc))
+                {
+                    cb_DanhMuc_SanPham.SelectedValue = Guid.Parse(idDanhMuc);
+                }
+                tb_TenSanPham_SanPham.Text = rowData.Cells[4].Value?.ToString() ?? string.Empty;
+
+                tb_MoTa_SanPham.Text = rowData.Cells[5].Value?.ToString() ?? string.Empty;
+
+                // Chuyển đổi trạng thái sản phẩm từ chuỗi sang giá trị bool
+                string trangThai = rowData.Cells[6].Value?.ToString() ?? string.Empty;
+                cb_TrangThaiSP_SanPham.SelectedValue = trangThai == "Đang kinh doanh" ? true : false;
+            }
+        }
+
+        private void btn_Sua_SP_Click(object sender, EventArgs e)
+        {
+            string masp = tb_MaSP_SP.Text;
+            string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
+            string idThuongHieu = cb_ThuongHieu_SanPham.SelectedValue.ToString();
+            string ten = tb_TenSanPham_SanPham.Text;
+
+            string moTa = tb_MoTa_SanPham.Text;
+            bool trangthaisp = (bool)cb_TrangThaiSP_SanPham.SelectedValue;
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                string kq = sanPhamServices.CNSua(masp, idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
+                MessageBox.Show(kq);
+                List<SanPham> sanPhams = sanPhamServices.CNShow();
+                ShowSanPham(sanPhams);
+                return;
+
+            }
+        }
+
+        private void btn_LamMoi_SanPham_Click(object sender, EventArgs e)
+        {
+            tb_MaSP_SP.Clear();
+            tb_TenSanPham_SanPham.Clear();
+            tb_MoTa_SanPham.Clear();
+            tb_timKiem_SanPham.Clear();
+            LoadSanPham();
+        }
+
+        private void tb_timKiem_SanPham_TextChanged(object sender, EventArgs e)
+        {
+            List<SanPham> sanPhams = sanPhamServices.CNTim(tb_timKiem_SanPham.Text);
+            ShowSanPham(sanPhams);
+        }
+
+        private void cb_Loc_TH_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgv_DanhSachSP_SanPham.Rows.Clear();
+
+            // Kiểm tra nếu SelectedValue không null và có kiểu Guid
+            if (cb_Loc_TH.SelectedValue != null && cb_Loc_TH.SelectedValue is Guid)
+            {
+                Guid maThuongHieu = (Guid)cb_Loc_TH.SelectedValue;
+                List<SanPham> sanPhams = sanPhamServices.GetSPByThuongHieu(maThuongHieu);
+                ShowSanPham(sanPhams);
+            }
+        }
+
+
+
+        private void cb_Loc_DanhMuc_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            dgv_DanhSachSP_SanPham.Rows.Clear();
+
+            // Kiểm tra nếu SelectedValue không null và có kiểu Guid
+            if (cb_Loc_DanhMuc.SelectedValue != null && cb_Loc_DanhMuc.SelectedValue is Guid)
+            {
+                Guid maDanhMuc = (Guid)cb_Loc_DanhMuc.SelectedValue;
+                List<SanPham> sanPhams = sanPhamServices.GetSPByDanhMuc(maDanhMuc);
+                ShowSanPham(sanPhams);
+            }
+        }
+
+        private void cb_Loc_TTSP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgv_DanhSachSP_SanPham.Rows.Clear();
+
+            // Kiểm tra nếu SelectedValue không null
+            if (cb_Loc_TTSP.SelectedValue != null && cb_Loc_TTSP.SelectedValue is bool)
+            {
+                bool trangThai = (bool)cb_Loc_TTSP.SelectedValue;
+                List<SanPham> sanPhams = sanPhamServices.GetSPByTTSP(trangThai);
+                ShowSanPham(sanPhams);
             }
         }
     }

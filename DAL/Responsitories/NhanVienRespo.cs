@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using DAL.Models;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,24 +11,13 @@ namespace DAL.Responsitories
 {
     public class NhanVienRespo
     {
-        private string connectionString = "Data Source=DESKTOP-BQH9I25;Initial Catalog=DuAn1;Integrated Security=True";
-       // private string connectionString = "Data Source=VUANHDUC\\SQLEXPRESS;Initial Catalog=DuAn1;Integrated Security=True";
+        DuAn1Context dbContext = new DuAn1Context();
 
-        public DataTable CheckLogin(string taikhoan, string matKhau)
+        public NhanVien? DangNhap(string username, string password)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("sp_CheckLogin", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Email", taikhoan);
-                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
-
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-
-                return dt;
-            }
+            return dbContext.NhanViens.FirstOrDefault(nv => (nv.DienThoai == username
+            && nv.MatKhau == password) || (nv.Email == username
+            && nv.MatKhau == password));
         }
     }
 }

@@ -50,23 +50,14 @@ namespace GUI
 
         private void btn_DangNhap_Click(object sender, EventArgs e)
         {
-            string email = tbt_TenDangNhap.Text;
-            string matKhau = tbt_MatKhau.Text;
-            DataTable userInfo;
 
-            if (nhanVienBUS.CheckLogin(email, matKhau, out userInfo))
-            {
-                MessageBox.Show("Đăng nhập thành công!");
-                // Chuyển hướng đến giao diện chính của ứng dụng và truyền thông tin người dùng
+            var username = tbt_TenDangNhap.Text;
+            var password = tbt_MatKhau.Text;
 
-                TrangChu trangChu = new TrangChu(userInfo);
-                trangChu.Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Đăng nhập thất bại. Vui lòng kiểm tra lại tài khoản và mật khẩu.");
-            }
+            var nhanVien = nhanVienBUS.DangNhap(username, password);
+            this.Hide();
+            TrangChu trangChu = new TrangChu(nhanVien);
+            trangChu.Show();
         }
 
         private void btn_DangNhap_MouseLeave(object sender, EventArgs e)

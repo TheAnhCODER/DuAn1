@@ -1,4 +1,5 @@
-﻿using DAL.Responsitories;
+﻿using DAL.Models;
+using DAL.Responsitories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,12 +11,11 @@ namespace BUS.Services
 {
     public class NhanVienServices
     {
-        private NhanVienRespo nhanVienRespo = new NhanVienRespo();
+        NhanVienRespo nhanVienRespo = new NhanVienRespo();
 
-        public bool CheckLogin(string email, string matKhau, out DataTable userInfo)
+        public NhanVien? DangNhap(string username, string password)
         {
-            userInfo = nhanVienRespo.CheckLogin(email, matKhau);
-            return userInfo.Rows.Count > 0;
+            return nhanVienRespo.DangNhap(username, password);
         }
     }
 }

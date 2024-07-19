@@ -1,12 +1,14 @@
-﻿using System.Data;
+﻿using DAL.Models;
+using System.Data;
 
 namespace GUI
 {
     public partial class TrangChu : Form
     {
-        private DataTable userInfo;
-        public TrangChu(DataTable userInfo)
+        NhanVien _nhanVien;
+        public TrangChu(NhanVien nhanVien)
         {
+            _nhanVien = nhanVien;
             InitializeComponent();
             // Đặt kích thước và vị trí ban đầu cho SidePanel
             SidePanel.Height = btn_BanHang.Height;
@@ -15,14 +17,13 @@ namespace GUI
             banHangControl1.BringToFront();
 
             //phan quyen
-            if (userInfo.Rows.Count > 0)
+            if (_nhanVien.IdChucvu > 0)
             {
-                int idChucVu = Convert.ToInt32(userInfo.Rows[0]["Id_chucvu"]);
+                int idChucVu = Convert.ToInt32( nhanVien.IdChucvu);
                 PhanQuyenNguoiDung(idChucVu);
             }
-            string loiChao = "Xin chào: " + userInfo.Rows[0]["Ten_nhan_vien"].ToString();
+            string loiChao = "Xin chào: " + nhanVien.TenNhanVien.ToString();
             this.tbt_TenUser.Text = loiChao;
-
         }
 
 

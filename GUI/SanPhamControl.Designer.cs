@@ -36,18 +36,26 @@
             tabControl1 = new TabControl();
             tabPage2 = new TabPage();
             groupBox1 = new GroupBox();
-            pictureBox4 = new PictureBox();
-            label16 = new Label();
-            tb_TimKiem_SanPham = new TextBox();
+            tb_MaSP_SP = new TextBox();
+            label22 = new Label();
             label11 = new Label();
             cb_TrangThaiSP_SanPham = new ComboBox();
             label10 = new Label();
             tb_MoTa_SanPham = new TextBox();
-            tb_Gia_SanPham = new TextBox();
-            label9 = new Label();
             groupBox2 = new GroupBox();
+            groupBox10 = new GroupBox();
+            label16 = new Label();
+            label20 = new Label();
+            label21 = new Label();
+            cb_Loc_TTSP = new ComboBox();
+            cb_Loc_TH = new ComboBox();
+            cb_Loc_DanhMuc = new ComboBox();
+            groupBox9 = new GroupBox();
+            pictureBox4 = new PictureBox();
+            tb_timKiem_SanPham = new TextBox();
             dgv_DanhSachSP_SanPham = new DataGridView();
             panel2 = new Panel();
+            btn_Sua_SP = new Button();
             btn_SanPhamChiTiet_SanPham = new Button();
             btn_LamMoi_SanPham = new Button();
             btn_Them_SanPham = new Button();
@@ -60,11 +68,20 @@
             label2 = new Label();
             tabPage1 = new TabPage();
             groupBox3 = new GroupBox();
-            pictureBox3 = new PictureBox();
-            label15 = new Label();
-            tb_TimKiem_SanPhamChiTiet = new TextBox();
+            tb_Gia_SanPhamCT = new TextBox();
+            label9 = new Label();
             cb_SanPham_SanPham = new ComboBox();
             groupBox4 = new GroupBox();
+            groupBox8 = new GroupBox();
+            label19 = new Label();
+            label18 = new Label();
+            label15 = new Label();
+            comboBox3 = new ComboBox();
+            comboBox2 = new ComboBox();
+            comboBox1 = new ComboBox();
+            groupBox7 = new GroupBox();
+            pictureBox3 = new PictureBox();
+            tb_TimKiem_SanPhamChiTiet = new TextBox();
             dgv_SanPhamChiTiet = new DataGridView();
             panel3 = new Panel();
             btn_TaoMaQR = new Button();
@@ -109,14 +126,18 @@
             tabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             groupBox2.SuspendLayout();
+            groupBox10.SuspendLayout();
+            groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_DanhSachSP_SanPham).BeginInit();
             panel2.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             groupBox4.SuspendLayout();
+            groupBox8.SuspendLayout();
+            groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_SanPhamChiTiet).BeginInit();
             panel3.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -196,15 +217,12 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(pictureBox4);
-            groupBox1.Controls.Add(label16);
-            groupBox1.Controls.Add(tb_TimKiem_SanPham);
+            groupBox1.Controls.Add(tb_MaSP_SP);
+            groupBox1.Controls.Add(label22);
             groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(cb_TrangThaiSP_SanPham);
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(tb_MoTa_SanPham);
-            groupBox1.Controls.Add(tb_Gia_SanPham);
-            groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(panel2);
             groupBox1.Controls.Add(cb_ThuongHieu_SanPham);
@@ -222,42 +240,30 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Quản lý sản phẩm";
             // 
-            // pictureBox4
+            // tb_MaSP_SP
             // 
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(237, 228);
-            pictureBox4.Margin = new Padding(2);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(27, 25);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 17;
-            pictureBox4.TabStop = false;
+            tb_MaSP_SP.BorderStyle = BorderStyle.FixedSingle;
+            tb_MaSP_SP.Location = new Point(8, 47);
+            tb_MaSP_SP.Name = "tb_MaSP_SP";
+            tb_MaSP_SP.ReadOnly = true;
+            tb_MaSP_SP.Size = new Size(216, 25);
+            tb_MaSP_SP.TabIndex = 16;
             // 
-            // label16
+            // label22
             // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label16.Location = new Point(18, 216);
-            label16.Margin = new Padding(2, 0, 2, 0);
-            label16.Name = "label16";
-            label16.Size = new Size(63, 17);
-            label16.TabIndex = 16;
-            label16.Text = "Tìm kiếm";
-            // 
-            // tb_TimKiem_SanPham
-            // 
-            tb_TimKiem_SanPham.Location = new Point(18, 233);
-            tb_TimKiem_SanPham.Margin = new Padding(2);
-            tb_TimKiem_SanPham.Name = "tb_TimKiem_SanPham";
-            tb_TimKiem_SanPham.PlaceholderText = "Tìm kiếm tại đây...";
-            tb_TimKiem_SanPham.Size = new Size(216, 25);
-            tb_TimKiem_SanPham.TabIndex = 15;
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label22.Location = new Point(8, 26);
+            label22.Name = "label22";
+            label22.Size = new Size(91, 17);
+            label22.TabIndex = 15;
+            label22.Text = "Mã sản phẩm";
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label11.Location = new Point(324, 152);
+            label11.Location = new Point(281, 74);
             label11.Name = "label11";
             label11.Size = new Size(44, 17);
             label11.TabIndex = 14;
@@ -266,7 +272,7 @@
             // cb_TrangThaiSP_SanPham
             // 
             cb_TrangThaiSP_SanPham.FormattingEnabled = true;
-            cb_TrangThaiSP_SanPham.Location = new Point(324, 107);
+            cb_TrangThaiSP_SanPham.Location = new Point(281, 46);
             cb_TrangThaiSP_SanPham.Name = "cb_TrangThaiSP_SanPham";
             cb_TrangThaiSP_SanPham.Size = new Size(216, 25);
             cb_TrangThaiSP_SanPham.TabIndex = 13;
@@ -275,7 +281,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label10.Location = new Point(324, 87);
+            label10.Location = new Point(281, 26);
             label10.Name = "label10";
             label10.Size = new Size(133, 17);
             label10.TabIndex = 12;
@@ -283,69 +289,172 @@
             // 
             // tb_MoTa_SanPham
             // 
-            tb_MoTa_SanPham.Location = new Point(324, 173);
+            tb_MoTa_SanPham.Location = new Point(281, 95);
             tb_MoTa_SanPham.Multiline = true;
             tb_MoTa_SanPham.Name = "tb_MoTa_SanPham";
-            tb_MoTa_SanPham.Size = new Size(216, 80);
+            tb_MoTa_SanPham.Size = new Size(216, 123);
             tb_MoTa_SanPham.TabIndex = 11;
-            // 
-            // tb_Gia_SanPham
-            // 
-            tb_Gia_SanPham.Location = new Point(324, 45);
-            tb_Gia_SanPham.Name = "tb_Gia_SanPham";
-            tb_Gia_SanPham.Size = new Size(216, 25);
-            tb_Gia_SanPham.TabIndex = 10;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label9.Location = new Point(324, 25);
-            label9.Name = "label9";
-            label9.Size = new Size(27, 17);
-            label9.TabIndex = 8;
-            label9.Text = "Giá";
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(groupBox10);
+            groupBox2.Controls.Add(groupBox9);
             groupBox2.Controls.Add(dgv_DanhSachSP_SanPham);
-            groupBox2.Location = new Point(8, 258);
+            groupBox2.Location = new Point(8, 221);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(828, 260);
+            groupBox2.Size = new Size(828, 297);
             groupBox2.TabIndex = 7;
             groupBox2.TabStop = false;
             groupBox2.Text = "Danh sách sản phẩm";
             // 
+            // groupBox10
+            // 
+            groupBox10.Controls.Add(label16);
+            groupBox10.Controls.Add(label20);
+            groupBox10.Controls.Add(label21);
+            groupBox10.Controls.Add(cb_Loc_TTSP);
+            groupBox10.Controls.Add(cb_Loc_TH);
+            groupBox10.Controls.Add(cb_Loc_DanhMuc);
+            groupBox10.Location = new Point(6, 14);
+            groupBox10.Name = "groupBox10";
+            groupBox10.Size = new Size(561, 64);
+            groupBox10.TabIndex = 3;
+            groupBox10.TabStop = false;
+            groupBox10.Text = "Lọc";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(411, 13);
+            label16.Name = "label16";
+            label16.Size = new Size(127, 17);
+            label16.TabIndex = 4;
+            label16.Text = "Trạng thái sản phẩm";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(240, 13);
+            label20.Name = "label20";
+            label20.Size = new Size(81, 17);
+            label20.TabIndex = 4;
+            label20.Text = "Thương hiệu";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(63, 13);
+            label21.Name = "label21";
+            label21.Size = new Size(66, 17);
+            label21.TabIndex = 3;
+            label21.Text = "Danh mục";
+            // 
+            // cb_Loc_TTSP
+            // 
+            cb_Loc_TTSP.FormattingEnabled = true;
+            cb_Loc_TTSP.Location = new Point(384, 33);
+            cb_Loc_TTSP.Name = "cb_Loc_TTSP";
+            cb_Loc_TTSP.Size = new Size(171, 25);
+            cb_Loc_TTSP.TabIndex = 2;
+            cb_Loc_TTSP.SelectedIndexChanged += cb_Loc_TTSP_SelectedIndexChanged;
+            // 
+            // cb_Loc_TH
+            // 
+            cb_Loc_TH.FormattingEnabled = true;
+            cb_Loc_TH.Location = new Point(199, 33);
+            cb_Loc_TH.Name = "cb_Loc_TH";
+            cb_Loc_TH.Size = new Size(171, 25);
+            cb_Loc_TH.TabIndex = 1;
+            cb_Loc_TH.SelectedIndexChanged += cb_Loc_TH_SelectedIndexChanged;
+            // 
+            // cb_Loc_DanhMuc
+            // 
+            cb_Loc_DanhMuc.FormattingEnabled = true;
+            cb_Loc_DanhMuc.Location = new Point(11, 32);
+            cb_Loc_DanhMuc.Name = "cb_Loc_DanhMuc";
+            cb_Loc_DanhMuc.Size = new Size(171, 25);
+            cb_Loc_DanhMuc.TabIndex = 0;
+            cb_Loc_DanhMuc.SelectedIndexChanged += cb_Loc_DanhMuc_SelectedIndexChanged_1;
+            // 
+            // groupBox9
+            // 
+            groupBox9.Controls.Add(pictureBox4);
+            groupBox9.Controls.Add(tb_timKiem_SanPham);
+            groupBox9.Location = new Point(575, 14);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Size = new Size(247, 64);
+            groupBox9.TabIndex = 2;
+            groupBox9.TabStop = false;
+            groupBox9.Text = "Tìm kiếm";
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(211, 21);
+            pictureBox4.Margin = new Padding(2);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(27, 25);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 13;
+            pictureBox4.TabStop = false;
+            // 
+            // tb_timKiem_SanPham
+            // 
+            tb_timKiem_SanPham.Location = new Point(5, 23);
+            tb_timKiem_SanPham.Margin = new Padding(2);
+            tb_timKiem_SanPham.Name = "tb_timKiem_SanPham";
+            tb_timKiem_SanPham.PlaceholderText = "Tìm kiếm tại đây...";
+            tb_timKiem_SanPham.Size = new Size(202, 25);
+            tb_timKiem_SanPham.TabIndex = 11;
+            tb_timKiem_SanPham.TextChanged += tb_timKiem_SanPham_TextChanged;
+            // 
             // dgv_DanhSachSP_SanPham
             // 
             dgv_DanhSachSP_SanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_DanhSachSP_SanPham.Location = new Point(6, 24);
+            dgv_DanhSachSP_SanPham.Location = new Point(6, 84);
             dgv_DanhSachSP_SanPham.Name = "dgv_DanhSachSP_SanPham";
             dgv_DanhSachSP_SanPham.RowHeadersWidth = 62;
-            dgv_DanhSachSP_SanPham.Size = new Size(816, 230);
+            dgv_DanhSachSP_SanPham.Size = new Size(816, 207);
             dgv_DanhSachSP_SanPham.TabIndex = 0;
+            dgv_DanhSachSP_SanPham.CellClick += dgv_DanhSachSP_SanPham_CellClick;
             // 
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(btn_Sua_SP);
             panel2.Controls.Add(btn_SanPhamChiTiet_SanPham);
             panel2.Controls.Add(btn_LamMoi_SanPham);
             panel2.Controls.Add(btn_Them_SanPham);
             panel2.Controls.Add(btn_Sua_SanPham);
             panel2.ForeColor = Color.Black;
-            panel2.Location = new Point(617, 15);
+            panel2.Location = new Point(546, 26);
             panel2.Name = "panel2";
-            panel2.Size = new Size(219, 237);
+            panel2.Size = new Size(284, 192);
             panel2.TabIndex = 6;
+            // 
+            // btn_Sua_SP
+            // 
+            btn_Sua_SP.BackColor = Color.FromArgb(29, 135, 209);
+            btn_Sua_SP.FlatStyle = FlatStyle.Flat;
+            btn_Sua_SP.ForeColor = Color.White;
+            btn_Sua_SP.Image = (Image)resources.GetObject("btn_Sua_SP.Image");
+            btn_Sua_SP.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_Sua_SP.Location = new Point(145, 28);
+            btn_Sua_SP.Name = "btn_Sua_SP";
+            btn_Sua_SP.Size = new Size(123, 57);
+            btn_Sua_SP.TabIndex = 4;
+            btn_Sua_SP.Text = "Sửa";
+            btn_Sua_SP.UseVisualStyleBackColor = false;
+            btn_Sua_SP.Click += btn_Sua_SP_Click;
             // 
             // btn_SanPhamChiTiet_SanPham
             // 
             btn_SanPhamChiTiet_SanPham.BackColor = Color.FromArgb(29, 135, 209);
             btn_SanPhamChiTiet_SanPham.FlatStyle = FlatStyle.Flat;
             btn_SanPhamChiTiet_SanPham.ForeColor = Color.White;
-            btn_SanPhamChiTiet_SanPham.Location = new Point(49, 181);
+            btn_SanPhamChiTiet_SanPham.Location = new Point(145, 105);
             btn_SanPhamChiTiet_SanPham.Name = "btn_SanPhamChiTiet_SanPham";
-            btn_SanPhamChiTiet_SanPham.Size = new Size(123, 36);
+            btn_SanPhamChiTiet_SanPham.Size = new Size(123, 57);
             btn_SanPhamChiTiet_SanPham.TabIndex = 3;
             btn_SanPhamChiTiet_SanPham.Text = "Sản phẩm chi tiết";
             btn_SanPhamChiTiet_SanPham.UseVisualStyleBackColor = false;
@@ -357,12 +466,13 @@
             btn_LamMoi_SanPham.ForeColor = Color.White;
             btn_LamMoi_SanPham.Image = (Image)resources.GetObject("btn_LamMoi_SanPham.Image");
             btn_LamMoi_SanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_LamMoi_SanPham.Location = new Point(49, 129);
+            btn_LamMoi_SanPham.Location = new Point(16, 105);
             btn_LamMoi_SanPham.Name = "btn_LamMoi_SanPham";
-            btn_LamMoi_SanPham.Size = new Size(123, 36);
+            btn_LamMoi_SanPham.Size = new Size(123, 57);
             btn_LamMoi_SanPham.TabIndex = 2;
             btn_LamMoi_SanPham.Text = "Làm mới";
             btn_LamMoi_SanPham.UseVisualStyleBackColor = false;
+            btn_LamMoi_SanPham.Click += btn_LamMoi_SanPham_Click;
             // 
             // btn_Them_SanPham
             // 
@@ -371,9 +481,9 @@
             btn_Them_SanPham.ForeColor = Color.White;
             btn_Them_SanPham.Image = (Image)resources.GetObject("btn_Them_SanPham.Image");
             btn_Them_SanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Them_SanPham.Location = new Point(49, 22);
+            btn_Them_SanPham.Location = new Point(16, 28);
             btn_Them_SanPham.Name = "btn_Them_SanPham";
-            btn_Them_SanPham.Size = new Size(123, 36);
+            btn_Them_SanPham.Size = new Size(123, 57);
             btn_Them_SanPham.TabIndex = 0;
             btn_Them_SanPham.Text = "Thêm";
             btn_Them_SanPham.UseVisualStyleBackColor = false;
@@ -386,9 +496,9 @@
             btn_Sua_SanPham.ForeColor = Color.White;
             btn_Sua_SanPham.Image = (Image)resources.GetObject("btn_Sua_SanPham.Image");
             btn_Sua_SanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Sua_SanPham.Location = new Point(49, 75);
+            btn_Sua_SanPham.Location = new Point(145, 12);
             btn_Sua_SanPham.Name = "btn_Sua_SanPham";
-            btn_Sua_SanPham.Size = new Size(123, 36);
+            btn_Sua_SanPham.Size = new Size(0, 0);
             btn_Sua_SanPham.TabIndex = 1;
             btn_Sua_SanPham.Text = "Sửa";
             btn_Sua_SanPham.UseVisualStyleBackColor = false;
@@ -396,7 +506,7 @@
             // cb_ThuongHieu_SanPham
             // 
             cb_ThuongHieu_SanPham.FormattingEnabled = true;
-            cb_ThuongHieu_SanPham.Location = new Point(18, 173);
+            cb_ThuongHieu_SanPham.Location = new Point(8, 193);
             cb_ThuongHieu_SanPham.Name = "cb_ThuongHieu_SanPham";
             cb_ThuongHieu_SanPham.Size = new Size(216, 25);
             cb_ThuongHieu_SanPham.TabIndex = 5;
@@ -405,7 +515,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(18, 152);
+            label4.Location = new Point(8, 172);
             label4.Name = "label4";
             label4.Size = new Size(85, 17);
             label4.TabIndex = 4;
@@ -414,7 +524,7 @@
             // cb_DanhMuc_SanPham
             // 
             cb_DanhMuc_SanPham.FormattingEnabled = true;
-            cb_DanhMuc_SanPham.Location = new Point(18, 107);
+            cb_DanhMuc_SanPham.Location = new Point(8, 144);
             cb_DanhMuc_SanPham.Name = "cb_DanhMuc_SanPham";
             cb_DanhMuc_SanPham.Size = new Size(216, 25);
             cb_DanhMuc_SanPham.TabIndex = 3;
@@ -423,7 +533,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(18, 87);
+            label3.Location = new Point(8, 124);
             label3.Name = "label3";
             label3.Size = new Size(70, 17);
             label3.TabIndex = 2;
@@ -432,7 +542,7 @@
             // tb_TenSanPham_SanPham
             // 
             tb_TenSanPham_SanPham.BorderStyle = BorderStyle.FixedSingle;
-            tb_TenSanPham_SanPham.Location = new Point(18, 46);
+            tb_TenSanPham_SanPham.Location = new Point(8, 96);
             tb_TenSanPham_SanPham.Name = "tb_TenSanPham_SanPham";
             tb_TenSanPham_SanPham.Size = new Size(216, 25);
             tb_TenSanPham_SanPham.TabIndex = 1;
@@ -441,7 +551,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(18, 25);
+            label2.Location = new Point(8, 75);
             label2.Name = "label2";
             label2.Size = new Size(93, 17);
             label2.TabIndex = 0;
@@ -460,9 +570,8 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(pictureBox3);
-            groupBox3.Controls.Add(label15);
-            groupBox3.Controls.Add(tb_TimKiem_SanPhamChiTiet);
+            groupBox3.Controls.Add(tb_Gia_SanPhamCT);
+            groupBox3.Controls.Add(label9);
             groupBox3.Controls.Add(cb_SanPham_SanPham);
             groupBox3.Controls.Add(groupBox4);
             groupBox3.Controls.Add(panel3);
@@ -482,10 +591,124 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Thông tin sản phẩm";
             // 
+            // tb_Gia_SanPhamCT
+            // 
+            tb_Gia_SanPhamCT.Location = new Point(375, 91);
+            tb_Gia_SanPhamCT.Name = "tb_Gia_SanPhamCT";
+            tb_Gia_SanPhamCT.Size = new Size(173, 23);
+            tb_Gia_SanPhamCT.TabIndex = 12;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label9.Location = new Point(297, 93);
+            label9.Name = "label9";
+            label9.Size = new Size(27, 17);
+            label9.TabIndex = 11;
+            label9.Text = "Giá";
+            // 
+            // cb_SanPham_SanPham
+            // 
+            cb_SanPham_SanPham.FormattingEnabled = true;
+            cb_SanPham_SanPham.Location = new Point(87, 18);
+            cb_SanPham_SanPham.Name = "cb_SanPham_SanPham";
+            cb_SanPham_SanPham.Size = new Size(173, 23);
+            cb_SanPham_SanPham.TabIndex = 10;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(groupBox8);
+            groupBox4.Controls.Add(groupBox7);
+            groupBox4.Controls.Add(dgv_SanPhamChiTiet);
+            groupBox4.Location = new Point(6, 143);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(830, 375);
+            groupBox4.TabIndex = 9;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Danh sách sản phẩm chi tiết";
+            // 
+            // groupBox8
+            // 
+            groupBox8.Controls.Add(label19);
+            groupBox8.Controls.Add(label18);
+            groupBox8.Controls.Add(label15);
+            groupBox8.Controls.Add(comboBox3);
+            groupBox8.Controls.Add(comboBox2);
+            groupBox8.Controls.Add(comboBox1);
+            groupBox8.Location = new Point(7, 23);
+            groupBox8.Name = "groupBox8";
+            groupBox8.Size = new Size(561, 64);
+            groupBox8.TabIndex = 2;
+            groupBox8.TabStop = false;
+            groupBox8.Text = "Lọc sản phẩm";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new Point(384, 18);
+            label19.Name = "label19";
+            label19.Size = new Size(51, 15);
+            label19.TabIndex = 4;
+            label19.Text = "Màu sắc";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(199, 18);
+            label18.Name = "label18";
+            label18.Size = new Size(64, 15);
+            label18.TabIndex = 4;
+            label18.Text = "Kích thước";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(14, 18);
+            label15.Name = "label15";
+            label15.Size = new Size(59, 15);
+            label15.TabIndex = 3;
+            label15.Text = "Trạng thái";
+            // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(384, 35);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(171, 23);
+            comboBox3.TabIndex = 2;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(199, 35);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(171, 23);
+            comboBox2.TabIndex = 1;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(11, 34);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(171, 23);
+            comboBox1.TabIndex = 0;
+            // 
+            // groupBox7
+            // 
+            groupBox7.Controls.Add(pictureBox3);
+            groupBox7.Controls.Add(tb_TimKiem_SanPhamChiTiet);
+            groupBox7.Location = new Point(574, 23);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Size = new Size(247, 64);
+            groupBox7.TabIndex = 1;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Tìm kiếm";
+            // 
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(270, 205);
+            pictureBox3.Location = new Point(211, 32);
             pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(27, 25);
@@ -493,51 +716,22 @@
             pictureBox3.TabIndex = 13;
             pictureBox3.TabStop = false;
             // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label15.Location = new Point(12, 194);
-            label15.Margin = new Padding(2, 0, 2, 0);
-            label15.Name = "label15";
-            label15.Size = new Size(63, 17);
-            label15.TabIndex = 12;
-            label15.Text = "Tìm kiếm";
-            // 
             // tb_TimKiem_SanPhamChiTiet
             // 
-            tb_TimKiem_SanPhamChiTiet.Location = new Point(12, 211);
+            tb_TimKiem_SanPhamChiTiet.Location = new Point(5, 34);
             tb_TimKiem_SanPhamChiTiet.Margin = new Padding(2);
             tb_TimKiem_SanPhamChiTiet.Name = "tb_TimKiem_SanPhamChiTiet";
             tb_TimKiem_SanPhamChiTiet.PlaceholderText = "Tìm kiếm tại đây...";
-            tb_TimKiem_SanPhamChiTiet.Size = new Size(255, 23);
+            tb_TimKiem_SanPhamChiTiet.Size = new Size(202, 23);
             tb_TimKiem_SanPhamChiTiet.TabIndex = 11;
-            // 
-            // cb_SanPham_SanPham
-            // 
-            cb_SanPham_SanPham.FormattingEnabled = true;
-            cb_SanPham_SanPham.Location = new Point(87, 39);
-            cb_SanPham_SanPham.Name = "cb_SanPham_SanPham";
-            cb_SanPham_SanPham.Size = new Size(173, 23);
-            cb_SanPham_SanPham.TabIndex = 10;
-            // 
-            // groupBox4
-            // 
-            groupBox4.Controls.Add(dgv_SanPhamChiTiet);
-            groupBox4.Location = new Point(6, 249);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(830, 269);
-            groupBox4.TabIndex = 9;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Danh sách sản phẩm chi tiết";
             // 
             // dgv_SanPhamChiTiet
             // 
             dgv_SanPhamChiTiet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_SanPhamChiTiet.Location = new Point(6, 22);
+            dgv_SanPhamChiTiet.Location = new Point(6, 93);
             dgv_SanPhamChiTiet.Name = "dgv_SanPhamChiTiet";
             dgv_SanPhamChiTiet.RowHeadersWidth = 62;
-            dgv_SanPhamChiTiet.Size = new Size(818, 241);
+            dgv_SanPhamChiTiet.Size = new Size(818, 276);
             dgv_SanPhamChiTiet.TabIndex = 0;
             // 
             // panel3
@@ -547,9 +741,9 @@
             panel3.Controls.Add(btn_LamMoi_SanPhamChiTiet);
             panel3.Controls.Add(btn_Sua_SanPhamChiTiet);
             panel3.Controls.Add(btn_Them_SanPhamChiTiet);
-            panel3.Location = new Point(629, 13);
+            panel3.Location = new Point(580, 18);
             panel3.Name = "panel3";
-            panel3.Size = new Size(201, 230);
+            panel3.Size = new Size(256, 119);
             panel3.TabIndex = 8;
             // 
             // btn_TaoMaQR
@@ -557,9 +751,9 @@
             btn_TaoMaQR.BackColor = Color.FromArgb(29, 135, 209);
             btn_TaoMaQR.FlatStyle = FlatStyle.Flat;
             btn_TaoMaQR.ForeColor = Color.White;
-            btn_TaoMaQR.Location = new Point(41, 180);
+            btn_TaoMaQR.Location = new Point(128, 64);
             btn_TaoMaQR.Name = "btn_TaoMaQR";
-            btn_TaoMaQR.Size = new Size(123, 36);
+            btn_TaoMaQR.Size = new Size(123, 50);
             btn_TaoMaQR.TabIndex = 11;
             btn_TaoMaQR.Text = "Tạo mã QR";
             btn_TaoMaQR.UseVisualStyleBackColor = false;
@@ -571,9 +765,9 @@
             btn_LamMoi_SanPhamChiTiet.ForeColor = Color.White;
             btn_LamMoi_SanPhamChiTiet.Image = (Image)resources.GetObject("btn_LamMoi_SanPhamChiTiet.Image");
             btn_LamMoi_SanPhamChiTiet.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_LamMoi_SanPhamChiTiet.Location = new Point(41, 126);
+            btn_LamMoi_SanPhamChiTiet.Location = new Point(3, 64);
             btn_LamMoi_SanPhamChiTiet.Name = "btn_LamMoi_SanPhamChiTiet";
-            btn_LamMoi_SanPhamChiTiet.Size = new Size(123, 36);
+            btn_LamMoi_SanPhamChiTiet.Size = new Size(123, 50);
             btn_LamMoi_SanPhamChiTiet.TabIndex = 2;
             btn_LamMoi_SanPhamChiTiet.Text = "Làm mới";
             btn_LamMoi_SanPhamChiTiet.UseVisualStyleBackColor = false;
@@ -585,9 +779,9 @@
             btn_Sua_SanPhamChiTiet.ForeColor = Color.White;
             btn_Sua_SanPhamChiTiet.Image = (Image)resources.GetObject("btn_Sua_SanPhamChiTiet.Image");
             btn_Sua_SanPhamChiTiet.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Sua_SanPhamChiTiet.Location = new Point(41, 72);
+            btn_Sua_SanPhamChiTiet.Location = new Point(128, 8);
             btn_Sua_SanPhamChiTiet.Name = "btn_Sua_SanPhamChiTiet";
-            btn_Sua_SanPhamChiTiet.Size = new Size(123, 36);
+            btn_Sua_SanPhamChiTiet.Size = new Size(123, 50);
             btn_Sua_SanPhamChiTiet.TabIndex = 1;
             btn_Sua_SanPhamChiTiet.Text = "Sửa";
             btn_Sua_SanPhamChiTiet.UseVisualStyleBackColor = false;
@@ -599,9 +793,9 @@
             btn_Them_SanPhamChiTiet.ForeColor = Color.White;
             btn_Them_SanPhamChiTiet.Image = (Image)resources.GetObject("btn_Them_SanPhamChiTiet.Image");
             btn_Them_SanPhamChiTiet.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Them_SanPhamChiTiet.Location = new Point(41, 17);
+            btn_Them_SanPhamChiTiet.Location = new Point(3, 7);
             btn_Them_SanPhamChiTiet.Name = "btn_Them_SanPhamChiTiet";
-            btn_Them_SanPhamChiTiet.Size = new Size(123, 36);
+            btn_Them_SanPhamChiTiet.Size = new Size(123, 51);
             btn_Them_SanPhamChiTiet.TabIndex = 0;
             btn_Them_SanPhamChiTiet.Text = "Thêm";
             btn_Them_SanPhamChiTiet.UseVisualStyleBackColor = false;
@@ -609,7 +803,7 @@
             // cb_MauSac_SanPham
             // 
             cb_MauSac_SanPham.FormattingEnabled = true;
-            cb_MauSac_SanPham.Location = new Point(395, 94);
+            cb_MauSac_SanPham.Location = new Point(375, 54);
             cb_MauSac_SanPham.Name = "cb_MauSac_SanPham";
             cb_MauSac_SanPham.Size = new Size(173, 23);
             cb_MauSac_SanPham.TabIndex = 5;
@@ -617,7 +811,7 @@
             // cb_KichThuoc_SanPham
             // 
             cb_KichThuoc_SanPham.FormattingEnabled = true;
-            cb_KichThuoc_SanPham.Location = new Point(395, 39);
+            cb_KichThuoc_SanPham.Location = new Point(375, 18);
             cb_KichThuoc_SanPham.Name = "cb_KichThuoc_SanPham";
             cb_KichThuoc_SanPham.Size = new Size(173, 23);
             cb_KichThuoc_SanPham.TabIndex = 4;
@@ -625,7 +819,7 @@
             // cb_TrangThai_SanPham
             // 
             cb_TrangThai_SanPham.FormattingEnabled = true;
-            cb_TrangThai_SanPham.Location = new Point(87, 149);
+            cb_TrangThai_SanPham.Location = new Point(87, 92);
             cb_TrangThai_SanPham.Name = "cb_TrangThai_SanPham";
             cb_TrangThai_SanPham.Size = new Size(173, 23);
             cb_TrangThai_SanPham.TabIndex = 3;
@@ -633,7 +827,7 @@
             // tb_SoLuong_SanPham
             // 
             tb_SoLuong_SanPham.BorderStyle = BorderStyle.FixedSingle;
-            tb_SoLuong_SanPham.Location = new Point(87, 95);
+            tb_SoLuong_SanPham.Location = new Point(88, 55);
             tb_SoLuong_SanPham.Name = "tb_SoLuong_SanPham";
             tb_SoLuong_SanPham.Size = new Size(173, 23);
             tb_SoLuong_SanPham.TabIndex = 2;
@@ -642,7 +836,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(317, 95);
+            label8.Location = new Point(297, 55);
             label8.Name = "label8";
             label8.Size = new Size(58, 17);
             label8.TabIndex = 1;
@@ -652,7 +846,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(317, 39);
+            label7.Location = new Point(297, 18);
             label7.Name = "label7";
             label7.Size = new Size(72, 17);
             label7.TabIndex = 1;
@@ -662,7 +856,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(12, 149);
+            label6.Location = new Point(12, 92);
             label6.Name = "label6";
             label6.Size = new Size(69, 17);
             label6.TabIndex = 1;
@@ -672,7 +866,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label12.Location = new Point(12, 40);
+            label12.Location = new Point(12, 19);
             label12.Name = "label12";
             label12.Size = new Size(69, 17);
             label12.TabIndex = 1;
@@ -682,7 +876,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(12, 95);
+            label5.Location = new Point(13, 55);
             label5.Name = "label5";
             label5.Size = new Size(62, 17);
             label5.TabIndex = 1;
@@ -958,6 +1152,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             Controls.Add(tabControl1);
             Controls.Add(panel1);
             Name = "SanPhamControl";
@@ -969,15 +1164,23 @@
             tabPage2.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             groupBox2.ResumeLayout(false);
+            groupBox10.ResumeLayout(false);
+            groupBox10.PerformLayout();
+            groupBox9.ResumeLayout(false);
+            groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_DanhSachSP_SanPham).EndInit();
             panel2.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             groupBox4.ResumeLayout(false);
+            groupBox8.ResumeLayout(false);
+            groupBox8.PerformLayout();
+            groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_SanPhamChiTiet).EndInit();
             panel3.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
@@ -1038,8 +1241,6 @@
         private ComboBox cb_TrangThaiSP_SanPham;
         private Label label10;
         private TextBox tb_MoTa_SanPham;
-        private TextBox tb_Gia_SanPham;
-        private Label label9;
         private Label label11;
         private ComboBox cb_SanPham_SanPham;
         private Label label12;
@@ -1062,14 +1263,33 @@
         private PictureBox pictureBox2;
         private Label label14;
         private TextBox tb_TimKiem_ThuocTinh;
-        private PictureBox pictureBox4;
-        private Label label16;
-        private TextBox tb_TimKiem_SanPham;
         private PictureBox pictureBox3;
-        private Label label15;
         private TextBox tb_TimKiem_SanPhamChiTiet;
         private Label label17;
         private TextBox tb_MaThuocTinh;
         private Button btn_Xoa_ThuocTinh;
+        private GroupBox groupBox8;
+        private ComboBox comboBox3;
+        private ComboBox comboBox2;
+        private ComboBox comboBox1;
+        private GroupBox groupBox7;
+        private Label label19;
+        private Label label18;
+        private Label label15;
+        private GroupBox groupBox9;
+        private PictureBox pictureBox4;
+        private TextBox tb_timKiem_SanPham;
+        private GroupBox groupBox10;
+        private Label label16;
+        private Label label20;
+        private Label label21;
+        private ComboBox cb_Loc_TTSP;
+        private ComboBox cb_Loc_TH;
+        private ComboBox cb_Loc_DanhMuc;
+        private Button btn_Sua_SP;
+        private TextBox tb_MaSP_SP;
+        private Label label22;
+        private TextBox tb_Gia_SanPhamCT;
+        private Label label9;
     }
 }

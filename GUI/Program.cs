@@ -15,4 +15,4 @@ namespace GUI
         }
     }
 }
-//Scaffold-DbContext "Server=DESKTOP-BQH9I25;Database=DuAn1;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+//Scaffold-DbContext "Server=DESKTOP-BQH9I25;Database=DuAn1;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force

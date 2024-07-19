@@ -15,7 +15,7 @@ namespace DAL.Models
         public Guid? IdNhanvien { get; set; }
         public Guid? IdPhuongthucthanhtoan { get; set; }
         public decimal TongSoTienHoaDon { get; set; }
-        public bool TrangThaiThanhToan { get; set; }
+        public int TrangThaiThanhToan { get; set; }
         public DateTime? NgayTao { get; set; }
 
         public virtual NhanVien? IdNhanvienNavigation { get; set; }
