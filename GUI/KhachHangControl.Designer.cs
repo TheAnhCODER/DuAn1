@@ -394,7 +394,7 @@
             Controls.Add(panel1);
             Name = "KhachHangControl";
             Size = new Size(868, 628);
-            Load += KhachHangControl_Load;
+
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

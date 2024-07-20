@@ -26,7 +26,7 @@ namespace GUI
             tb_sdt_KhachHang.Tag = "Số điện thoại";
             tb_tenkhachhang_KhachHang.Tag = "Tên khách hàng";
             tb_diachi_KhachHang.Tag = "Địa chỉ";
-
+            LoadKhachHang();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -39,12 +39,33 @@ namespace GUI
             }
         }
 
-        private void KhachHangControl_Load(object sender, EventArgs e)
-        {
-            List<Khach> danhSachKhach = khachhangServices.CNShow();
+        //ham load dgv
 
-            // Hiển thị danh sách lên DataGridView
-            ShowKhachHang(danhSachKhach);
+        private void LoadKhachHang()
+        {
+            try
+            {
+                List<Khach> khachHangList = khachhangServices.CNShow();
+                dgv_danhsach_KhachHang.Rows.Clear();
+                dgv_danhsach_KhachHang.ColumnCount = 4;
+                int stt = 1;
+                dgv_danhsach_KhachHang.Columns[0].HeaderText = "Số thứ tự";
+                dgv_danhsach_KhachHang.Columns[1].HeaderText = "Số điện thoại";
+                dgv_danhsach_KhachHang.Columns[2].HeaderText = "Tên khách hàng";
+                dgv_danhsach_KhachHang.Columns[3].HeaderText = "Địa chỉ";
+
+  
+                dgv_danhsach_KhachHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                foreach (var item in khachHangList)
+                {
+
+                    dgv_danhsach_KhachHang.Rows.Add(stt++, item.SoDienThoai, item.TenKhachHang  , item.DiaChi);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
         }
 
         private void btn_them_KhachHang_Click(object sender, EventArgs e)
@@ -111,13 +132,20 @@ namespace GUI
 
         private void dgv_danhsach_KhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_danhsach_KhachHang.Rows.Count)
             {
-                DataGridViewRow dtr = dgv_danhsach_KhachHang.Rows[e.RowIndex];
-                originalSoDienThoai = dtr.Cells[1].Value.ToString(); // Lưu giá trị ban đầu
-                tb_sdt_KhachHang.Text = originalSoDienThoai;
-                tb_tenkhachhang_KhachHang.Text = dtr.Cells[2].Value.ToString();
-                tb_diachi_KhachHang.Text = dtr.Cells[3].Value.ToString();
+
+                // Lấy dữ liệu từ dòng được chọn để điền vào form
+                int row = e.RowIndex;
+                var rowData = dgv_danhsach_KhachHang.Rows[row]; // Lấy dữ liệu từ dòng đó ra
+
+                // Kiểm tra chỉ số cột có hợp lệ hay không
+                if (rowData.Cells.Count > 2)
+                {
+                    tb_sdt_KhachHang.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
+                    tb_tenkhachhang_KhachHang.Text = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+                    tb_diachi_KhachHang.Text = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+                }
             }
         }
 
@@ -152,7 +180,7 @@ namespace GUI
             tb_sdt_KhachHang.Clear();
             tb_tenkhachhang_KhachHang.Clear();
             tb_diachi_KhachHang.Clear();
-
+            LoadKhachHang();
 
             // Xóa trường tìm kiếm 
             tb_timkiem_KhachHang.Clear();
