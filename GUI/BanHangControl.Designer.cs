@@ -65,6 +65,9 @@
             tabPage2 = new TabPage();
             dgv_DangGiamGia = new DataGridView();
             groupBox5 = new GroupBox();
+            tb_MaHoaDon_BanHang = new TextBox();
+            label8 = new Label();
+            btn_ThemKhachHang = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -148,7 +151,7 @@
             groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(889, 275);
+            groupBox1.Size = new Size(547, 275);
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
             groupBox1.Text = "Danh sách hóa đơn chờ";
@@ -156,15 +159,20 @@
             // dgv_HoaDonCho_BanHang
             // 
             dgv_HoaDonCho_BanHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_HoaDonCho_BanHang.Location = new Point(9, 25);
+            dgv_HoaDonCho_BanHang.Location = new Point(7, 25);
             dgv_HoaDonCho_BanHang.Margin = new Padding(4, 5, 4, 5);
             dgv_HoaDonCho_BanHang.Name = "dgv_HoaDonCho_BanHang";
             dgv_HoaDonCho_BanHang.RowHeadersWidth = 62;
-            dgv_HoaDonCho_BanHang.Size = new Size(871, 240);
+            dgv_HoaDonCho_BanHang.Size = new Size(530, 240);
             dgv_HoaDonCho_BanHang.TabIndex = 0;
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(label2);
+            groupBox2.Controls.Add(tb_SoDienThoai_BanHang);
+            groupBox2.Controls.Add(btn_ThemKhachHang);
+            groupBox2.Controls.Add(tb_MaHoaDon_BanHang);
+            groupBox2.Controls.Add(label8);
             groupBox2.Controls.Add(btn_HuyHoaDon_BanHang);
             groupBox2.Controls.Add(btn_TaoHoaDon_BanHang);
             groupBox2.Controls.Add(btn_ThanhToan_BanHang);
@@ -178,22 +186,20 @@
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(label3);
             groupBox2.Controls.Add(panel1);
-            groupBox2.Controls.Add(tb_SoDienThoai_BanHang);
-            groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(tb_TenKhachHang_BanHang);
-            groupBox2.Location = new Point(901, 368);
+            groupBox2.Location = new Point(901, 83);
             groupBox2.Margin = new Padding(4, 5, 4, 5);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4, 5, 4, 5);
-            groupBox2.Size = new Size(334, 673);
+            groupBox2.Size = new Size(334, 958);
             groupBox2.TabIndex = 16;
             groupBox2.TabStop = false;
             groupBox2.Text = "Hóa đơn";
             // 
             // btn_HuyHoaDon_BanHang
             // 
-            btn_HuyHoaDon_BanHang.Location = new Point(170, 580);
+            btn_HuyHoaDon_BanHang.Location = new Point(171, 768);
             btn_HuyHoaDon_BanHang.Margin = new Padding(4, 5, 4, 5);
             btn_HuyHoaDon_BanHang.Name = "btn_HuyHoaDon_BanHang";
             btn_HuyHoaDon_BanHang.Size = new Size(126, 78);
@@ -203,7 +209,7 @@
             // 
             // btn_TaoHoaDon_BanHang
             // 
-            btn_TaoHoaDon_BanHang.Location = new Point(36, 580);
+            btn_TaoHoaDon_BanHang.Location = new Point(37, 768);
             btn_TaoHoaDon_BanHang.Margin = new Padding(4, 5, 4, 5);
             btn_TaoHoaDon_BanHang.Name = "btn_TaoHoaDon_BanHang";
             btn_TaoHoaDon_BanHang.Size = new Size(123, 78);
@@ -213,7 +219,7 @@
             // 
             // btn_ThanhToan_BanHang
             // 
-            btn_ThanhToan_BanHang.Location = new Point(36, 492);
+            btn_ThanhToan_BanHang.Location = new Point(37, 680);
             btn_ThanhToan_BanHang.Margin = new Padding(4, 5, 4, 5);
             btn_ThanhToan_BanHang.Name = "btn_ThanhToan_BanHang";
             btn_ThanhToan_BanHang.Size = new Size(260, 78);
@@ -224,7 +230,7 @@
             // panel2
             // 
             panel2.BackColor = Color.Gainsboro;
-            panel2.Location = new Point(0, 463);
+            panel2.Location = new Point(1, 651);
             panel2.Margin = new Padding(4, 5, 4, 5);
             panel2.Name = "panel2";
             panel2.Size = new Size(334, 2);
@@ -232,7 +238,7 @@
             // 
             // tb_TienThua_BanHang
             // 
-            tb_TienThua_BanHang.Location = new Point(146, 393);
+            tb_TienThua_BanHang.Location = new Point(148, 582);
             tb_TienThua_BanHang.Margin = new Padding(4, 5, 4, 5);
             tb_TienThua_BanHang.Name = "tb_TienThua_BanHang";
             tb_TienThua_BanHang.Size = new Size(178, 31);
@@ -240,7 +246,7 @@
             // 
             // tb_TienKhachTra_BanHang
             // 
-            tb_TienKhachTra_BanHang.Location = new Point(146, 327);
+            tb_TienKhachTra_BanHang.Location = new Point(148, 516);
             tb_TienKhachTra_BanHang.Margin = new Padding(4, 5, 4, 5);
             tb_TienKhachTra_BanHang.Name = "tb_TienKhachTra_BanHang";
             tb_TienKhachTra_BanHang.Size = new Size(178, 31);
@@ -249,7 +255,7 @@
             // cb_HTTT_BanHang
             // 
             cb_HTTT_BanHang.FormattingEnabled = true;
-            cb_HTTT_BanHang.Location = new Point(146, 265);
+            cb_HTTT_BanHang.Location = new Point(148, 454);
             cb_HTTT_BanHang.Margin = new Padding(4, 5, 4, 5);
             cb_HTTT_BanHang.Name = "cb_HTTT_BanHang";
             cb_HTTT_BanHang.Size = new Size(178, 33);
@@ -257,7 +263,7 @@
             // 
             // tb_TongTien_BanHang
             // 
-            tb_TongTien_BanHang.Location = new Point(146, 202);
+            tb_TongTien_BanHang.Location = new Point(148, 391);
             tb_TongTien_BanHang.Margin = new Padding(4, 5, 4, 5);
             tb_TongTien_BanHang.Name = "tb_TongTien_BanHang";
             tb_TongTien_BanHang.Size = new Size(178, 31);
@@ -266,7 +272,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(9, 398);
+            label7.Location = new Point(11, 587);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
             label7.Size = new Size(85, 25);
@@ -276,7 +282,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(9, 332);
+            label6.Location = new Point(11, 521);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new Size(121, 25);
@@ -286,7 +292,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(9, 270);
+            label5.Location = new Point(11, 459);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(125, 25);
@@ -296,7 +302,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(9, 207);
+            label3.Location = new Point(11, 396);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(132, 25);
@@ -306,7 +312,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Gainsboro;
-            panel1.Location = new Point(0, 172);
+            panel1.Location = new Point(1, 296);
             panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
             panel1.Size = new Size(334, 2);
@@ -314,7 +320,7 @@
             // 
             // tb_SoDienThoai_BanHang
             // 
-            tb_SoDienThoai_BanHang.Location = new Point(146, 105);
+            tb_SoDienThoai_BanHang.Location = new Point(145, 49);
             tb_SoDienThoai_BanHang.Margin = new Padding(4, 5, 4, 5);
             tb_SoDienThoai_BanHang.Name = "tb_SoDienThoai_BanHang";
             tb_SoDienThoai_BanHang.Size = new Size(178, 31);
@@ -323,7 +329,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(9, 110);
+            label2.Location = new Point(8, 52);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(117, 25);
@@ -333,16 +339,17 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(9, 47);
+            label1.Location = new Point(3, 117);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(134, 25);
             label1.TabIndex = 1;
             label1.Text = "Tên khách hàng";
+        
             // 
             // tb_TenKhachHang_BanHang
             // 
-            tb_TenKhachHang_BanHang.Location = new Point(146, 42);
+            tb_TenKhachHang_BanHang.Location = new Point(145, 117);
             tb_TenKhachHang_BanHang.Margin = new Padding(4, 5, 4, 5);
             tb_TenKhachHang_BanHang.Name = "tb_TenKhachHang_BanHang";
             tb_TenKhachHang_BanHang.Size = new Size(178, 31);
@@ -454,7 +461,7 @@
             // 
             // groupBox5
             // 
-            groupBox5.Location = new Point(901, 83);
+            groupBox5.Location = new Point(559, 83);
             groupBox5.Margin = new Padding(4, 5, 4, 5);
             groupBox5.Name = "groupBox5";
             groupBox5.Padding = new Padding(4, 5, 4, 5);
@@ -462,6 +469,33 @@
             groupBox5.TabIndex = 19;
             groupBox5.TabStop = false;
             groupBox5.Text = "Quét QR sản phẩm";
+            // 
+            // tb_MaHoaDon_BanHang
+            // 
+            tb_MaHoaDon_BanHang.Location = new Point(148, 332);
+            tb_MaHoaDon_BanHang.Margin = new Padding(4, 5, 4, 5);
+            tb_MaHoaDon_BanHang.Name = "tb_MaHoaDon_BanHang";
+            tb_MaHoaDon_BanHang.Size = new Size(178, 31);
+            tb_MaHoaDon_BanHang.TabIndex = 21;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(11, 337);
+            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(109, 25);
+            label8.TabIndex = 20;
+            label8.Text = "Mã hóa đơn";
+            // 
+            // btn_ThemKhachHang
+            // 
+            btn_ThemKhachHang.Location = new Point(57, 188);
+            btn_ThemKhachHang.Name = "btn_ThemKhachHang";
+            btn_ThemKhachHang.Size = new Size(226, 77);
+            btn_ThemKhachHang.TabIndex = 22;
+            btn_ThemKhachHang.Text = "Thêm khách hàng";
+            btn_ThemKhachHang.UseVisualStyleBackColor = true;
             // 
             // BanHangControl
             // 
@@ -536,5 +570,8 @@
         private DataGridView dgv_TatCaSanPham;
         private TabPage tabPage2;
         private DataGridView dgv_DangGiamGia;
+        private Button btn_ThemKhachHang;
+        private TextBox tb_MaHoaDon_BanHang;
+        private Label label8;
     }
 }

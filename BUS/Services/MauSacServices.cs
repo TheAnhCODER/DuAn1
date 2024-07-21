@@ -74,5 +74,13 @@ namespace BUS.Services
                 return "Xóa thất bại";
             }
         }
+
+        public Dictionary<Guid, string> GetMauSacDict()
+        {
+
+            var mauSacs = _repo.GetAll();
+            return mauSacs.ToDictionary(ms => ms.IdMauSac, ms => ms.TenMauSac);
+        }
+
     }
 }

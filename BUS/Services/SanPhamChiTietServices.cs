@@ -87,5 +87,11 @@ namespace BUS.Services
         {
             return _repo.GetSPCTByMASP(maSP);
         }
+
+        // Lấy tất cả sp dang kinh doanh
+        public List<SanPhamChiTiet> CNShowSPDangKinhDoanh()
+        {
+            return _repo.GetAllSPDangKinhDoanh();
+        }
     }
 }

@@ -121,38 +121,26 @@ namespace DAL.Models
 
             modelBuilder.Entity<HoaDonChiTiet>(entity =>
             {
-                entity.HasKey(e => e.IdHoadonChitiet)
-                    .HasName("PK__HoaDon_C__EA24FCBAB0F248C6");
+                entity.HasKey(e => new { e.MaSpct, e.MaHoaDon })
+                    .HasName("PK__HoaDonCh__36E3C8548FEBB5CC");
 
-                entity.ToTable("HoaDon_ChiTiet");
+                entity.ToTable("HoaDonChiTiet");
 
-                entity.Property(e => e.IdHoadonChitiet)
-                    .HasColumnName("id_hoadon_chitiet")
-                    .HasDefaultValueSql("(newid())");
+                entity.Property(e => e.MaSpct).HasColumnName("MaSPCT");
 
-                entity.Property(e => e.DonGia)
-                    .HasColumnType("decimal(18, 2)")
-                    .HasColumnName("Don_gia");
+                entity.Property(e => e.DonGia).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.IdHoadon).HasColumnName("id_hoadon");
-
-                entity.Property(e => e.IdSanphamChitiet).HasColumnName("id_sanpham_chitiet");
-
-                entity.Property(e => e.SoLuongSanPham).HasColumnName("So_luong_san_pham");
-
-                entity.Property(e => e.TongSoTien)
-                    .HasColumnType("decimal(18, 2)")
-                    .HasColumnName("Tong_so_tien");
-
-                entity.HasOne(d => d.IdHoadonNavigation)
+                entity.HasOne(d => d.MaHoaDonNavigation)
                     .WithMany(p => p.HoaDonChiTiets)
-                    .HasForeignKey(d => d.IdHoadon)
-                    .HasConstraintName("FK__HoaDon_Ch__id_ho__6477ECF3");
+                    .HasForeignKey(d => d.MaHoaDon)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__HoaDonChi__MaHoa__01142BA1");
 
-                entity.HasOne(d => d.IdSanphamChitietNavigation)
+                entity.HasOne(d => d.MaSpctNavigation)
                     .WithMany(p => p.HoaDonChiTiets)
-                    .HasForeignKey(d => d.IdSanphamChitiet)
-                    .HasConstraintName("FK__HoaDon_Ch__id_sa__656C112C");
+                    .HasForeignKey(d => d.MaSpct)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__HoaDonChi__MaSPC__00200768");
             });
 
             modelBuilder.Entity<Khach>(entity =>

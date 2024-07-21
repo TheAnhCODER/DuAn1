@@ -95,6 +95,11 @@ namespace BUS.Services
 
             return _repo.GetSPByTTSP(ttsp);
         }
+        public Dictionary<Guid, string> GetSanPhamDict()
+        {
 
+            var sanPhamList = _repo.GetAll();
+            return sanPhamList.ToDictionary(sp => sp.IdSanPham, sp => sp.TenSanPham);
+        }
     }
 }

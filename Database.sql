@@ -102,16 +102,17 @@ CREATE TABLE HoaDon (
     FOREIGN KEY (id_phuongthucthanhtoan) REFERENCES PhuongThucThanhToan(id_phuongthucthanhtoan)
 );
 
-CREATE TABLE HoaDon_ChiTiet (
-    id_hoadon_chitiet UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
-    id_hoadon UNIQUEIDENTIFIER,
-    id_sanpham_chitiet UNIQUEIDENTIFIER,
-    Tong_so_tien DECIMAL(18, 2) NOT NULL,
-    So_luong_san_pham INT NOT NULL,
-    Don_gia DECIMAL(18, 2) NOT NULL,
-    FOREIGN KEY (id_hoadon) REFERENCES HoaDon(id_hoadon),
-    FOREIGN KEY (id_sanpham_chitiet) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet)
+CREATE TABLE dbo.HoaDonChiTiet (
+    MaSPCT UNIQUEIDENTIFIER NOT NULL,
+    MaHoaDon UNIQUEIDENTIFIER NOT NULL,
+    DonGia DECIMAL(18, 2) NULL,
+    SoLuong INT NULL,
+    PRIMARY KEY (MaSPCT, MaHoaDon),
+    FOREIGN KEY (MaSPCT) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet),
+    FOREIGN KEY (MaHoaDon) REFERENCES HoaDon(id_hoadon)
 );
+GO
+
 
 
 

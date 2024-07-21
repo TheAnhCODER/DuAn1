@@ -81,6 +81,12 @@ namespace DAL.Responsitories
         {
             return _duan1Context.SanPhamChiTiets.Where(p => p.IdKichCo == maKichCo).ToList();
         }
-
+        // Lấy tất cả sản phẩm chi tiết từ các sản phẩm có trạng thái Đang Kinh Doanh
+        public List<SanPhamChiTiet> GetAllSPDangKinhDoanh()
+        {
+            return _duan1Context.SanPhamChiTiets
+                .Where(spct => spct.IdSanPhamNavigation.TrangThaiSanPham == true)
+                .ToList();
+        }
     }
 }

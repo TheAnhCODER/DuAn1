@@ -5,14 +5,12 @@ namespace DAL.Models
 {
     public partial class HoaDonChiTiet
     {
-        public Guid IdHoadonChitiet { get; set; }
-        public Guid? IdHoadon { get; set; }
-        public Guid? IdSanphamChitiet { get; set; }
-        public decimal TongSoTien { get; set; }
-        public int SoLuongSanPham { get; set; }
-        public decimal DonGia { get; set; }
+        public Guid MaSpct { get; set; }
+        public Guid MaHoaDon { get; set; }
+        public decimal? DonGia { get; set; }
+        public int? SoLuong { get; set; }
 
-        public virtual HoaDon? IdHoadonNavigation { get; set; }
-        public virtual SanPhamChiTiet? IdSanphamChitietNavigation { get; set; }
+        public virtual HoaDon MaHoaDonNavigation { get; set; } = null!;
+        public virtual SanPhamChiTiet MaSpctNavigation { get; set; } = null!;
     }
 }

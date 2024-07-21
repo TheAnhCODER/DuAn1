@@ -74,5 +74,14 @@ namespace BUS.Services
                 return "Xóa thất bại";
             }
         }
+
+
+        public Dictionary<Guid, string> GetKichCoDict()
+        {
+
+            var kichCos = _repo.GetAll();
+            return kichCos.ToDictionary(kc => kc.IdKichCo, kc => kc.KichCo1);
+        }
+
     }
 }
