@@ -34,6 +34,7 @@
             panel1 = new Panel();
             panel4 = new Panel();
             groupBox1 = new GroupBox();
+            btn_Show = new Button();
             panel2 = new Panel();
             btn_lammoi_KhachHang = new Button();
             btn_sua_KhachHang = new Button();
@@ -120,6 +121,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btn_Show);
             groupBox1.Controls.Add(panel2);
             groupBox1.Controls.Add(tb_diachi_KhachHang);
             groupBox1.Controls.Add(tb_sdt_KhachHang);
@@ -135,13 +137,26 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Thiết lập thông tin khách hàng";
             // 
+            // btn_Show
+            // 
+            btn_Show.BackColor = Color.FromArgb(29, 135, 209);
+            btn_Show.FlatStyle = FlatStyle.Flat;
+            btn_Show.ForeColor = Color.White;
+            btn_Show.Location = new Point(49, 118);
+            btn_Show.Name = "btn_Show";
+            btn_Show.Size = new Size(106, 55);
+            btn_Show.TabIndex = 7;
+            btn_Show.Text = "Show";
+            btn_Show.UseVisualStyleBackColor = false;
+            btn_Show.Click += btn_Show_Click;
+            // 
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(btn_lammoi_KhachHang);
             panel2.Controls.Add(btn_sua_KhachHang);
             panel2.Controls.Add(btn_them_KhachHang);
-            panel2.Location = new Point(127, 104);
+            panel2.Location = new Point(196, 111);
             panel2.Name = "panel2";
             panel2.Size = new Size(581, 86);
             panel2.TabIndex = 6;
@@ -394,7 +409,6 @@
             Controls.Add(panel1);
             Name = "KhachHangControl";
             Size = new Size(868, 628);
-
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -447,5 +461,6 @@
         private TextBox textBox5;
         private PictureBox pictureBox3;
         private DataGridView dataGridView2;
+        private Button btn_Show;
     }
 }

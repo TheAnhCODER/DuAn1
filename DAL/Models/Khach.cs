@@ -17,3 +17,4 @@ namespace DAL.Models
         public virtual ICollection<HoaDon> HoaDons { get; set; }
     }
 }
+        
