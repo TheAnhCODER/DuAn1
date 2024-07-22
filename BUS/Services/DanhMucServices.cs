@@ -29,6 +29,10 @@ namespace BUS.Services
         // Thêm danh mục mới
         public string CNThem(string ten)
         {
+            if (IsProductExists(ten))
+            {
+                return "Danh mục đã tồn tại";
+            }
             DanhMuc danhMuc = new DanhMuc()
             {
                 TenDanhMuc = ten,
@@ -46,6 +50,10 @@ namespace BUS.Services
         // Sửa danh mục
         public string CNSua(string idDanhMuc, string ten)
         {
+            if (IsProductExists(ten))
+            {
+                return "Danh mục đã tồn tại";
+            }
             DanhMuc danhMuc = new DanhMuc()
             {
                 IdDanhMuc = Guid.Parse(idDanhMuc),
@@ -71,6 +79,11 @@ namespace BUS.Services
             return danhMucs.ToDictionary(ms => ms.IdDanhMuc, ms => ms.TenDanhMuc);
         }
 
+
+        public bool IsProductExists(string tendanhmuc)
+        {
+            return _repo.IsProductExists(tendanhmuc);
+        }
 
 
 

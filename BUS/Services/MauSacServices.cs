@@ -29,6 +29,10 @@ namespace BUS.Services
         // Thêm màu sắc mới
         public string CNThem(string ten)
         {
+            if (IsProductExists(ten))
+            {
+                return "Màu sắc đã tồn tại";
+            }
             MauSac mauSac = new MauSac()
             {
                 TenMauSac = ten,
@@ -46,6 +50,10 @@ namespace BUS.Services
         // Sửa màu sắc
         public string CNSua(string idMauSac, string ten)
         {
+            if (IsProductExists(ten))
+            {
+                return "Màu sắc đã tồn tại";
+            }
             MauSac mauSac = new MauSac()
             {
                 IdMauSac = Guid.Parse(idMauSac),
@@ -69,6 +77,11 @@ namespace BUS.Services
             var mauSacs = _repo.GetAll();
             return mauSacs.ToDictionary(ms => ms.IdMauSac, ms => ms.TenMauSac);
         }
+        public bool IsProductExists(string tenmausac)
+        {
+            return _repo.IsProductExists(tenmausac);
+        }
+
 
     }
 }

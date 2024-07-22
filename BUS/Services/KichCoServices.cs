@@ -29,6 +29,10 @@ namespace BUS.Services
         // Thêm kích cỡ mới
         public string CNThem(string ten)
         {
+            if (IsProductExists(ten))
+            {
+                return "Kích cỡ đã tồn tại";
+            }
             KichCo kichCo = new KichCo()
             {
                 KichCo1 = ten,
@@ -46,6 +50,10 @@ namespace BUS.Services
         // Sửa kích cỡ
         public string CNSua(string idKichCo, string ten)
         {
+            if (IsProductExists(ten))
+            {
+                return "Kích cỡ đã tồn tại";
+            }
             KichCo kichCo = new KichCo()
             {
                 IdKichCo = Guid.Parse(idKichCo),
@@ -69,6 +77,13 @@ namespace BUS.Services
             var kichCos = _repo.GetAll();
             return kichCos.ToDictionary(kc => kc.IdKichCo, kc => kc.KichCo1);
         }
+
+        public bool IsProductExists(string tenkichco)
+        {
+            return _repo.IsProductExists(tenkichco);
+        }
+
+
 
     }
 }

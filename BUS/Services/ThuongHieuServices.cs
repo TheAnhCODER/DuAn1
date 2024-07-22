@@ -30,6 +30,11 @@ namespace BUS.Services
         //them
         public string CNThem(string ten)
         {
+            
+            if (IsProductExists( ten))
+            {
+                return "Thương hiệu đã tồn tại";
+            }
             ThuongHieu thuongHieu = new ThuongHieu()//tao ra 1 doi tuong chua thong tin duoc truyen vao
             {
                 TenThuongHieu = ten,
@@ -45,6 +50,10 @@ namespace BUS.Services
         //sua
         public string CNSua(string idThuongHieu, string ten)
         {
+            if (IsProductExists(ten))
+            {
+                return "Thương hiệu đã tồn tại";
+            }
             ThuongHieu thuongHieu = new ThuongHieu()//tao ra 1 doi tuong chua thong tin duoc truyen vao
             {
                 IdThuongHieu = Guid.Parse(idThuongHieu),
@@ -69,7 +78,10 @@ namespace BUS.Services
             return thuongHieus.ToDictionary(ms => ms.IdThuongHieu, ms => ms.TenThuongHieu);
         }
 
-
+        public bool IsProductExists( string tenthuonghieu)
+        {
+            return _repo.IsProductExists(tenthuonghieu);
+        }
 
 
 
