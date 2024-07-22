@@ -67,25 +67,6 @@ namespace DAL.Responsitories
             }
         }
 
-        // Xóa màu sắc
-        public bool DeleteMS(Guid maMS)
-        {
-            try
-            {
-                // Lấy ra đối tượng cần được xóa
-                var deleteItem = _duan1Context.MauSacs.Find(maMS);
-                if (deleteItem != null)
-                {
-                    _duan1Context.MauSacs.Remove(deleteItem);
-                    _duan1Context.SaveChanges(); // Lưu lại thay đổi
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+     
     }
 }

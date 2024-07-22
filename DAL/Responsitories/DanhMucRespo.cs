@@ -67,25 +67,6 @@ namespace DAL.Responsitories
             }
         }
 
-        // Xóa danh mục
-        public bool DeleteDM(Guid maDM)
-        {
-            try
-            {
-                // Lấy ra đối tượng cần được xóa
-                var deleteItem = _duan1Context.DanhMucs.Find(maDM);
-                if (deleteItem != null)
-                {
-                    _duan1Context.DanhMucs.Remove(deleteItem);
-                    _duan1Context.SaveChanges(); // Lưu lại thay đổi
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+      
     }
 }

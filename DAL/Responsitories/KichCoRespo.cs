@@ -67,25 +67,6 @@ namespace DAL.Responsitories
             }
         }
 
-        // Xóa kích cỡ
-        public bool DeleteKC(Guid maKC)
-        {
-            try
-            {
-                // Lấy ra đối tượng cần được xóa
-                var deleteItem = _duan1Context.KichCos.Find(maKC);
-                if (deleteItem != null)
-                {
-                    _duan1Context.KichCos.Remove(deleteItem);
-                    _duan1Context.SaveChanges(); // Lưu lại thay đổi
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        
     }
 }

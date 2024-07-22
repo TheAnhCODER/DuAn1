@@ -61,20 +61,7 @@ namespace BUS.Services
             }
         }
 
-        // Xóa kích cỡ
-        public string XoaKC(string idKichCo)
-        {
-            var id = Guid.Parse(idKichCo);
-            if (_repo.DeleteKC(id))
-            {
-                return "Xóa thành công";
-            }
-            else
-            {
-                return "Xóa thất bại";
-            }
-        }
-
+  
 
         public Dictionary<Guid, string> GetKichCoDict()
         {

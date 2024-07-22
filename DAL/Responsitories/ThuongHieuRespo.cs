@@ -63,23 +63,7 @@ namespace DAL.Responsitories
             }
         }
 
-        public bool DeleteTH(Guid maTH)
-        {
-            try
-            {
-                //lấy ra đối tượng cần được sửa
-                var deleteItem = _duan1Context.ThuongHieus.Find(maTH);
-                //sau khi tìm ra thì ta đi gán gía trị 
-                _duan1Context.ThuongHieus.Remove(deleteItem);
-                _duan1Context.SaveChanges();//lưu lại thay đổi
-                return true;
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-        }
+        
 
     }
 }

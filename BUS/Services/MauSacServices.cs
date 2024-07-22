@@ -61,19 +61,7 @@ namespace BUS.Services
             }
         }
 
-        // Xóa màu sắc
-        public string XoaMS(string idMauSac)
-        {
-            var id = Guid.Parse(idMauSac);
-            if (_repo.DeleteMS(id))
-            {
-                return "Xóa thành công";
-            }
-            else
-            {
-                return "Xóa thất bại";
-            }
-        }
+     
 
         public Dictionary<Guid, string> GetMauSacDict()
         {

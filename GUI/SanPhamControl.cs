@@ -397,106 +397,7 @@ namespace GUI
             }
         }
 
-        private void btn_Xoa_ThuocTinh_Click(object sender, EventArgs e)
-        {
-            if (rb_ThuongHieu.Checked)
-            {
-
-                DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
-                    {
-
-                        thuonghieuServices.XoaTH(tb_MaThuocTinh.Text);
-                        List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
-                        ShowThuongHieu(thuongHieus);
-                        LoadThuongHieu();
-                        LoadThuongHieuTimKiem();
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-
-            }
-            else if (rb_DanhMuc.Checked)
-            {
-                string id = tb_MaThuocTinh.Text;
-
-                DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
-                    {
-
-                        string kq = danhMucServices.XoaDM(id);
-                        MessageBox.Show(kq);
-                        List<DanhMuc> danhMucs = danhMucServices.CNShow();
-                        ShowDanhMuc(danhMucs);
-                        LoadDanhMuc();
-                        LoadDanhMucTimKiem();
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-
-            }
-            else if (rb_MauSac.Checked)
-            {
-                string id = tb_MaThuocTinh.Text;
-
-                DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
-                    {
-
-                        string kq = mauSacServices.XoaMS(id);
-                        MessageBox.Show(kq);
-                        List<MauSac> mauSacs = mauSacServices.CNShow();
-                        ShowMauSac(mauSacs);
-                        LoadMauSac();
-                        LoadMauSacTimKiem();
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-
-            }
-            else if (rb_KichCo.Checked)
-            {
-                string id = tb_MaThuocTinh.Text;
-
-                DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
-                    {
-
-                        string kq = kichCoServices.XoaKC(id);
-                        MessageBox.Show(kq);
-                        List<KichCo> kichCos = kichCoServices.CNShow();
-                        ShowKichCo(kichCos);
-                        LoadKichCo();
-                        LoadKichCoTimKiem();
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-        }
+      
 
         private void rb_DanhMuc_CheckedChanged(object sender, EventArgs e)
         {
@@ -627,11 +528,23 @@ namespace GUI
                 dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
                 dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
                 dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
+
+                dgv_DanhSachSP_SanPham.Columns[0].Visible = false;
+                dgv_DanhSachSP_SanPham.Columns[1].Visible = false;
+
+                Dictionary<Guid, string> thuonghieuDict = thuonghieuServices.GetThuongHieuDict();
+                Dictionary<Guid, string> danhmucDict = danhMucServices.GetDanhMucDict();
                 dgv_DanhSachSP_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 foreach (var item in sanPhams)
                 {
+                    string danhmuc = danhmucDict.ContainsKey(item.IdDanhMuc.Value)
+           ? danhmucDict[item.IdDanhMuc.Value]
+           : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
+                    string thuonghieu = thuonghieuDict.ContainsKey(item.IdThuongHieu.Value)
+               ? thuonghieuDict[item.IdThuongHieu.Value]
+               : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                     string trangThaiSanPham = item.TrangThaiSanPham ? "Đang kinh doanh" : "Ngưng kinh doanh";
-                    dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, item.IdThuongHieu, item.IdDanhMuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
+                    dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, danhmuc, thuonghieu, item.TenSanPham, item.MoTa, trangThaiSanPham);
                 }
             }
             catch (Exception ex)
@@ -654,13 +567,85 @@ namespace GUI
 
             dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
             dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
+
+            dgv_DanhSachSP_SanPham.Columns[0].Visible = false;
+            dgv_DanhSachSP_SanPham.Columns[1].Visible = false;
+
+
+            Dictionary<Guid, string> thuonghieuDict = thuonghieuServices.GetThuongHieuDict();
+            Dictionary<Guid, string> danhmucDict = danhMucServices.GetDanhMucDict();
             dgv_DanhSachSP_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in sanPhams)
             {
+                string danhmuc = danhmucDict.ContainsKey(item.IdDanhMuc.Value)
+           ? danhmucDict[item.IdDanhMuc.Value]
+           : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
+                string thuonghieu = thuonghieuDict.ContainsKey(item.IdThuongHieu.Value)
+           ? thuonghieuDict[item.IdThuongHieu.Value]
+           : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string trangThaiSanPham = item.TrangThaiSanPham ? "Đang kinh doanh" : "Ngưng kinh doanh";
-                dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, item.IdThuongHieu, item.IdDanhMuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
+                dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, thuonghieu, danhmuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
             }
         }
+
+
+        private void dgv_DanhSachSP_SanPham_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_DanhSachSP_SanPham.Rows.Count)
+            {
+                // Lấy dữ liệu từ dòng được chọn để điền vào form
+                int row = e.RowIndex;
+                var rowData = dgv_DanhSachSP_SanPham.Rows[row]; // Lấy dữ liệu từ dòng đó ra
+
+                // Điền dữ liệu vào các trường trên form
+                tb_MaSP_SP.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
+                // Lấy idThuongHieu từ dòng được chọn
+                string idThuongHieu = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+
+                // Lấy danh sách thương hiệu từ dịch vụ
+                Dictionary<Guid, string> thuonghieuDict = thuonghieuServices.GetThuongHieuDict();
+
+                // Thiết lập SelectedValue của ComboBox thương hiệu
+                if (!string.IsNullOrEmpty(idThuongHieu) && Guid.TryParse(idThuongHieu, out Guid thuongHieuGuid))
+                {
+                    if (thuonghieuDict.ContainsKey(thuongHieuGuid))
+                    {
+                        cb_ThuongHieu_SanPham.SelectedItem = thuonghieuDict[thuongHieuGuid];
+                    }
+                    else
+                    {
+                        cb_ThuongHieu_SanPham.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
+                    }
+                }
+
+                // Lấy IdDanhMuc từ dòng được chọn
+                string idDanhMuc = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+                // Lấy danh sách danh mục từ dịch vụ
+                Dictionary<Guid, string> danhmucDict = danhMucServices.GetDanhMucDict();
+
+                // Thiết lập SelectedItem của ComboBox danh mục
+                if (!string.IsNullOrEmpty(idDanhMuc) && Guid.TryParse(idDanhMuc, out Guid danhMucGuid))
+                {
+                    if (danhmucDict.ContainsKey(danhMucGuid))
+                    {
+                        cb_DanhMuc_SanPham.SelectedItem = danhmucDict[danhMucGuid];
+                    }
+                    else
+                    {
+                        cb_DanhMuc_SanPham.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
+                    }
+                }
+                tb_TenSanPham_SanPham.Text = rowData.Cells[4].Value?.ToString() ?? string.Empty;
+
+                tb_MoTa_SanPham.Text = rowData.Cells[5].Value?.ToString() ?? string.Empty;
+
+                // Chuyển đổi trạng thái sản phẩm từ chuỗi sang giá trị bool
+                string trangThai = rowData.Cells[6].Value?.ToString() ?? string.Empty;
+                cb_TrangThaiSP_SanPham.SelectedValue = trangThai == "Đang kinh doanh" ? true : false;
+            }
+        }
+
+
 
         private void LoadTrangThai()
         {
@@ -702,41 +687,7 @@ namespace GUI
             }
         }
 
-        private void dgv_DanhSachSP_SanPham_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < dgv_DanhSachSP_SanPham.Rows.Count)
-            {
-                // Lấy dữ liệu từ dòng được chọn để điền vào form
-                int row = e.RowIndex;
-                var rowData = dgv_DanhSachSP_SanPham.Rows[row]; // Lấy dữ liệu từ dòng đó ra
-
-                // Điền dữ liệu vào các trường trên form
-                tb_MaSP_SP.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
-                string idThuongHieu = rowData.Cells[2].Value?.ToString() ?? string.Empty;
-
-                // Thiết lập SelectedValue của ComboBox thuong hieu
-                if (!string.IsNullOrEmpty(idThuongHieu))
-                {
-                    cb_ThuongHieu_SanPham.SelectedValue = Guid.Parse(idThuongHieu);
-                }
-                // Lấy IdDanhMuc từ dòng được chọn
-                string idDanhMuc = rowData.Cells[3].Value?.ToString() ?? string.Empty;
-
-                // Thiết lập SelectedValue của ComboBox danh mục
-                if (!string.IsNullOrEmpty(idDanhMuc))
-                {
-                    cb_DanhMuc_SanPham.SelectedValue = Guid.Parse(idDanhMuc);
-                }
-                tb_TenSanPham_SanPham.Text = rowData.Cells[4].Value?.ToString() ?? string.Empty;
-
-                tb_MoTa_SanPham.Text = rowData.Cells[5].Value?.ToString() ?? string.Empty;
-
-                // Chuyển đổi trạng thái sản phẩm từ chuỗi sang giá trị bool
-                string trangThai = rowData.Cells[6].Value?.ToString() ?? string.Empty;
-                cb_TrangThaiSP_SanPham.SelectedValue = trangThai == "Đang kinh doanh" ? true : false;
-            }
-        }
-
+      
         private void btn_Sua_SP_Click(object sender, EventArgs e)
         {
             if (ValidateNotEmpty(tb_MaSP_SP, tb_TenSanPham_SanPham))
@@ -912,16 +863,32 @@ namespace GUI
                 int stt = 1;
                 dgv_SanPhamChiTiet.Columns[0].HeaderText = "Số thứ tự";
                 dgv_SanPhamChiTiet.Columns[1].HeaderText = "Mã sản phẩm chi tiết";
-                dgv_SanPhamChiTiet.Columns[2].HeaderText = "Mã sản phẩm";
-                dgv_SanPhamChiTiet.Columns[3].HeaderText = "Mã màu sắc";
-                dgv_SanPhamChiTiet.Columns[4].HeaderText = "Mã kích cỡ";
+                dgv_SanPhamChiTiet.Columns[2].HeaderText = "Tên sản phẩm";
+                dgv_SanPhamChiTiet.Columns[3].HeaderText = "Màu sắc";
+                dgv_SanPhamChiTiet.Columns[4].HeaderText = "Kích cỡ";
                 dgv_SanPhamChiTiet.Columns[5].HeaderText = "Số lượng";
                 dgv_SanPhamChiTiet.Columns[6].HeaderText = "Giá";
+
+                dgv_SanPhamChiTiet.Columns[0].Visible = false;
+                dgv_SanPhamChiTiet.Columns[1].Visible = false;
+
                 dgv_SanPhamChiTiet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                Dictionary<Guid, string> sanPhamDict = sanPhamServices.GetSanPhamDict();
+                Dictionary<Guid, string> mauSacDict = mauSacServices.GetMauSacDict();
+                Dictionary<Guid, string> kichCoDict = kichCoServices.GetKichCoDict();
+
                 foreach (var item in sanPhamChiTiets)
                 {
-
-                    dgv_SanPhamChiTiet.Rows.Add(stt++, item.IdSanphamChitiet, item.IdSanPham, item.IdMauSac, item.IdKichCo, item.SoLuong, item.Gia);
+                    string mausac = mauSacDict.ContainsKey(item.IdMauSac.Value)
+          ? mauSacDict[item.IdMauSac.Value]
+          : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
+                    string kichco = kichCoDict.ContainsKey(item.IdKichCo.Value)
+               ? kichCoDict[item.IdKichCo.Value]
+               : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
+                    string tenSanPham = sanPhamDict.ContainsKey(item.IdSanPham.Value)
+               ? sanPhamDict[item.IdSanPham.Value]
+               : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy tên sản phẩm
+                    dgv_SanPhamChiTiet.Rows.Add(stt++, item.IdSanphamChitiet, tenSanPham, mausac, kichco, item.SoLuong, item.Gia);
                 }
             }
             catch (Exception ex)
@@ -938,18 +905,101 @@ namespace GUI
             int stt = 1;
             dgv_SanPhamChiTiet.Columns[0].HeaderText = "Số thứ tự";
             dgv_SanPhamChiTiet.Columns[1].HeaderText = "Mã sản phẩm chi tiết";
-            dgv_SanPhamChiTiet.Columns[2].HeaderText = "Mã sản phẩm";
-            dgv_SanPhamChiTiet.Columns[3].HeaderText = "Mã màu sắc";
-            dgv_SanPhamChiTiet.Columns[4].HeaderText = "Mã kích cỡ";
+            dgv_SanPhamChiTiet.Columns[2].HeaderText = "Tên sản phẩm";
+            dgv_SanPhamChiTiet.Columns[3].HeaderText = "Màu sắc";
+            dgv_SanPhamChiTiet.Columns[4].HeaderText = "Kích cỡ";
             dgv_SanPhamChiTiet.Columns[5].HeaderText = "Số lượng";
             dgv_SanPhamChiTiet.Columns[6].HeaderText = "Giá";
+
+            dgv_SanPhamChiTiet.Columns[0].Visible = false;
+            dgv_SanPhamChiTiet.Columns[1].Visible = false;
+
             dgv_SanPhamChiTiet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Dictionary<Guid, string> sanPhamDict = sanPhamServices.GetSanPhamDict();
+            Dictionary<Guid, string> mauSacDict = mauSacServices.GetMauSacDict();
+            Dictionary<Guid, string> kichCoDict = kichCoServices.GetKichCoDict();
+
             foreach (var item in sanPhamChiTiets)
             {
-
-                dgv_SanPhamChiTiet.Rows.Add(stt++, item.IdSanphamChitiet, item.IdSanPham, item.IdMauSac, item.IdKichCo, item.SoLuong, item.Gia);
+                string mausac = mauSacDict.ContainsKey(item.IdMauSac.Value)
+      ? mauSacDict[item.IdMauSac.Value]
+      : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
+                string kichco = kichCoDict.ContainsKey(item.IdKichCo.Value)
+           ? kichCoDict[item.IdKichCo.Value]
+           : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
+                string tenSanPham = sanPhamDict.ContainsKey(item.IdSanPham.Value)
+           ? sanPhamDict[item.IdSanPham.Value]
+           : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy tên sản phẩm
+                dgv_SanPhamChiTiet.Rows.Add(stt++, item.IdSanphamChitiet, tenSanPham, mausac, kichco, item.SoLuong, item.Gia);
             }
         }
+
+
+        private void dgv_SanPhamChiTiet_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 )
+            {
+                // Lấy dữ liệu từ dòng được chọn để điền vào form
+                int row = e.RowIndex;
+                var rowData = dgv_SanPhamChiTiet.Rows[row]; // Lấy dữ liệu từ dòng đó ra
+
+                // Điền dữ liệu vào các trường trên form
+                tb_MaSPCT.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
+                string idSanPham = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+                // Lấy danh sách thương hiệu từ dịch vụ
+                Dictionary<Guid, string> sanphamDict = sanPhamServices.GetSanPhamDict();
+
+                // Thiết lập SelectedValue của ComboBox sanpham
+                if (!string.IsNullOrEmpty(idSanPham) && Guid.TryParse(idSanPham, out Guid sanphamGuid))
+                {
+                    if (sanphamDict.ContainsKey(sanphamGuid))
+                    {
+                        cb_SanPham_SanPhamChiTiet.SelectedItem = sanphamDict[sanphamGuid];
+                    }
+                    else
+                    {
+                        cb_SanPham_SanPhamChiTiet.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
+                    }
+                }
+
+                // Lấy id màu sắc từ dòng được chọn
+                string idMauSac = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+
+                // Thiết lập SelectedValue của ComboBox màu sắc
+                if (!string.IsNullOrEmpty(idMauSac) && Guid.TryParse(idMauSac, out Guid mauSacGuid))
+                {
+                    if (cb_MauSac_SanPhamChiTiet.Items.Count > 0) // Kiểm tra ComboBox có ít nhất 1 mục
+                    {
+                        cb_MauSac_SanPhamChiTiet.SelectedValue = mauSacGuid;
+                    }
+                    else
+                    {
+                        cb_MauSac_SanPhamChiTiet.SelectedIndex = -1; // Nếu không có mục để chọn, bỏ chọn
+                    }
+                }
+
+                // Lấy id kích cỡ từ dòng được chọn
+                string idKichCo = rowData.Cells[4].Value?.ToString() ?? string.Empty;
+
+                // Thiết lập SelectedValue của ComboBox kích cỡ
+                if (!string.IsNullOrEmpty(idKichCo) && Guid.TryParse(idKichCo, out Guid kichCoGuid))
+                {
+                    if (cb_KichThuoc_SanPhamChiTiet.Items.Count > 0) // Kiểm tra ComboBox có ít nhất 1 mục
+                    {
+                        cb_KichThuoc_SanPhamChiTiet.SelectedValue = kichCoGuid;
+                    }
+                    else
+                    {
+                        cb_KichThuoc_SanPhamChiTiet.SelectedIndex = -1; // Nếu không có mục để chọn, bỏ chọn
+                    }
+                }
+                tb_SoLuong_SanPham.Text = rowData.Cells[5].Value?.ToString() ?? string.Empty;
+
+                tb_Gia_SanPhamCT.Text = rowData.Cells[6].Value?.ToString() ?? string.Empty;
+            }
+        }
+
+
 
         private void btn_Them_SanPhamChiTiet_Click(object sender, EventArgs e)
         {
@@ -966,6 +1016,8 @@ namespace GUI
                     {
                         if (ValidateNumericInt(tb_SoLuong_SanPham))
                         {
+                            if (ValidatePositiveInteger(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
+                            {
                             string idSanPham = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
                             string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
                             string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
@@ -976,6 +1028,11 @@ namespace GUI
                             List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
                             ShowSanPhamCT(sanPhamChiTiets);
                             return;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Dữ liệu nhập phải lớn hơn 0.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
                         else
                         {
@@ -996,43 +1053,7 @@ namespace GUI
 
         }
 
-        private void dgv_SanPhamChiTiet_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < dgv_DanhSachSP_SanPham.Rows.Count)
-            {
-                // Lấy dữ liệu từ dòng được chọn để điền vào form
-                int row = e.RowIndex;
-                var rowData = dgv_SanPhamChiTiet.Rows[row]; // Lấy dữ liệu từ dòng đó ra
-
-                // Điền dữ liệu vào các trường trên form
-                tb_MaSPCT.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
-                string idSanPham = rowData.Cells[2].Value?.ToString() ?? string.Empty;
-
-                // Thiết lập SelectedValue của ComboBox san pham
-                if (!string.IsNullOrEmpty(idSanPham))
-                {
-                    cb_SanPham_SanPhamChiTiet.SelectedValue = Guid.Parse(idSanPham);
-                }
-                // Lấy id mau sac từ dòng được chọn
-                string idMauSac = rowData.Cells[3].Value?.ToString() ?? string.Empty;
-
-                // Thiết lập SelectedValue của ComboBox mau sac
-                if (!string.IsNullOrEmpty(idMauSac))
-                {
-                    cb_MauSac_SanPhamChiTiet.SelectedValue = Guid.Parse(idMauSac);
-                }
-                string idKichCo = rowData.Cells[4].Value?.ToString() ?? string.Empty;
-
-                // Thiết lập SelectedValue của ComboBox kich co
-                if (!string.IsNullOrEmpty(idKichCo))
-                {
-                    cb_KichThuoc_SanPhamChiTiet.SelectedValue = Guid.Parse(idKichCo);
-                }
-                tb_SoLuong_SanPham.Text = rowData.Cells[5].Value?.ToString() ?? string.Empty;
-
-                tb_Gia_SanPhamCT.Text = rowData.Cells[6].Value?.ToString() ?? string.Empty;
-            }
-        }
+       
 
 
 
@@ -1084,17 +1105,25 @@ namespace GUI
                     {
                         if (ValidateNumericInt(tb_SoLuong_SanPham))
                         {
-                            string maspct = tb_MaSPCT.Text.ToString();
-                            string idSP = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
-                            string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
-                            string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
-                            int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
-                            decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
-                            string kq = sanPhamChiTietServices.CNSua(maspct, idSP, idMauSac, idKichCo, soLuong, gia);
-                            MessageBox.Show(kq);
-                            List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
-                            ShowSanPhamCT(sanPhamChiTiets);
-                            return;
+
+                            if (ValidatePositiveInteger(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
+                            {
+                                string maspct = tb_MaSPCT.Text.ToString();
+                                string idSP = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
+                                string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
+                                string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
+                                int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
+                                decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
+                                string kq = sanPhamChiTietServices.CNSua(maspct, idSP, idMauSac, idKichCo, soLuong, gia);
+                                MessageBox.Show(kq);
+                                List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
+                                ShowSanPhamCT(sanPhamChiTiets);
+                                return;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Dữ liệu nhập phải lớn hơn 0.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
                         else
                         {
@@ -1215,6 +1244,33 @@ namespace GUI
             }
             return true; // Trả về true nếu tất cả các TextBox đều chứa giá trị số
         }
+
+
+        public static bool ValidatePositiveInteger(params TextBox[] textboxes)
+        {
+            foreach (var textbox in textboxes)
+            {
+                if (!IsPositiveInteger(textbox.Text))
+                {
+                    return false; // Trả về false nếu bất kỳ TextBox nào không chứa giá trị số nguyên dương
+                }
+            }
+            return true; // Trả về true nếu tất cả các TextBox đều chứa giá trị số nguyên dương
+        }
+
+        // Hàm kiểm tra xem chuỗi có phải là số nguyên dương không
+        private static bool IsPositiveInteger(string value)
+        {
+            if (float.TryParse(value, out float number))
+            {
+                return number > 0; // Kiểm tra xem số nguyên có lớn hơn 0 không
+            }
+            return false; // Không phải số nguyên dương
+        }
+
+
+
+
 
         private void btn_TaoMaQR_Click(object sender, EventArgs e)
         {

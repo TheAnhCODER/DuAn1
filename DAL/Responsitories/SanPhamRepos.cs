@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +90,17 @@ namespace DAL.Responsitories
         {
             return _duan1Context.SanPhams.Where(p => p.TrangThaiSanPham == ttsp).ToList();
         }
+
+
+        public bool IsProductExists(Guid idDanhMuc, Guid idThuongHieu, string tenSanPham)
+        {
+            return _duan1Context.SanPhams.Any(sp => sp.IdDanhMuc == idDanhMuc
+                                              && sp.IdThuongHieu == idThuongHieu
+                                              && sp.TenSanPham == tenSanPham);
+        }
+
+
+
 
     }
 }

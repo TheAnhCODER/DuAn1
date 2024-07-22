@@ -88,5 +88,14 @@ namespace DAL.Responsitories
                 .Where(spct => spct.IdSanPhamNavigation.TrangThaiSanPham == true)
                 .ToList();
         }
+
+        public bool IsProductExists(Guid idMauSac, Guid idKichCo, Guid idSP)
+        {
+            return _duan1Context.SanPhamChiTiets.Any(sp => sp.IdMauSac == idMauSac
+                                              && sp.IdKichCo == idKichCo
+                                              && sp.IdSanPham == idSP);
+        }
+
+
     }
 }

@@ -61,18 +61,19 @@ namespace BUS.Services
             }
         }
 
-        // Xóa danh mục
-        public string XoaDM(string idDanhMuc)
+
+
+
+        public Dictionary<Guid, string> GetDanhMucDict()
         {
-            var id = Guid.Parse(idDanhMuc);
-            if (_repo.DeleteDM(id))
-            {
-                return "Xóa thành công";
-            }
-            else
-            {
-                return "Xóa thất bại";
-            }
+
+            var danhMucs = _repo.GetAll();
+            return danhMucs.ToDictionary(ms => ms.IdDanhMuc, ms => ms.TenDanhMuc);
         }
+
+
+
+
+
     }
 }

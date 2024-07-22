@@ -59,17 +59,24 @@ namespace BUS.Services
 
         }
 
-        //xoa
-        public string XoaTH(string idThuongHieu)
+     
 
+
+        public Dictionary<Guid, string> GetThuongHieuDict()
         {
-            var id = Guid.Parse(idThuongHieu);
-            if (_repo.DeleteTH(id))
-            {
-                return "Xóa thành công";
-            }
-            else
-                return "Xóa thất bại";
+
+            var thuongHieus = _repo.GetAll();
+            return thuongHieus.ToDictionary(ms => ms.IdThuongHieu, ms => ms.TenThuongHieu);
         }
+
+
+
+
+
+
+
+
+
+
     }
 }

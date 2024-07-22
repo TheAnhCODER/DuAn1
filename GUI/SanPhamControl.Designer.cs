@@ -100,7 +100,6 @@
             label14 = new Label();
             tb_TimKiem_ThuocTinh = new TextBox();
             panel7 = new Panel();
-            btn_Xoa_ThuocTinh = new Button();
             btn_LamMoi_ThuocTinh = new Button();
             btn_Them_ThuocTinhSanPham = new Button();
             btn_Sua_ThuocTinh = new Button();
@@ -911,7 +910,6 @@
             // panel7
             // 
             panel7.BorderStyle = BorderStyle.FixedSingle;
-            panel7.Controls.Add(btn_Xoa_ThuocTinh);
             panel7.Controls.Add(btn_LamMoi_ThuocTinh);
             panel7.Controls.Add(btn_Them_ThuocTinhSanPham);
             panel7.Controls.Add(btn_Sua_ThuocTinh);
@@ -921,21 +919,6 @@
             panel7.Size = new Size(501, 66);
             panel7.TabIndex = 7;
             // 
-            // btn_Xoa_ThuocTinh
-            // 
-            btn_Xoa_ThuocTinh.BackColor = Color.FromArgb(29, 135, 209);
-            btn_Xoa_ThuocTinh.FlatStyle = FlatStyle.Flat;
-            btn_Xoa_ThuocTinh.ForeColor = Color.White;
-            btn_Xoa_ThuocTinh.Image = (Image)resources.GetObject("btn_Xoa_ThuocTinh.Image");
-            btn_Xoa_ThuocTinh.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Xoa_ThuocTinh.Location = new Point(377, 14);
-            btn_Xoa_ThuocTinh.Name = "btn_Xoa_ThuocTinh";
-            btn_Xoa_ThuocTinh.Size = new Size(114, 36);
-            btn_Xoa_ThuocTinh.TabIndex = 3;
-            btn_Xoa_ThuocTinh.Text = "Xóa";
-            btn_Xoa_ThuocTinh.UseVisualStyleBackColor = false;
-            btn_Xoa_ThuocTinh.Click += btn_Xoa_ThuocTinh_Click;
-            // 
             // btn_LamMoi_ThuocTinh
             // 
             btn_LamMoi_ThuocTinh.BackColor = Color.FromArgb(29, 135, 209);
@@ -943,7 +926,7 @@
             btn_LamMoi_ThuocTinh.ForeColor = Color.White;
             btn_LamMoi_ThuocTinh.Image = (Image)resources.GetObject("btn_LamMoi_ThuocTinh.Image");
             btn_LamMoi_ThuocTinh.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_LamMoi_ThuocTinh.Location = new Point(137, 14);
+            btn_LamMoi_ThuocTinh.Location = new Point(346, 13);
             btn_LamMoi_ThuocTinh.Name = "btn_LamMoi_ThuocTinh";
             btn_LamMoi_ThuocTinh.Size = new Size(114, 36);
             btn_LamMoi_ThuocTinh.TabIndex = 2;
@@ -958,7 +941,7 @@
             btn_Them_ThuocTinhSanPham.ForeColor = Color.White;
             btn_Them_ThuocTinhSanPham.Image = (Image)resources.GetObject("btn_Them_ThuocTinhSanPham.Image");
             btn_Them_ThuocTinhSanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Them_ThuocTinhSanPham.Location = new Point(17, 14);
+            btn_Them_ThuocTinhSanPham.Location = new Point(39, 13);
             btn_Them_ThuocTinhSanPham.Name = "btn_Them_ThuocTinhSanPham";
             btn_Them_ThuocTinhSanPham.Size = new Size(114, 36);
             btn_Them_ThuocTinhSanPham.TabIndex = 0;
@@ -973,7 +956,7 @@
             btn_Sua_ThuocTinh.ForeColor = Color.White;
             btn_Sua_ThuocTinh.Image = (Image)resources.GetObject("btn_Sua_ThuocTinh.Image");
             btn_Sua_ThuocTinh.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Sua_ThuocTinh.Location = new Point(257, 14);
+            btn_Sua_ThuocTinh.Location = new Point(195, 13);
             btn_Sua_ThuocTinh.Name = "btn_Sua_ThuocTinh";
             btn_Sua_ThuocTinh.Size = new Size(114, 36);
             btn_Sua_ThuocTinh.TabIndex = 1;
@@ -1219,7 +1202,6 @@
         private TextBox tb_TimKiem_SanPhamChiTiet;
         private Label label17;
         private TextBox tb_MaThuocTinh;
-        private Button btn_Xoa_ThuocTinh;
         private GroupBox groupBox8;
         private ComboBox comboBox3;
         private ComboBox cb_KíchThuoc_SPCT_Loc;
