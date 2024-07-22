@@ -148,7 +148,6 @@
             btn_Show.TabIndex = 7;
             btn_Show.Text = "Show";
             btn_Show.UseVisualStyleBackColor = false;
-            btn_Show.Click += btn_Show_Click;
             // 
             // panel2
             // 

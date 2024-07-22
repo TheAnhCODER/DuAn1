@@ -308,10 +308,5 @@ namespace GUI
             }
             return true; // Trả về true nếu tất cả các TextBox đều chứa giá trị số
         }
-
-        private void btn_Show_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
