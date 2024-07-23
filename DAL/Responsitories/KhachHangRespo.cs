@@ -61,5 +61,10 @@ namespace DAL.Responsitories
                 return false;
             }
         }
+
+        public Khach? GetKhachHangBySDT(string sdt)
+        {
+            return _duan1Context.Khaches.FirstOrDefault(kh => kh.SoDienThoai == sdt);
+        }
     }
 }

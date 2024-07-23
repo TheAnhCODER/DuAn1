@@ -22,7 +22,7 @@ namespace BUS.Services
         public HoaDonChiTiet? GetHDCTById(string maHoaDon, string maSPCT)
         {
             var mahoadon = Guid.Parse(maHoaDon);
-            var maspct = Guid.Parse(maHoaDon);
+            var maspct = Guid.Parse(maSPCT);
             return hoaDonChiTietRespo.GetHDCTById(mahoadon, maspct);
         }
 

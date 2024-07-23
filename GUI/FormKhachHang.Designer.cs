@@ -278,8 +278,10 @@
             Controls.Add(groupBox1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormKhachHang";
-            Text = "FormKhachHang";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Khách hàng";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             groupBox1.ResumeLayout(false);

@@ -61,12 +61,7 @@ namespace BUS.Services
         // Sửa danh mục
         public string CNSua(string idSanPham, string idDanhMuc, string idThuongHieu, string ten, string moTa, bool trangthaisp)
         {
-            var iddanhmuc = Guid.Parse(idDanhMuc);
-            var idthuonghieu = Guid.Parse(idThuongHieu);
-            if (IsProductExists(iddanhmuc, idthuonghieu, ten))
-            {
-                return "Sản phẩm đã tồn tại";
-            }
+            
             SanPham sanPham = new SanPham()
             {
                 IdSanPham = Guid.Parse(idSanPham),

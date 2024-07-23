@@ -45,6 +45,9 @@ namespace GUI
             LoadSanPhamTimKiem();
             LoadSanPhamCT();
             LoadSanPham();
+            tb_MaSPCT.Visible = false;
+            tb_MaSP_SP.Visible = false;
+            tb_MaThuocTinh.Visible = false;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -199,6 +202,7 @@ namespace GUI
             dgv_ThuocTinh.Columns[0].HeaderText = "Số thứ tự";
             dgv_ThuocTinh.Columns[1].HeaderText = "Mã thương hiệu";
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên thương hiệu";
+            dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in thuongHieus)
             {
@@ -214,6 +218,7 @@ namespace GUI
             dgv_ThuocTinh.Columns[0].HeaderText = "Số thứ tự";
             dgv_ThuocTinh.Columns[1].HeaderText = "Mã danh mục";
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên danh mục";
+            dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in danhMucs)
             {
@@ -229,6 +234,7 @@ namespace GUI
             dgv_ThuocTinh.Columns[0].HeaderText = "Số thứ tự";
             dgv_ThuocTinh.Columns[1].HeaderText = "Mã màu sắc";
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên màu sắc";
+            dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in mauSacs)
             {
@@ -244,6 +250,7 @@ namespace GUI
             dgv_ThuocTinh.Columns[0].HeaderText = "Số thứ tự";
             dgv_ThuocTinh.Columns[1].HeaderText = "Mã kích cỡ";
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên kích cỡ";
+            dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in kichCos)
             {
@@ -397,7 +404,7 @@ namespace GUI
             }
         }
 
-      
+
 
         private void rb_DanhMuc_CheckedChanged(object sender, EventArgs e)
         {
@@ -528,7 +535,7 @@ namespace GUI
                 dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
                 dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
                 dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
-
+                dgv_DanhSachSP_SanPham.Columns[5].Visible = false;
                 dgv_DanhSachSP_SanPham.Columns[0].Visible = false;
                 dgv_DanhSachSP_SanPham.Columns[1].Visible = false;
 
@@ -622,8 +629,10 @@ namespace GUI
 
         private void dgv_DanhSachSP_SanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex >= 0 && e.RowIndex < dgv_DanhSachSP_SanPham.Rows.Count)
             {
+
                 // Lấy dữ liệu từ dòng được chọn để điền vào form
                 int row = e.RowIndex;
                 var rowData = dgv_DanhSachSP_SanPham.Rows[row]; // Lấy dữ liệu từ dòng đó ra
@@ -714,7 +723,7 @@ namespace GUI
             }
         }
 
-      
+
         private void btn_Sua_SP_Click(object sender, EventArgs e)
         {
             if (ValidateNotEmpty(tb_MaSP_SP, tb_TenSanPham_SanPham))
@@ -803,17 +812,7 @@ namespace GUI
         }
 
 
-
-
-
-
-
-
-
         // sản phẩm chi tiết
-
-
-
         private void LoadMauSacTimKiem()
         {
             try
@@ -999,7 +998,7 @@ namespace GUI
 
         private void dgv_SanPhamChiTiet_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 )
+            if (e.RowIndex >= 0)
             {
                 // Lấy dữ liệu từ dòng được chọn để điền vào form
                 int row = e.RowIndex;
@@ -1082,16 +1081,17 @@ namespace GUI
                         {
                             if (ValidatePositiveInteger(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
                             {
-                            string idSanPham = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
-                            string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
-                            string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
-                            int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
-                            decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
-                            string kq = sanPhamChiTietServices.CNThem(idSanPham, idMauSac, idKichCo, soLuong, gia);
-                            MessageBox.Show(kq);
-                            List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
-                            ShowSanPhamCT(sanPhamChiTiets);
-                            return;
+                                string idSanPham = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
+                                string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
+                                string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
+                                int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
+                                decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
+                                string kq = sanPhamChiTietServices.CNThem(idSanPham, idMauSac, idKichCo, soLuong, gia);
+                                MessageBox.Show(kq);
+                                List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
+                                ShowSanPhamCT(sanPhamChiTiets);
+                                BanHangControl.banHangControl.RefreshDataGridView();
+                                return;
                             }
                             else
                             {
@@ -1117,7 +1117,7 @@ namespace GUI
 
         }
 
-       
+
 
 
 
@@ -1375,6 +1375,11 @@ namespace GUI
                     }
                 }
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
