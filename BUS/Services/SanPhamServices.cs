@@ -113,12 +113,5 @@ namespace BUS.Services
         {
             return _repo.IsProductExists(idDanhMuc, idThuongHieu, tenSanPham);
         }
-
-
-
-
-
-
-
     }
 }

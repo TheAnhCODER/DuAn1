@@ -113,7 +113,6 @@ namespace GUI
                         LoadThuongHieuTimKiem();
                         return;
                     }
-
                     else
                     {
                         MessageBox.Show("Vui lòng điền tên thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
