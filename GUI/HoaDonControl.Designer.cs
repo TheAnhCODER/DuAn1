@@ -62,9 +62,10 @@
             // 
             pictureBox1.Cursor = Cursors.Hand;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(821, 0);
+            pictureBox1.Location = new Point(938, 0);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(47, 34);
+            pictureBox1.Size = new Size(54, 45);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
@@ -78,16 +79,18 @@
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(868, 44);
+            panel1.Size = new Size(992, 59);
             panel1.TabIndex = 4;
             // 
             // panel4
             // 
             panel4.BackColor = Color.White;
-            panel4.Location = new Point(120, 35);
+            panel4.Location = new Point(137, 47);
+            panel4.Margin = new Padding(3, 4, 3, 4);
             panel4.Name = "panel4";
-            panel4.Size = new Size(626, 1);
+            panel4.Size = new Size(715, 1);
             panel4.TabIndex = 9;
             // 
             // label1
@@ -95,20 +98,21 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(360, 0);
+            label1.Location = new Point(411, 0);
             label1.Name = "label1";
-            label1.Size = new Size(112, 32);
+            label1.Size = new Size(139, 41);
             label1.TabIndex = 5;
             label1.Text = "Hoá đơn";
             // 
             // textBox1
             // 
             textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(-2, 10);
+            textBox1.Location = new Point(-2, 13);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "    Tìm kiếm tại đây ...";
-            textBox1.Size = new Size(234, 28);
+            textBox1.Size = new Size(267, 37);
             textBox1.TabIndex = 5;
             // 
             // panel2
@@ -116,17 +120,19 @@
             panel2.BackColor = SystemColors.Window;
             panel2.BorderStyle = BorderStyle.Fixed3D;
             panel2.Controls.Add(textBox1);
-            panel2.Location = new Point(22, 36);
+            panel2.Location = new Point(25, 48);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(249, 39);
+            panel2.Size = new Size(284, 51);
             panel2.TabIndex = 6;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(277, 36);
+            pictureBox2.Location = new Point(317, 48);
+            pictureBox2.Margin = new Padding(3, 4, 3, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(53, 39);
+            pictureBox2.Size = new Size(61, 52);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
@@ -135,9 +141,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(83, 19);
+            label2.Location = new Point(95, 25);
             label2.Name = "label2";
-            label2.Size = new Size(78, 20);
+            label2.Size = new Size(97, 25);
             label2.TabIndex = 8;
             label2.Text = "Trạng thái";
             // 
@@ -145,36 +151,40 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(317, 19);
+            label3.Location = new Point(362, 25);
             label3.Name = "label3";
-            label3.Size = new Size(125, 20);
+            label3.Size = new Size(168, 25);
             label3.TabIndex = 9;
-            label3.Text = "Ngày thanh toán";
+            label3.Text = "Ngày tạo hoá đơn";
             // 
             // comboBox1
             // 
             comboBox1.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(15, 44);
+            comboBox1.Location = new Point(17, 59);
+            comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(214, 31);
+            comboBox1.Size = new Size(244, 38);
             comboBox1.TabIndex = 10;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.CalendarFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dateTimePicker1.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateTimePicker1.Location = new Point(263, 45);
+            dateTimePicker1.Location = new Point(301, 60);
+            dateTimePicker1.Margin = new Padding(3, 4, 3, 4);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(231, 30);
+            dateTimePicker1.Size = new Size(263, 36);
             dateTimePicker1.TabIndex = 11;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(dataGridView1);
-            groupBox1.Location = new Point(4, 157);
+            groupBox1.Location = new Point(5, 209);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(861, 226);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(984, 301);
             groupBox1.TabIndex = 12;
             groupBox1.TabStop = false;
             groupBox1.Text = "Hoá đơn";
@@ -182,17 +192,21 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(10, 22);
+            dataGridView1.Location = new Point(11, 29);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(845, 198);
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(966, 264);
             dataGridView1.TabIndex = 0;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(dataGridView2);
-            groupBox2.Location = new Point(6, 383);
+            groupBox2.Location = new Point(7, 511);
+            groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(859, 242);
+            groupBox2.Padding = new Padding(3, 4, 3, 4);
+            groupBox2.Size = new Size(982, 323);
             groupBox2.TabIndex = 13;
             groupBox2.TabStop = false;
             groupBox2.Text = "Hoá đơn chi tiết";
@@ -200,9 +214,11 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(8, 22);
+            dataGridView2.Location = new Point(9, 29);
+            dataGridView2.Margin = new Padding(3, 4, 3, 4);
             dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(845, 214);
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.Size = new Size(966, 285);
             dataGridView2.TabIndex = 0;
             // 
             // groupBox3
@@ -211,9 +227,11 @@
             groupBox3.Controls.Add(dateTimePicker1);
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(comboBox1);
-            groupBox3.Location = new Point(6, 60);
+            groupBox3.Location = new Point(7, 80);
+            groupBox3.Margin = new Padding(3, 4, 3, 4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(513, 91);
+            groupBox3.Padding = new Padding(3, 4, 3, 4);
+            groupBox3.Size = new Size(586, 121);
             groupBox3.TabIndex = 14;
             groupBox3.TabStop = false;
             groupBox3.Text = "Lọc hoá đơn";
@@ -222,16 +240,18 @@
             // 
             groupBox4.Controls.Add(panel2);
             groupBox4.Controls.Add(pictureBox2);
-            groupBox4.Location = new Point(525, 60);
+            groupBox4.Location = new Point(600, 80);
+            groupBox4.Margin = new Padding(3, 4, 3, 4);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(342, 91);
+            groupBox4.Padding = new Padding(3, 4, 3, 4);
+            groupBox4.Size = new Size(391, 121);
             groupBox4.TabIndex = 15;
             groupBox4.TabStop = false;
             groupBox4.Text = "Tìm kiếm";
             // 
             // HoaDonControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             Controls.Add(groupBox4);
@@ -239,8 +259,9 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(panel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "HoaDonControl";
-            Size = new Size(868, 628);
+            Size = new Size(992, 837);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

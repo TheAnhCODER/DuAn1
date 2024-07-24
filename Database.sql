@@ -200,3 +200,6 @@ VALUES (NEWID(), '0987654321', (SELECT ID_nhanvien FROM NhanVien WHERE Ten_nhan_
 INSERT INTO HoaDon_ChiTiet (id_hoadon_chitiet, id_hoadon, id_sanpham_chitiet, Tong_so_tien, So_luong_san_pham, Don_gia)
 VALUES (NEWID(), (SELECT id_hoadon FROM HoaDon WHERE Tong_so_tien_hoa_don = 500000), (SELECT id_sanpham_chitiet FROM SanPham_ChiTiet WHERE So_luong = 100), 200000, 2, 100000);
 
+ALTER TABLE NhanVien
+ADD Trang_thai bit not null default 1;
+
