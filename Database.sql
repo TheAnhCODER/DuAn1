@@ -150,59 +150,6 @@ VALUES (NEWID(), 2, 'Vũ Anh Đức', 'Nam', '2005-07-18', 'Hà Nội', '0986184
 INSERT INTO Khach (So_dien_thoai, Ten_khach_hang, Dia_chi) VALUES ('0123456789', 'Nguyễn Văn C', 'Hà Nội');
 INSERT INTO Khach (So_dien_thoai, Ten_khach_hang, Dia_chi) VALUES ('0987654321', 'Lê Thị D', 'Hồ Chí Minh');
 
--- Chèn dữ liệu vào bảng PhuongThucThanhToan
-INSERT INTO PhuongThucThanhToan (id_phuongthucthanhtoan, Ten_phuong_thuc_thanh_toan) VALUES (NEWID(), 'Tiền mặt');
-INSERT INTO PhuongThucThanhToan (id_phuongthucthanhtoan, Ten_phuong_thuc_thanh_toan) VALUES (NEWID(), 'Chuyển khoản');
-
--- Chèn dữ liệu vào bảng MauSac
-INSERT INTO MauSac (id_mau_sac, Ten_mau_sac) VALUES (NEWID(), 'Đỏ');
-INSERT INTO MauSac (id_mau_sac, Ten_mau_sac) VALUES (NEWID(), 'Xanh');
-
--- Chèn dữ liệu vào bảng KichCo
-INSERT INTO KichCo (id_kich_co, Kich_co) VALUES (NEWID(), 'S');
-INSERT INTO KichCo (id_kich_co, Kich_co) VALUES (NEWID(), 'M');
-
--- Chèn dữ liệu vào bảng DanhMuc
-INSERT INTO DanhMuc (id_danh_muc, Ten_danh_muc) VALUES (NEWID(), 'Áo');
-INSERT INTO DanhMuc (id_danh_muc, Ten_danh_muc) VALUES (NEWID(), 'Quần');
-
--- Chèn dữ liệu vào bảng ThuongHieu
-INSERT INTO ThuongHieu (id_thuong_hieu, Ten_thuong_hieu) VALUES (NEWID(), 'Nike');
-INSERT INTO ThuongHieu (id_thuong_hieu, Ten_thuong_hieu) VALUES (NEWID(), 'Adidas');
-
--- Chèn dữ liệu vào bảng SanPham
-INSERT INTO SanPham (id_san_pham, id_thuong_hieu, id_danh_muc, Ten_san_pham, Gia, Mo_ta, Trang_thai_san_pham)
-VALUES (NEWID(), (SELECT id_thuong_hieu FROM ThuongHieu WHERE Ten_thuong_hieu = 'Nike'), (SELECT id_danh_muc FROM DanhMuc WHERE Ten_danh_muc = 'Áo'), 'Áo Thun', 200000, 'Áo thun thể thao', 1);
-INSERT INTO SanPham (id_san_pham, id_thuong_hieu, id_danh_muc, Ten_san_pham, Gia, Mo_ta, Trang_thai_san_pham)
-VALUES (NEWID(), (SELECT id_thuong_hieu FROM ThuongHieu WHERE Ten_thuong_hieu = 'Adidas'), (SELECT id_danh_muc FROM DanhMuc WHERE Ten_danh_muc = 'Quần'), 'Quần Dài', 300000, 'Quần dài thể thao', 1);
-
--- Chèn dữ liệu vào bảng Anh_SanPham
-INSERT INTO Anh_SanPham (id_anh_san_pham, id_san_pham, Anh_san_pham)
-VALUES (NEWID(), (SELECT id_san_pham FROM SanPham WHERE Ten_san_pham = 'Áo Thun'), 'https://example.com/ao_thun.jpg');
-INSERT INTO Anh_SanPham (id_anh_san_pham, id_san_pham, Anh_san_pham)
-VALUES (NEWID(), (SELECT id_san_pham FROM SanPham WHERE Ten_san_pham = 'Quần Dài'), 'https://example.com/quan_dai.jpg');
-
--- Chèn dữ liệu vào bảng SanPham_ChiTiet
-INSERT INTO SanPham_ChiTiet (id_sanpham_chitiet, id_san_pham, id_mau_sac, id_kich_co, So_luong, Trang_thai_san_pham)
-VALUES (NEWID(), (SELECT id_san_pham FROM SanPham WHERE Ten_san_pham = 'Áo Thun'), (SELECT id_mau_sac FROM MauSac WHERE Ten_mau_sac = 'Đỏ'), (SELECT id_kich_co FROM KichCo WHERE Kich_co = 'S'), 100, 1);
-INSERT INTO SanPham_ChiTiet (id_sanpham_chitiet, id_san_pham, id_mau_sac, id_kich_co, So_luong, Trang_thai_san_pham)
-VALUES (NEWID(), (SELECT id_san_pham FROM SanPham WHERE Ten_san_pham = 'Quần Dài'), (SELECT id_mau_sac FROM MauSac WHERE Ten_mau_sac = 'Xanh'), (SELECT id_kich_co FROM KichCo WHERE Kich_co = 'M'), 50, 1);
-
--- Chèn dữ liệu vào bảng KhuyenMai
-INSERT INTO KhuyenMai (id_khuyen_mai, id_sanpham_chitiet, Giam_gia, Ngay_bat_dau, Ngay_ket_thuc, Trang_thai, Loai_giam_gia)
-VALUES (NEWID(), (SELECT id_sanpham_chitiet FROM SanPham_ChiTiet WHERE So_luong = 100), 10.0, '2024-07-01', '2024-07-31', 1, 'Phần trăm');
-INSERT INTO KhuyenMai (id_khuyen_mai, id_sanpham_chitiet, Giam_gia, Ngay_bat_dau, Ngay_ket_thuc, Trang_thai, Loai_giam_gia)
-VALUES (NEWID(), (SELECT id_sanpham_chitiet FROM SanPham_ChiTiet WHERE So_luong = 50), 50000, '2024-07-01', '2024-07-31', 1, 'Số tiền');
-
--- Chèn dữ liệu vào bảng HoaDon
-INSERT INTO HoaDon (id_hoadon, So_dien_thoai, ID_nhanvien, id_phuongthucthanhtoan, Tong_so_tien_hoa_don, Trang_thai_thanh_toan)
-VALUES (NEWID(), '0123456789', (SELECT ID_nhanvien FROM NhanVien WHERE Ten_nhan_vien = 'Đinh Thế Anh'), (SELECT id_phuongthucthanhtoan FROM PhuongThucThanhToan WHERE Ten_phuong_thuc_thanh_toan = 'Tiền mặt'), 500000, 1);
-INSERT INTO HoaDon (id_hoadon, So_dien_thoai, ID_nhanvien, id_phuongthucthanhtoan, Tong_so_tien_hoa_don, Trang_thai_thanh_toan)
-VALUES (NEWID(), '0987654321', (SELECT ID_nhanvien FROM NhanVien WHERE Ten_nhan_vien = 'Vũ Anh Đức'), (SELECT id_phuongthucthanhtoan FROM PhuongThucThanhToan WHERE Ten_phuong_thuc_thanh_toan = 'Chuyển Khoản'), 300000, 1);
-
--- Chèn dữ liệu vào bảng HoaDon_ChiTiet
-INSERT INTO HoaDon_ChiTiet (id_hoadon_chitiet, id_hoadon, id_sanpham_chitiet, Tong_so_tien, So_luong_san_pham, Don_gia)
-VALUES (NEWID(), (SELECT id_hoadon FROM HoaDon WHERE Tong_so_tien_hoa_don = 500000), (SELECT id_sanpham_chitiet FROM SanPham_ChiTiet WHERE So_luong = 100), 200000, 2, 100000);
 
 ALTER TABLE NhanVien
 ADD Trang_thai bit not null default 1;
