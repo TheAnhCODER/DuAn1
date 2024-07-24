@@ -203,6 +203,16 @@ namespace GUI
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên thương hiệu";
             dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_ThuocTinh.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_ThuocTinh.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_ThuocTinh.Font, FontStyle.Bold);
+            dgv_ThuocTinh.EnableHeadersVisualStyles = false;
             foreach (var item in thuongHieus)
             {
                 dgv_ThuocTinh.Rows.Add(stt++, item.IdThuongHieu, item.TenThuongHieu);
@@ -219,6 +229,16 @@ namespace GUI
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên danh mục";
             dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_ThuocTinh.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_ThuocTinh.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_ThuocTinh.Font, FontStyle.Bold);
+            dgv_ThuocTinh.EnableHeadersVisualStyles = false;
             foreach (var item in danhMucs)
             {
                 dgv_ThuocTinh.Rows.Add(stt++, item.IdDanhMuc, item.TenDanhMuc);
@@ -235,6 +255,16 @@ namespace GUI
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên màu sắc";
             dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_ThuocTinh.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_ThuocTinh.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_ThuocTinh.Font, FontStyle.Bold);
+            dgv_ThuocTinh.EnableHeadersVisualStyles = false;
             foreach (var item in mauSacs)
             {
                 dgv_ThuocTinh.Rows.Add(stt++, item.IdMauSac, item.TenMauSac);
@@ -251,6 +281,16 @@ namespace GUI
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên kích cỡ";
             dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_ThuocTinh.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_ThuocTinh.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_ThuocTinh.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_ThuocTinh.Font, FontStyle.Bold);
+            dgv_ThuocTinh.EnableHeadersVisualStyles = false;
             foreach (var item in kichCos)
             {
                 dgv_ThuocTinh.Rows.Add(stt++, item.IdKichCo, item.KichCo1);
@@ -541,6 +581,16 @@ namespace GUI
                 Dictionary<Guid, string> thuonghieuDict = thuonghieuServices.GetThuongHieuDict();
                 Dictionary<Guid, string> danhmucDict = danhMucServices.GetDanhMucDict();
                 dgv_DanhSachSP_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                // Đặt chiều cao cho hàng tiêu đề
+                dgv_DanhSachSP_SanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+                dgv_DanhSachSP_SanPham.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+                // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+                dgv_DanhSachSP_SanPham.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+                dgv_DanhSachSP_SanPham.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                dgv_DanhSachSP_SanPham.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgv_DanhSachSP_SanPham.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_DanhSachSP_SanPham.Font, FontStyle.Bold);
+                dgv_DanhSachSP_SanPham.EnableHeadersVisualStyles = false;
                 foreach (var item in sanPhams)
                 {
                     string danhmuc = danhmucDict.ContainsKey(item.IdDanhMuc.Value)
@@ -581,6 +631,16 @@ namespace GUI
             Dictionary<Guid, string> thuonghieuDict = thuonghieuServices.GetThuongHieuDict();
             Dictionary<Guid, string> danhmucDict = danhMucServices.GetDanhMucDict();
             dgv_DanhSachSP_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_DanhSachSP_SanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_DanhSachSP_SanPham.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_DanhSachSP_SanPham.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_DanhSachSP_SanPham.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_DanhSachSP_SanPham.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_DanhSachSP_SanPham.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_DanhSachSP_SanPham.Font, FontStyle.Bold);
+            dgv_DanhSachSP_SanPham.EnableHeadersVisualStyles = false;
             foreach (var item in sanPhams)
             {
                 string danhmuc = danhmucDict.ContainsKey(item.IdDanhMuc.Value)
@@ -901,7 +961,16 @@ namespace GUI
                 Dictionary<Guid, string> sanPhamDict = sanPhamServices.GetSanPhamDict();
                 Dictionary<Guid, string> mauSacDict = mauSacServices.GetMauSacDict();
                 Dictionary<Guid, string> kichCoDict = kichCoServices.GetKichCoDict();
+                // Đặt chiều cao cho hàng tiêu đề
+                dgv_SanPhamChiTiet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+                dgv_SanPhamChiTiet.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
 
+                // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+                dgv_SanPhamChiTiet.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+                dgv_SanPhamChiTiet.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                dgv_SanPhamChiTiet.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgv_SanPhamChiTiet.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_SanPhamChiTiet.Font, FontStyle.Bold);
+                dgv_SanPhamChiTiet.EnableHeadersVisualStyles = false;
                 foreach (var item in sanPhamChiTiets)
                 {
                     string mausac = mauSacDict.ContainsKey(item.IdMauSac.Value)

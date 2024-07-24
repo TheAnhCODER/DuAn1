@@ -80,7 +80,16 @@ namespace GUI
             dgv_TatCaSanPham.Columns[1].Visible = false;
 
             dgv_TatCaSanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_TatCaSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_TatCaSanPham.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
 
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_TatCaSanPham.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_TatCaSanPham.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_TatCaSanPham.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_TatCaSanPham.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_TatCaSanPham.Font, FontStyle.Bold);
+            dgv_TatCaSanPham.EnableHeadersVisualStyles = false;
             Dictionary<Guid, string> sanPhamDict = sanPhamServices.GetSanPhamDict();
             Dictionary<Guid, string> mauSacDict = mauSacServices.GetMauSacDict();
             Dictionary<Guid, string> kichCoDict = kichCoServices.GetKichCoDict();
@@ -293,7 +302,16 @@ namespace GUI
             dgv_HoaDonChiTiet_BanHang.Columns[2].Visible = false;
 
             dgv_HoaDonChiTiet_BanHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_HoaDonChiTiet_BanHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_HoaDonChiTiet_BanHang.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
 
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_HoaDonChiTiet_BanHang.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_HoaDonChiTiet_BanHang.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_HoaDonChiTiet_BanHang.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_HoaDonChiTiet_BanHang.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_HoaDonChiTiet_BanHang.Font, FontStyle.Bold);
+            dgv_HoaDonChiTiet_BanHang.EnableHeadersVisualStyles = false;
             Dictionary<Guid, string> sanPhamChiTietDict = sanPhamChiTietServices.GetMaSanPhamDict();
             Dictionary<Guid, string> sanphamDict = sanPhamServices.GetSanPhamDict();
 
