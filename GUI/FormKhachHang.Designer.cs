@@ -279,6 +279,8 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FormKhachHang";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Khách hàng";

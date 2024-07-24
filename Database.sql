@@ -20,8 +20,12 @@ CREATE TABLE NhanVien (
     Dien_thoai NVARCHAR(20),
     Email NVARCHAR(255),
     Mat_khau NVARCHAR(255),
+	Trang_thai bit
     FOREIGN KEY (id_chucvu) REFERENCES ChucVu(id_chucvu)
 );
+
+ALTER TABLE NhanVien
+ADD Trang_thai bit not null default 1;
 
 CREATE TABLE Khach (
     So_dien_thoai NVARCHAR(20) PRIMARY KEY,

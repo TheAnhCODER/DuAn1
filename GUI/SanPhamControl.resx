@@ -329,18 +329,6 @@
         gg==
 </value>
   </data>
-  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1
-        MAAA6mAAADqYAAAXcJy6UTwAAAAHdElNRQfoBwwEByMkGh+OAAABS0lEQVRIS72UTy4GQRBHZ0HYcwDC
-        AXAlwcIZiBtYEMIlyMc1sGXjICx4L5lKOp2e0ZOvxy95yaS7qmu6609XqdWe5tqBQ7iFB3jsv11zbylt
-        wBl8ws8A7mmj7WRtwROUDi7xDNtQLf8qD/AB13DacwXvkNoYaBOq5PXD8RtuwJvlcs29Lwj7c/hTJjLN
-        gYesw5DcswjCXt9dGJUVEw4+UekGubTRNvyOYFTpX5mDWmkbfncuDMkmsw/C2ATXStvwW8AKFGUQG61F
-        kNGpMPtzqX9JfF7C3qx5Cau8GT2kdCPX3NMm7C+hSo4VR0Q4Sj5W/E6fKHiFfaiSwy4PVMukQA47Z1Ga
-        oxz3fKKXZE0mBVIm0oqxNO0Bue/XIsl74MFLBQrZyUON5oHNAo2pFOgNDqCp8kCW+Ak0l4G8gQEuYA1m
-        kU90DLMFKKjrfgHYPKwTCPMAfAAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1
@@ -513,6 +501,18 @@
         oelzXOEzWZafqqr6WNf1dyTIzLo4hfdYf1LFOvVRP57f0ieOu/AlygXZ392Fb19zwVUfJl6CZRwvfuyZ
         mYa5Qvlhfs/l4GBvjymeglcLs8iZIK7HZ+FlPBaI4MofhM3wqq9S/gXW16/PwEZ8DjYSMeQ8LF5kYmcB
         ier1+uBHTY++2dhBosN/V//NzLZt0DQtiWN0yQyjhzu9G90M4C8Cf4uzsDRxJwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1
+        MAAA6mAAADqYAAAXcJy6UTwAAAAHdElNRQfoBwwEByMkGh+OAAABS0lEQVRIS72UTy4GQRBHZ0HYcwDC
+        AXAlwcIZiBtYEMIlyMc1sGXjICx4L5lKOp2e0ZOvxy95yaS7qmu6609XqdWe5tqBQ7iFB3jsv11zbylt
+        wBl8ws8A7mmj7WRtwROUDi7xDNtQLf8qD/AB13DacwXvkNoYaBOq5PXD8RtuwJvlcs29Lwj7c/hTJjLN
+        gYesw5DcswjCXt9dGJUVEw4+UekGubTRNvyOYFTpX5mDWmkbfncuDMkmsw/C2ATXStvwW8AKFGUQG61F
+        kNGpMPtzqX9JfF7C3qx5Cau8GT2kdCPX3NMm7C+hSo4VR0Q4Sj5W/E6fKHiFfaiSwy4PVMukQA47Z1Ga
+        oxz3fKKXZE0mBVIm0oqxNO0Bue/XIsl74MFLBQrZyUON5oHNAo2pFOgNDqCp8kCW+Ak0l4G8gQEuYA1m
+        kU90DLMFKKjrfgHYPKwTCPMAfAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btn_LamMoi_ThuocTinh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

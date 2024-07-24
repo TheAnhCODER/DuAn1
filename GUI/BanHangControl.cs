@@ -190,7 +190,7 @@ namespace GUI
 
                 MessageBox.Show("Tạo hóa đơn chờ thành công!");
             }
-            LoadHoaDonCho();
+            RefreshToanBoForm();
         }
 
         private void tb_TimKiem_SanPham_TextChanged(object sender, EventArgs e)
@@ -221,44 +221,62 @@ namespace GUI
             dgv_HoaDonCho_BanHang.Rows.Clear();
             dgv_HoaDonCho_BanHang.ColumnCount = 6;
             int stt = 1;
-            dgv_HoaDonCho_BanHang.Columns[0].HeaderText = "Hóa đơn";
+            dgv_HoaDonCho_BanHang.Columns[0].HeaderText = "Hóa đơn chờ";
             dgv_HoaDonCho_BanHang.Columns[1].HeaderText = "MaHoaDon";
-            dgv_HoaDonCho_BanHang.Columns[2].HeaderText = "Tên khách hàng";
+            dgv_HoaDonCho_BanHang.Columns[2].HeaderText = "Số điện thoại khách hàng";
             dgv_HoaDonCho_BanHang.Columns[3].HeaderText = "Tên nhân viên";
             dgv_HoaDonCho_BanHang.Columns[4].HeaderText = "Phương thức thanh toán";
             dgv_HoaDonCho_BanHang.Columns[5].HeaderText = "Trạng thái thanh toán";
-
             dgv_HoaDonCho_BanHang.Columns[1].Visible = false;
             dgv_HoaDonCho_BanHang.Columns[3].Visible = false;
+            dgv_HoaDonCho_BanHang.Columns[4].Visible = false;
+
             dgv_HoaDonCho_BanHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            string hoadoncho = "Hóa đơn chờ" + stt;
+
+
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_HoaDonCho_BanHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_HoaDonCho_BanHang.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_HoaDonCho_BanHang.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_HoaDonCho_BanHang.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_HoaDonCho_BanHang.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_HoaDonCho_BanHang.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_HoaDonCho_BanHang.Font, FontStyle.Bold);
+            dgv_HoaDonCho_BanHang.EnableHeadersVisualStyles = false;
 
             foreach (var item in hoaDons)
             {
-
-                dgv_HoaDonCho_BanHang.Rows.Add(hoadoncho, item.IdHoadon, item.SoDienThoai, item.IdNhanvien, item.IdPhuongthucthanhtoan, item.TrangThaiThanhToan);
-                stt++;
+                string status= item.TrangThaiThanhToan.ToString();
+           
+                if(Convert.ToUInt32( status) == 0)
+                {
+                    status = "Chưa thanh toán";
+                }
+                
+                dgv_HoaDonCho_BanHang.Rows.Add("Hóa đơn chờ "+stt++, item.IdHoadon, item.SoDienThoai, item.IdNhanvien, item.IdPhuongthucthanhtoan, status);
+            
             }
         }
         private void dgv_HoaDonCho_BanHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int row = e.RowIndex;
-            var hoaDonDangChon = dgv_HoaDonCho_BanHang.Rows[row];
-            // Kiểm tra xem người dùng có nhấp vào hàng dữ liệu hay không (không phải tiêu đề cột)
+
             if (e.RowIndex >= 0)
             {
-
-
-                var rowData = dgv_HoaDonCho_BanHang.Rows[row]; // Lấy dữ liệu từ dòng đó ra
-                                                               // Bạn có thể lấy thêm thông tin cần thiết từ hàng được chọn tại đây
-
-                // Điền dữ liệu vào các trường trên form
-                tb_MaHoaDon_BanHang.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
-                tb_SoDienThoai_BanHang.Text = rowData.Cells[2].Value?.ToString() ?? string.Empty;
-
-                tb_TenKhachHang_BanHang.Text = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text).TenKhachHang;
-                LoadData_dgvHoaDonChiTiet(hoaDonChiTietServices.GetAllHoaDonCTByMaHoaDon(tb_MaHoaDon_BanHang.Text));
-                // Có thể thực hiện thêm các hành động khác tại đây nếu cần
+                int row = e.RowIndex;
+                var hoaDonDangChon = dgv_HoaDonCho_BanHang.Rows[row];
+                // Kiểm tra xem người dùng có nhấp vào hàng dữ liệu hay không (không phải tiêu đề cột)
+                if (e.RowIndex >= 0)
+                {
+                    var rowData = dgv_HoaDonCho_BanHang.Rows[row]; // Lấy dữ liệu từ dòng đó ra
+                                                                   // Bạn có thể lấy thêm thông tin cần thiết từ hàng được chọn tại đây
+                    // Điền dữ liệu vào các trường trên form
+                    tb_MaHoaDon_BanHang.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
+                    tb_SoDienThoai_BanHang.Text = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+                    tb_TenKhachHang_BanHang.Text = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text).TenKhachHang;
+                    LoadData_dgvHoaDonChiTiet(hoaDonChiTietServices.GetAllHoaDonCTByMaHoaDon(tb_MaHoaDon_BanHang.Text));
+    
+                }
             }
         }
         private void LoadData_dgvHoaDonChiTiet(List<HoaDonChiTiet> hoaDonChiTiets)
@@ -272,11 +290,13 @@ namespace GUI
             dgv_HoaDonChiTiet_BanHang.Columns[4].HeaderText = "Số lượng";
 
             dgv_HoaDonChiTiet_BanHang.Columns[0].Visible = false;
-
             dgv_HoaDonChiTiet_BanHang.Columns[2].Visible = false;
+
             dgv_HoaDonChiTiet_BanHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             Dictionary<Guid, string> sanPhamChiTietDict = sanPhamChiTietServices.GetMaSanPhamDict();
             Dictionary<Guid, string> sanphamDict = sanPhamServices.GetSanPhamDict();
+
             int stt = 1;
             foreach (var hdct in hoaDonChiTiets)
             {
@@ -318,10 +338,9 @@ namespace GUI
             tb_TienThua_BanHang.Text = "0";
             tb_TongTien_BanHang.Text = "0";
             tb_MaHoaDon_BanHang.Clear();
-
+       
             LoadHoaDonCho();
             ShowSanPham_BanHang();
-
         }
 
         private void BanHangControl_Load(object sender, EventArgs e)

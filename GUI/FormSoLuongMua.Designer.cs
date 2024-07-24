@@ -59,7 +59,10 @@
             Controls.Add(label1);
             Controls.Add(textBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FormSoLuongMua";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Số Lượng mua";
             KeyDown += FormSoLuongMua_KeyDown;
             ResumeLayout(false);
