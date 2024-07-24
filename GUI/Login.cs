@@ -56,9 +56,14 @@ namespace GUI
 
             var nhanVien = nhanVienBUS.DangNhap(username, password);
             this.Hide();
+            
             TrangChu trangChu = new TrangChu(nhanVien);
+            TrangChu.nhanVien1 = nhanVien;
             trangChu.Show();
         }
+
+        
+
 
         private void btn_DangNhap_MouseLeave(object sender, EventArgs e)
         {

@@ -57,14 +57,7 @@ namespace BUS.Services
         // Sửa spct
         public string CNSua(string idSPCT, string idSP, string idMauSac, string idKichCo, int SoLuong, decimal gia)
         {
-            var idmausac = Guid.Parse(idMauSac);
-            var idkichco = Guid.Parse(idKichCo);
-            var idsp = Guid.Parse(idSP);
-
-            if (IsProductExists(idmausac, idkichco, idsp))
-            {
-                return "Sản phẩm đã tồn tại";
-            }
+            
             SanPhamChiTiet sanPhamChiTIet = new SanPhamChiTiet()
             {
                 IdSanphamChitiet = Guid.Parse(idSPCT),
@@ -113,6 +106,25 @@ namespace BUS.Services
         {
             return _repo.IsProductExists(idDanhMuc, idThuongHieu, idSp);
         }
+
+        public SanPhamChiTiet GetAllSanPhamChiTietById(string maSPCT)
+        {
+            var maspct = Guid.Parse(maSPCT);
+            return _repo.GetAllSanPhamChiTietById(maspct);
+        }
+        public void UpdateSoLuong(SanPhamChiTiet spctNew)
+        {
+            _repo.UpdateSoLuong(spctNew);
+        }
+
+
+        public Dictionary<Guid, string> GetMaSanPhamDict()
+        {
+
+            var sanPhamList = _repo.GetAll();
+            return sanPhamList.ToDictionary(sp => sp.IdSanphamChitiet, sp => Convert.ToString( sp.IdSanPham));
+        }
+
 
     }
 }

@@ -67,6 +67,11 @@ namespace DAL.Responsitories
             }
         }
 
-      
+        public bool IsProductExists(string tendanhmuc)
+        {
+            return _duan1Context.DanhMucs.Any(sp => sp.TenDanhMuc == tendanhmuc);
+
+        }
+
     }
 }

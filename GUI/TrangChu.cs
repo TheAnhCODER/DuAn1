@@ -6,6 +6,9 @@ namespace GUI
     public partial class TrangChu : Form
     {
         NhanVien _nhanVien;
+
+        public static NhanVien nhanVien1 = new NhanVien();
+
         public TrangChu(NhanVien nhanVien)
         {
             _nhanVien = nhanVien;
@@ -51,7 +54,7 @@ namespace GUI
                     btn_KhuyenMai.Enabled = false;
                     btn_SanPham.Enabled = true;
                     btn_TaiKhoan.Enabled = true;
-                    btn_ThongKe.Enabled = false;
+                    btn_ThongKe.Enabled = true;
                     btn_NhanVien.Enabled = false;
                     break;
             }

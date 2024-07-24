@@ -45,6 +45,9 @@ namespace GUI
             LoadSanPhamTimKiem();
             LoadSanPhamCT();
             LoadSanPham();
+            tb_MaSPCT.Visible = false;
+            tb_MaSP_SP.Visible = false;
+            tb_MaThuocTinh.Visible = false;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -198,6 +201,7 @@ namespace GUI
             dgv_ThuocTinh.Columns[0].HeaderText = "Số thứ tự";
             dgv_ThuocTinh.Columns[1].HeaderText = "Mã thương hiệu";
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên thương hiệu";
+            dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in thuongHieus)
             {
@@ -213,6 +217,7 @@ namespace GUI
             dgv_ThuocTinh.Columns[0].HeaderText = "Số thứ tự";
             dgv_ThuocTinh.Columns[1].HeaderText = "Mã danh mục";
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên danh mục";
+            dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in danhMucs)
             {
@@ -228,6 +233,7 @@ namespace GUI
             dgv_ThuocTinh.Columns[0].HeaderText = "Số thứ tự";
             dgv_ThuocTinh.Columns[1].HeaderText = "Mã màu sắc";
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên màu sắc";
+            dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in mauSacs)
             {
@@ -243,6 +249,7 @@ namespace GUI
             dgv_ThuocTinh.Columns[0].HeaderText = "Số thứ tự";
             dgv_ThuocTinh.Columns[1].HeaderText = "Mã kích cỡ";
             dgv_ThuocTinh.Columns[2].HeaderText = "Tên kích cỡ";
+            dgv_ThuocTinh.Columns[1].Visible = false;
             dgv_ThuocTinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var item in kichCos)
             {
@@ -396,7 +403,7 @@ namespace GUI
             }
         }
 
-      
+
 
         private void rb_DanhMuc_CheckedChanged(object sender, EventArgs e)
         {
@@ -522,12 +529,12 @@ namespace GUI
                 int stt = 1;
                 dgv_DanhSachSP_SanPham.Columns[0].HeaderText = "Số thứ tự";
                 dgv_DanhSachSP_SanPham.Columns[1].HeaderText = "Mã sản phẩm";
-                dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Mã thương hiệu";
-                dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Mã danh mục";
+                dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Thương hiệu";
+                dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Danh mục";
                 dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
                 dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
                 dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
-
+                dgv_DanhSachSP_SanPham.Columns[5].Visible = false;
                 dgv_DanhSachSP_SanPham.Columns[0].Visible = false;
                 dgv_DanhSachSP_SanPham.Columns[1].Visible = false;
 
@@ -543,7 +550,7 @@ namespace GUI
                ? thuonghieuDict[item.IdThuongHieu.Value]
                : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                     string trangThaiSanPham = item.TrangThaiSanPham ? "Đang kinh doanh" : "Ngưng kinh doanh";
-                    dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, danhmuc, thuonghieu, item.TenSanPham, item.MoTa, trangThaiSanPham);
+                    dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, thuonghieu, danhmuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
                 }
             }
             catch (Exception ex)
@@ -560,8 +567,8 @@ namespace GUI
             int stt = 1;
             dgv_DanhSachSP_SanPham.Columns[0].HeaderText = "Số thứ tự";
             dgv_DanhSachSP_SanPham.Columns[1].HeaderText = "Mã sản phẩm";
-            dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Mã thương hiệu";
-            dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Mã danh mục";
+            dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Thương hiệu";
+            dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Danh mục";
             dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
 
             dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
@@ -586,53 +593,82 @@ namespace GUI
                 dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, thuonghieu, danhmuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
             }
         }
+        // Hàm để lấy Id thương hiệu từ tên thương hiệu
+        private Guid? GetThuongHieuIdByName(string tenThuongHieu)
+        {
+            try
+            {
+                List<ThuongHieu> thuongHieulist = thuonghieuServices.CNShow();
+                var thuongHieu = thuongHieulist.FirstOrDefault(th => th.TenThuongHieu.Equals(tenThuongHieu, StringComparison.OrdinalIgnoreCase));
+                return thuongHieu?.IdThuongHieu; // Trả về null nếu không tìm thấy
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+                return null; // Trả về null nếu có lỗi
+            }
+        }
+        // Hàm để lấy Id danh mục từ tên danh mục
+        private Guid? GetDanhMucIdByName(string tenDanhMuc)
+        {
+            try
+            {
+                List<DanhMuc> danhMucList = danhMucServices.CNShow(); // Lấy danh sách danh mục từ dịch vụ
+                var danhMuc = danhMucList.FirstOrDefault(dm => dm.TenDanhMuc.Equals(tenDanhMuc, StringComparison.OrdinalIgnoreCase));
+                return danhMuc?.IdDanhMuc; // Trả về null nếu không tìm thấy
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+                return null; // Trả về null nếu có lỗi
+            }
+        }
+
 
 
         private void dgv_DanhSachSP_SanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex >= 0 && e.RowIndex < dgv_DanhSachSP_SanPham.Rows.Count)
             {
+
                 // Lấy dữ liệu từ dòng được chọn để điền vào form
                 int row = e.RowIndex;
                 var rowData = dgv_DanhSachSP_SanPham.Rows[row]; // Lấy dữ liệu từ dòng đó ra
 
                 // Điền dữ liệu vào các trường trên form
                 tb_MaSP_SP.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
-                // Lấy idThuongHieu từ dòng được chọn
-                string idThuongHieu = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+                // Lấy tên thương hiệu từ dòng được chọn
+                string tenThuongHieu = rowData.Cells[2].Value?.ToString() ?? string.Empty;
 
-                // Lấy danh sách thương hiệu từ dịch vụ
-                Dictionary<Guid, string> thuonghieuDict = thuonghieuServices.GetThuongHieuDict();
+                // Lấy id thương hiệu từ tên thương hiệu
+                Guid? thuongHieuId = GetThuongHieuIdByName(tenThuongHieu);
 
                 // Thiết lập SelectedValue của ComboBox thương hiệu
-                if (!string.IsNullOrEmpty(idThuongHieu) && Guid.TryParse(idThuongHieu, out Guid thuongHieuGuid))
+                if (thuongHieuId.HasValue)
                 {
-                    if (thuonghieuDict.ContainsKey(thuongHieuGuid))
-                    {
-                        cb_ThuongHieu_SanPham.SelectedItem = thuonghieuDict[thuongHieuGuid];
-                    }
-                    else
-                    {
-                        cb_ThuongHieu_SanPham.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
-                    }
+                    cb_ThuongHieu_SanPham.SelectedValue = thuongHieuId.Value;
+                }
+                else
+                {
+                    cb_ThuongHieu_SanPham.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
                 }
 
-                // Lấy IdDanhMuc từ dòng được chọn
-                string idDanhMuc = rowData.Cells[3].Value?.ToString() ?? string.Empty;
-                // Lấy danh sách danh mục từ dịch vụ
-                Dictionary<Guid, string> danhmucDict = danhMucServices.GetDanhMucDict();
 
-                // Thiết lập SelectedItem của ComboBox danh mục
-                if (!string.IsNullOrEmpty(idDanhMuc) && Guid.TryParse(idDanhMuc, out Guid danhMucGuid))
+                // Lấy tên danh mục từ dòng được chọn
+                string tenDanhMuc = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+
+                // Lấy id danh mục từ tên danh mục
+                Guid? danhMucId = GetDanhMucIdByName(tenDanhMuc);
+
+                // Thiết lập SelectedValue của ComboBox danh mục
+                if (danhMucId.HasValue)
                 {
-                    if (danhmucDict.ContainsKey(danhMucGuid))
-                    {
-                        cb_DanhMuc_SanPham.SelectedItem = danhmucDict[danhMucGuid];
-                    }
-                    else
-                    {
-                        cb_DanhMuc_SanPham.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
-                    }
+                    cb_DanhMuc_SanPham.SelectedValue = danhMucId.Value;
+                }
+                else
+                {
+                    cb_DanhMuc_SanPham.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
                 }
                 tb_TenSanPham_SanPham.Text = rowData.Cells[4].Value?.ToString() ?? string.Empty;
 
@@ -686,7 +722,7 @@ namespace GUI
             }
         }
 
-      
+
         private void btn_Sua_SP_Click(object sender, EventArgs e)
         {
             if (ValidateNotEmpty(tb_MaSP_SP, tb_TenSanPham_SanPham))
@@ -775,17 +811,7 @@ namespace GUI
         }
 
 
-
-
-
-
-
-
-
         // sản phẩm chi tiết
-
-
-
         private void LoadMauSacTimKiem()
         {
             try
@@ -932,11 +958,46 @@ namespace GUI
                 dgv_SanPhamChiTiet.Rows.Add(stt++, item.IdSanphamChitiet, tenSanPham, mausac, kichco, item.SoLuong, item.Gia);
             }
         }
+        // Hàm để lấy Id màu sắc từ tên màu sắc
+        private Guid? GetMauSacIdByName(string tenMauSac)
+        {
+            try
+            {
+                List<MauSac> mauSacList = mauSacServices.CNShow(); // Lấy danh sách màu sắc từ dịch vụ
+                var mauSac = mauSacList.FirstOrDefault(ms => ms.TenMauSac.Equals(tenMauSac, StringComparison.OrdinalIgnoreCase));
+                return mauSac?.IdMauSac; // Trả về null nếu không tìm thấy
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+                return null; // Trả về null nếu có lỗi
+            }
+        }
+        // Hàm để lấy Id kích cỡ từ tên kích cỡ
+        private Guid? GetKichCoIdByName(string tenKichCo)
+        {
+            try
+            {
+                List<KichCo> kichCoList = kichCoServices.CNShow(); // Lấy danh sách kích cỡ từ dịch vụ
+                var kichCo = kichCoList.FirstOrDefault(kc => kc.KichCo1.Equals(tenKichCo, StringComparison.OrdinalIgnoreCase));
+                return kichCo?.IdKichCo; // Trả về null nếu không tìm thấy
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+                return null; // Trả về null nếu có lỗi
+            }
+        }
+
+
+
+
+
 
 
         private void dgv_SanPhamChiTiet_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 )
+            if (e.RowIndex >= 0)
             {
                 // Lấy dữ liệu từ dòng được chọn để điền vào form
                 int row = e.RowIndex;
@@ -961,37 +1022,39 @@ namespace GUI
                     }
                 }
 
-                // Lấy id màu sắc từ dòng được chọn
-                string idMauSac = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+
+                // Lấy tên màu sắc từ dòng được chọn
+                string tenMauSac = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+
+                // Lấy id màu sắc từ tên màu sắc
+                Guid? mauSacId = GetMauSacIdByName(tenMauSac);
 
                 // Thiết lập SelectedValue của ComboBox màu sắc
-                if (!string.IsNullOrEmpty(idMauSac) && Guid.TryParse(idMauSac, out Guid mauSacGuid))
+                if (mauSacId.HasValue)
                 {
-                    if (cb_MauSac_SanPhamChiTiet.Items.Count > 0) // Kiểm tra ComboBox có ít nhất 1 mục
-                    {
-                        cb_MauSac_SanPhamChiTiet.SelectedValue = mauSacGuid;
-                    }
-                    else
-                    {
-                        cb_MauSac_SanPhamChiTiet.SelectedIndex = -1; // Nếu không có mục để chọn, bỏ chọn
-                    }
+                    cb_MauSac_SanPhamChiTiet.SelectedValue = mauSacId.Value;
+                }
+                else
+                {
+                    cb_MauSac_SanPhamChiTiet.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
                 }
 
-                // Lấy id kích cỡ từ dòng được chọn
-                string idKichCo = rowData.Cells[4].Value?.ToString() ?? string.Empty;
+                // Lấy tên kích cỡ từ dòng được chọn
+                string tenKichCo = rowData.Cells[4].Value?.ToString() ?? string.Empty;
+
+                // Lấy id kích cỡ từ tên kích cỡ
+                Guid? kichCoId = GetKichCoIdByName(tenKichCo);
 
                 // Thiết lập SelectedValue của ComboBox kích cỡ
-                if (!string.IsNullOrEmpty(idKichCo) && Guid.TryParse(idKichCo, out Guid kichCoGuid))
+                if (kichCoId.HasValue)
                 {
-                    if (cb_KichThuoc_SanPhamChiTiet.Items.Count > 0) // Kiểm tra ComboBox có ít nhất 1 mục
-                    {
-                        cb_KichThuoc_SanPhamChiTiet.SelectedValue = kichCoGuid;
-                    }
-                    else
-                    {
-                        cb_KichThuoc_SanPhamChiTiet.SelectedIndex = -1; // Nếu không có mục để chọn, bỏ chọn
-                    }
+                    cb_KichThuoc_SanPhamChiTiet.SelectedValue = kichCoId.Value;
                 }
+                else
+                {
+                    cb_KichThuoc_SanPhamChiTiet.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
+                }
+
                 tb_SoLuong_SanPham.Text = rowData.Cells[5].Value?.ToString() ?? string.Empty;
 
                 tb_Gia_SanPhamCT.Text = rowData.Cells[6].Value?.ToString() ?? string.Empty;
@@ -1017,16 +1080,17 @@ namespace GUI
                         {
                             if (ValidatePositiveInteger(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
                             {
-                            string idSanPham = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
-                            string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
-                            string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
-                            int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
-                            decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
-                            string kq = sanPhamChiTietServices.CNThem(idSanPham, idMauSac, idKichCo, soLuong, gia);
-                            MessageBox.Show(kq);
-                            List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
-                            ShowSanPhamCT(sanPhamChiTiets);
-                            return;
+                                string idSanPham = cb_SanPham_SanPhamChiTiet.SelectedValue.ToString();
+                                string idMauSac = cb_MauSac_SanPhamChiTiet.SelectedValue.ToString();
+                                string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
+                                int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
+                                decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
+                                string kq = sanPhamChiTietServices.CNThem(idSanPham, idMauSac, idKichCo, soLuong, gia);
+                                MessageBox.Show(kq);
+                                List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
+                                ShowSanPhamCT(sanPhamChiTiets);
+                                BanHangControl.banHangControl.RefreshDataGridView();
+                                return;
                             }
                             else
                             {
@@ -1052,7 +1116,7 @@ namespace GUI
 
         }
 
-       
+
 
 
 
@@ -1310,6 +1374,11 @@ namespace GUI
                     }
                 }
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

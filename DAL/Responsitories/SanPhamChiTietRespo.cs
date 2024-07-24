@@ -95,7 +95,19 @@ namespace DAL.Responsitories
                                               && sp.IdKichCo == idKichCo
                                               && sp.IdSanPham == idSP);
         }
-
+        public SanPhamChiTiet GetAllSanPhamChiTietById(Guid maSPCT)
+        {
+            return _duan1Context.SanPhamChiTiets.Find(maSPCT);
+        }
+        public void UpdateSoLuong(SanPhamChiTiet spctNew)
+        {
+            var spctOld = GetAllSanPhamChiTietById(spctNew.IdSanphamChitiet);
+            if (spctOld != null)
+            {
+                spctOld.SoLuong = spctNew.SoLuong;
+            }
+            _duan1Context.SaveChanges();
+        }
 
     }
 }

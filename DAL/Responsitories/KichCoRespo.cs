@@ -67,6 +67,11 @@ namespace DAL.Responsitories
             }
         }
 
-        
+        public bool IsProductExists(string tenkichco)
+        {
+            return _duan1Context.KichCos.Any(sp => sp.KichCo1 == tenkichco);
+
+        }
+
     }
 }

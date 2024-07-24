@@ -37,7 +37,6 @@
             tabPage2 = new TabPage();
             groupBox1 = new GroupBox();
             tb_MaSP_SP = new TextBox();
-            label22 = new Label();
             label11 = new Label();
             cb_TrangThaiSP_SanPham = new ComboBox();
             label10 = new Label();
@@ -91,7 +90,6 @@
             label8 = new Label();
             label7 = new Label();
             label12 = new Label();
-            label6 = new Label();
             label5 = new Label();
             tabPage3 = new TabPage();
             groupBox5 = new GroupBox();
@@ -110,7 +108,6 @@
             rb_ThuongHieu = new RadioButton();
             panel4 = new Panel();
             tb_MaThuocTinh = new TextBox();
-            label17 = new Label();
             label13 = new Label();
             tb_TenThuocTinh = new TextBox();
             groupBox6 = new GroupBox();
@@ -211,7 +208,6 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(tb_MaSP_SP);
-            groupBox1.Controls.Add(label22);
             groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(cb_TrangThaiSP_SanPham);
             groupBox1.Controls.Add(label10);
@@ -232,25 +228,16 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Quản lý sản phẩm";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // tb_MaSP_SP
             // 
             tb_MaSP_SP.BorderStyle = BorderStyle.FixedSingle;
-            tb_MaSP_SP.Location = new Point(8, 47);
+            tb_MaSP_SP.Location = new Point(109, 18);
             tb_MaSP_SP.Name = "tb_MaSP_SP";
             tb_MaSP_SP.ReadOnly = true;
             tb_MaSP_SP.Size = new Size(216, 25);
             tb_MaSP_SP.TabIndex = 16;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label22.Location = new Point(8, 26);
-            label22.Name = "label22";
-            label22.Size = new Size(91, 17);
-            label22.TabIndex = 15;
-            label22.Text = "Mã sản phẩm";
             // 
             // label11
             // 
@@ -486,7 +473,7 @@
             // cb_ThuongHieu_SanPham
             // 
             cb_ThuongHieu_SanPham.FormattingEnabled = true;
-            cb_ThuongHieu_SanPham.Location = new Point(8, 193);
+            cb_ThuongHieu_SanPham.Location = new Point(8, 176);
             cb_ThuongHieu_SanPham.Name = "cb_ThuongHieu_SanPham";
             cb_ThuongHieu_SanPham.Size = new Size(216, 25);
             cb_ThuongHieu_SanPham.TabIndex = 5;
@@ -495,7 +482,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(8, 172);
+            label4.Location = new Point(8, 155);
             label4.Name = "label4";
             label4.Size = new Size(85, 17);
             label4.TabIndex = 4;
@@ -504,7 +491,7 @@
             // cb_DanhMuc_SanPham
             // 
             cb_DanhMuc_SanPham.FormattingEnabled = true;
-            cb_DanhMuc_SanPham.Location = new Point(8, 144);
+            cb_DanhMuc_SanPham.Location = new Point(8, 112);
             cb_DanhMuc_SanPham.Name = "cb_DanhMuc_SanPham";
             cb_DanhMuc_SanPham.Size = new Size(216, 25);
             cb_DanhMuc_SanPham.TabIndex = 3;
@@ -513,7 +500,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(8, 124);
+            label3.Location = new Point(8, 92);
             label3.Name = "label3";
             label3.Size = new Size(70, 17);
             label3.TabIndex = 2;
@@ -522,7 +509,7 @@
             // tb_TenSanPham_SanPham
             // 
             tb_TenSanPham_SanPham.BorderStyle = BorderStyle.FixedSingle;
-            tb_TenSanPham_SanPham.Location = new Point(8, 96);
+            tb_TenSanPham_SanPham.Location = new Point(6, 45);
             tb_TenSanPham_SanPham.Name = "tb_TenSanPham_SanPham";
             tb_TenSanPham_SanPham.Size = new Size(216, 25);
             tb_TenSanPham_SanPham.TabIndex = 1;
@@ -531,7 +518,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(8, 75);
+            label2.Location = new Point(6, 24);
             label2.Name = "label2";
             label2.Size = new Size(93, 17);
             label2.TabIndex = 0;
@@ -552,17 +539,16 @@
             // 
             groupBox3.Controls.Add(tb_Gia_SanPhamCT);
             groupBox3.Controls.Add(label9);
+            groupBox3.Controls.Add(tb_MaSPCT);
             groupBox3.Controls.Add(cb_SanPham_SanPhamChiTiet);
             groupBox3.Controls.Add(groupBox4);
             groupBox3.Controls.Add(panel3);
             groupBox3.Controls.Add(cb_MauSac_SanPhamChiTiet);
             groupBox3.Controls.Add(cb_KichThuoc_SanPhamChiTiet);
-            groupBox3.Controls.Add(tb_MaSPCT);
             groupBox3.Controls.Add(tb_SoLuong_SanPham);
             groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(label7);
             groupBox3.Controls.Add(label12);
-            groupBox3.Controls.Add(label6);
             groupBox3.Controls.Add(label5);
             groupBox3.Location = new Point(6, 6);
             groupBox3.Name = "groupBox3";
@@ -573,7 +559,7 @@
             // 
             // tb_Gia_SanPhamCT
             // 
-            tb_Gia_SanPhamCT.Location = new Point(375, 91);
+            tb_Gia_SanPhamCT.Location = new Point(81, 93);
             tb_Gia_SanPhamCT.Name = "tb_Gia_SanPhamCT";
             tb_Gia_SanPhamCT.Size = new Size(173, 23);
             tb_Gia_SanPhamCT.TabIndex = 12;
@@ -582,7 +568,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            label9.Location = new Point(297, 93);
+            label9.Location = new Point(7, 94);
             label9.Name = "label9";
             label9.Size = new Size(27, 17);
             label9.TabIndex = 11;
@@ -591,7 +577,7 @@
             // cb_SanPham_SanPhamChiTiet
             // 
             cb_SanPham_SanPhamChiTiet.FormattingEnabled = true;
-            cb_SanPham_SanPhamChiTiet.Location = new Point(87, 54);
+            cb_SanPham_SanPhamChiTiet.Location = new Point(81, 18);
             cb_SanPham_SanPhamChiTiet.Name = "cb_SanPham_SanPhamChiTiet";
             cb_SanPham_SanPhamChiTiet.Size = new Size(173, 23);
             cb_SanPham_SanPhamChiTiet.TabIndex = 10;
@@ -775,7 +761,7 @@
             // tb_MaSPCT
             // 
             tb_MaSPCT.BorderStyle = BorderStyle.FixedSingle;
-            tb_MaSPCT.Location = new Point(87, 19);
+            tb_MaSPCT.Location = new Point(375, 99);
             tb_MaSPCT.Name = "tb_MaSPCT";
             tb_MaSPCT.ReadOnly = true;
             tb_MaSPCT.Size = new Size(173, 23);
@@ -784,7 +770,7 @@
             // tb_SoLuong_SanPham
             // 
             tb_SoLuong_SanPham.BorderStyle = BorderStyle.FixedSingle;
-            tb_SoLuong_SanPham.Location = new Point(88, 91);
+            tb_SoLuong_SanPham.Location = new Point(82, 55);
             tb_SoLuong_SanPham.Name = "tb_SoLuong_SanPham";
             tb_SoLuong_SanPham.Size = new Size(173, 23);
             tb_SoLuong_SanPham.TabIndex = 2;
@@ -813,27 +799,17 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label12.Location = new Point(12, 55);
+            label12.Location = new Point(6, 19);
             label12.Name = "label12";
             label12.Size = new Size(69, 17);
             label12.TabIndex = 1;
             label12.Text = "Sản phẩm";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(12, 19);
-            label6.Name = "label6";
-            label6.Size = new Size(61, 17);
-            label6.TabIndex = 1;
-            label6.Text = "Mã SPCT";
-            // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(13, 91);
+            label5.Location = new Point(7, 55);
             label5.Name = "label5";
             label5.Size = new Size(62, 17);
             label5.TabIndex = 1;
@@ -867,6 +843,7 @@
             // panel8
             // 
             panel8.BorderStyle = BorderStyle.FixedSingle;
+            panel8.Controls.Add(tb_MaThuocTinh);
             panel8.Controls.Add(pictureBox2);
             panel8.Controls.Add(label14);
             panel8.Controls.Add(tb_TimKiem_ThuocTinh);
@@ -1027,8 +1004,6 @@
             // panel4
             // 
             panel4.BorderStyle = BorderStyle.FixedSingle;
-            panel4.Controls.Add(tb_MaThuocTinh);
-            panel4.Controls.Add(label17);
             panel4.Controls.Add(label13);
             panel4.Controls.Add(tb_TenThuocTinh);
             panel4.Location = new Point(6, 22);
@@ -1038,25 +1013,16 @@
             // 
             // tb_MaThuocTinh
             // 
-            tb_MaThuocTinh.Location = new Point(99, 7);
+            tb_MaThuocTinh.Location = new Point(71, 5);
             tb_MaThuocTinh.Name = "tb_MaThuocTinh";
             tb_MaThuocTinh.ReadOnly = true;
             tb_MaThuocTinh.Size = new Size(210, 23);
             tb_MaThuocTinh.TabIndex = 3;
             // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(10, 10);
-            label17.Name = "label17";
-            label17.Size = new Size(82, 15);
-            label17.TabIndex = 2;
-            label17.Text = "Mã thuộc tính";
-            // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(10, 43);
+            label13.Location = new Point(10, 26);
             label13.Name = "label13";
             label13.Size = new Size(83, 15);
             label13.TabIndex = 1;
@@ -1064,7 +1030,7 @@
             // 
             // tb_TenThuocTinh
             // 
-            tb_TenThuocTinh.Location = new Point(99, 40);
+            tb_TenThuocTinh.Location = new Point(99, 23);
             tb_TenThuocTinh.Name = "tb_TenThuocTinh";
             tb_TenThuocTinh.Size = new Size(210, 23);
             tb_TenThuocTinh.TabIndex = 0;
@@ -1200,7 +1166,6 @@
         private TextBox tb_TimKiem_ThuocTinh;
         private PictureBox pictureBox3;
         private TextBox tb_TimKiem_SanPhamChiTiet;
-        private Label label17;
         private TextBox tb_MaThuocTinh;
         private GroupBox groupBox8;
         private ComboBox comboBox3;
@@ -1220,13 +1185,11 @@
         private ComboBox cb_Loc_DanhMuc;
         private Button btn_Sua_SP;
         private TextBox tb_MaSP_SP;
-        private Label label22;
         private TextBox tb_Gia_SanPhamCT;
         private Label label9;
         private Label label23;
         private ComboBox cb_SanPham_SPCT_Loc;
         private TextBox tb_MaSPCT;
-        private Label label6;
         private ComboBox cb_MauSac_SPCT_Loc;
     }
 }

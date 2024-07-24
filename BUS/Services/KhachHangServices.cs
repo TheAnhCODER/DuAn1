@@ -62,5 +62,9 @@ namespace BUS.Services
                 return "Sửa thất bại";
             }
         }
+        public Khach? GetKhachHangBySDT(string sdt)
+        {
+            return _repo.GetKhachHangBySDT(sdt);
+        }
     }
 }
