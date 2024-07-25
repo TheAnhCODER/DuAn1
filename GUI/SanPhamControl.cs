@@ -804,6 +804,8 @@ namespace GUI
                     ShowSanPham(sanPhams);
                     LoadSanPhamTimKiem();
                     LoadSanPhamSPCT();
+                    BanHangControl banHangControl = new BanHangControl();
+                    banHangControl.ShowSanPham_BanHang();
                     return;
 
                 }

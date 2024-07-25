@@ -110,6 +110,11 @@ namespace GUI
         }
         private void dgv_TatCaSanPham_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if(string.IsNullOrEmpty(tb_MaHoaDon_BanHang.Text))
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (e.RowIndex >= 0)
             {
@@ -279,6 +284,7 @@ namespace GUI
                 {
                     var rowData = dgv_HoaDonCho_BanHang.Rows[row]; // Lấy dữ liệu từ dòng đó ra
                                                                    // Bạn có thể lấy thêm thông tin cần thiết từ hàng được chọn tại đây
+                    tb_HoaDonCho.Text = rowData.Cells[0].Value.ToString() ?? string.Empty;
                     // Điền dữ liệu vào các trường trên form
                     tb_MaHoaDon_BanHang.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
                     tb_SoDienThoai_BanHang.Text = rowData.Cells[2].Value?.ToString() ?? string.Empty;
@@ -329,7 +335,7 @@ namespace GUI
             if (tb_MaHoaDon_BanHang != null)
             {
                 var selectedHoaDon = tb_MaHoaDon_BanHang.Text.ToString();
-                tb_TongTien_BanHang.Text = TinhTongTienHoaDon(selectedHoaDon).ToString("#,##0.00 'VND'");
+                tb_TongTien_BanHang.Text = TinhTongTienHoaDon(selectedHoaDon).ToString("#,##0 'VND'");
             }
         }
 
@@ -424,6 +430,22 @@ namespace GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
+
+                if (!SanPhamControl.ValidateNotEmpty(tb_TienKhachTra_BanHang))
+                {
+                    MessageBox.Show("Vui lòng nhập tiền khách trả!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (!SanPhamControl.ValidateNumeric(tb_TienKhachTra_BanHang))
+                {
+                    MessageBox.Show("Giá trị nhập phải là số!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (!SanPhamControl.ValidatePositiveInteger(tb_TienKhachTra_BanHang))
+                {
+                    MessageBox.Show("Số tiền nhập vào không được âm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 try
                 {
                     decimal tienKhachDua = Convert.ToDecimal(tb_TienKhachTra_BanHang.Text);
@@ -455,5 +477,8 @@ namespace GUI
             FormKhachHang formKhachHang = new FormKhachHang();
             formKhachHang.ShowDialog();
         }
+
+     
+
     }
 }

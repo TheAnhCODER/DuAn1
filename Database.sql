@@ -20,12 +20,11 @@ CREATE TABLE NhanVien (
     Dien_thoai NVARCHAR(20),
     Email NVARCHAR(255),
     Mat_khau NVARCHAR(255),
-	Trang_thai bit
+	 Trang_thai bit not null default 1
     FOREIGN KEY (id_chucvu) REFERENCES ChucVu(id_chucvu)
 );
 
-ALTER TABLE NhanVien
-ADD Trang_thai bit not null default 1;
+
 
 CREATE TABLE Khach (
     So_dien_thoai NVARCHAR(20) PRIMARY KEY,
@@ -34,7 +33,7 @@ CREATE TABLE Khach (
 );
 
 CREATE TABLE PhuongThucThanhToan (
-    id_phuongthucthanhtoan UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
+    id_phuongthucthanhtoan int PRIMARY KEY identity(1,1),
     Ten_phuong_thuc_thanh_toan NVARCHAR(255) NOT NULL
 );
 
@@ -97,7 +96,7 @@ CREATE TABLE HoaDon (
     id_hoadon UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
     So_dien_thoai NVARCHAR(20),
     ID_nhanvien UNIQUEIDENTIFIER,
-    id_phuongthucthanhtoan UNIQUEIDENTIFIER,
+    id_phuongthucthanhtoan int,
     Tong_so_tien_hoa_don DECIMAL(18, 2) NOT NULL,
     Trang_thai_thanh_toan int NOT NULL default '0', --0: chua thanh toan, 1: da thanh toan, 2: da huy
 	Ngay_tao DATETIME DEFAULT GETDATE(),
@@ -151,6 +150,4 @@ INSERT INTO Khach (So_dien_thoai, Ten_khach_hang, Dia_chi) VALUES ('0123456789',
 INSERT INTO Khach (So_dien_thoai, Ten_khach_hang, Dia_chi) VALUES ('0987654321', 'Lê Thị D', 'Hồ Chí Minh');
 
 
-ALTER TABLE NhanVien
-ADD Trang_thai bit not null default 1;
 
