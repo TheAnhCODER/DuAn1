@@ -73,6 +73,8 @@
             dgv_DangGiamGia = new DataGridView();
             groupBox5 = new GroupBox();
             panel_Cam = new Panel();
+            btn_Xoa1Sp = new Button();
+            btn_XoaTatCa = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -260,17 +262,17 @@
             // 
             // btn_HuyHoaDon_BanHang
             // 
-            btn_HuyHoaDon_BanHang.Location = new Point(122, 483);
+            btn_HuyHoaDon_BanHang.Location = new Point(122, 497);
             btn_HuyHoaDon_BanHang.Name = "btn_HuyHoaDon_BanHang";
             btn_HuyHoaDon_BanHang.Size = new Size(88, 47);
             btn_HuyHoaDon_BanHang.TabIndex = 19;
-            btn_HuyHoaDon_BanHang.Text = "Hủy hóa đơn";
+            btn_HuyHoaDon_BanHang.Text = "Làm mới";
             btn_HuyHoaDon_BanHang.UseVisualStyleBackColor = true;
             btn_HuyHoaDon_BanHang.Click += btn_HuyHoaDon_BanHang_Click;
             // 
             // btn_TaoHoaDon_BanHang
             // 
-            btn_TaoHoaDon_BanHang.Location = new Point(28, 483);
+            btn_TaoHoaDon_BanHang.Location = new Point(28, 497);
             btn_TaoHoaDon_BanHang.Name = "btn_TaoHoaDon_BanHang";
             btn_TaoHoaDon_BanHang.Size = new Size(86, 47);
             btn_TaoHoaDon_BanHang.TabIndex = 18;
@@ -280,7 +282,7 @@
             // 
             // btn_ThanhToan_BanHang
             // 
-            btn_ThanhToan_BanHang.Location = new Point(28, 430);
+            btn_ThanhToan_BanHang.Location = new Point(28, 444);
             btn_ThanhToan_BanHang.Name = "btn_ThanhToan_BanHang";
             btn_ThanhToan_BanHang.Size = new Size(182, 47);
             btn_ThanhToan_BanHang.TabIndex = 17;
@@ -314,6 +316,7 @@
             // 
             // cb_HTTT_BanHang
             // 
+            cb_HTTT_BanHang.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_HTTT_BanHang.FormattingEnabled = true;
             cb_HTTT_BanHang.Location = new Point(102, 281);
             cb_HTTT_BanHang.Name = "cb_HTTT_BanHang";
@@ -383,6 +386,7 @@
             // 
             // tb_TenKhachHang_BanHang
             // 
+            tb_TenKhachHang_BanHang.CausesValidation = false;
             tb_TenKhachHang_BanHang.Location = new Point(105, 73);
             tb_TenKhachHang_BanHang.Name = "tb_TenKhachHang_BanHang";
             tb_TenKhachHang_BanHang.ReadOnly = true;
@@ -391,6 +395,8 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(btn_XoaTatCa);
+            groupBox3.Controls.Add(btn_Xoa1Sp);
             groupBox3.Controls.Add(dgv_HoaDonChiTiet_BanHang);
             groupBox3.Location = new Point(3, 221);
             groupBox3.Name = "groupBox3";
@@ -415,7 +421,7 @@
             dgv_HoaDonChiTiet_BanHang.ReadOnly = true;
             dgv_HoaDonChiTiet_BanHang.RowHeadersWidth = 62;
             dgv_HoaDonChiTiet_BanHang.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_HoaDonChiTiet_BanHang.Size = new Size(610, 158);
+            dgv_HoaDonChiTiet_BanHang.Size = new Size(515, 158);
             dgv_HoaDonChiTiet_BanHang.TabIndex = 0;
             // 
             // groupBox4
@@ -534,6 +540,25 @@
             panel_Cam.Size = new Size(219, 144);
             panel_Cam.TabIndex = 0;
             // 
+            // btn_Xoa1Sp
+            // 
+            btn_Xoa1Sp.Image = (Image)resources.GetObject("btn_Xoa1Sp.Image");
+            btn_Xoa1Sp.Location = new Point(536, 36);
+            btn_Xoa1Sp.Name = "btn_Xoa1Sp";
+            btn_Xoa1Sp.Size = new Size(75, 46);
+            btn_Xoa1Sp.TabIndex = 1;
+            btn_Xoa1Sp.Text = "Xóa";
+            btn_Xoa1Sp.UseVisualStyleBackColor = true;
+            // 
+            // btn_XoaTatCa
+            // 
+            btn_XoaTatCa.Location = new Point(538, 105);
+            btn_XoaTatCa.Name = "btn_XoaTatCa";
+            btn_XoaTatCa.Size = new Size(75, 46);
+            btn_XoaTatCa.TabIndex = 2;
+            btn_XoaTatCa.Text = "Xóa tất cả";
+            btn_XoaTatCa.UseVisualStyleBackColor = true;
+            // 
             // BanHangControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -613,5 +638,7 @@
         private TextBox tb_HoaDonCho;
         private Label label8;
         private Panel panel_Cam;
+        private Button btn_XoaTatCa;
+        private Button btn_Xoa1Sp;
     }
 }

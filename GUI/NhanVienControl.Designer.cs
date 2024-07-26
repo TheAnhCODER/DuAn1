@@ -282,6 +282,7 @@
             // 
             // cb_trangthai_NhanVien
             // 
+            cb_trangthai_NhanVien.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_trangthai_NhanVien.FormattingEnabled = true;
             cb_trangthai_NhanVien.Location = new Point(319, 234);
             cb_trangthai_NhanVien.Name = "cb_trangthai_NhanVien";
