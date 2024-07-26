@@ -10,11 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Camera;
 
 namespace GUI
 {
     public partial class BanHangControl : UserControl
     {
+        private FormCamera formCamera;
+        private Form childform;
         public static BanHangControl banHangControl = new BanHangControl();
         NhanVien _nhanVien { get; set; }
         ThuongHieuServices thuonghieuServices;
@@ -39,9 +42,35 @@ namespace GUI
             sanPhamChiTietServices = new SanPhamChiTietServices();
             hoaDonServices = new HoaDonServices();
             RefreshDataGridView();
-
+            formCamera = new FormCamera();
+            formCamera.OnQRCodeScanned += FormCamera_OnQRCodeScanned; ;
+            OpenChildForm(formCamera);
         }
 
+        private void FormCamera_OnQRCodeScanned(string obj)
+        {
+            // Ensure that the update to the TextBox is performed on the UI thread
+            tb_TienKhachTra_BanHang.Invoke(new MethodInvoker(delegate ()
+            {
+                tb_TienKhachTra_BanHang.Text = obj;
+            }));
+        }
+
+        private void OpenChildForm(Form chillform)
+        {
+            if (this.childform != null)
+            {
+                this.childform.Close();
+            }
+            this.childform = chillform;
+            chillform.TopLevel = false;
+            chillform.FormBorderStyle = FormBorderStyle.None;
+            chillform.Dock = DockStyle.Fill;
+            panel_Cam.Controls.Add(chillform);
+            panel_Cam.Tag = chillform;
+            chillform.BringToFront();
+            chillform.Show();
+        }
 
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -50,6 +79,7 @@ namespace GUI
 
             if (result == DialogResult.Yes)
             {
+                childform?.Close();
                 Application.Exit();
             }
         }
