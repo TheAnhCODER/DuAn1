@@ -35,9 +35,16 @@ namespace BUS.Services
         {
             hoaDonChiTietRespo.UpdateSoLuong(hdctNew);
         }
+        public void DeleteHDCTById(string mahoadon, string maSPCT)
+        {
+            hoaDonChiTietRespo.DeleteHDCTById(Guid.Parse(mahoadon), Guid.Parse(maSPCT));
+        }
 
 
-
+        public void DeleteAllHDCTByMaHoaDon(string maHoaDon)
+        {
+            hoaDonChiTietRespo.DeleteAllHDCTByMaHoaDon(Guid.Parse(maHoaDon));
+        }
 
     }
 }

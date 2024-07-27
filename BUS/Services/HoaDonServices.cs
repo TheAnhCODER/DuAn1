@@ -38,5 +38,11 @@ namespace BUS.Services
             var mahoadon = Guid.Parse(maHoaDon);
             hoaDonRespo.SuaTrangThai(mahoadon, trangThai);
         }
+
+        public void SuaTrangThai(string maHoaDon, int trangThai, int phuongthuocthanhtoan)
+        {
+            var mahoadon = Guid.Parse(maHoaDon);
+            hoaDonRespo.SuaTrangThai(mahoadon, trangThai, phuongthuocthanhtoan);
+        }
     }
 }

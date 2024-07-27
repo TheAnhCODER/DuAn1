@@ -36,5 +36,19 @@ namespace DAL.Responsitories
             }
             _dbContext.SaveChanges();
         }
+
+        public void SuaTrangThai(Guid maHoaDon, int trangThai, int phuongthucthanhtoan)
+        {
+            var hoaDonSua = _dbContext.HoaDons.Find(maHoaDon);
+            if (hoaDonSua != null)
+            {
+                hoaDonSua.TrangThaiThanhToan = trangThai;
+                hoaDonSua.IdPhuongthucthanhtoan = phuongthucthanhtoan;
+            }
+            _dbContext.SaveChanges();
+        }
+
+
+
     }
 }

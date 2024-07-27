@@ -38,5 +38,32 @@ namespace DAL.Responsitories
             }
             dbContext.SaveChanges();
         }
+
+        public void DeleteAllHDCTByMaHoaDon(Guid maHoaDon)
+        {
+            // Thêm logic để xóa tất cả các chi tiết hóa đơn theo mã hóa đơn
+            // Ví dụ:
+            var hoaDonChiTietList = GetAllHoaDonCTByMaHoaDon(maHoaDon);
+            foreach (var hdct in hoaDonChiTietList)
+            {
+                // Xóa chi tiết hóa đơn
+                dbContext.HoaDonChiTiets.Remove(hdct);
+            }
+            dbContext.SaveChanges();
+        }
+
+
+        public void DeleteHDCTById(Guid maHoaDon, Guid maSPCT)
+        {
+            // Thêm logic để xóa chi tiết hóa đơn
+            var hdct = dbContext.HoaDonChiTiets.SingleOrDefault(h => h.MaHoaDon == maHoaDon && h.MaSpct == maSPCT);
+            if (hdct != null)
+            {
+                dbContext.HoaDonChiTiets.Remove(hdct);
+                dbContext.SaveChanges();
+            }
+        }
+
+
     }
 }
