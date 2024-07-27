@@ -1,5 +1,7 @@
 ﻿using BUS.Services;
 using DAL.Models;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Camera;
 using System.Diagnostics.Eventing.Reader;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Net.NetworkInformation;
 
 namespace GUI
 {
@@ -556,7 +559,7 @@ namespace GUI
                 {
                     if (daThanhToanDu)
                     {
-
+                        checkInHoaDon();
                         hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 1);
                         MessageBox.Show("Đã thanh toán hóa đơn!");
                         RefreshToanBoForm();
@@ -569,7 +572,7 @@ namespace GUI
                 }
                 else if (cb_HTTT_BanHang.SelectedIndex == 1) // "Chuyển khoản"
                 {
-
+                    checkInHoaDon();
                     var tongSoTien = TinhTongTienHoaDon(tb_MaHoaDon_BanHang.Text.ToString());
                     tienQR = Convert.ToInt32(tongSoTien);
                     FormBank formBank = new FormBank();
@@ -588,6 +591,134 @@ namespace GUI
                 MessageBox.Show("Hãy chọn hóa đơn chờ để thanh toán!");
             }
         }
+
+        private void checkInHoaDon()
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                string folderPath = @"D:\Hoc\HOCKI3\Dự án 1\DuAn1Repos\DuAn1\HoaDon";
+                // Gọi hàm để tạo file PDF
+                CreatePdfInvoice(folderPath);
+            }
+        }
+        public void CreatePdfInvoice(string folderPath)
+        {
+            try
+            {
+                // Kiểm tra và tạo thư mục nếu chưa tồn tại
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                // Tạo tên file độc nhất bằng cách sử dụng dấu thời gian
+                string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string filePath = Path.Combine(folderPath, $"invoice_{timestamp}.pdf");
+
+                // Tạo tài liệu PDF
+                PdfDocument document = new PdfDocument();
+                document.Info.Title = "Hóa đơn bán hàng";
+
+                // Tạo trang và thêm nội dung
+                PdfPage page = document.AddPage();
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+                XFont font = new XFont("Verdana", 12);
+                XFont fontBold = new XFont("Verdana", 12);
+                XFont titleFont = new XFont("Verdana", 18);
+                XFont storeFont = new XFont("Verdana", 22);
+
+                // Tạo tiêu đề cửa hàng và ngày tháng
+                gfx.DrawString("ADV STORE", storeFont, XBrushes.Black, new XRect(0, 20, page.Width, 40), XStringFormats.TopCenter);
+                gfx.DrawString("Hóa đơn bán hàng", titleFont, XBrushes.Black, new XRect(0, 60, page.Width, 40), XStringFormats.TopCenter);
+                // Vẽ đường kẻ chia ranh giới giữa tiêu đề và bảng
+                gfx.DrawLine(XPens.Black, 20, 140, page.Width - 20, 140);
+                gfx.DrawString("Ngày tạo: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), font, XBrushes.Black, new XRect(20, 110, page.Width - 40, 20), XStringFormats.TopLeft);
+
+            
+
+                // Vẽ bảng từ DataGridView
+                int yPosition = 150;
+                int rowHeight = 25;
+                int[] columnWidths = { 50, 200, 100, 100, 100 }; // Đặt chiều rộng các cột
+
+                // Tiêu đề cột
+                XSolidBrush headerBackground = new XSolidBrush(XColor.FromArgb(29, 135, 209));
+                XSolidBrush headerForeground = XBrushes.White;
+                gfx.DrawRectangle(headerBackground, 20, yPosition, page.Width - 40, rowHeight);
+                gfx.DrawRectangle(XPens.Black, 20, yPosition, page.Width - 40, rowHeight);
+                gfx.DrawString("STT", fontBold, headerForeground, new XRect(25, yPosition, columnWidths[0], rowHeight), XStringFormats.Center);
+                gfx.DrawString("Tên sản phẩm", fontBold, headerForeground, new XRect(75, yPosition, columnWidths[1], rowHeight), XStringFormats.Center);
+                gfx.DrawString("Đơn giá", fontBold, headerForeground, new XRect(275, yPosition, columnWidths[2], rowHeight), XStringFormats.Center);
+                gfx.DrawString("Số lượng", fontBold, headerForeground, new XRect(375, yPosition, columnWidths[3], rowHeight), XStringFormats.Center);
+                gfx.DrawString("Thành tiền", fontBold, headerForeground, new XRect(475, yPosition, columnWidths[4], rowHeight), XStringFormats.Center);
+                yPosition += rowHeight;
+
+                // Dữ liệu từ DataGridView
+                int stt = 1;
+                decimal totalAmount = 0;
+                XPen borderPen = new XPen(XColors.Black, 1);
+                foreach (DataGridViewRow row in dgv_HoaDonChiTiet_BanHang.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    string tenSanPham = row.Cells[1].Value?.ToString() ?? string.Empty;
+                    string donGiaStr = row.Cells[3].Value?.ToString() ?? string.Empty;
+                    string soLuongStr = row.Cells[4].Value?.ToString() ?? string.Empty;
+                    decimal donGia = decimal.TryParse(donGiaStr, out donGia) ? donGia : 0;
+                    int soLuong = int.TryParse(soLuongStr, out soLuong) ? soLuong : 0;
+                    decimal thanhTien = donGia * soLuong;
+                    totalAmount += thanhTien;
+
+                    gfx.DrawRectangle(borderPen, 20, yPosition, page.Width - 40, rowHeight);
+                    gfx.DrawLine(borderPen, 20 + columnWidths[0], yPosition, 20 + columnWidths[0], yPosition + rowHeight);
+                    gfx.DrawLine(borderPen, 20 + columnWidths[0] + columnWidths[1], yPosition, 20 + columnWidths[0] + columnWidths[1], yPosition + rowHeight);
+                    gfx.DrawLine(borderPen, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2], yPosition, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2], yPosition + rowHeight);
+                    gfx.DrawLine(borderPen, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], yPosition, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], yPosition + rowHeight);
+
+                    gfx.DrawString(stt.ToString(), font, XBrushes.Black, new XRect(25, yPosition, columnWidths[0], rowHeight), XStringFormats.Center);
+                    gfx.DrawString(tenSanPham, font, XBrushes.Black, new XRect(75, yPosition, columnWidths[1], rowHeight), XStringFormats.Center);
+                    gfx.DrawString(donGia.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(275, yPosition, columnWidths[2], rowHeight), XStringFormats.Center);
+                    gfx.DrawString(soLuong.ToString(), font, XBrushes.Black, new XRect(375, yPosition, columnWidths[3], rowHeight), XStringFormats.Center);
+                    gfx.DrawString(thanhTien.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(475, yPosition, columnWidths[4], rowHeight), XStringFormats.Center);
+
+                    yPosition += rowHeight;
+                    stt++;
+                }
+
+                // Vẽ đường kẻ ngang để kết thúc bảng
+                gfx.DrawLine(XPens.Black, 20, yPosition, page.Width - 20, yPosition);
+
+                // Tổng cộng
+                yPosition += 20;
+                gfx.DrawString("Tổng cộng:", fontBold, XBrushes.Black, new XRect(375, yPosition, columnWidths[3], rowHeight), XStringFormats.Center);
+                gfx.DrawString(totalAmount.ToString("#,##0 'VND'"), fontBold, XBrushes.Black, new XRect(475, yPosition, columnWidths[4], rowHeight), XStringFormats.Center);
+
+                // Thông điệp cảm ơn
+                yPosition += rowHeight + 20;
+                gfx.DrawString("Cảm ơn quý khách. Hẹn gặp lại!", font, XBrushes.Black, new XRect(20, yPosition, page.Width - 40, rowHeight), XStringFormats.TopCenter);
+
+                // Lưu tài liệu PDF
+                document.Save(filePath);
+
+                MessageBox.Show("Hóa đơn đã được in thành công: " + filePath, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show("Không có quyền truy cập thư mục: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("Lỗi IO: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
 
 
 
