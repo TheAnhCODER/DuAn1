@@ -456,7 +456,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgv_HoaDonChiTiet_BanHang.DefaultCellStyle = dataGridViewCellStyle2;
-            dgv_HoaDonChiTiet_BanHang.Location = new Point(9, 23);
+            dgv_HoaDonChiTiet_BanHang.Location = new Point(7, 24);
             dgv_HoaDonChiTiet_BanHang.Margin = new Padding(4, 5, 4, 5);
             dgv_HoaDonChiTiet_BanHang.Name = "dgv_HoaDonChiTiet_BanHang";
             dgv_HoaDonChiTiet_BanHang.ReadOnly = true;

@@ -840,6 +840,7 @@ namespace GUI
 
         private void dgv_HoaDonChiTiet_BanHang_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            int soLuong = 0;
             if (string.IsNullOrEmpty(tb_MaHoaDon_BanHang.Text))
             {
                 MessageBox.Show("Vui lòng chọn hóa đơn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -847,36 +848,58 @@ namespace GUI
             }
             if (e.RowIndex >= 0)
             {
-
                 var rowHienTai = dgv_HoaDonChiTiet_BanHang.Rows[e.RowIndex];
                 var maSPCTDangTao = rowHienTai.Cells[5].Value.ToString();
                 var spctDangTao = sanPhamChiTietServices.GetAllSanPhamChiTietById(maSPCTDangTao);
+
+                if (spctDangTao == null)
+                {
+                    MessageBox.Show("Không tìm thấy sản phẩm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 var maHoaDon = tb_MaHoaDon_BanHang.Text;
-                var hoaDonDangChon = hoaDonServices.GetHoaDonbyMaHoaDon(maHoaDon); // Giả sử bạn có phương thức này để lấy chi tiết hóa đơn
-                FormSoLuongMua formSoLuongMua = new FormSoLuongMua();                                                                   // Kiểm tra số lượng sản phẩm có đủ không
+                var hoaDonDangChon = hoaDonServices.GetHoaDonbyMaHoaDon(maHoaDon);
+
+                if (hoaDonDangChon == null)
+                {
+                    MessageBox.Show("Không tìm thấy hóa đơn.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                FormSoLuongMua formSoLuongMua = new FormSoLuongMua();
                 formSoLuongMua.ShowDialog();
+
+                var hoaDonChiTietTonTai = hoaDonChiTietServices.GetHDCTById(Convert.ToString(hoaDonDangChon.IdHoadon), maSPCTDangTao);
+
+                // Trả lại số lượng sản phẩm từ hóa đơn chi tiết hiện tại về kho hàng
+                if (hoaDonChiTietTonTai != null)
+                {
+                    spctDangTao.SoLuong += hoaDonChiTietTonTai.SoLuong ?? 0; // Sử dụng toán tử null-coalescing
+                    sanPhamChiTietServices.UpdateSoLuong(spctDangTao);
+                }
+
+                // Kiểm tra nếu số lượng sản phẩm mới nhỏ hơn hoặc bằng số lượng trong cơ sở dữ liệu
                 if (spctDangTao.SoLuong < formSoLuongMua.SoLuongMua)
                 {
                     MessageBox.Show("Số lượng sản phẩm không đủ để thêm vào hóa đơn chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
                     return;
                 }
-                var hoaDonChiTietTonTai = hoaDonChiTietServices.GetHDCTById(Convert.ToString(hoaDonDangChon.IdHoadon), maSPCTDangTao);
-                int soLuong = 0;
+
                 if (hoaDonChiTietTonTai != null)
                 {
-
-                    HoaDonChiTiet hoaDonChiTietDangUpdate = new HoaDonChiTiet();
-                    soLuong = Convert.ToInt32(formSoLuongMua.SoLuongMua - hoaDonChiTietTonTai.SoLuong);
-                    hoaDonChiTietDangUpdate.MaSpct = Guid.Parse(maSPCTDangTao);
-                    hoaDonChiTietDangUpdate.MaHoaDon = hoaDonDangChon.IdHoadon;
-                    hoaDonChiTietDangUpdate.DonGia = spctDangTao.Gia;
-                    hoaDonChiTietDangUpdate.SoLuong = formSoLuongMua.SoLuongMua;
+                    soLuong = formSoLuongMua.SoLuongMua;
+                    HoaDonChiTiet hoaDonChiTietDangUpdate = new HoaDonChiTiet
+                    {
+                        MaSpct = Guid.Parse(maSPCTDangTao),
+                        MaHoaDon = hoaDonDangChon.IdHoadon,
+                        DonGia = spctDangTao.Gia,
+                        SoLuong = soLuong
+                    };
                     hoaDonChiTietServices.UpdateSoLuong(hoaDonChiTietDangUpdate);
-
-
-
                 }
+               
+
                 spctDangTao.SoLuong -= soLuong;
                 sanPhamChiTietServices.UpdateSoLuong(spctDangTao);
 
@@ -884,8 +907,11 @@ namespace GUI
                 tb_TimKiem_SanPham.Text = string.Empty;
                 ShowSanPham_BanHang();
                 LoadData_dgvHoaDonChiTiet(hoaDonChiTietServices.GetAllHoaDonCTByMaHoaDon(maHoaDon));
-
             }
         }
+         
+
+
+
     }
 }
