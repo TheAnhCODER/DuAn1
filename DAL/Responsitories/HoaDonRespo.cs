@@ -27,23 +27,14 @@ namespace DAL.Responsitories
             _dbContext.SaveChanges();
         }
 
-        public void SuaTrangThai(Guid maHoaDon, int trangThai)
-        {
-            var hoaDonSua = _dbContext.HoaDons.Find(maHoaDon);
-            if (hoaDonSua != null)
-            {
-                hoaDonSua.TrangThaiThanhToan = trangThai;
-            }
-            _dbContext.SaveChanges();
-        }
-
-        public void SuaTrangThai(Guid maHoaDon, int trangThai, int phuongthucthanhtoan)
+        public void SuaTrangThai(Guid maHoaDon, int trangThai, int phuongthucthanhtoan, decimal tongtien)
         {
             var hoaDonSua = _dbContext.HoaDons.Find(maHoaDon);
             if (hoaDonSua != null)
             {
                 hoaDonSua.TrangThaiThanhToan = trangThai;
                 hoaDonSua.IdPhuongthucthanhtoan = phuongthucthanhtoan;
+                hoaDonSua.TongSoTienHoaDon = tongtien;
             }
             _dbContext.SaveChanges();
         }

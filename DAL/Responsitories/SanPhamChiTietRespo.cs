@@ -85,7 +85,16 @@ namespace DAL.Responsitories
         public List<SanPhamChiTiet> GetAllSPDangKinhDoanh()
         {
             return _duan1Context.SanPhamChiTiets
-                .Where(spct => spct.IdSanPhamNavigation.TrangThaiSanPham == true)
+                .Where(spct => spct.IdSanPhamNavigation.TrangThaiSanPham == true && spct.SoLuong > 0)
+                .ToList();
+        }
+        //tim iem theo ten
+        public List<SanPhamChiTiet> SearchSanPhamByName(string tenSanPham)
+        {
+            return _duan1Context.SanPhamChiTiets
+                .Where(spct => spct.IdSanPhamNavigation.TrangThaiSanPham == true
+                               && spct.SoLuong > 0
+                               && spct.IdSanPhamNavigation.TenSanPham.Contains(tenSanPham))
                 .ToList();
         }
 

@@ -102,6 +102,11 @@ namespace BUS.Services
             return _repo.GetAllSPDangKinhDoanh();
         }
 
+        public List<SanPhamChiTiet> TimkiemSpBanHangTheoTen(string tensanpham)
+        {
+            return _repo.SearchSanPhamByName( tensanpham);
+        }
+
         public bool IsProductExists(Guid idDanhMuc, Guid idThuongHieu, Guid idSp)
         {
             return _repo.IsProductExists(idDanhMuc, idThuongHieu, idSp);

@@ -193,6 +193,7 @@
             dgv_HoaDonCho_BanHang.Size = new Size(530, 240);
             dgv_HoaDonCho_BanHang.TabIndex = 0;
             dgv_HoaDonCho_BanHang.CellClick += dgv_HoaDonCho_BanHang_CellClick;
+            dgv_HoaDonCho_BanHang.CellDoubleClick += dgv_HoaDonCho_BanHang_CellDoubleClick;
             // 
             // groupBox2
             // 
@@ -265,45 +266,73 @@
             // 
             // btn_ThemKhachHang
             // 
+            btn_ThemKhachHang.BackColor = Color.FromArgb(29, 135, 209);
+            btn_ThemKhachHang.Cursor = Cursors.Hand;
+            btn_ThemKhachHang.FlatStyle = FlatStyle.Flat;
+            btn_ThemKhachHang.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_ThemKhachHang.ForeColor = Color.White;
+            btn_ThemKhachHang.Image = (Image)resources.GetObject("btn_ThemKhachHang.Image");
+            btn_ThemKhachHang.ImageAlign = ContentAlignment.MiddleLeft;
             btn_ThemKhachHang.Location = new Point(53, 210);
             btn_ThemKhachHang.Name = "btn_ThemKhachHang";
             btn_ThemKhachHang.Size = new Size(226, 77);
             btn_ThemKhachHang.TabIndex = 22;
-            btn_ThemKhachHang.Text = "Thêm khách hàng";
-            btn_ThemKhachHang.UseVisualStyleBackColor = true;
+            btn_ThemKhachHang.Text = "    Thêm khách hàng";
+            btn_ThemKhachHang.UseVisualStyleBackColor = false;
             btn_ThemKhachHang.Click += btn_ThemKhachHang_Click_1;
             // 
             // btn_HuyHoaDon_BanHang
             // 
-            btn_HuyHoaDon_BanHang.Location = new Point(174, 828);
+            btn_HuyHoaDon_BanHang.BackColor = Color.FromArgb(29, 135, 209);
+            btn_HuyHoaDon_BanHang.Cursor = Cursors.Hand;
+            btn_HuyHoaDon_BanHang.FlatStyle = FlatStyle.Flat;
+            btn_HuyHoaDon_BanHang.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_HuyHoaDon_BanHang.ForeColor = Color.White;
+            btn_HuyHoaDon_BanHang.Image = (Image)resources.GetObject("btn_HuyHoaDon_BanHang.Image");
+            btn_HuyHoaDon_BanHang.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_HuyHoaDon_BanHang.Location = new Point(171, 828);
             btn_HuyHoaDon_BanHang.Margin = new Padding(4, 5, 4, 5);
             btn_HuyHoaDon_BanHang.Name = "btn_HuyHoaDon_BanHang";
-            btn_HuyHoaDon_BanHang.Size = new Size(126, 78);
+            btn_HuyHoaDon_BanHang.Size = new Size(157, 78);
             btn_HuyHoaDon_BanHang.TabIndex = 19;
-            btn_HuyHoaDon_BanHang.Text = "Làm mới";
-            btn_HuyHoaDon_BanHang.UseVisualStyleBackColor = true;
+            btn_HuyHoaDon_BanHang.Text = "   Làm mới";
+            btn_HuyHoaDon_BanHang.UseVisualStyleBackColor = false;
             btn_HuyHoaDon_BanHang.Click += btn_HuyHoaDon_BanHang_Click;
             // 
             // btn_TaoHoaDon_BanHang
             // 
-            btn_TaoHoaDon_BanHang.Location = new Point(40, 828);
+            btn_TaoHoaDon_BanHang.BackColor = Color.FromArgb(29, 135, 209);
+            btn_TaoHoaDon_BanHang.Cursor = Cursors.Hand;
+            btn_TaoHoaDon_BanHang.FlatStyle = FlatStyle.Flat;
+            btn_TaoHoaDon_BanHang.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_TaoHoaDon_BanHang.ForeColor = Color.White;
+            btn_TaoHoaDon_BanHang.Image = (Image)resources.GetObject("btn_TaoHoaDon_BanHang.Image");
+            btn_TaoHoaDon_BanHang.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_TaoHoaDon_BanHang.Location = new Point(6, 828);
             btn_TaoHoaDon_BanHang.Margin = new Padding(4, 5, 4, 5);
             btn_TaoHoaDon_BanHang.Name = "btn_TaoHoaDon_BanHang";
-            btn_TaoHoaDon_BanHang.Size = new Size(123, 78);
+            btn_TaoHoaDon_BanHang.Size = new Size(157, 78);
             btn_TaoHoaDon_BanHang.TabIndex = 18;
-            btn_TaoHoaDon_BanHang.Text = "Tạo hóa đơn";
-            btn_TaoHoaDon_BanHang.UseVisualStyleBackColor = true;
+            btn_TaoHoaDon_BanHang.Text = "      Tạo hóa đơn";
+            btn_TaoHoaDon_BanHang.UseVisualStyleBackColor = false;
             btn_TaoHoaDon_BanHang.Click += btn_TaoHoaDon_BanHang_Click;
             // 
             // btn_ThanhToan_BanHang
             // 
-            btn_ThanhToan_BanHang.Location = new Point(40, 740);
+            btn_ThanhToan_BanHang.BackColor = Color.FromArgb(29, 135, 209);
+            btn_ThanhToan_BanHang.Cursor = Cursors.Hand;
+            btn_ThanhToan_BanHang.FlatStyle = FlatStyle.Flat;
+            btn_ThanhToan_BanHang.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_ThanhToan_BanHang.ForeColor = Color.White;
+            btn_ThanhToan_BanHang.Image = (Image)resources.GetObject("btn_ThanhToan_BanHang.Image");
+            btn_ThanhToan_BanHang.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_ThanhToan_BanHang.Location = new Point(6, 740);
             btn_ThanhToan_BanHang.Margin = new Padding(4, 5, 4, 5);
             btn_ThanhToan_BanHang.Name = "btn_ThanhToan_BanHang";
-            btn_ThanhToan_BanHang.Size = new Size(260, 78);
+            btn_ThanhToan_BanHang.Size = new Size(322, 78);
             btn_ThanhToan_BanHang.TabIndex = 17;
             btn_ThanhToan_BanHang.Text = "Thanh toán";
-            btn_ThanhToan_BanHang.UseVisualStyleBackColor = true;
+            btn_ThanhToan_BanHang.UseVisualStyleBackColor = false;
             btn_ThanhToan_BanHang.Click += btn_ThanhToan_BanHang_Click;
             // 
             // panel2
@@ -436,17 +465,25 @@
             // 
             // btn_XoaTatCa
             // 
-            btn_XoaTatCa.Location = new Point(764, 122);
+            btn_XoaTatCa.BackColor = Color.FromArgb(29, 135, 209);
+            btn_XoaTatCa.Cursor = Cursors.Hand;
+            btn_XoaTatCa.FlatStyle = FlatStyle.Flat;
+            btn_XoaTatCa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_XoaTatCa.ForeColor = Color.White;
+            btn_XoaTatCa.Image = (Image)resources.GetObject("btn_XoaTatCa.Image");
+            btn_XoaTatCa.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_XoaTatCa.Location = new Point(751, 122);
             btn_XoaTatCa.Margin = new Padding(4, 5, 4, 5);
             btn_XoaTatCa.Name = "btn_XoaTatCa";
-            btn_XoaTatCa.Size = new Size(107, 77);
+            btn_XoaTatCa.Size = new Size(128, 77);
             btn_XoaTatCa.TabIndex = 2;
-            btn_XoaTatCa.Text = "Xóa tất cả";
-            btn_XoaTatCa.UseVisualStyleBackColor = true;
+            btn_XoaTatCa.Text = "     Xóa tất cả";
+            btn_XoaTatCa.UseVisualStyleBackColor = false;
             btn_XoaTatCa.Click += btn_XoaTatCa_Click;
             // 
             // dgv_HoaDonChiTiet_BanHang
             // 
+            dgv_HoaDonChiTiet_BanHang.AllowUserToAddRows = false;
             dgv_HoaDonChiTiet_BanHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
