@@ -15,6 +15,7 @@ namespace GUI
 {
     public partial class FormKhachHang : Form
     {
+        BanHangControl banHangControl;
         FormKhacHangServices khachhangServices;
         private string originalSoDienThoai;
         public FormKhachHang()
@@ -22,7 +23,12 @@ namespace GUI
             InitializeComponent();
             khachhangServices = new FormKhacHangServices();
             LoadKhachHang();
+  
+           
         }
+
+
+
         private void LoadKhachHang()
         {
             try
@@ -291,5 +297,11 @@ namespace GUI
             }
             return true; // Trả về true nếu tất cả các TextBox đều chứa giá trị số
         }
+
+       
+
+      
+
+       
     }
 }

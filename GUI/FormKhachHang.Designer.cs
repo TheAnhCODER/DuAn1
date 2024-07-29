@@ -267,6 +267,7 @@
             dgv_danhsach.Size = new Size(834, 207);
             dgv_danhsach.TabIndex = 0;
             dgv_danhsach.CellClick += dgv_danhsach_CellClick;
+
             // 
             // FormKhachHang
             // 
@@ -284,6 +285,7 @@
             Name = "FormKhachHang";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Khách hàng";
+
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             groupBox1.ResumeLayout(false);

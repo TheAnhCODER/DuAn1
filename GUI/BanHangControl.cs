@@ -50,6 +50,7 @@ namespace GUI
             formCamera = new FormCamera();
             formCamera.OnQRCodeScanned += FormCamera_OnQRCodeScanned; ;
             OpenChildForm(formCamera);
+
             cb_HTTT_BanHang.SelectedIndexChanged += Cb_HTTT_BanHang_SelectedIndexChanged; ;
         }
 
@@ -219,6 +220,12 @@ namespace GUI
             }
 
             var spctDangTao = sanPhamChiTietServices.GetAllSanPhamChiTietById(maspct);
+            if (spctDangTao == null)
+            {
+                MessageBox.Show("Sản phẩm không tồn tại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                formCamera.ResetProcessing(); // Reset processing flag
+                return;
+            }
             var maHoaDon = tb_MaHoaDon_BanHang.Text;
             var hoaDonDangChon = hoaDonServices.GetHoaDonbyMaHoaDon(maHoaDon); // Giả sử bạn có phương thức này để lấy chi tiết hóa đơn
             FormSoLuongMua formSoLuongMua = new FormSoLuongMua();                                                                   // Kiểm tra số lượng sản phẩm có đủ không
@@ -371,25 +378,19 @@ namespace GUI
                 return;
             }
 
-            var khachHang = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text);
-            if (khachHang == null)
-            {
-                MessageBox.Show("SĐT khách hàng không hợp lệ!");
-            }
-            else
-            {
+           
                 HoaDon hoaDon = new HoaDon
                 {
                     IdNhanvien = TrangChu.nhanVien1.IdNhanvien,
-                    SoDienThoai = tb_SoDienThoai_BanHang.Text,
+                  
                     NgayTao = DateTime.Now,
                     TrangThaiThanhToan = 0 // 0: hóa đơn chờ, 1: đã thanh toán, 2: đã hủy (tự quy định)
                 };
 
                 hoaDonServices.TaoHoaDonCho(hoaDon);
 
-                MessageBox.Show("Tạo hóa đơn chờ thành công!");
-            }
+                MessageBox.Show("Tạo hóa đơn chờ thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+       
             RefreshToanBoForm();
         }
 
@@ -475,7 +476,7 @@ namespace GUI
                     // Điền dữ liệu vào các trường trên form
                     tb_MaHoaDon_BanHang.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
                     tb_SoDienThoai_BanHang.Text = rowData.Cells[2].Value?.ToString() ?? string.Empty;
-                    tb_TenKhachHang_BanHang.Text = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text).TenKhachHang;
+               
                     LoadData_dgvHoaDonChiTiet(hoaDonChiTietServices.GetAllHoaDonCTByMaHoaDon(tb_MaHoaDon_BanHang.Text));
                     dgv_HoaDonChiTiet_BanHang.ClearSelection();
                 }
@@ -526,6 +527,10 @@ namespace GUI
             int stt = 1;
             foreach (var hdct in hoaDonChiTiets)
             {
+                if (hdct.SoLuong == 0)
+                {
+                    continue; // Bỏ qua các hóa đơn có số lượng bằng 0
+                }
                 string masp = sanPhamChiTietDict.ContainsKey(hdct.MaSpct)
             ? sanPhamChiTietDict[hdct.MaSpct]
             : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
@@ -610,9 +615,22 @@ namespace GUI
         {// Kiểm tra xem mã hóa đơn có giá trị không
             if (!string.IsNullOrEmpty(tb_MaHoaDon_BanHang.Text))
             {
+               
                 DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán không?", "Xác nhận thanh toán hóa đơn", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
+                    if (string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
+                    {
+                        MessageBox.Show("Vui lòng chọn khách hàng?", "Xác nhận thêm khách hàng", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    var khachHang = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text);
+                    if (khachHang == null)
+                    {
+                        MessageBox.Show("SĐT khách hàng không hợp lệ!");
+                        return;
+                    }
+                    
                     // Kiểm tra phương thức thanh toán
                     if (cb_HTTT_BanHang.SelectedIndex == 0) // "Tiền mặt"
                     {
@@ -620,7 +638,8 @@ namespace GUI
                         {
                             checkInHoaDon();
                             var tongSoTien = TinhTongTienHoaDon(tb_MaHoaDon_BanHang.Text.ToString());
-                            hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 1, Convert.ToDecimal(tongSoTien));
+                            string sodienthoaikhachhang = tb_SoDienThoai_BanHang.Text;
+                            hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 1, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang);
                             MessageBox.Show("Đã thanh toán hóa đơn!");
                             RefreshToanBoForm();
 
@@ -637,7 +656,8 @@ namespace GUI
                         tienQR = Convert.ToInt32(tongSoTien);
                         FormBank formBank = new FormBank();
                         formBank.ShowDialog();
-                        hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 2, Convert.ToDecimal(tongSoTien));
+                        string sodienthoaikhachhang = tb_SoDienThoai_BanHang.Text;
+                        hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 2, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang);
                         MessageBox.Show("Đã thanh toán hóa đơn!");
                         RefreshToanBoForm();
                     }
@@ -785,7 +805,7 @@ namespace GUI
 
 
 
-
+        
         private void tb_TienKhachTra_BanHang_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -834,8 +854,10 @@ namespace GUI
 
         private void btn_ThemKhachHang_Click_1(object sender, EventArgs e)
         {
+            
             FormKhachHang formKhachHang = new FormKhachHang();
             formKhachHang.ShowDialog();
+           
         }
 
         private void dgv_HoaDonChiTiet_BanHang_CellClick(object sender, DataGridViewCellEventArgs e)
