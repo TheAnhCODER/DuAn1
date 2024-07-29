@@ -76,6 +76,7 @@ CREATE TABLE SanPham_ChiTiet (
     id_kich_co UNIQUEIDENTIFIER,
     So_luong INT NOT NULL,
 	Gia DECIMAL(18, 2) NOT NULL,
+	Gia_sau_giam DECIMAL(18,2) ,
     FOREIGN KEY (id_san_pham) REFERENCES SanPham(id_san_pham),
     FOREIGN KEY (id_mau_sac) REFERENCES MauSac(id_mau_sac),
     FOREIGN KEY (id_kich_co) REFERENCES KichCo(id_kich_co)
@@ -138,6 +139,9 @@ GO
 -- Chèn dữ liệu vào bảng ChucVu
 INSERT INTO ChucVu ( Ten_chuc_vu) VALUES ( 'admin');
 INSERT INTO ChucVu ( Ten_chuc_vu) VALUES ( 'Nhân viên bán hàng');
+
+INSERT INTO PhuongThucThanhToan( Ten_phuong_thuc_thanh_toan) VALUES ( 'Tiền mặt');
+INSERT INTO PhuongThucThanhToan ( Ten_phuong_thuc_thanh_toan) VALUES ( 'Chuyển khoản');
 
 -- Chèn dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (ID_nhanvien, id_chucvu, Ten_nhan_vien, Gioi_tinh, Ngay_sinh, Dia_chi, Dien_thoai, Email, Mat_khau)

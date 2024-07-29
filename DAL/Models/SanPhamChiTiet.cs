@@ -17,6 +17,7 @@ namespace DAL.Models
         public Guid? IdKichCo { get; set; }
         public int SoLuong { get; set; }
         public decimal Gia { get; set; }
+        public decimal? GiaSauGiam { get; set; }
 
         public virtual KichCo? IdKichCoNavigation { get; set; }
         public virtual MauSac? IdMauSacNavigation { get; set; }

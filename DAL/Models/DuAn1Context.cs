@@ -44,7 +44,7 @@ namespace DAL.Models
             modelBuilder.Entity<ChucVu>(entity =>
             {
                 entity.HasKey(e => e.IdChucvu)
-                    .HasName("PK__ChucVu__B4FC39BF5625CDA9");
+                    .HasName("PK__ChucVu__B4FC39BF7F4F6323");
 
                 entity.ToTable("ChucVu");
 
@@ -58,7 +58,7 @@ namespace DAL.Models
             modelBuilder.Entity<DanhMuc>(entity =>
             {
                 entity.HasKey(e => e.IdDanhMuc)
-                    .HasName("PK__DanhMuc__8CE82CD1EBF620E2");
+                    .HasName("PK__DanhMuc__8CE82CD11820CEC3");
 
                 entity.ToTable("DanhMuc");
 
@@ -74,7 +74,7 @@ namespace DAL.Models
             modelBuilder.Entity<HoaDon>(entity =>
             {
                 entity.HasKey(e => e.IdHoadon)
-                    .HasName("PK__HoaDon__F9F51331830F3BE7");
+                    .HasName("PK__HoaDon__F9F5133160DF8AC8");
 
                 entity.ToTable("HoaDon");
 
@@ -122,7 +122,7 @@ namespace DAL.Models
             modelBuilder.Entity<HoaDonChiTiet>(entity =>
             {
                 entity.HasKey(e => new { e.MaSpct, e.MaHoaDon })
-                    .HasName("PK__HoaDonCh__36E3C854CA872627");
+                    .HasName("PK__HoaDonCh__36E3C8548FAEE5FE");
 
                 entity.ToTable("HoaDonChiTiet");
 
@@ -146,7 +146,7 @@ namespace DAL.Models
             modelBuilder.Entity<Khach>(entity =>
             {
                 entity.HasKey(e => e.SoDienThoai)
-                    .HasName("PK__Khach__F0FE0FA43D93449C");
+                    .HasName("PK__Khach__F0FE0FA467C99C92");
 
                 entity.ToTable("Khach");
 
@@ -166,7 +166,7 @@ namespace DAL.Models
             modelBuilder.Entity<KhuyenMai>(entity =>
             {
                 entity.HasKey(e => e.IdKhuyenMai)
-                    .HasName("PK__KhuyenMa__E5173E982050591B");
+                    .HasName("PK__KhuyenMa__E5173E98979C115D");
 
                 entity.ToTable("KhuyenMai");
 
@@ -203,7 +203,7 @@ namespace DAL.Models
             modelBuilder.Entity<KichCo>(entity =>
             {
                 entity.HasKey(e => e.IdKichCo)
-                    .HasName("PK__KichCo__EBB498AF1E79E6E1");
+                    .HasName("PK__KichCo__EBB498AFD3000605");
 
                 entity.ToTable("KichCo");
 
@@ -219,7 +219,7 @@ namespace DAL.Models
             modelBuilder.Entity<MauSac>(entity =>
             {
                 entity.HasKey(e => e.IdMauSac)
-                    .HasName("PK__MauSac__5D8EF426E3DFEF9D");
+                    .HasName("PK__MauSac__5D8EF426F0FC66FC");
 
                 entity.ToTable("MauSac");
 
@@ -235,7 +235,7 @@ namespace DAL.Models
             modelBuilder.Entity<NhanVien>(entity =>
             {
                 entity.HasKey(e => e.IdNhanvien)
-                    .HasName("PK__NhanVien__38E5C90582CDAE53");
+                    .HasName("PK__NhanVien__38E5C9057FEADAF4");
 
                 entity.ToTable("NhanVien");
 
@@ -285,7 +285,7 @@ namespace DAL.Models
             modelBuilder.Entity<PhuongThucThanhToan>(entity =>
             {
                 entity.HasKey(e => e.IdPhuongthucthanhtoan)
-                    .HasName("PK__PhuongTh__99624A7B2BF8D5A1");
+                    .HasName("PK__PhuongTh__99624A7BA7CCF1AA");
 
                 entity.ToTable("PhuongThucThanhToan");
 
@@ -299,7 +299,7 @@ namespace DAL.Models
             modelBuilder.Entity<SanPham>(entity =>
             {
                 entity.HasKey(e => e.IdSanPham)
-                    .HasName("PK__SanPham__5776A52997E34B44");
+                    .HasName("PK__SanPham__5776A52947AC7015");
 
                 entity.ToTable("SanPham");
 
@@ -333,7 +333,7 @@ namespace DAL.Models
             modelBuilder.Entity<SanPhamChiTiet>(entity =>
             {
                 entity.HasKey(e => e.IdSanphamChitiet)
-                    .HasName("PK__SanPham___A718EABE67829875");
+                    .HasName("PK__SanPham___A718EABEF34173E7");
 
                 entity.ToTable("SanPham_ChiTiet");
 
@@ -342,6 +342,10 @@ namespace DAL.Models
                     .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.Gia).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.GiaSauGiam)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("Gia_sau_giam");
 
                 entity.Property(e => e.IdKichCo).HasColumnName("id_kich_co");
 
@@ -370,7 +374,7 @@ namespace DAL.Models
             modelBuilder.Entity<ThuongHieu>(entity =>
             {
                 entity.HasKey(e => e.IdThuongHieu)
-                    .HasName("PK__ThuongHi__37E13EF3004531C3");
+                    .HasName("PK__ThuongHi__37E13EF39571AC05");
 
                 entity.ToTable("ThuongHieu");
 
