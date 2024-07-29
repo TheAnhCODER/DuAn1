@@ -57,6 +57,7 @@
             tb_timKiem_SanPham = new TextBox();
             dgv_DanhSachSP_SanPham = new DataGridView();
             panel2 = new Panel();
+            btn_SPCT = new Button();
             btn_Sua_SP = new Button();
             btn_LamMoi_SanPham = new Button();
             btn_Them_SanPham = new Button();
@@ -202,7 +203,7 @@
             tabPage2.Controls.Add(groupBox1);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3, 3, 3, 3);
+            tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(854, 536);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Sản phẩm";
@@ -231,7 +232,6 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Quản lý sản phẩm";
-            groupBox1.Enter += groupBox1_Enter;
             // 
             // tb_MaSP_SP
             // 
@@ -254,6 +254,7 @@
             // 
             // cb_TrangThaiSP_SanPham
             // 
+            cb_TrangThaiSP_SanPham.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_TrangThaiSP_SanPham.FormattingEnabled = true;
             cb_TrangThaiSP_SanPham.Location = new Point(323, 46);
             cb_TrangThaiSP_SanPham.Name = "cb_TrangThaiSP_SanPham";
@@ -377,7 +378,7 @@
             // 
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
             pictureBox4.Location = new Point(211, 21);
-            pictureBox4.Margin = new Padding(2, 2, 2, 2);
+            pictureBox4.Margin = new Padding(2);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(27, 25);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
@@ -387,7 +388,7 @@
             // tb_timKiem_SanPham
             // 
             tb_timKiem_SanPham.Location = new Point(5, 23);
-            tb_timKiem_SanPham.Margin = new Padding(2, 2, 2, 2);
+            tb_timKiem_SanPham.Margin = new Padding(2);
             tb_timKiem_SanPham.Name = "tb_timKiem_SanPham";
             tb_timKiem_SanPham.PlaceholderText = "Tìm kiếm tại đây...";
             tb_timKiem_SanPham.Size = new Size(202, 25);
@@ -417,15 +418,30 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(btn_SPCT);
             panel2.Controls.Add(btn_Sua_SP);
             panel2.Controls.Add(btn_LamMoi_SanPham);
             panel2.Controls.Add(btn_Them_SanPham);
             panel2.Controls.Add(btn_Sua_SanPham);
             panel2.ForeColor = Color.Black;
-            panel2.Location = new Point(623, 24);
+            panel2.Location = new Point(570, 45);
             panel2.Name = "panel2";
-            panel2.Size = new Size(181, 194);
+            panel2.Size = new Size(266, 173);
             panel2.TabIndex = 6;
+            // 
+            // btn_SPCT
+            // 
+            btn_SPCT.BackColor = Color.FromArgb(29, 135, 209);
+            btn_SPCT.FlatStyle = FlatStyle.Flat;
+            btn_SPCT.ForeColor = Color.White;
+            btn_SPCT.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_SPCT.Location = new Point(135, 96);
+            btn_SPCT.Name = "btn_SPCT";
+            btn_SPCT.Size = new Size(115, 57);
+            btn_SPCT.TabIndex = 5;
+            btn_SPCT.Text = "Sản phẩm chi tiết";
+            btn_SPCT.UseVisualStyleBackColor = false;
+            btn_SPCT.Click += btn_SPCT_Click;
             // 
             // btn_Sua_SP
             // 
@@ -434,9 +450,9 @@
             btn_Sua_SP.ForeColor = Color.White;
             btn_Sua_SP.Image = (Image)resources.GetObject("btn_Sua_SP.Image");
             btn_Sua_SP.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Sua_SP.Location = new Point(29, 67);
+            btn_Sua_SP.Location = new Point(6, 96);
             btn_Sua_SP.Name = "btn_Sua_SP";
-            btn_Sua_SP.Size = new Size(123, 57);
+            btn_Sua_SP.Size = new Size(115, 57);
             btn_Sua_SP.TabIndex = 4;
             btn_Sua_SP.Text = "Sửa";
             btn_Sua_SP.UseVisualStyleBackColor = false;
@@ -449,9 +465,9 @@
             btn_LamMoi_SanPham.ForeColor = Color.White;
             btn_LamMoi_SanPham.Image = (Image)resources.GetObject("btn_LamMoi_SanPham.Image");
             btn_LamMoi_SanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_LamMoi_SanPham.Location = new Point(29, 130);
+            btn_LamMoi_SanPham.Location = new Point(135, 26);
             btn_LamMoi_SanPham.Name = "btn_LamMoi_SanPham";
-            btn_LamMoi_SanPham.Size = new Size(123, 57);
+            btn_LamMoi_SanPham.Size = new Size(115, 57);
             btn_LamMoi_SanPham.TabIndex = 2;
             btn_LamMoi_SanPham.Text = "Làm mới";
             btn_LamMoi_SanPham.UseVisualStyleBackColor = false;
@@ -464,9 +480,9 @@
             btn_Them_SanPham.ForeColor = Color.White;
             btn_Them_SanPham.Image = (Image)resources.GetObject("btn_Them_SanPham.Image");
             btn_Them_SanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Them_SanPham.Location = new Point(29, 4);
+            btn_Them_SanPham.Location = new Point(6, 26);
             btn_Them_SanPham.Name = "btn_Them_SanPham";
-            btn_Them_SanPham.Size = new Size(123, 57);
+            btn_Them_SanPham.Size = new Size(115, 57);
             btn_Them_SanPham.TabIndex = 0;
             btn_Them_SanPham.Text = "Thêm";
             btn_Them_SanPham.UseVisualStyleBackColor = false;
@@ -479,7 +495,7 @@
             btn_Sua_SanPham.ForeColor = Color.White;
             btn_Sua_SanPham.Image = (Image)resources.GetObject("btn_Sua_SanPham.Image");
             btn_Sua_SanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Sua_SanPham.Location = new Point(73, 16);
+            btn_Sua_SanPham.Location = new Point(67, 13);
             btn_Sua_SanPham.Name = "btn_Sua_SanPham";
             btn_Sua_SanPham.Size = new Size(0, 0);
             btn_Sua_SanPham.TabIndex = 1;
@@ -547,7 +563,7 @@
             tabPage1.Controls.Add(groupBox3);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 3, 3, 3);
+            tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(854, 536);
             tabPage1.TabIndex = 2;
             tabPage1.Text = "Sản phẩm chi tiết";
@@ -854,7 +870,7 @@
             tabPage3.Controls.Add(groupBox5);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3, 3, 3, 3);
+            tabPage3.Padding = new Padding(3);
             tabPage3.Size = new Size(854, 536);
             tabPage3.TabIndex = 3;
             tabPage3.Text = "Thuộc tính sản phẩm";
@@ -882,7 +898,7 @@
             panel8.Controls.Add(label14);
             panel8.Controls.Add(tb_TimKiem_ThuocTinh);
             panel8.Location = new Point(6, 94);
-            panel8.Margin = new Padding(2, 2, 2, 2);
+            panel8.Margin = new Padding(2);
             panel8.Name = "panel8";
             panel8.Size = new Size(320, 68);
             panel8.TabIndex = 8;
@@ -899,7 +915,7 @@
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(269, 26);
-            pictureBox2.Margin = new Padding(2, 2, 2, 2);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(27, 25);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -919,7 +935,7 @@
             // tb_TimKiem_ThuocTinh
             // 
             tb_TimKiem_ThuocTinh.Location = new Point(10, 33);
-            tb_TimKiem_ThuocTinh.Margin = new Padding(2, 2, 2, 2);
+            tb_TimKiem_ThuocTinh.Margin = new Padding(2);
             tb_TimKiem_ThuocTinh.Name = "tb_TimKiem_ThuocTinh";
             tb_TimKiem_ThuocTinh.PlaceholderText = "Tìm kiếm tại đây...";
             tb_TimKiem_ThuocTinh.Size = new Size(255, 23);
@@ -1108,6 +1124,7 @@
             Controls.Add(panel1);
             Name = "SanPhamControl";
             Size = new Size(868, 628);
+            Load += SanPhamControl_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -1235,5 +1252,6 @@
         private ComboBox cb_SanPham_SPCT_Loc;
         private TextBox tb_MaSPCT;
         private ComboBox cb_MauSac_SPCT_Loc;
+        private Button btn_SPCT;
     }
 }

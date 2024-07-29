@@ -62,7 +62,7 @@ namespace GUI
 
         private void btn_Them_SanPham_Click(object sender, EventArgs e)
         {
-            if (ValidateNotEmpty(tb_TenSanPham_SanPham))
+            if (ValidateNotEmpty(tb_TenSanPham_SanPham) && cb_DanhMuc_SanPham.SelectedIndex!=-1 && cb_ThuongHieu_SanPham.SelectedIndex != -1 && cb_TrangThaiSP_SanPham.SelectedIndex != -1)
             {
                 // Thực hiện hành động lưu dữ liệu
                 string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
@@ -74,12 +74,22 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
+
+                    if (cb_ThuongHieu_SanPham.SelectedIndex == -1 || cb_TrangThaiSP_SanPham.SelectedIndex == -1 || cb_DanhMuc_SanPham.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Vui lòng nhập đủ thông tin sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     string kq = sanPhamServices.CNThem(idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
                     MessageBox.Show(kq);
                     List<SanPham> sanPhams = sanPhamServices.CNShow();
                     ShowSanPham(sanPhams);
                     LoadSanPhamTimKiem();
                     LoadSanPhamSPCT();
+                    refreshSP();
+
+                    // Focus vào hàng đã sửa
+                    FocusOnEditedRowByName(ten);
+
                     return;
 
                 }
@@ -87,11 +97,38 @@ namespace GUI
             }
             else
             {
-                MessageBox.Show("Vui lòng điền tên sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
 
 
+        }
+
+        private void refreshSP()
+        {
+            tb_MaSP_SP.Clear();
+            tb_TenSanPham_SanPham.Clear();
+            tb_MoTa_SanPham.Clear();
+            cb_DanhMuc_SanPham.SelectedIndex = -1;
+            cb_ThuongHieu_SanPham.SelectedIndex = -1;
+            cb_Loc_DanhMuc.SelectedIndex = -1;
+            cb_Loc_TH.SelectedIndex = -1;
+            cb_TrangThaiSP_SanPham.SelectedIndex = -1;
+            cb_Loc_TTSP.SelectedIndex = -1;
+            tb_timKiem_SanPham.Clear();
+            LoadSanPham();
+            dgv_DanhSachSP_SanPham.ClearSelection();
+        }
+
+        private void RefreshThuocTinh()
+        {
+            rb_DanhMuc.Checked = false;
+            rb_KichCo.Checked = false;
+            rb_MauSac.Checked = false;
+            rb_ThuongHieu.Checked = false;
+            tb_TenThuocTinh.Clear();
+            tb_TimKiem_ThuocTinh.Clear();
+            dgv_ThuocTinh.ClearSelection();
         }
 
         private void btn_Them_ThuocTinhSanPham_Click(object sender, EventArgs e)
@@ -111,6 +148,7 @@ namespace GUI
                         ShowThuongHieu(thuongHieus);
                         LoadThuongHieu();
                         LoadThuongHieuTimKiem();
+                        RefreshThuocTinh();
                         return;
                     }
                     else
@@ -135,6 +173,7 @@ namespace GUI
                         ShowDanhMuc(danhMucs);
                         LoadDanhMuc();
                         LoadDanhMucTimKiem();
+                        RefreshThuocTinh();
                         return;
                     }
                     else
@@ -159,6 +198,7 @@ namespace GUI
                         ShowMauSac(mauSacs);
                         LoadMauSac();
                         LoadMauSacTimKiem();
+                        RefreshThuocTinh();
                         return;
                     }
                     else
@@ -183,6 +223,7 @@ namespace GUI
                         ShowKichCo(kichCos);
                         LoadKichCo();
                         LoadKichCoTimKiem();
+                        RefreshThuocTinh();
                         return;
                     }
                     else
@@ -190,6 +231,11 @@ namespace GUI
                         MessageBox.Show("Vui lòng điền tên thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+            }
+            else
+            {
+
+                MessageBox.Show("Vui lòng chọn thuộc tính muốn thêm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -323,20 +369,13 @@ namespace GUI
         {
             List<ThuongHieu> thuongHieus = thuonghieuServices.CNShow();
             ShowThuongHieu(thuongHieus);
+            dgv_ThuocTinh.ClearSelection();
             return;
         }
 
         private void btn_LamMoi_ThuocTinh_Click(object sender, EventArgs e)
         {
-            tb_MaThuocTinh.Clear();
-            tb_TenThuocTinh.Clear();
-            rb_DanhMuc.Checked = false;
-            rb_KichCo.Checked = false;
-            rb_ThuongHieu.Checked = false;
-            rb_DanhMuc.Checked = false;
-            dgv_ThuocTinh.Rows.Clear();
-            tb_TimKiem_ThuocTinh.Clear();
-            rb_MauSac.Checked = false;
+            RefreshThuocTinh();
         }
 
         private void btn_Sua_ThuocTinh_Click(object sender, EventArgs e)
@@ -349,7 +388,11 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    if (ValidateNotEmpty(tb_MaThuocTinh))
+                    {
+                        MessageBox.Show("Vui chọn thuộc tính để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                        if (ValidateNotEmpty(tb_TenThuocTinh))
                     {
 
                         string kq = thuonghieuServices.CNSua(idThuongHieu, ten);
@@ -358,6 +401,7 @@ namespace GUI
                         ShowThuongHieu(thuongHieus);
                         LoadThuongHieu();
                         LoadThuongHieuTimKiem();
+                        RefreshThuocTinh();
                         return;
                     }
                     else
@@ -374,7 +418,11 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    if (ValidateNotEmpty(tb_MaThuocTinh))
+                    {
+                        MessageBox.Show("Vui chọn thuộc tính để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    if (ValidateNotEmpty(tb_TenThuocTinh))
                     {
 
                         string kq = danhMucServices.CNSua(id, ten);
@@ -383,6 +431,7 @@ namespace GUI
                         ShowDanhMuc(danhMucs);
                         LoadDanhMuc();
                         LoadDanhMucTimKiem();
+                        RefreshThuocTinh();
                         return;
                     }
                     else
@@ -399,7 +448,11 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    if (ValidateNotEmpty(tb_MaThuocTinh))
+                    {
+                        MessageBox.Show("Vui chọn thuộc tính để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    if (ValidateNotEmpty(tb_TenThuocTinh))
                     {
 
                         string kq = mauSacServices.CNSua(id, ten);
@@ -408,6 +461,7 @@ namespace GUI
                         ShowMauSac(mauSacs);
                         LoadMauSacTimKiem();
                         LoadMauSac();
+                        RefreshThuocTinh();
                         return;
                     }
                     else
@@ -424,7 +478,11 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    if (ValidateNotEmpty(tb_TenThuocTinh, tb_MaThuocTinh))
+                    if (ValidateNotEmpty(tb_MaThuocTinh))
+                    {
+                        MessageBox.Show("Vui chọn thuộc tính để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    if (ValidateNotEmpty(tb_TenThuocTinh))
                     {
 
                         string kq = kichCoServices.CNSua(id, ten);
@@ -433,6 +491,7 @@ namespace GUI
                         ShowKichCo(kichCos);
                         LoadKichCoTimKiem();
                         LoadKichCo();
+                        RefreshThuocTinh();
                         return;
                     }
                     else
@@ -440,6 +499,11 @@ namespace GUI
                         MessageBox.Show("Vui lòng điền đầy đủ thông tin thuộc tính.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+            }
+            else
+            {
+
+                MessageBox.Show("Vui lòng chọn thuộc tính cần sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -449,6 +513,7 @@ namespace GUI
         {
             List<DanhMuc> danhMucs = danhMucServices.CNShow();
             ShowDanhMuc(danhMucs);
+            dgv_ThuocTinh.ClearSelection();
             return;
         }
 
@@ -456,6 +521,7 @@ namespace GUI
         {
             List<MauSac> mauSacs = mauSacServices.CNShow();
             ShowMauSac(mauSacs);
+            dgv_ThuocTinh.ClearSelection();
             return;
         }
 
@@ -463,6 +529,7 @@ namespace GUI
         {
             List<KichCo> kichCos = kichCoServices.CNShow();
             ShowKichCo(kichCos);
+            dgv_ThuocTinh.ClearSelection();
             return;
         }
 
@@ -472,24 +539,33 @@ namespace GUI
             {
                 List<ThuongHieu> thuongHieus = thuonghieuServices.CNTim(tb_TimKiem_ThuocTinh.Text);
                 ShowThuongHieu(thuongHieus);
+                dgv_ThuocTinh.ClearSelection();
 
             }
             else if (rb_DanhMuc.Checked)
             {
                 List<DanhMuc> danhMucs = danhMucServices.CNTim(tb_TimKiem_ThuocTinh.Text);
                 ShowDanhMuc(danhMucs);
+                dgv_ThuocTinh.ClearSelection();
 
             }
             else if (rb_MauSac.Checked)
             {
                 List<MauSac> mauSacs = mauSacServices.CNTim(tb_TimKiem_ThuocTinh.Text);
                 ShowMauSac(mauSacs);
+                dgv_ThuocTinh.ClearSelection();
 
             }
             else if (rb_KichCo.Checked)
             {
                 List<KichCo> kichCos = kichCoServices.CNTim(tb_TimKiem_ThuocTinh.Text);
                 ShowKichCo(kichCos);
+                dgv_ThuocTinh.ClearSelection();
+            }
+            else
+            {
+
+                MessageBox.Show("Vui lòng chọn thuộc tính cần tìm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -569,9 +645,9 @@ namespace GUI
                 int stt = 1;
                 dgv_DanhSachSP_SanPham.Columns[0].HeaderText = "Số thứ tự";
                 dgv_DanhSachSP_SanPham.Columns[1].HeaderText = "Mã sản phẩm";
-                dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Thương hiệu";
-                dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Danh mục";
-                dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
+                dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Thương hiệu";
+                dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Danh mục";
+                dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Tên sản phẩm";
                 dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
                 dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
                 dgv_DanhSachSP_SanPham.Columns[5].Visible = false;
@@ -600,7 +676,7 @@ namespace GUI
                ? thuonghieuDict[item.IdThuongHieu.Value]
                : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                     string trangThaiSanPham = item.TrangThaiSanPham ? "Đang kinh doanh" : "Ngưng kinh doanh";
-                    dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, thuonghieu, danhmuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
+                    dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, item.TenSanPham, thuonghieu, danhmuc, item.MoTa, trangThaiSanPham);
                 }
             }
             catch (Exception ex)
@@ -617,9 +693,9 @@ namespace GUI
             int stt = 1;
             dgv_DanhSachSP_SanPham.Columns[0].HeaderText = "Số thứ tự";
             dgv_DanhSachSP_SanPham.Columns[1].HeaderText = "Mã sản phẩm";
-            dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Thương hiệu";
-            dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Danh mục";
-            dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Tên sản phẩm";
+            dgv_DanhSachSP_SanPham.Columns[3].HeaderText = "Thương hiệu";
+            dgv_DanhSachSP_SanPham.Columns[4].HeaderText = "Danh mục";
+            dgv_DanhSachSP_SanPham.Columns[2].HeaderText = "Tên sản phẩm";
 
             dgv_DanhSachSP_SanPham.Columns[5].HeaderText = "Mô tả";
             dgv_DanhSachSP_SanPham.Columns[6].HeaderText = "Trạng thái sản phẩm";
@@ -650,7 +726,7 @@ namespace GUI
            ? thuonghieuDict[item.IdThuongHieu.Value]
            : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string trangThaiSanPham = item.TrangThaiSanPham ? "Đang kinh doanh" : "Ngưng kinh doanh";
-                dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, thuonghieu, danhmuc, item.TenSanPham, item.MoTa, trangThaiSanPham);
+                dgv_DanhSachSP_SanPham.Rows.Add(stt++, item.IdSanPham, item.TenSanPham, thuonghieu, danhmuc, item.MoTa, trangThaiSanPham);
             }
         }
         // Hàm để lấy Id thương hiệu từ tên thương hiệu
@@ -699,7 +775,7 @@ namespace GUI
                 // Điền dữ liệu vào các trường trên form
                 tb_MaSP_SP.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
                 // Lấy tên thương hiệu từ dòng được chọn
-                string tenThuongHieu = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+                string tenThuongHieu = rowData.Cells[3].Value?.ToString() ?? string.Empty;
 
                 // Lấy id thương hiệu từ tên thương hiệu
                 Guid? thuongHieuId = GetThuongHieuIdByName(tenThuongHieu);
@@ -716,7 +792,7 @@ namespace GUI
 
 
                 // Lấy tên danh mục từ dòng được chọn
-                string tenDanhMuc = rowData.Cells[3].Value?.ToString() ?? string.Empty;
+                string tenDanhMuc = rowData.Cells[4].Value?.ToString() ?? string.Empty;
 
                 // Lấy id danh mục từ tên danh mục
                 Guid? danhMucId = GetDanhMucIdByName(tenDanhMuc);
@@ -730,7 +806,7 @@ namespace GUI
                 {
                     cb_DanhMuc_SanPham.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
                 }
-                tb_TenSanPham_SanPham.Text = rowData.Cells[4].Value?.ToString() ?? string.Empty;
+                tb_TenSanPham_SanPham.Text = rowData.Cells[2].Value?.ToString() ?? string.Empty;
 
                 tb_MoTa_SanPham.Text = rowData.Cells[5].Value?.ToString() ?? string.Empty;
 
@@ -785,62 +861,125 @@ namespace GUI
 
         private void btn_Sua_SP_Click(object sender, EventArgs e)
         {
-            if (ValidateNotEmpty(tb_MaSP_SP, tb_TenSanPham_SanPham))
+            if (ValidateNotEmpty(tb_MaSP_SP))
             {
-
-                string masp = tb_MaSP_SP.Text;
-                string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
-                string idThuongHieu = cb_ThuongHieu_SanPham.SelectedValue.ToString();
-                string ten = tb_TenSanPham_SanPham.Text;
-
-                string moTa = tb_MoTa_SanPham.Text;
-                bool trangthaisp = (bool)cb_TrangThaiSP_SanPham.SelectedValue;
-                DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+                if (ValidateNotEmpty(tb_TenSanPham_SanPham) && cb_DanhMuc_SanPham.SelectedIndex != -1 && cb_ThuongHieu_SanPham.SelectedIndex != -1 && cb_TrangThaiSP_SanPham.SelectedIndex != -1)
                 {
-                    string kq = sanPhamServices.CNSua(masp, idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
-                    MessageBox.Show(kq);
-                    List<SanPham> sanPhams = sanPhamServices.CNShow();
-                    ShowSanPham(sanPhams);
-                    LoadSanPhamTimKiem();
-                    LoadSanPhamSPCT();
-                    BanHangControl banHangControl = new BanHangControl();
-                    banHangControl.ShowSanPham_BanHang();
-                    return;
 
+                    string masp = tb_MaSP_SP.Text;
+                    string idDanhMuc = cb_DanhMuc_SanPham.SelectedValue.ToString();
+                    string idThuongHieu = cb_ThuongHieu_SanPham.SelectedValue.ToString();
+                    string ten = tb_TenSanPham_SanPham.Text;
+
+                    string moTa = tb_MoTa_SanPham.Text;
+                    bool trangthaisp = (bool)cb_TrangThaiSP_SanPham.SelectedValue;
+                    DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        string kq = sanPhamServices.CNSua(masp, idDanhMuc, idThuongHieu, ten, moTa, trangthaisp);
+                        MessageBox.Show(kq);
+                        List<SanPham> sanPhams = sanPhamServices.CNShow();
+                        ShowSanPham(sanPhams);
+                        LoadSanPhamTimKiem();
+                        LoadSanPhamSPCT();
+                        BanHangControl banHangControl = new BanHangControl();
+                        banHangControl.ShowSanPham_BanHang();
+                        refreshSP();
+                        // Hiển thị sản phẩm và lưu lại chỉ số hàng đã sửa
+                        // Focus vào hàng đã sửa
+                        FocusOnEditedRow(masp);
+
+                        return;
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng điền đầy đủ thông tin sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Hãy chọn sản phẩm muốn sửa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void FocusOnEditedRow(string maSanPhamSua)
+        {
+            // Duyệt qua tất cả các hàng trong DataGridView để tìm hàng có mã sản phẩm đã sửa
+            foreach (DataGridViewRow row in dgv_DanhSachSP_SanPham.Rows)
+            {
+                if (row.Cells[1].Value.ToString() == maSanPhamSua)
+                {
+                    // Lấy chỉ số hàng đã tìm thấy
+                    int editedRowIndex = row.Index;
+
+                    // Đặt hàng đã tìm thấy là hàng được chọn
+                    dgv_DanhSachSP_SanPham.ClearSelection();
+                    dgv_DanhSachSP_SanPham.Rows[editedRowIndex].Selected = true;
+
+                    // Cuộn DataGridView để hàng đã tìm thấy hiện lên
+                    dgv_DanhSachSP_SanPham.FirstDisplayedScrollingRowIndex = editedRowIndex;
+
+                    // Đặt ô hiện tại để focus vào hàng đã tìm thấy
+                    dgv_DanhSachSP_SanPham.CurrentCell = dgv_DanhSachSP_SanPham.Rows[editedRowIndex].Cells[2];
+
+                    break;
+                }
+            }
+        }
+
+        private void FocusOnEditedRowByName(string ten)
+        {
+            // Duyệt qua tất cả các hàng trong DataGridView để tìm hàng có mã sản phẩm đã sửa
+            foreach (DataGridViewRow row in dgv_DanhSachSP_SanPham.Rows)
+            {
+                if (row.Cells[2].Value.ToString() == ten)
+                {
+                    // Lấy chỉ số hàng đã tìm thấy
+                    int editedRowIndex = row.Index;
+
+                    // Đặt hàng đã tìm thấy là hàng được chọn
+                    dgv_DanhSachSP_SanPham.ClearSelection();
+                    dgv_DanhSachSP_SanPham.Rows[editedRowIndex].Selected = true;
+
+                    // Cuộn DataGridView để hàng đã tìm thấy hiện lên
+                    dgv_DanhSachSP_SanPham.FirstDisplayedScrollingRowIndex = editedRowIndex;
+
+                    // Đặt ô hiện tại để focus vào hàng đã tìm thấy
+                    dgv_DanhSachSP_SanPham.CurrentCell = dgv_DanhSachSP_SanPham.Rows[editedRowIndex].Cells[2];
+
+                    break;
+                }
             }
         }
 
         private void btn_LamMoi_SanPham_Click(object sender, EventArgs e)
         {
-            tb_MaSP_SP.Clear();
-            tb_TenSanPham_SanPham.Clear();
-            tb_MoTa_SanPham.Clear();
-            tb_timKiem_SanPham.Clear();
             LoadSanPham();
+            refreshSP();
+
         }
 
         private void tb_timKiem_SanPham_TextChanged(object sender, EventArgs e)
         {
             List<SanPham> sanPhams = sanPhamServices.CNTim(tb_timKiem_SanPham.Text);
             ShowSanPham(sanPhams);
+            dgv_DanhSachSP_SanPham.ClearSelection();
         }
 
         private void cb_Loc_TH_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgv_DanhSachSP_SanPham.Rows.Clear();
-
+          
             // Kiểm tra nếu SelectedValue không null và có kiểu Guid
             if (cb_Loc_TH.SelectedValue != null && cb_Loc_TH.SelectedValue is Guid)
             {
                 Guid maThuongHieu = (Guid)cb_Loc_TH.SelectedValue;
                 List<SanPham> sanPhams = sanPhamServices.GetSPByThuongHieu(maThuongHieu);
                 ShowSanPham(sanPhams);
+                dgv_DanhSachSP_SanPham.ClearSelection();
+
             }
         }
 
@@ -849,26 +988,32 @@ namespace GUI
         private void cb_Loc_DanhMuc_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             dgv_DanhSachSP_SanPham.Rows.Clear();
-
+         
             // Kiểm tra nếu SelectedValue không null và có kiểu Guid
             if (cb_Loc_DanhMuc.SelectedValue != null && cb_Loc_DanhMuc.SelectedValue is Guid)
             {
+
                 Guid maDanhMuc = (Guid)cb_Loc_DanhMuc.SelectedValue;
                 List<SanPham> sanPhams = sanPhamServices.GetSPByDanhMuc(maDanhMuc);
                 ShowSanPham(sanPhams);
+                dgv_DanhSachSP_SanPham.ClearSelection();
+
             }
         }
 
         private void cb_Loc_TTSP_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgv_DanhSachSP_SanPham.Rows.Clear();
-
+         
             // Kiểm tra nếu SelectedValue không null
             if (cb_Loc_TTSP.SelectedValue != null && cb_Loc_TTSP.SelectedValue is bool)
             {
                 bool trangThai = (bool)cb_Loc_TTSP.SelectedValue;
                 List<SanPham> sanPhams = sanPhamServices.GetSPByTTSP(trangThai);
                 ShowSanPham(sanPhams);
+                dgv_DanhSachSP_SanPham.ClearSelection();
+
+
             }
         }
 
@@ -883,6 +1028,8 @@ namespace GUI
                 cb_MauSac_SPCT_Loc.DataSource = mauSacs;
                 cb_MauSac_SPCT_Loc.DisplayMember = "TenMauSac"; // Thuộc tính tên để hiển thị
                 cb_MauSac_SPCT_Loc.ValueMember = "IdMauSac"; // Thuộc tính giá trị
+
+
             }
             catch (Exception ex)
             {
@@ -1044,6 +1191,27 @@ namespace GUI
                 return null; // Trả về null nếu có lỗi
             }
         }
+        private Guid? GetSanPhamIdByName(string tenSanPham)
+        {
+            try
+            {
+                // Lấy danh sách sản phẩm từ dịch vụ
+                List<SanPham> sanPhamList = sanPhamServices.CNShow();
+
+                // Tìm sản phẩm dựa trên tên sản phẩm
+                var sanPham = sanPhamList.FirstOrDefault(sp => sp.TenSanPham.Equals(tenSanPham, StringComparison.OrdinalIgnoreCase));
+
+                // Trả về IdSanPham nếu tìm thấy, hoặc null nếu không tìm thấy
+                return sanPham?.IdSanPham;
+            }
+            catch (Exception ex)
+            {
+                // Hiển thị thông báo lỗi nếu có lỗi xảy ra
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+                return null; // Trả về null nếu có lỗi
+            }
+        }
+
         // Hàm để lấy Id kích cỡ từ tên kích cỡ
         private Guid? GetKichCoIdByName(string tenKichCo)
         {
@@ -1076,22 +1244,22 @@ namespace GUI
 
                 // Điền dữ liệu vào các trường trên form
                 tb_MaSPCT.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
-                string idSanPham = rowData.Cells[2].Value?.ToString() ?? string.Empty;
-                // Lấy danh sách thương hiệu từ dịch vụ
-                Dictionary<Guid, string> sanphamDict = sanPhamServices.GetSanPhamDict();
+                string tenSanPham = rowData.Cells[2].Value?.ToString() ?? string.Empty;
+             
+                // Lấy id màu sắc từ tên màu sắc
+                Guid? sanPhamId = GetSanPhamIdByName(tenSanPham);
 
-                // Thiết lập SelectedValue của ComboBox sanpham
-                if (!string.IsNullOrEmpty(idSanPham) && Guid.TryParse(idSanPham, out Guid sanphamGuid))
+
+                // Thiết lập SelectedValue của ComboBox màu sắc
+                if (sanPhamId.HasValue)
                 {
-                    if (sanphamDict.ContainsKey(sanphamGuid))
-                    {
-                        cb_SanPham_SanPhamChiTiet.SelectedItem = sanphamDict[sanphamGuid];
-                    }
-                    else
-                    {
-                        cb_SanPham_SanPhamChiTiet.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
-                    }
+                    cb_SanPham_SanPhamChiTiet.SelectedValue = sanPhamId.Value;
                 }
+                else
+                {
+                    cb_SanPham_SanPhamChiTiet.SelectedIndex = -1; // Nếu không tìm thấy, bỏ chọn
+                }
+
 
 
                 // Lấy tên màu sắc từ dòng được chọn
@@ -1137,13 +1305,13 @@ namespace GUI
         private void btn_Them_SanPhamChiTiet_Click(object sender, EventArgs e)
         {
 
-
-
-
             DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if (ValidateNotEmpty(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
+                if (ValidateNotEmpty(tb_SoLuong_SanPham, tb_Gia_SanPhamCT) &&
+                    cb_KichThuoc_SanPhamChiTiet.SelectedIndex != -1 &&
+                    cb_MauSac_SanPhamChiTiet.SelectedIndex != -1 &&
+                    cb_SanPham_SanPhamChiTiet.SelectedIndex != -1)
                 {
                     if (ValidateNumeric(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
                     {
@@ -1156,11 +1324,14 @@ namespace GUI
                                 string idKichCo = cb_KichThuoc_SanPhamChiTiet.SelectedValue.ToString();
                                 int soLuong = Convert.ToInt32(tb_SoLuong_SanPham.Text);
                                 decimal gia = Convert.ToDecimal(tb_Gia_SanPhamCT.Text);
+
                                 string kq = sanPhamChiTietServices.CNThem(idSanPham, idMauSac, idKichCo, soLuong, gia);
                                 MessageBox.Show(kq);
+
                                 List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
                                 ShowSanPhamCT(sanPhamChiTiets);
                                 BanHangControl.banHangControl.RefreshDataGridView();
+                                RefreshSPCT();
                                 return;
                             }
                             else
@@ -1172,7 +1343,6 @@ namespace GUI
                         {
                             MessageBox.Show("Số lượng sản phẩm phải là số nguyên.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-
                     }
                     else
                     {
@@ -1181,12 +1351,26 @@ namespace GUI
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin và chọn các mục cần thiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
 
         }
 
+        private void RefreshSPCT()
+        {
+            cb_SanPham_SanPhamChiTiet.SelectedIndex = -1;
+            tb_SoLuong_SanPham.Clear();
+            cb_SanPham_SPCT_Loc.SelectedIndex = -1;
+            cb_MauSac_SPCT_Loc.SelectedIndex = -1;
+            cb_KichThuoc_SanPhamChiTiet.SelectedIndex = -1;
+            cb_MauSac_SanPhamChiTiet.SelectedIndex = -1;
+            cb_KíchThuoc_SPCT_Loc.SelectedIndex = -1;
+            tb_MaSPCT.Clear();
+            tb_Gia_SanPhamCT.Clear();
+            LoadSanPhamCT();
+
+        }
 
 
 
@@ -1228,18 +1412,20 @@ namespace GUI
 
         private void btn_Sua_SanPhamChiTiet_Click(object sender, EventArgs e)
         {
-
-
             DialogResult result = MessageBox.Show("Bạn có muốn sửa không?", "Sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if (ValidateNotEmpty(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
+                if (string.IsNullOrEmpty(tb_MaSPCT.Text))
+                {
+                    MessageBox.Show("Hãy chọn sản phẩm muốn sửa", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    return;
+                } 
+                if (ValidateNotEmpty(tb_SoLuong_SanPham, tb_Gia_SanPhamCT) && cb_KichThuoc_SanPhamChiTiet.SelectedIndex != -1 && cb_MauSac_SanPhamChiTiet.SelectedIndex != -1 && cb_SanPham_SanPhamChiTiet.SelectedIndex != -1)
                 {
                     if (ValidateNumeric(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
                     {
                         if (ValidateNumericInt(tb_SoLuong_SanPham))
                         {
-
                             if (ValidatePositiveInteger(tb_SoLuong_SanPham, tb_Gia_SanPhamCT))
                             {
                                 string maspct = tb_MaSPCT.Text.ToString();
@@ -1252,6 +1438,9 @@ namespace GUI
                                 MessageBox.Show(kq);
                                 List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShow();
                                 ShowSanPhamCT(sanPhamChiTiets);
+                                RefreshSPCT();
+                                // Focus vào hàng đã sửa
+                                FocusOnEditedRowSPCT(maspct);
                                 return;
                             }
                             else
@@ -1275,56 +1464,84 @@ namespace GUI
                     MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
+            }       
+        }
+        private void FocusOnEditedRowSPCT(string maSanPhamSua)
+        {
+            // Duyệt qua tất cả các hàng trong DataGridView để tìm hàng có mã sản phẩm đã sửa
+            foreach (DataGridViewRow row in dgv_SanPhamChiTiet.Rows)
+            {
+                if (row.Cells[1].Value.ToString() == maSanPhamSua)
+                {
+                    // Lấy chỉ số hàng đã tìm thấy
+                    int editedRowIndex = row.Index;
+
+                    // Đặt hàng đã tìm thấy là hàng được chọn
+                    dgv_SanPhamChiTiet.ClearSelection();
+                    dgv_SanPhamChiTiet.Rows[editedRowIndex].Selected = true;
+
+                    // Cuộn DataGridView để hàng đã tìm thấy hiện lên
+                    dgv_SanPhamChiTiet.FirstDisplayedScrollingRowIndex = editedRowIndex;
+
+                    // Đặt ô hiện tại để focus vào hàng đã tìm thấy
+                    dgv_SanPhamChiTiet.CurrentCell = dgv_SanPhamChiTiet.Rows[editedRowIndex].Cells[2];
+
+                    break;
+                }
             }
         }
 
 
-
         private void btn_LamMoi_SanPhamChiTiet_Click(object sender, EventArgs e)
         {
-            tb_MaSPCT.Clear();
-            tb_SoLuong_SanPham.Clear();
-            tb_Gia_SanPhamCT.Clear();
+            RefreshSPCT();
             LoadSanPhamCT();
             return;
+
         }
 
         private void cb_KíchThuoc_SPCT_Loc_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             dgv_SanPhamChiTiet.Rows.Clear();
-
             // Kiểm tra nếu SelectedValue không null và có kiểu Guid
             if (cb_KíchThuoc_SPCT_Loc.SelectedValue != null && cb_KíchThuoc_SPCT_Loc.SelectedValue is Guid)
             {
                 Guid maKichThuoc = (Guid)cb_KíchThuoc_SPCT_Loc.SelectedValue;
                 List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.GetSPCTByKichCo(maKichThuoc);
                 ShowSanPhamCT(sanPhamChiTiets);
+                dgv_SanPhamChiTiet.ClearSelection();
+    
             }
         }
 
         private void cb_MauSac_SPCT_Loc_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             dgv_SanPhamChiTiet.Rows.Clear();
-
             // Kiểm tra nếu SelectedValue không null và có kiểu Guid
             if (cb_MauSac_SPCT_Loc.SelectedValue != null && cb_MauSac_SPCT_Loc.SelectedValue is Guid)
             {
                 Guid maMauSac = (Guid)cb_MauSac_SPCT_Loc.SelectedValue;
                 List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.GetSPCTByMauSac(maMauSac);
                 ShowSanPhamCT(sanPhamChiTiets);
+                dgv_SanPhamChiTiet.ClearSelection();
+               
             }
         }
 
         private void cb_SanPham_SPCT_Loc_SelectedIndexChanged(object sender, EventArgs e)
         {
+          
             dgv_SanPhamChiTiet.Rows.Clear();
-
             // Kiểm tra nếu SelectedValue không null và có kiểu Guid
             if (cb_SanPham_SPCT_Loc.SelectedValue != null && cb_SanPham_SPCT_Loc.SelectedValue is Guid)
             {
                 Guid maSP = (Guid)cb_SanPham_SPCT_Loc.SelectedValue;
                 List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.GetSPCTBySanPham(maSP);
                 ShowSanPhamCT(sanPhamChiTiets);
+                dgv_SanPhamChiTiet.ClearSelection();
+               
             }
         }
 
@@ -1413,7 +1630,7 @@ namespace GUI
             // Kiểm tra nội dung không rỗng
             if (string.IsNullOrWhiteSpace(sanphamCode))
             {
-                MessageBox.Show("Vui lòng nhập mã sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn sản phẩm muốn tạo mã QR.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             // Hiển thị hộp thoại chọn thư mục
@@ -1440,6 +1657,7 @@ namespace GUI
                                 qrCodeImage.Save(qrCodeFilePath, System.Drawing.Imaging.ImageFormat.Png);
 
                                 MessageBox.Show($"QR code đã được lưu tại: {qrCodeFilePath}");
+                                RefreshSPCT();
                             }
                         }
                     }
@@ -1447,9 +1665,31 @@ namespace GUI
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
+
+        private void SanPhamControl_Load(object sender, EventArgs e)
+        {
+            refreshSP();
+            RefreshSPCT();
+        }
+
+        private void btn_SPCT_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+            //Lấy mã sản phẩm từ TextBox
+            string maSP = tb_MaSP_SP.Text;
+
+            //Tìm và chọn mục trong ComboBox dựa trên mã sản phẩm
+            for (int i = 0; i < cb_SanPham_SanPhamChiTiet.Items.Count; i++)
+            {
+               // Lấy đối tượng sản phẩm tại vị trí i
+               SanPham sanPham = cb_SanPham_SanPhamChiTiet.Items[i] as SanPham;
+                if (sanPham != null && sanPham.IdSanPham.ToString() == (maSP))
+                {
+                    cb_SanPham_SanPhamChiTiet.SelectedIndex = i;
+                    break;
+                }
+            }
         }
     }
 }
