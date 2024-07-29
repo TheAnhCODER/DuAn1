@@ -44,6 +44,24 @@ namespace BUS.Services
                 return "Thêm thất bại";
             }
         }
+
+        public string CNThemKhachVangLai(string soDienThoai, string tenKhachHang)
+        {
+            Khach khach = new Khach()
+            {
+                SoDienThoai = soDienThoai,
+                TenKhachHang = tenKhachHang,
+               
+            };
+            if (_repo.AddK(khach))
+            {
+                return "Thêm thành công";
+            }
+            else
+            {
+                return "Thêm thất bại";
+            }
+        }
         // Sửa khách hàng 
         public string CNSua(string soDienThoai, string tenKhachHang, string? diaChi)
         {

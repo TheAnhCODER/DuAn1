@@ -407,7 +407,10 @@ namespace GUI
                 var khachHang = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text);
                 if (khachHang == null)
                 {
-                    MessageBox.Show("SĐT khách hàng không hợp lệ!");
+                    // Nếu khách hàng không tồn tại, thêm khách hàng mới vào cơ sở dữ liệu
+          
+                    khachHangServices.CNThemKhachVangLai(tb_SoDienThoai_BanHang.Text, "Khách vãng lai");
+                    MessageBox.Show("Khách hàng mới đã được thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -656,10 +659,14 @@ namespace GUI
                         tienQR = Convert.ToInt32(tongSoTien);
                         FormBank formBank = new FormBank();
                         formBank.ShowDialog();
-                        string sodienthoaikhachhang = tb_SoDienThoai_BanHang.Text;
-                        hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 2, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang);
-                        MessageBox.Show("Đã thanh toán hóa đơn!");
-                        RefreshToanBoForm();
+                        if (formBank.tinhtrangtrangtoan)
+                        {
+                            string sodienthoaikhachhang = tb_SoDienThoai_BanHang.Text;
+                            hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 2, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang);
+                            MessageBox.Show("Đã thanh toán hóa đơn!");
+                            RefreshToanBoForm();
+                        }
+            
                     }
                     else
                     {

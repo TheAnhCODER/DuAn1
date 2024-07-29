@@ -63,6 +63,20 @@ namespace GUI
                 return Image.FromStream(ms);
             }
         }
+
+        public bool tinhtrangtrangtoan = false;
+
+        private void btn_xacNhanThanhToan_Click(object sender, EventArgs e)
+        {
+            tinhtrangtrangtoan = true;
+            this.Close();
+        }
+
+        private void btn_ThanhToanThaiBai_Click(object sender, EventArgs e)
+        {
+            tinhtrangtrangtoan = false;
+            this.Close();
+        }
     }
     public class ApiRequest
     {
