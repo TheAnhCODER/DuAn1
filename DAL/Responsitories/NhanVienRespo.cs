@@ -20,9 +20,12 @@ namespace DAL.Responsitories
 
         public NhanVien? DangNhap(string username, string password)
         {
-            return dbContext.NhanViens.FirstOrDefault(nv => (nv.DienThoai == username
-            && nv.MatKhau == password) || (nv.Email == username
-            && nv.MatKhau == password));
+            var result = dbContext.NhanViens
+                .FromSqlRaw("EXEC sp_CheckLogin @Email = {0}, @MatKhau = {1}", username, password)
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            return result;
         }
         // Lấy tất cả nhân viên
         public List<NhanVien> GetAll()

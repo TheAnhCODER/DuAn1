@@ -55,11 +55,18 @@ namespace GUI
             var password = tbt_MatKhau.Text;
 
             var nhanVien = nhanVienBUS.DangNhap(username, password);
-            this.Hide();
-            
-            TrangChu trangChu = new TrangChu(nhanVien);
-            TrangChu.nhanVien1 = nhanVien;
-            trangChu.Show();
+
+            if (nhanVien != null)
+            {
+                this.Hide();
+                TrangChu trangChu = new TrangChu(nhanVien);
+                TrangChu.nhanVien1 = nhanVien;
+                trangChu.Show();
+            }
+            else
+            {
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         
