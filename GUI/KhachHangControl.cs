@@ -97,6 +97,7 @@ namespace GUI
                         MessageBox.Show(kq);
                         List<Khach> khachHang = khachhangServices.CNShow();
                         ShowKhachHang(khachHang);
+                        lammoi();
                         return;
                     }
                     else
@@ -200,6 +201,7 @@ namespace GUI
                             MessageBox.Show(kq);
                             List<Khach> khachHang = khachhangServices.CNShow();
                             ShowKhachHang(khachHang);
+                            lammoi();
                             return;
                         }
                         else
@@ -245,16 +247,19 @@ namespace GUI
         }
         private void btn_lammoi_KhachHang_Click(object sender, EventArgs e)
         {
+            lammoi();
+        }
+        private void lammoi()
+        {
             // Xóa các trường nhập liệu
             tb_sdt_KhachHang.Clear();
             tb_tenkhachhang_KhachHang.Clear();
             tb_diachi_KhachHang.Clear();
             LoadKhachHang();
-
+            dgv_danhsach_KhachHang.ClearSelection();
             // Xóa trường tìm kiếm 
             tb_timkiem_KhachHang.Clear();
         }
-
         private void tb_timkiem_KhachHang_TextChanged(object sender, EventArgs e)
         {
             List<Khach> khaches = khachhangServices.CNTim(tb_timkiem_KhachHang.Text);
@@ -307,6 +312,25 @@ namespace GUI
                 }
             }
             return true; // Trả về true nếu tất cả các TextBox đều chứa giá trị số
+        }
+
+        private void KhachHangControl_Load(object sender, EventArgs e)
+        {
+            dgv_danhsach_KhachHang.ClearSelection();
+        }
+
+        private void dgv_danhsach_KhachHang_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_danhsach_KhachHang.Rows.Count)
+            {
+
+                // Lấy dữ liệu từ dòng được chọn để điền vào form
+                int row = e.RowIndex;
+                var rowData = dgv_danhsach_KhachHang.Rows[row]; // Lấy dữ liệu từ dòng đó ra
+
+                LichSuMuaHang ctKH = new LichSuMuaHang(rowData.Cells[1].Value?.ToString());
+                ctKH.ShowDialog();
+            }
         }
     }
 }

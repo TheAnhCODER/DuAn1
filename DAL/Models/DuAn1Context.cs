@@ -35,7 +35,7 @@ namespace DAL.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-BQH9I25;Database=DuAn1;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=VUANHDUC\\SQLEXPRESS;Database=DuAn1;Trusted_Connection=True;");
             }
         }
 
@@ -44,7 +44,7 @@ namespace DAL.Models
             modelBuilder.Entity<ChucVu>(entity =>
             {
                 entity.HasKey(e => e.IdChucvu)
-                    .HasName("PK__ChucVu__B4FC39BF7F4F6323");
+                    .HasName("PK__ChucVu__B4FC39BFE4A783C8");
 
                 entity.ToTable("ChucVu");
 
@@ -58,7 +58,7 @@ namespace DAL.Models
             modelBuilder.Entity<DanhMuc>(entity =>
             {
                 entity.HasKey(e => e.IdDanhMuc)
-                    .HasName("PK__DanhMuc__8CE82CD11820CEC3");
+                    .HasName("PK__DanhMuc__8CE82CD1C2195CB8");
 
                 entity.ToTable("DanhMuc");
 
@@ -74,7 +74,7 @@ namespace DAL.Models
             modelBuilder.Entity<HoaDon>(entity =>
             {
                 entity.HasKey(e => e.IdHoadon)
-                    .HasName("PK__HoaDon__F9F5133160DF8AC8");
+                    .HasName("PK__HoaDon__F9F513316E5E1B04");
 
                 entity.ToTable("HoaDon");
 
@@ -122,7 +122,7 @@ namespace DAL.Models
             modelBuilder.Entity<HoaDonChiTiet>(entity =>
             {
                 entity.HasKey(e => new { e.MaSpct, e.MaHoaDon })
-                    .HasName("PK__HoaDonCh__36E3C8548FAEE5FE");
+                    .HasName("PK__HoaDonCh__36E3C854A8804F1E");
 
                 entity.ToTable("HoaDonChiTiet");
 
@@ -146,7 +146,7 @@ namespace DAL.Models
             modelBuilder.Entity<Khach>(entity =>
             {
                 entity.HasKey(e => e.SoDienThoai)
-                    .HasName("PK__Khach__F0FE0FA467C99C92");
+                    .HasName("PK__Khach__F0FE0FA49E45481E");
 
                 entity.ToTable("Khach");
 
@@ -166,7 +166,7 @@ namespace DAL.Models
             modelBuilder.Entity<KhuyenMai>(entity =>
             {
                 entity.HasKey(e => e.IdKhuyenMai)
-                    .HasName("PK__KhuyenMa__E5173E98979C115D");
+                    .HasName("PK__KhuyenMa__E5173E98C5850681");
 
                 entity.ToTable("KhuyenMai");
 
@@ -203,7 +203,7 @@ namespace DAL.Models
             modelBuilder.Entity<KichCo>(entity =>
             {
                 entity.HasKey(e => e.IdKichCo)
-                    .HasName("PK__KichCo__EBB498AFD3000605");
+                    .HasName("PK__KichCo__EBB498AF1B9378E2");
 
                 entity.ToTable("KichCo");
 
@@ -219,7 +219,7 @@ namespace DAL.Models
             modelBuilder.Entity<MauSac>(entity =>
             {
                 entity.HasKey(e => e.IdMauSac)
-                    .HasName("PK__MauSac__5D8EF426F0FC66FC");
+                    .HasName("PK__MauSac__5D8EF42674507F11");
 
                 entity.ToTable("MauSac");
 
@@ -235,7 +235,7 @@ namespace DAL.Models
             modelBuilder.Entity<NhanVien>(entity =>
             {
                 entity.HasKey(e => e.IdNhanvien)
-                    .HasName("PK__NhanVien__38E5C9057FEADAF4");
+                    .HasName("PK__NhanVien__38E5C905EDAF9DAB");
 
                 entity.ToTable("NhanVien");
 
@@ -285,7 +285,7 @@ namespace DAL.Models
             modelBuilder.Entity<PhuongThucThanhToan>(entity =>
             {
                 entity.HasKey(e => e.IdPhuongthucthanhtoan)
-                    .HasName("PK__PhuongTh__99624A7BA7CCF1AA");
+                    .HasName("PK__PhuongTh__99624A7B5A84D589");
 
                 entity.ToTable("PhuongThucThanhToan");
 
@@ -299,7 +299,7 @@ namespace DAL.Models
             modelBuilder.Entity<SanPham>(entity =>
             {
                 entity.HasKey(e => e.IdSanPham)
-                    .HasName("PK__SanPham__5776A52947AC7015");
+                    .HasName("PK__SanPham__5776A529BC5581EA");
 
                 entity.ToTable("SanPham");
 
@@ -333,7 +333,7 @@ namespace DAL.Models
             modelBuilder.Entity<SanPhamChiTiet>(entity =>
             {
                 entity.HasKey(e => e.IdSanphamChitiet)
-                    .HasName("PK__SanPham___A718EABEF34173E7");
+                    .HasName("PK__SanPham___A718EABED530993F");
 
                 entity.ToTable("SanPham_ChiTiet");
 
@@ -374,7 +374,7 @@ namespace DAL.Models
             modelBuilder.Entity<ThuongHieu>(entity =>
             {
                 entity.HasKey(e => e.IdThuongHieu)
-                    .HasName("PK__ThuongHi__37E13EF39571AC05");
+                    .HasName("PK__ThuongHi__37E13EF31193EDE2");
 
                 entity.ToTable("ThuongHieu");
 

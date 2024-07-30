@@ -89,6 +89,11 @@ namespace BUS.Services
                 return "Sửa thất bại";
             }
         }
+        public Dictionary<Guid, string> GetNhanVienDict()
+        {
+            var nhanViens = nhanVienRespo.GetAll();
+            return nhanViens.ToDictionary(ms => ms.IdNhanvien, ms => ms.TenNhanVien);
+        }
 
     }
 }

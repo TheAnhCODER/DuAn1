@@ -40,7 +40,29 @@ namespace DAL.Responsitories
             _dbContext.SaveChanges();
         }
 
+        public List<HoaDon> GetHoaDonByTrangThaiThanhToan(int trangThaiThanhToan)
+        {
+            return _dbContext.HoaDons.Where(hd => hd.TrangThaiThanhToan == trangThaiThanhToan).ToList();
+        }
 
+        public List<HoaDon> GetHoaDonByDate(DateTime date)
+        {
+            // Xác định bắt đầu và kết thúc của ngày
+            DateTime startOfDay = date.Date;
+            DateTime endOfDay = startOfDay.AddDays(1).AddTicks(-1);
+
+            // Truy vấn dữ liệu từ cơ sở dữ liệu
+            return _dbContext.HoaDons
+                .Where(hd => hd.NgayTao >= startOfDay && hd.NgayTao <= endOfDay)
+                .ToList();
+        }
+
+        public List<HoaDon> GetHoaDonByPhoneNumber(string phoneNumber)
+        {
+            return _dbContext.HoaDons
+                .Where(hd => hd.SoDienThoai.Contains(phoneNumber)) // Giả sử 'Sdt' là trường số điện thoại
+                .ToList();
+        }
 
     }
 }
