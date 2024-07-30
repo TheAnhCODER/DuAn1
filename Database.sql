@@ -120,16 +120,17 @@ GO
 
 
 
-	CREATE PROCEDURE sp_CheckLogin
-		@Email NVARCHAR(255),
-		@MatKhau NVARCHAR(255)
-
-	AS
-	BEGIN
-	   SELECT Id_nhanvien, Id_chucvu, Ten_nhan_vien
-		FROM NhanVien
-		WHERE Email = @Email AND Mat_khau = @MatKhau or Dien_thoai = @Email and Mat_khau = @MatKhau;
-	END
+CREATE PROCEDURE sp_CheckLogin
+    @Email NVARCHAR(255),
+    @MatKhau NVARCHAR(255)
+AS
+BEGIN
+    SELECT ID_nhanvien, id_chucvu, Ten_nhan_vien, Gioi_tinh, Ngay_sinh, Dia_chi, Dien_thoai, Email, Mat_khau, Trang_thai
+    FROM NhanVien
+    WHERE (Email = @Email OR Dien_thoai = @Email) 
+      AND Mat_khau = @MatKhau 
+      AND Trang_thai = 1;
+END
 
 --drop PROC sp_CheckLogin
 

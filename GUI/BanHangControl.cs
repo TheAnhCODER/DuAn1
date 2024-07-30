@@ -404,6 +404,11 @@ namespace GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
+                if (string.IsNullOrEmpty(tb_MaHoaDon_BanHang.Text))
+                {
+                    MessageBox.Show("Vui lòng chọn hóa đơn chờ muốn thêm khách hàng", "Thông báo");
+                    return;
+                }
                 var khachHang = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text);
                 if (khachHang == null)
                 {
@@ -411,10 +416,24 @@ namespace GUI
           
                     khachHangServices.CNThemKhachVangLai(tb_SoDienThoai_BanHang.Text, "Khách vãng lai");
                     MessageBox.Show("Khách hàng mới đã được thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadHoaDonCho();
                 }
                 else
                 {
                     tb_TenKhachHang_BanHang.Text = khachHang.TenKhachHang;
+                    string sdt = tb_SoDienThoai_BanHang.Text;
+                    string mahd = tb_MaHoaDon_BanHang.Text;
+                    if(string.IsNullOrEmpty(mahd))
+                    {
+                        MessageBox.Show("Vui lòng chọn hóa đơn chờ muốn thêm khách hàng", "Thông báo");
+                        return;
+                    }
+                    else
+                    {
+
+                    hoaDonServices.updateSDTKhachHang(mahd,sdt);
+                    LoadHoaDonCho();
+                    }
                 }
             }
         }
@@ -473,6 +492,8 @@ namespace GUI
                 // Kiểm tra xem người dùng có nhấp vào hàng dữ liệu hay không (không phải tiêu đề cột)
                 if (e.RowIndex >= 0)
                 {
+                    tb_TienKhachTra_BanHang.ReadOnly = false;
+                    tb_SoDienThoai_BanHang.ReadOnly = false;
                     var rowData = dgv_HoaDonCho_BanHang.Rows[row]; // Lấy dữ liệu từ dòng đó ra
                                                                    // Bạn có thể lấy thêm thông tin cần thiết từ hàng được chọn tại đây
                     tb_HoaDonCho.Text = rowData.Cells[0].Value.ToString() ?? string.Empty;
@@ -580,10 +601,14 @@ namespace GUI
             dgv_TatCaSanPham.ClearSelection();
             dgv_HoaDonCho_BanHang.ClearSelection();
             dgv_HoaDonChiTiet_BanHang.ClearSelection();
+            tb_SoDienThoai_BanHang.ReadOnly = true;
+            tb_TienKhachTra_BanHang.ReadOnly = true;
         }
 
         private void BanHangControl_Load(object sender, EventArgs e)
         {
+            tb_SoDienThoai_BanHang.ReadOnly = true;
+            tb_TienKhachTra_BanHang.ReadOnly = true;
             LoadHoaDonCho();
             ShowSanPham_BanHang();
             tb_MaHoaDon_BanHang.Visible = false;
@@ -624,7 +649,7 @@ namespace GUI
                 {
                     if (string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
                     {
-                        MessageBox.Show("Vui lòng chọn khách hàng?", "Xác nhận thêm khách hàng", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        MessageBox.Show("Vui lòng chọn khách hàng?", "Xác nhận thêm khách hàng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     var khachHang = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text);

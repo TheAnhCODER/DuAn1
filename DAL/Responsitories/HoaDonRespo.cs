@@ -39,6 +39,15 @@ namespace DAL.Responsitories
             }
             _dbContext.SaveChanges();
         }
+        public void SuaSDT(Guid maHD ,string sdt)
+        {
+            var hoaDonSua = _dbContext.HoaDons.Find(maHD);
+            if (hoaDonSua != null)
+            {
+                hoaDonSua.SoDienThoai = sdt;
+            }
+            _dbContext.SaveChanges();
+        }
 
         public List<HoaDon> GetHoaDonByTrangThaiThanhToan(int trangThaiThanhToan)
         {

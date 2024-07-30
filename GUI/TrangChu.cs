@@ -49,12 +49,12 @@ namespace GUI
                 case 2: // Nhân viên bán hàng
                         // Ẩn một số chức năng không cần thiết
                     btn_BanHang.Enabled = true;
-                    btn_HoaDon.Enabled = true;
+                    btn_HoaDon.Enabled = false;
                     btn_KhachHang.Enabled = true;
                     btn_KhuyenMai.Enabled = false;
                     btn_SanPham.Enabled = true;
                     btn_TaiKhoan.Enabled = true;
-                    btn_ThongKe.Enabled = true;
+                    btn_ThongKe.Enabled = false;
                     btn_NhanVien.Enabled = false;
                     break;
             }

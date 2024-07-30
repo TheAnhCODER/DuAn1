@@ -35,7 +35,11 @@ namespace BUS.Services
         {
             hoaDonRespo.TaoHoaDonCho(hoaDon);
         }
-
+        public void updateSDTKhachHang(string mahoadon,string sdt)
+        {
+            var mahd = Guid.Parse(mahoadon);
+            hoaDonRespo.SuaSDT(mahd,sdt);
+        }
 
         public void SuaTrangThai(string maHoaDon, int trangThai, int phuongthuocthanhtoan, decimal tongtien, string sodienthoaikhachhang)
         {
