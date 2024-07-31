@@ -224,6 +224,7 @@
             llb_QuenMK.TabStop = true;
             llb_QuenMK.Text = "Quên mật khẩu?";
             llb_QuenMK.VisitedLinkColor = Color.FromArgb(29, 135, 209);
+            llb_QuenMK.LinkClicked += llb_QuenMK_LinkClicked;
             llb_QuenMK.MouseEnter += linkLabel1_MouseEnter;
             llb_QuenMK.MouseLeave += llb_QuenMK_MouseLeave;
             // 

@@ -35,6 +35,11 @@ namespace BUS.Services
         {
             return nhanVienRespo.GetNhanVienByPhoneNumber(phoneNumber);
         }
+
+        public bool GetNhanVienByEmail(string email)
+        {
+            return nhanVienRespo.GetNhanVienByEmail(email);
+        }
         // Thêm nhân viên mới
         public string CNThem(string tenNhanVien, string? gioiTinh, DateTime? ngaySinh, string? diaChi, string? dienThoai, string? email, string? matKhau, bool trangThai)
         {
@@ -89,6 +94,21 @@ namespace BUS.Services
                 return "Sửa thất bại";
             }
         }
+
+
+        public bool UpdateMatKhau( string? email, string? matKhau)
+        {
+            // Gọi phương thức cập nhật từ repository
+            if (nhanVienRespo.UpdateMatKhau(email, matKhau))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public Dictionary<Guid, string> GetNhanVienDict()
         {
             var nhanViens = nhanVienRespo.GetAll();

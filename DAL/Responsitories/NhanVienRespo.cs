@@ -43,6 +43,12 @@ namespace DAL.Responsitories
         {
             return dbContext.NhanViens.FirstOrDefault(p => p.DienThoai == phoneNumber);
         }
+
+        public bool GetNhanVienByEmail(string email)
+        {
+            return dbContext.NhanViens.Any(p => p.Email == email);
+        }
+
         // Thêm kích nhân viên mới
         public bool AddNV(NhanVien nhanVien)
         {
@@ -88,6 +94,30 @@ namespace DAL.Responsitories
                 return false;
             }
         }
+
+
+        public bool UpdateMatKhau(string email, string matkhaumoi)
+        {
+            try
+            {
+                // Lấy đối tượng cần được sửa
+                var updateItem = dbContext.NhanViens.FirstOrDefault(nv => nv.Email == email);
+                if (updateItem != null)
+                {
+                    // Gán giá trị mới
+                    updateItem.MatKhau = matkhaumoi; 
+                    dbContext.NhanViens.Update(updateItem);
+                    dbContext.SaveChanges(); // Lưu lại thay đổi
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }
 //Data Source=DESKTOP-BQH9I25;Initial Catalog=DuAn1;Integrated Security=True

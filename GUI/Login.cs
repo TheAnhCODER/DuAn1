@@ -69,7 +69,7 @@ namespace GUI
             }
         }
 
-        
+
 
 
         private void btn_DangNhap_MouseLeave(object sender, EventArgs e)
@@ -100,5 +100,10 @@ namespace GUI
             btn_Thoat.FlatAppearance.BorderColor = Color.FromArgb(29, 135, 209);
         }
 
+        private void llb_QuenMK_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            QuenMatKhau quenMatKhau = new QuenMatKhau();
+            quenMatKhau.ShowDialog();
+        }
     }
 }
