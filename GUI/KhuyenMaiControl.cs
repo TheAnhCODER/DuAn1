@@ -17,7 +17,8 @@ namespace GUI
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+     
+        private void pictureBox2_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thoát?", "Xác nhận đóng", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -26,5 +27,7 @@ namespace GUI
                 Application.Exit();
             }
         }
+
+
     }
 }

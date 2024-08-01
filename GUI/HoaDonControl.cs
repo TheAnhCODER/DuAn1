@@ -277,8 +277,16 @@ namespace GUI
 
         private void cb_trangthai_HoaDon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dgv_hoadon_HoaDon.Rows.Clear();
 
+            txt_timkiem_HoaDon.Clear();
+            dateTime_ngaytaohoadon_HoaDon.CustomFormat = " ";
+            dateTime_ngaytaohoadon_HoaDon.Format = DateTimePickerFormat.Custom;
+            dtp_NgayKetThuc.CustomFormat = " ";
+            dtp_NgayKetThuc.Format = DateTimePickerFormat.Custom;
+            dtp_NgayBatDau.CustomFormat = " ";
+            dtp_NgayBatDau.Format = DateTimePickerFormat.Custom;
+            dgv_hoadon_HoaDon.Rows.Clear();
+            dgv_hoadonchitiet_HoaDon.Rows.Clear();
             // Kiểm tra nếu SelectedValue không null và là kiểu int
             if (cb_trangthai_HoaDon.SelectedValue != null && cb_trangthai_HoaDon.SelectedValue is int trangThai)
             {
@@ -342,12 +350,27 @@ namespace GUI
 
         private void dateTime_ngaytaohoadon_HoaDon_ValueChanged(object sender, EventArgs e)
         {
+            refreshForm();
+            dateTime_ngaytaohoadon_HoaDon.CustomFormat = "dd/MM/yyyy"; // Định dạng ngày
+            dateTime_ngaytaohoadon_HoaDon.Format = DateTimePickerFormat.Custom;
+            // Giới hạn ngày lớn nhất là ngày hiện tại
+            dateTime_ngaytaohoadon_HoaDon.MaxDate = DateTime.Now;
+
             SearchHoaDon();
         }
 
         private void txt_timkiem_HoaDon_TextChanged(object sender, EventArgs e)
         {
+            cb_trangthai_HoaDon.SelectedIndex = -1;
+
+            dateTime_ngaytaohoadon_HoaDon.CustomFormat = " ";
+            dateTime_ngaytaohoadon_HoaDon.Format = DateTimePickerFormat.Custom;
+            dtp_NgayKetThuc.CustomFormat = " ";
+            dtp_NgayKetThuc.Format = DateTimePickerFormat.Custom;
+            dtp_NgayBatDau.CustomFormat = " ";
+            dtp_NgayBatDau.Format = DateTimePickerFormat.Custom;
             SearchHoaDonByPhoneNumber();
+
         }
         // Phương thức kiểm tra ngày hợp lệ
         private bool IsValidDay(string input)
@@ -436,24 +459,73 @@ namespace GUI
             ShowHoaDon(hoaDons);
         }
 
-        private void txt_timkiemtheongay_HoaDon_TextChanged(object sender, EventArgs e)
-        {
-            SearchHoaDonByDay(txt_timkiemtheongay_HoaDon.Text.Trim());
-        }
 
-        private void txt_timkiemtheothang_HoaDon_TextChanged(object sender, EventArgs e)
-        {
-            SearchHoaDonByMonth(txt_timkiemtheothang_HoaDon.Text.Trim());
-        }
-
-        private void txt_timkiemtheonam_HoaDon_TextChanged(object sender, EventArgs e)
-        {
-            SearchHoaDonByYear(txt_timkiemtheonam_HoaDon.Text.Trim());
-        }
 
         private void HoaDonControl_Load(object sender, EventArgs e)
         {
             LoadHoaDonAll();
+
+            dateTime_ngaytaohoadon_HoaDon.CustomFormat = " ";
+            dateTime_ngaytaohoadon_HoaDon.Format = DateTimePickerFormat.Custom;
+            dtp_NgayKetThuc.CustomFormat = " ";
+            dtp_NgayKetThuc.Format = DateTimePickerFormat.Custom;
+            dtp_NgayBatDau.CustomFormat = " ";
+            dtp_NgayBatDau.Format = DateTimePickerFormat.Custom;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            refreshForm();
+        }
+
+        private void refreshForm()
+        {
+            cb_trangthai_HoaDon.SelectedIndex = -1;
+            txt_timkiem_HoaDon.Clear();
+            dateTime_ngaytaohoadon_HoaDon.CustomFormat = " ";
+            dateTime_ngaytaohoadon_HoaDon.Format = DateTimePickerFormat.Custom;
+            dtp_NgayKetThuc.CustomFormat = " ";
+            dtp_NgayKetThuc.Format = DateTimePickerFormat.Custom;
+            dtp_NgayBatDau.CustomFormat = " ";
+            dtp_NgayBatDau.Format = DateTimePickerFormat.Custom;
+            dgv_hoadonchitiet_HoaDon.Rows.Clear();
+      
+        }
+
+        private void btn_TimKiem_Click(object sender, EventArgs e)
+        {
+            cb_trangthai_HoaDon.SelectedIndex = -1;
+            txt_timkiem_HoaDon.Clear();
+            dateTime_ngaytaohoadon_HoaDon.CustomFormat = " ";
+            dateTime_ngaytaohoadon_HoaDon.Format = DateTimePickerFormat.Custom;
+            dgv_hoadonchitiet_HoaDon.Rows.Clear();
+            if (dtp_NgayBatDau.CustomFormat == " " || dtp_NgayKetThuc.CustomFormat == " ")
+            {
+                MessageBox.Show("Vui lòng chọn ngày bắt đầu và ngày kết thúc.");
+                return;
+            }
+            DateTime startDate = dtp_NgayBatDau.Value.Date;
+            DateTime endDate = dtp_NgayKetThuc.Value.Date;
+            List<HoaDon> hoaDons = hoaDonServices.GetHoaDonsByDateRange(startDate, endDate);
+            ShowHoaDon(hoaDons);
+
+        }
+
+        private void dtp_NgayBatDau_ValueChanged(object sender, EventArgs e)
+        {
+            cb_trangthai_HoaDon.SelectedIndex = -1;
+            dtp_NgayBatDau.CustomFormat = "dd/MM/yyyy"; // Định dạng ngày
+            dtp_NgayBatDau.Format = DateTimePickerFormat.Custom;
+            // Giới hạn ngày lớn nhất là ngày hiện tại
+            dtp_NgayBatDau.MaxDate = DateTime.Now;
+        }
+
+        private void dtp_NgayKetThuc_ValueChanged(object sender, EventArgs e)
+        {
+            dtp_NgayKetThuc.CustomFormat = "dd/MM/yyyy"; // Định dạng ngày
+            dtp_NgayKetThuc.Format = DateTimePickerFormat.Custom;
+            // Giới hạn ngày lớn nhất là ngày hiện tại
+            dtp_NgayKetThuc.MaxDate = DateTime.Now;
         }
     }
 }

@@ -60,5 +60,14 @@ namespace BUS.Services
         {
             return hoaDonRespo.GetHoaDonByPhoneNumber(phoneNumber);
         }
+
+        public List<HoaDon> GetHoaDonsByDateRange(DateTime startDate, DateTime endDate)
+        {
+            // Business logic (if any) can be added here before calling the repository
+            return hoaDonRespo.GetHoaDonsByDateRange(startDate, endDate);
+        }
+
+
+
     }
 }

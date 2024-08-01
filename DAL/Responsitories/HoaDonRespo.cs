@@ -72,6 +72,11 @@ namespace DAL.Responsitories
                 .Where(hd => hd.SoDienThoai.Contains(phoneNumber)) // Giả sử 'Sdt' là trường số điện thoại
                 .ToList();
         }
-
+        public List<HoaDon> GetHoaDonsByDateRange(DateTime startDate, DateTime endDate)
+        {
+            return _dbContext.HoaDons
+                .Where(hd => hd.NgayTao >= startDate && hd.NgayTao <= endDate)
+                .ToList();
+        }
     }
 }
