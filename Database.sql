@@ -93,6 +93,16 @@ CREATE TABLE KhuyenMai (
     FOREIGN KEY (id_sanpham_chitiet) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet)
 );
 
+CREATE PROCEDURE UpdateKhuyenMaiStatus
+AS
+BEGIN
+    UPDATE KhuyenMai
+    SET Trang_thai = 0
+    WHERE Ngay_ket_thuc < CAST(GETDATE() AS DATE) AND Trang_thai = 1;
+END
+GO
+
+
 CREATE TABLE HoaDon (
     id_hoadon UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
     So_dien_thoai NVARCHAR(20),
@@ -138,21 +148,21 @@ END
 
 
 -- Chèn dữ liệu vào bảng ChucVu
-INSERT INTO ChucVu ( Ten_chuc_vu) VALUES ( 'admin');
-INSERT INTO ChucVu ( Ten_chuc_vu) VALUES ( 'Nhân viên bán hàng');
+INSERT INTO ChucVu ( Ten_chuc_vu) VALUES ( N'admin');
+INSERT INTO ChucVu ( Ten_chuc_vu) VALUES ( N'Nhân viên bán hàng');
 
-INSERT INTO PhuongThucThanhToan( Ten_phuong_thuc_thanh_toan) VALUES ( 'Tiền mặt');
-INSERT INTO PhuongThucThanhToan ( Ten_phuong_thuc_thanh_toan) VALUES ( 'Chuyển khoản');
+INSERT INTO PhuongThucThanhToan( Ten_phuong_thuc_thanh_toan) VALUES ( N'Tiền mặt');
+INSERT INTO PhuongThucThanhToan ( Ten_phuong_thuc_thanh_toan) VALUES ( N'Chuyển khoản');
 
 -- Chèn dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (ID_nhanvien, id_chucvu, Ten_nhan_vien, Gioi_tinh, Ngay_sinh, Dia_chi, Dien_thoai, Email, Mat_khau)
-VALUES (NEWID(), 1, 'Đinh Thế Anh', 'Nam', '2005-01-29', 'Phú Thọ', '0946826098', 'dinhtheanhts29012005@gmail.com', '123456');
+VALUES (NEWID(), 1, N'Đinh Thế Anh', N'Nam', '2005-01-29', N'Phú Thọ', '0946826098', 'dinhtheanhts29012005@gmail.com', '123456');
 INSERT INTO NhanVien (ID_nhanvien, id_chucvu, Ten_nhan_vien, Gioi_tinh, Ngay_sinh, Dia_chi, Dien_thoai, Email, Mat_khau)
-VALUES (NEWID(), 2, 'Vũ Anh Đức', 'Nam', '2005-07-18', 'Hà Nội', '0986184820', 'ducvaph51402@gmail.com', '123456');
+VALUES (NEWID(), 2, N'Vũ Anh Đức', N'Nam', '2005-07-18', N'Hà Nội', '0986184820', 'ducvaph51402@gmail.com', '123456');
 
 -- Chèn dữ liệu vào bảng Khach
-INSERT INTO Khach (So_dien_thoai, Ten_khach_hang, Dia_chi) VALUES ('0123456789', 'Nguyễn Văn C', 'Hà Nội');
-INSERT INTO Khach (So_dien_thoai, Ten_khach_hang, Dia_chi) VALUES ('0987654321', 'Lê Thị D', 'Hồ Chí Minh');
+INSERT INTO Khach (So_dien_thoai, Ten_khach_hang, Dia_chi) VALUES ('0123456789', N'Nguyễn Văn C', N'Hà Nội');
+INSERT INTO Khach (So_dien_thoai, Ten_khach_hang, Dia_chi) VALUES ('0987654321', N'Lê Thị D', N'Hồ Chí Minh');
 
 
 
