@@ -1,5 +1,6 @@
 ﻿using DAL.Models;
 using DAL.Responsitories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,6 +102,10 @@ namespace BUS.Services
         {
             return _repo.GetAllSPDangKinhDoanh();
         }
+        public List<SanPhamChiTiet> GetAllSPDangKinhDoanhAndSale()
+        {
+            return _repo.GetAllSPDangKinhDoanhAndSale();
+        }
 
         public List<SanPhamChiTiet> TimkiemSpBanHangTheoTen(string tensanpham)
         {
@@ -121,15 +126,16 @@ namespace BUS.Services
         {
             _repo.UpdateSoLuong(spctNew);
         }
-
-
         public Dictionary<Guid, string> GetMaSanPhamDict()
         {
 
             var sanPhamList = _repo.GetAll();
             return sanPhamList.ToDictionary(sp => sp.IdSanphamChitiet, sp => Convert.ToString( sp.IdSanPham));
         }
-
+        public void UpdateProductPrice(Guid productId, decimal newPrice)
+        {
+            _repo.UpdateProductPrice(productId, newPrice);
+        }
 
     }
 }

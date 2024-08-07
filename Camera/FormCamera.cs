@@ -101,5 +101,25 @@ namespace Camera
             isProcessing = false;
         }
 
+        private void btn_Tat_Click(object sender, EventArgs e)
+        {
+            if (captureDevice != null && captureDevice.IsRunning)
+            {
+                captureDevice.SignalToStop();
+                captureDevice.WaitForStop();
+                scanTimer.Stop();
+      
+            }
+        }
+
+        private void btn_Bat_Click(object sender, EventArgs e)
+        {
+            if (captureDevice != null && !captureDevice.IsRunning)
+            {
+                captureDevice.Start();
+                scanTimer.Start();
+     
+            }
+        }
     }
 }

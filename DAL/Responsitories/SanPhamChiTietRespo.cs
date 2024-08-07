@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,6 +89,14 @@ namespace DAL.Responsitories
                 .Where(spct => spct.IdSanPhamNavigation.TrangThaiSanPham == true && spct.SoLuong > 0)
                 .ToList();
         }
+
+        public List<SanPhamChiTiet> GetAllSPDangKinhDoanhAndSale()
+        {
+            return _duan1Context.SanPhamChiTiets
+                .Where(spct => spct.IdSanPhamNavigation.TrangThaiSanPham == true && spct.SoLuong > 0 )
+                .ToList();
+        }
+
         //tim iem theo ten
         public List<SanPhamChiTiet> SearchSanPhamByName(string tenSanPham)
         {
@@ -117,6 +126,18 @@ namespace DAL.Responsitories
             }
             _duan1Context.SaveChanges();
         }
+
+        public void UpdateProductPrice(Guid productId, decimal newPrice)
+        {
+            var product = _duan1Context.SanPhamChiTiets.Find(productId);
+            if (product != null)
+            {
+                product.GiaSauGiam = newPrice;
+                _duan1Context.SaveChanges();
+            }
+        }
+
+
 
     }
 }

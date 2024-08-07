@@ -7,11 +7,12 @@ namespace DAL.Models
     {
         public Guid IdKhuyenMai { get; set; }
         public Guid? IdSanphamChitiet { get; set; }
+        public string? TenKhuyenMai { get; set; }
         public decimal? GiamGia { get; set; }
-        public DateTime? NgayBatDau { get; set; }
-        public DateTime? NgayKetThuc { get; set; }
+        public DateTime NgayBatDau { get; set; }
+        public DateTime NgayKetThuc { get; set; }
         public bool? TrangThai { get; set; }
-        public string? LoaiGiamGia { get; set; }
+        public bool LoaiGiamGia { get; set; }
 
         public virtual SanPhamChiTiet? IdSanphamChitietNavigation { get; set; }
     }

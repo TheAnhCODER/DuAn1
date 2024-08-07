@@ -76,22 +76,24 @@ CREATE TABLE SanPham_ChiTiet (
     id_kich_co UNIQUEIDENTIFIER,
     So_luong INT NOT NULL,
 	Gia DECIMAL(18, 2) NOT NULL,
-	Gia_sau_giam DECIMAL(18,2) ,
+	Gia_sau_giam DECIMAL(18, 2),
     FOREIGN KEY (id_san_pham) REFERENCES SanPham(id_san_pham),
     FOREIGN KEY (id_mau_sac) REFERENCES MauSac(id_mau_sac),
     FOREIGN KEY (id_kich_co) REFERENCES KichCo(id_kich_co)
 );
-
 CREATE TABLE KhuyenMai (
-    id_khuyen_mai UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
-    id_sanpham_chitiet UNIQUEIDENTIFIER,
-    Giam_gia DECIMAL(18, 2),
-    Ngay_bat_dau DATE,
-    Ngay_ket_thuc DATE,
-    Trang_thai BIT,
-    Loai_giam_gia NVARCHAR(255),
-    FOREIGN KEY (id_sanpham_chitiet) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet)
+    IdKhuyenMai UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
+	 id_sanpham_chitiet UNIQUEIDENTIFIER,
+	TenKhuyenMai nvarchar(255),
+    GiamGia DECIMAL(18, 2),
+    NgayBatDau DATE NOT NULL default ,
+    NgayKetThuc DATE NOT NULL,
+    TrangThai BIT NOT NULL default 1,
+    LoaiGiamGia BIT NOT NULL,
+	FOREIGN KEY (id_sanpham_chitiet) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet)
+
 );
+
 
 CREATE PROCEDURE UpdateKhuyenMaiStatus
 AS
@@ -111,6 +113,7 @@ CREATE TABLE HoaDon (
     Tong_so_tien_hoa_don DECIMAL(18, 2) NOT NULL,
     Trang_thai_thanh_toan int NOT NULL default '0', --0: chua thanh toan, 1: da thanh toan, 2: da huy
 	Ngay_tao DATETIME DEFAULT GETDATE(),
+	Ngay_thanh_toan datetime,
     FOREIGN KEY (So_dien_thoai) REFERENCES Khach(So_dien_thoai),
     FOREIGN KEY (ID_nhanvien) REFERENCES NhanVien(ID_nhanvien),
     FOREIGN KEY (id_phuongthucthanhtoan) REFERENCES PhuongThucThanhToan(id_phuongthucthanhtoan)
