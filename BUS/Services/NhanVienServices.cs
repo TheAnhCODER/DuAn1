@@ -26,6 +26,11 @@ namespace BUS.Services
         {
             return nhanVienRespo.GetAll();
         }
+        public List<NhanVien> CNShowNhanVien()
+        {
+            return nhanVienRespo.GetAllNhanVien();
+        }
+
         // Phương thức tìm kiếm nhân viên theo tên hoặc số điện thoại
         public List<NhanVien> TimNhanVien(string tim)
         {

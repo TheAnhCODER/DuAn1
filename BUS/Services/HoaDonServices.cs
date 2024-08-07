@@ -35,10 +35,10 @@ namespace BUS.Services
         {
             hoaDonRespo.TaoHoaDonCho(hoaDon);
         }
-        public void updateSDTKhachHang(string mahoadon,string sdt)
+        public void updateSDTKhachHang(string mahoadon, string sdt)
         {
             var mahd = Guid.Parse(mahoadon);
-            hoaDonRespo.SuaSDT(mahd,sdt);
+            hoaDonRespo.SuaSDT(mahd, sdt);
         }
 
         public void SuaTrangThai(string maHoaDon, int trangThai, int phuongthuocthanhtoan, decimal tongtien, string sodienthoaikhachhang)
@@ -67,7 +67,83 @@ namespace BUS.Services
             return hoaDonRespo.GetHoaDonsByDateRange(startDate, endDate);
         }
 
+        public IEnumerable<int> GetAvailableYears()
+        {
+            return hoaDonRespo.GetAvailableYears();
+        }
+        public decimal GetTotalRevenueByMonth(int month, int year)
+        {
+            return hoaDonRespo.GetTotalRevenueByMonth(month, year);
+        }
+        public decimal GetTotalRevenueByYear(int year)
+        {
+            return hoaDonRespo.GetTotalRevenueByYear(year);
+        }
+        // Đếm số hóa đơn theo tháng và năm
+        public int GetNumberOfInvoicesByMonth(int month, int year)
+        {
+            return hoaDonRespo.CountInvoicesByMonth(month, year);
+        }
 
+        // Đếm số hóa đơn theo năm
+        public int GetNumberOfInvoicesByYear(int year)
+        {
+            return hoaDonRespo.CountInvoicesByYear(year);
+        }
 
+        public Dictionary<Guid, int> GetProductSalesCountsByMonth(int year, int month)
+        {
+            return hoaDonRespo.GetProductSalesCountsByMonth(year, month);
+        }
+
+        public Dictionary<Guid, int> GetProductSalesCountsByYear(int year)
+        {
+            return hoaDonRespo.GetProductSalesCountsByYear(year);
+        }
+
+        public List<int> GetMonthsWithDataByYear(int year)
+        {
+            return hoaDonRespo.GetMonthsWithDataByYear(year);
+        }
+
+        public decimal GetTotalRevenue(DateTime startDate, DateTime endDate)
+        {
+            return hoaDonRespo.GetTotalRevenue(startDate, endDate);
+        }
+
+        public int GetInvoiceCount(DateTime startDate, DateTime endDate)
+        {
+            return hoaDonRespo.GetInvoiceCount(startDate, endDate);
+        }
+
+        public int GetProductCount(DateTime startDate, DateTime endDate)
+        {
+            return hoaDonRespo.GetProductCount(startDate, endDate);
+        }
+
+        public int GetCustomerCount(DateTime startDate, DateTime endDate)
+        {
+            return hoaDonRespo.GetCustomerCount(startDate, endDate);
+        }
+
+        public List<HoaDon> GetHoaDonsByYearAndMonth(int year, int month)
+        {
+            return hoaDonRespo.GetHoaDonsByYearAndMonth(year, month);
+        }
+
+        public List<HoaDon> GetInvoicesByYear(int year)
+        {
+            return hoaDonRespo.GetInvoicesByYear(year);
+        }
+
+        public List<HoaDonChiTiet> GetInvoiceDetailsByInvoiceId(Guid invoiceId)
+        {
+            return hoaDonRespo.GetInvoiceDetailsByInvoiceId(invoiceId);
+        }
+
+        public List<HoaDon> GetHoaDonsByDateRanges(DateTime startDate, DateTime endDate)
+        {
+            return hoaDonRespo.GetHoaDonsByDateRanges(startDate, endDate);
+        }
     }
 }

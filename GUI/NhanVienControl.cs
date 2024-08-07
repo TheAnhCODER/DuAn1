@@ -89,7 +89,7 @@ namespace GUI
         {
             try
             {
-                List<NhanVien> nhanVienList = nhanVienServices.CNShow();
+                List<NhanVien> nhanVienList = nhanVienServices.CNShowNhanVien();
                 dgv_danhsach_NhanVien.Rows.Clear();
                 dgv_danhsach_NhanVien.ColumnCount = 7;
                 int stt = 1;
@@ -151,6 +151,18 @@ namespace GUI
             Regex regex = new Regex(pattern);
             return regex.IsMatch(number);
         }
+        public static bool IsEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return false;
+
+            // Regex to match an email with domain @gmail.com
+            string strRegex = @"^[\w\.\-]+@gmail\.com$";
+            Regex regex = new Regex(strRegex);
+
+            return regex.IsMatch(email);
+        }
+
         private void btn_them_NhanVien_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -165,18 +177,25 @@ namespace GUI
                     }
                     if (IsVietnamesePhoneNumber(tb_sdt_NhanVien.Text))
                     {
-                        string tenNhanVien = tb_ten_NhanVien.Text.ToString();
-                        string? gioiTinh = rb_nam_NhanVien.Checked ? "Nam" : rb_nu_NhanVien.Checked ? "Nữ" : null;
-                        DateTime ngaySinh = dateTime_ngaysinh_NhanVien.Value; // Sử dụng thuộc tính Value để lấy giá trị DateTime
-                        string diaChi = tb_diachi_NhanVien.Text.ToString();
-                        string dienThoai = tb_sdt_NhanVien.Text.ToString();
-                        string email = tb_email_NhanVien.Text.ToString();
-                        string matKhau = tb_matkhau_NhanVien.Text.ToString();
-                        bool trangThai = (bool)cb_trangthai_NhanVien.SelectedValue;
-                        string kq = nhanVienServices.CNThem(tenNhanVien, gioiTinh, ngaySinh, diaChi, dienThoai, email, matKhau, trangThai);
-                        MessageBox.Show(kq);
-                        LoadNhanVien();
-                        return;
+                        if (IsEmail(tb_email_NhanVien.Text))
+                        {
+                            string tenNhanVien = tb_ten_NhanVien.Text;
+                            string? gioiTinh = rb_nam_NhanVien.Checked ? "Nam" : rb_nu_NhanVien.Checked ? "Nữ" : null;
+                            DateTime ngaySinh = dateTime_ngaysinh_NhanVien.Value; // Sử dụng thuộc tính Value để lấy giá trị DateTime
+                            string diaChi = tb_diachi_NhanVien.Text;
+                            string dienThoai = tb_sdt_NhanVien.Text;
+                            string email = tb_email_NhanVien.Text;
+                            string matKhau = tb_matkhau_NhanVien.Text;
+                            bool trangThai = (bool)cb_trangthai_NhanVien.SelectedValue;
+                            string kq = nhanVienServices.CNThem(tenNhanVien, gioiTinh, ngaySinh, diaChi, dienThoai, email, matKhau, trangThai);
+                            MessageBox.Show(kq);
+                            LoadNhanVien();
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Email không đúng định dạng. Vui lòng nhập lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                     else
                     {
@@ -188,6 +207,7 @@ namespace GUI
                     MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+
         }
 
         private void NhanVienControl_Load(object sender, EventArgs e)
@@ -209,19 +229,26 @@ namespace GUI
                             MessageBox.Show("Vui lòng chọn một nhân viên để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                        string tenNhanVien = tb_ten_NhanVien.Text;
-                        string? gioiTinh = rb_nam_NhanVien.Checked ? "Nam" : rb_nu_NhanVien.Checked ? "Nữ" : null;
-                        DateTime ngaySinh = dateTime_ngaysinh_NhanVien.Value; // Sử dụng thuộc tính Value để lấy giá trị DateTime
-                        string diaChi = tb_diachi_NhanVien.Text;
-                        string dienThoai = tb_sdt_NhanVien.Text;
-                        string email = tb_email_NhanVien.Text;
-                        string matKhau = tb_matkhau_NhanVien.Text;
-                        bool trangThai = (bool)cb_trangthai_NhanVien.SelectedValue;
+                        if (IsEmail(tb_email_NhanVien.Text))
+                        {
+                            string tenNhanVien = tb_ten_NhanVien.Text;
+                            string? gioiTinh = rb_nam_NhanVien.Checked ? "Nam" : rb_nu_NhanVien.Checked ? "Nữ" : null;
+                            DateTime ngaySinh = dateTime_ngaysinh_NhanVien.Value; // Sử dụng thuộc tính Value để lấy giá trị DateTime
+                            string diaChi = tb_diachi_NhanVien.Text;
+                            string dienThoai = tb_sdt_NhanVien.Text;
+                            string email = tb_email_NhanVien.Text;
+                            string matKhau = tb_matkhau_NhanVien.Text;
+                            bool trangThai = (bool)cb_trangthai_NhanVien.SelectedValue;
 
-                        string kq = nhanVienServices.CNSua(IdNhanVien, tenNhanVien, gioiTinh, ngaySinh, diaChi, dienThoai, email, matKhau, trangThai);
-                        MessageBox.Show(kq);
-                        LoadNhanVien();
-                        return;
+                            string kq = nhanVienServices.CNSua(IdNhanVien, tenNhanVien, gioiTinh, ngaySinh, diaChi, dienThoai, email, matKhau, trangThai);
+                            MessageBox.Show(kq);
+                            LoadNhanVien();
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Email không đúng định dạng. Vui lòng nhập lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                     else
                     {
@@ -233,6 +260,7 @@ namespace GUI
                     MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+
         }
         private void dgv_danhsach_NhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {

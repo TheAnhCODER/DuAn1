@@ -46,5 +46,36 @@ namespace BUS.Services
             hoaDonChiTietRespo.DeleteAllHDCTByMaHoaDon(Guid.Parse(maHoaDon));
         }
 
+
+
+
+
+        // Phương thức để lấy tổng số lượng hóa đơn đã bán ra theo mốc thời gian
+        public async Task<int> GetTotalQuantitySoldByDateAsync(DateTime startDate, DateTime endDate)
+        {
+            return await hoaDonChiTietRespo.GetTotalQuantitySoldByDateAsync(startDate, endDate);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public List<HoaDonChiTiet> GetAllHoaDonChiTiet()
+        {
+            return hoaDonChiTietRespo.GetAllHoaDonChiTiet();
+        }
+
+
+        public IEnumerable<HoaDonChiTiet> GetInvoiceDetailsByInvoiceId(Guid idHoadon)
+        {
+            return hoaDonChiTietRespo.GetInvoiceDetailsByInvoiceId(idHoadon);
+        }
     }
 }

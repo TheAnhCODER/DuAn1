@@ -64,7 +64,52 @@ namespace DAL.Responsitories
                 dbContext.SaveChanges();
             }
         }
-       
 
+
+
+
+
+
+        // Phương thức để lấy tổng số lượng hóa đơn đã bán ra theo mốc thời gian (ngày, tháng, năm)
+        public async Task<int> GetTotalQuantitySoldByDateAsync(DateTime startDate, DateTime endDate)
+        {
+            return await dbContext.HoaDonChiTiets
+                .Where(hdct => dbContext.HoaDons
+                    .Any(hd => hd.IdHoadon == hdct.MaHoaDon && hd.NgayTao >= startDate && hd.NgayTao <= endDate))
+                .SumAsync(hdct => hdct.SoLuong ?? 0);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public List<HoaDonChiTiet> GetAllHoaDonChiTiet()
+        {
+            return dbContext.HoaDonChiTiets.ToList();
+        }
+
+
+
+        public List<HoaDonChiTiet> GetInvoiceDetailsByInvoiceId(Guid idHoadon)
+        {
+            return dbContext.HoaDonChiTiets
+                .Where(hdct => hdct.MaHoaDon == idHoadon)
+                .ToList();
+        }
     }
 }

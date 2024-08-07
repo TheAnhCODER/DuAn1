@@ -44,7 +44,7 @@ namespace BUS.Services
                 IdDanhMuc = Guid.Parse(idDanhMuc),
                 IdThuongHieu = Guid.Parse(idThuongHieu),
                 TenSanPham = ten,
-                
+
                 MoTa = moTa,
                 TrangThaiSanPham = trangthaisp
             };
@@ -61,14 +61,14 @@ namespace BUS.Services
         // Sửa danh mục
         public string CNSua(string idSanPham, string idDanhMuc, string idThuongHieu, string ten, string moTa, bool trangthaisp)
         {
-            
+
             SanPham sanPham = new SanPham()
             {
                 IdSanPham = Guid.Parse(idSanPham),
                 IdDanhMuc = Guid.Parse(idDanhMuc),
                 IdThuongHieu = Guid.Parse(idThuongHieu),
                 TenSanPham = ten,
-          
+
                 MoTa = moTa,
                 TrangThaiSanPham = trangthaisp
             };
@@ -92,7 +92,7 @@ namespace BUS.Services
         //tim theo danh muc
         public List<SanPham> GetSPByDanhMuc(Guid idDanhMuc)
         {
-            
+
             return _repo.GetSPByDanhMuc(idDanhMuc);
         }
 
@@ -112,6 +112,18 @@ namespace BUS.Services
         public bool IsProductExists(Guid idDanhMuc, Guid idThuongHieu, string tenSanPham)
         {
             return _repo.IsProductExists(idDanhMuc, idThuongHieu, tenSanPham);
+        }
+
+
+
+
+
+
+
+
+        public Dictionary<Guid, string> GetSanPhamDicts()
+        {
+            return _repo.GetSanPhamDict();
         }
     }
 }

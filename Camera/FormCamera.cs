@@ -108,7 +108,7 @@ namespace Camera
                 captureDevice.SignalToStop();
                 captureDevice.WaitForStop();
                 scanTimer.Stop();
-      
+
             }
         }
 
@@ -118,7 +118,7 @@ namespace Camera
             {
                 captureDevice.Start();
                 scanTimer.Start();
-     
+
             }
         }
     }

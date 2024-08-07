@@ -57,7 +57,7 @@ namespace DAL.Responsitories
                     updateItem.TenSanPham = sanPham.TenSanPham;
                     updateItem.TrangThaiSanPham = sanPham.TrangThaiSanPham;
                     updateItem.MoTa = sanPham.MoTa;
-            
+
                     updateItem.IdDanhMuc = sanPham.IdDanhMuc;
                     updateItem.IdThuongHieu = sanPham.IdThuongHieu;
                     _duan1Context.SanPhams.Update(updateItem);
@@ -102,5 +102,11 @@ namespace DAL.Responsitories
 
 
 
+
+        public Dictionary<Guid, string> GetSanPhamDict()
+        {
+            return _duan1Context.SanPhams
+                           .ToDictionary(sp => sp.IdSanPham, sp => sp.TenSanPham);
+        }
     }
 }

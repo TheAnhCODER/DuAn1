@@ -32,6 +32,11 @@ namespace DAL.Responsitories
         {
             return dbContext.NhanViens.ToList();
         }
+        public List<NhanVien> GetAllNhanVien()
+        {
+            return dbContext.NhanViens.Where(nv => nv.IdChucvu != 1).ToList();
+        }
+
         // Lấy thông tin theo số điện thoại và tên
         public List<NhanVien> TimNhanVien(string tim)
         {
