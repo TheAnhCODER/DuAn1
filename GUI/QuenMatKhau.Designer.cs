@@ -45,12 +45,12 @@
             // tb_emailkhoiphuc
             // 
             tb_emailkhoiphuc.BackColor = Color.White;
-            tb_emailkhoiphuc.BorderStyle = BorderStyle.FixedSingle;
             tb_emailkhoiphuc.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tb_emailkhoiphuc.ForeColor = SystemColors.WindowText;
             tb_emailkhoiphuc.Location = new Point(67, 26);
             tb_emailkhoiphuc.Multiline = true;
             tb_emailkhoiphuc.Name = "tb_emailkhoiphuc";
+            tb_emailkhoiphuc.PlaceholderText = "Nhập email đăng kí tài khoản ";
             tb_emailkhoiphuc.Size = new Size(250, 27);
             tb_emailkhoiphuc.TabIndex = 1;
             // 
@@ -68,7 +68,7 @@
             btn_nhanotp.Name = "btn_nhanotp";
             btn_nhanotp.Size = new Size(128, 27);
             btn_nhanotp.TabIndex = 2;
-            btn_nhanotp.Text = "Nhận OTP";
+            btn_nhanotp.Text = "     Nhận mã ";
             btn_nhanotp.UseVisualStyleBackColor = false;
             btn_nhanotp.Click += btn_nhanotp_Click;
             // 
@@ -78,6 +78,7 @@
             tb_xacnhanotp.Location = new Point(67, 70);
             tb_xacnhanotp.Multiline = true;
             tb_xacnhanotp.Name = "tb_xacnhanotp";
+            tb_xacnhanotp.PlaceholderText = "Nhập mã xác nhận";
             tb_xacnhanotp.Size = new Size(250, 28);
             tb_xacnhanotp.TabIndex = 3;
             // 
@@ -91,7 +92,7 @@
             button1.Name = "button1";
             button1.Size = new Size(128, 28);
             button1.TabIndex = 4;
-            button1.Text = "Xác nhận OTP";
+            button1.Text = "Xác nhận mã";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -100,6 +101,7 @@
             tb_matkhaumoi.BackColor = Color.White;
             tb_matkhaumoi.Location = new Point(179, 123);
             tb_matkhaumoi.Name = "tb_matkhaumoi";
+            tb_matkhaumoi.PlaceholderText = "Nhập mật khẩu mới";
             tb_matkhaumoi.Size = new Size(269, 23);
             tb_matkhaumoi.TabIndex = 5;
             // 
@@ -108,6 +110,7 @@
             tb_xacnhanmatkhaumoi.BackColor = Color.White;
             tb_xacnhanmatkhaumoi.Location = new Point(179, 158);
             tb_xacnhanmatkhaumoi.Name = "tb_xacnhanmatkhaumoi";
+            tb_xacnhanmatkhaumoi.PlaceholderText = "Xác nhận mật khẩu mới";
             tb_xacnhanmatkhaumoi.Size = new Size(269, 23);
             tb_xacnhanmatkhaumoi.TabIndex = 6;
             // 

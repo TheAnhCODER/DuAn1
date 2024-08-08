@@ -158,6 +158,7 @@
             dtp_NgayKetThuc_TimKiem.Name = "dtp_NgayKetThuc_TimKiem";
             dtp_NgayKetThuc_TimKiem.Size = new Size(200, 23);
             dtp_NgayKetThuc_TimKiem.TabIndex = 2;
+            dtp_NgayKetThuc_TimKiem.ValueChanged += dtp_NgayKetThuc_TimKiem_ValueChanged;
             // 
             // button1
             // 

@@ -36,6 +36,7 @@ namespace GUI
         HoaDonServices hoaDonServices;
         HoaDonChiTietServices hoaDonChiTietServices;
         KhuyenMaiServices khuyenMaiServices;
+        NhanVienServices nhanVienServices = new NhanVienServices();
         public BanHangControl()
         {
             InitializeComponent();
@@ -602,7 +603,7 @@ namespace GUI
                     // Điền dữ liệu vào các trường trên form
                     tb_MaHoaDon_BanHang.Text = rowData.Cells[1].Value?.ToString() ?? string.Empty;
                     tb_SoDienThoai_BanHang.Text = rowData.Cells[2].Value?.ToString() ?? string.Empty;
-
+                    tb_tennv.Text = rowData.Cells[3].Value?.ToString() ?? string.Empty;
                     LoadData_dgvHoaDonChiTiet(hoaDonChiTietServices.GetAllHoaDonCTByMaHoaDon(tb_MaHoaDon_BanHang.Text));
                     dgv_HoaDonChiTiet_BanHang.ClearSelection();
                 }
@@ -739,6 +740,7 @@ namespace GUI
             dgv_HoaDonCho_BanHang.ClearSelection();
             dgv_HoaDonChiTiet_BanHang.ClearSelection();
             ShowSanPham_BanHangGiamGia();
+            tb_tennv.Visible = false;   
         }
 
         private void LoadComboBoxPTT()
@@ -885,14 +887,16 @@ namespace GUI
                 gfx.DrawString("ADV STORE", storeFont, XBrushes.Black, new XRect(0, 20, page.Width, 40), XStringFormats.TopCenter);
                 gfx.DrawString("Hóa đơn bán hàng", titleFont, XBrushes.Black, new XRect(0, 60, page.Width, 40), XStringFormats.TopCenter);
                 // Vẽ đường kẻ chia ranh giới giữa tiêu đề và bảng
-                gfx.DrawLine(XPens.Black, 20, 140, page.Width - 20, 140);
+           
                 gfx.DrawString("Ngày thanh toán: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), font, XBrushes.Black, new XRect(20, 110, page.Width - 40, 20), XStringFormats.TopLeft);
 
+                string tennhanvien = nhanVienServices.GetNhanVienByid(tb_tennv.Text);
+                gfx.DrawString("Người tạo hóa đơn: " + tennhanvien, font, XBrushes.Black, new XRect(20, 130, page.Width - 40, 20), XStringFormats.TopLeft);
                 // Thông tin khách hàng
                 int yPosition = 150;
                 int rowHeight = 20; // Chiều cao của mỗi hàng
                 gfx.DrawString("Khách hàng:" + tb_TenKhachHang_BanHang.Text, fontBold, XBrushes.Black, new XRect(20, yPosition, page.Width - 40, rowHeight), XStringFormats.TopLeft);
-                yPosition += rowHeight;
+      
 
                 if (!string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
                 {

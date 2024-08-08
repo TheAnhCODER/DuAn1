@@ -39,7 +39,6 @@
             btn_DanhSachSanPham = new Button();
             label1 = new Label();
             tb_TenGiamGia = new TextBox();
-            btn_LamMoi = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_DanhSachSPKhuyenMai).BeginInit();
             SuspendLayout();
             // 
@@ -76,7 +75,7 @@
             dgv_DanhSachSPKhuyenMai.BackgroundColor = Color.White;
             dgv_DanhSachSPKhuyenMai.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_DanhSachSPKhuyenMai.GridColor = SystemColors.ActiveBorder;
-            dgv_DanhSachSPKhuyenMai.Location = new Point(5, 180);
+            dgv_DanhSachSPKhuyenMai.Location = new Point(5, 106);
             dgv_DanhSachSPKhuyenMai.Name = "dgv_DanhSachSPKhuyenMai";
             dgv_DanhSachSPKhuyenMai.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_DanhSachSPKhuyenMai.Size = new Size(567, 343);
@@ -87,7 +86,7 @@
             button1.BackColor = Color.FromArgb(29, 135, 209);
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(295, 36);
+            button1.Location = new Point(390, 36);
             button1.Name = "button1";
             button1.Size = new Size(89, 64);
             button1.TabIndex = 23;
@@ -98,7 +97,7 @@
             // rb_vnd
             // 
             rb_vnd.AutoSize = true;
-            rb_vnd.Location = new Point(109, 155);
+            rb_vnd.Location = new Point(178, 16);
             rb_vnd.Name = "rb_vnd";
             rb_vnd.Size = new Size(49, 19);
             rb_vnd.TabIndex = 24;
@@ -109,7 +108,7 @@
             // rb_phantram
             // 
             rb_phantram.AutoSize = true;
-            rb_phantram.Location = new Point(174, 155);
+            rb_phantram.Location = new Point(243, 16);
             rb_phantram.Name = "rb_phantram";
             rb_phantram.Size = new Size(35, 19);
             rb_phantram.TabIndex = 25;
@@ -119,7 +118,7 @@
             // 
             // tb_giatrigiam
             // 
-            tb_giatrigiam.Location = new Point(215, 151);
+            tb_giatrigiam.Location = new Point(284, 12);
             tb_giatrigiam.Name = "tb_giatrigiam";
             tb_giatrigiam.Size = new Size(100, 23);
             tb_giatrigiam.TabIndex = 26;
@@ -129,7 +128,7 @@
             btn_DanhSachSanPham.BackColor = Color.FromArgb(29, 135, 209);
             btn_DanhSachSanPham.FlatStyle = FlatStyle.Flat;
             btn_DanhSachSanPham.ForeColor = Color.White;
-            btn_DanhSachSanPham.Location = new Point(388, 36);
+            btn_DanhSachSanPham.Location = new Point(483, 36);
             btn_DanhSachSanPham.Name = "btn_DanhSachSanPham";
             btn_DanhSachSanPham.Size = new Size(89, 64);
             btn_DanhSachSanPham.TabIndex = 30;
@@ -153,26 +152,12 @@
             tb_TenGiamGia.Size = new Size(156, 23);
             tb_TenGiamGia.TabIndex = 31;
             // 
-            // btn_LamMoi
-            // 
-            btn_LamMoi.BackColor = Color.FromArgb(29, 135, 209);
-            btn_LamMoi.FlatStyle = FlatStyle.Flat;
-            btn_LamMoi.ForeColor = Color.White;
-            btn_LamMoi.Location = new Point(483, 36);
-            btn_LamMoi.Name = "btn_LamMoi";
-            btn_LamMoi.Size = new Size(89, 64);
-            btn_LamMoi.TabIndex = 33;
-            btn_LamMoi.Text = "Làm mới";
-            btn_LamMoi.UseVisualStyleBackColor = false;
-            btn_LamMoi.Click += btn_LamMoi_Click;
-            // 
             // GiamGiaSanPham
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(575, 526);
-            Controls.Add(btn_LamMoi);
+            ClientSize = new Size(575, 452);
             Controls.Add(label1);
             Controls.Add(tb_TenGiamGia);
             Controls.Add(btn_DanhSachSanPham);
@@ -207,6 +192,5 @@
         private Button btn_DanhSachSanPham;
         private Label label1;
         private TextBox tb_TenGiamGia;
-        private Button btn_LamMoi;
     }
 }

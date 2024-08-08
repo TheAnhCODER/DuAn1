@@ -92,6 +92,12 @@ namespace BUS.Services
         {
             _khuyenMaiRepos.UpdateProductPriceAsync(productId, newPrice);
         }
+        public List<KhuyenMai> TimKiemKhuyenMaiTheoKhoangNgay(DateTime ngayBatDau, DateTime ngayKetThuc)
+        {
+            return _khuyenMaiRepos.GetAll()
+                    .Where(km => km.NgayBatDau >= ngayBatDau && km.NgayKetThuc <= ngayKetThuc)
+                    .ToList();
+        }
 
 
 

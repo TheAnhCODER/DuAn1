@@ -1,5 +1,6 @@
 ﻿using DAL.Models;
 using DAL.Responsitories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -39,6 +40,11 @@ namespace BUS.Services
         public NhanVien GetNhanVienByPhoneNumber(string phoneNumber)
         {
             return nhanVienRespo.GetNhanVienByPhoneNumber(phoneNumber);
+        }
+        public string GetNhanVienByid(string id)
+        {
+           
+            return nhanVienRespo.GetNhanVienByid(Guid.Parse(id));
         }
 
         public bool GetNhanVienByEmail(string email)

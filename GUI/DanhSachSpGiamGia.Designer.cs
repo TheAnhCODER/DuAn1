@@ -63,7 +63,7 @@
             btn_XoaLuaChon.RightToLeft = RightToLeft.No;
             btn_XoaLuaChon.Size = new Size(97, 53);
             btn_XoaLuaChon.TabIndex = 6;
-            btn_XoaLuaChon.Text = "Bỏ tất cả";
+            btn_XoaLuaChon.Text = "Bỏ chọn tất cả";
             btn_XoaLuaChon.UseVisualStyleBackColor = false;
             btn_XoaLuaChon.Click += btn_XoaLuaChon_Click;
             // 

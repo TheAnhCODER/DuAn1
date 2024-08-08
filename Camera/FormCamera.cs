@@ -57,21 +57,7 @@ namespace Camera
 
         private void Camera_Load(object sender, EventArgs e)
         {
-            infoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (infoCollection.Count > 0)
-            {
-                // Start the first available camera
-                captureDevice = new VideoCaptureDevice(infoCollection[0].MonikerString);
-                captureDevice.NewFrame += CaptureDevice_NewFrame;
-                captureDevice.Start();
-
-                // Start the timer
-                scanTimer.Start();
-            }
-            else
-            {
-                MessageBox.Show("No camera devices found.");
-            }
+        
         }
 
         private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -114,6 +100,22 @@ namespace Camera
 
         private void btn_Bat_Click(object sender, EventArgs e)
         {
+            if (captureDevice == null)
+            {
+                // Initialize the capture device if it's not initialized
+                infoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                if (infoCollection.Count > 0)
+                {
+                    captureDevice = new VideoCaptureDevice(infoCollection[0].MonikerString);
+                    captureDevice.NewFrame += CaptureDevice_NewFrame;
+                }
+                else
+                {
+                    MessageBox.Show("No camera devices found.");
+                    return;
+                }
+            }
+
             if (captureDevice != null && !captureDevice.IsRunning)
             {
                 captureDevice.Start();

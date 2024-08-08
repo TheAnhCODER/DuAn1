@@ -79,6 +79,7 @@
             dgv_DangGiamGia = new DataGridView();
             groupBox5 = new GroupBox();
             panel_Cam = new Panel();
+            tb_tennv = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -111,6 +112,7 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(29, 135, 209);
+            panel3.Controls.Add(tb_tennv);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(pictureBox2);
@@ -639,6 +641,13 @@
             panel_Cam.Size = new Size(205, 144);
             panel_Cam.TabIndex = 0;
             // 
+            // tb_tennv
+            // 
+            tb_tennv.Location = new Point(172, 6);
+            tb_tennv.Name = "tb_tennv";
+            tb_tennv.Size = new Size(100, 23);
+            tb_tennv.TabIndex = 22;
+            // 
             // BanHangControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -723,5 +732,6 @@
         private TextBox tb_GiamGia;
         private Label label9;
         private Label label10;
+        private TextBox tb_tennv;
     }
 }

@@ -50,10 +50,7 @@ namespace GUI
 
         private void KhuyenMaiControl_Load(object sender, EventArgs e)
         {
-            dtk_NgayBatDau_TimKiem.CustomFormat = " ";
-            dtk_NgayBatDau_TimKiem.Format = DateTimePickerFormat.Custom;
-            dtp_NgayKetThuc_TimKiem.CustomFormat = " ";
-            dtp_NgayKetThuc_TimKiem.Format = DateTimePickerFormat.Custom;
+
             ShowKhuyenMai();
         }
 
@@ -411,28 +408,16 @@ namespace GUI
             dtp_NgayKetThuc.Value = DateTime.Now;
             dtp_NgayBatDau.Value = DateTime.Now;
             textBox1.Clear();
-            dtk_NgayBatDau_TimKiem.CustomFormat = " ";
-            dtk_NgayBatDau_TimKiem.Format = DateTimePickerFormat.Custom;
-            dtp_NgayKetThuc_TimKiem.CustomFormat = " ";
-            dtp_NgayKetThuc_TimKiem.Format = DateTimePickerFormat.Custom;
+            dtp_NgayKetThuc_TimKiem.Value = DateTime.Now;
+            dtk_NgayBatDau_TimKiem.Value = DateTime.Now;
             rb_VND.Checked = true;
+            dgv_DanhSachKhuyenMai.Rows.Clear();
+            ShowKhuyenMai();
         }
-        private bool isChangingngaybatdau = false;
+     
         private void dtp_NgayBatDau_ValueChanged(object sender, EventArgs e)
         {
-            //if (isChangingngaybatdau) return;
-
-            //try
-            //{
-            //    isChangingngaybatdau = true;
-            //    dtp_NgayBatDau.CustomFormat = "dd/MM/yyyy"; // Định dạng ngày
-            //    dtp_NgayBatDau.Format = DateTimePickerFormat.Custom;
-            //    dtp_NgayBatDau.MinDate = DateTime.Now;
-            //}
-            //finally
-            //{
-            //    isChangingngaybatdau = false;
-            //}
+           
         }
 
         private void dtp_NgayKetThuc_ValueChanged(object sender, EventArgs e)
@@ -442,6 +427,36 @@ namespace GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (dtk_NgayBatDau_TimKiem.Value.Date == DateTime.MinValue || dtp_NgayKetThuc_TimKiem.Value.Date == DateTime.MinValue)
+            {
+                MessageBox.Show("Vui lòng chọn ngày bắt đầu và ngày kết thúc.");
+                return;
+            }
+            if (dtp_NgayKetThuc_TimKiem.Value.Date <= dtk_NgayBatDau_TimKiem.Value.Date)
+            {
+                MessageBox.Show("Ngày kết thúc phải lớn hơn ngày bắt đầu.");
+                return;
+            }
+
+            // Lấy khoảng thời gian người dùng chọn
+            DateTime ngayBatDau = dtk_NgayBatDau_TimKiem.Value.Date;
+            DateTime ngayKetThuc = dtp_NgayKetThuc_TimKiem.Value.Date;
+
+            // Gọi phương thức tìm kiếm khuyến mãi theo khoảng thời gian
+            List<KhuyenMai> danhSachKhuyenMai = KhuyenMaiServices.TimKiemKhuyenMaiTheoKhoangNgay(ngayBatDau, ngayKetThuc);
+
+            // Hiển thị kết quả
+            if (danhSachKhuyenMai.Count > 0)
+            {
+                // Ví dụ: Hiển thị danh sách khuyến mãi trong DataGridView hoặc ListBox
+                ShowKhuyenMai_TImKiem(danhSachKhuyenMai);
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy khuyến mãi nào trong khoảng thời gian đã chọn.");
+            }
+
+
 
         }
 
@@ -454,21 +469,12 @@ namespace GUI
 
         private void dtk_NgayBatDau_TimKiem_ValueChanged(object sender, EventArgs e)
         {
-            DateTimePicker dateTimePicker = sender as DateTimePicker;
-            if (dateTimePicker != null)
-            {
-                DateTime currentDate = DateTime.Now.Date;
+            
+        }
 
-                // Kiểm tra nếu ngày được chọn lớn hơn ngày hiện tại
-                if (dateTimePicker.Value.Date > currentDate)
-                {
-                    // Đặt giá trị của DateTimePicker về ngày hiện tại
-                    dateTimePicker.Value = currentDate;
+        private void dtp_NgayKetThuc_TimKiem_ValueChanged(object sender, EventArgs e)
+        {
 
-                    // Hiển thị thông báo cho người dùng (tuỳ chọn)
-                    MessageBox.Show("Ngày không thể vượt quá ngày hiện tại.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
         }
     }
 }

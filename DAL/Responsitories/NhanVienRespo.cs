@@ -48,6 +48,12 @@ namespace DAL.Responsitories
         {
             return dbContext.NhanViens.FirstOrDefault(p => p.DienThoai == phoneNumber);
         }
+        public string GetNhanVienByid(Guid id)
+        {
+            var nhanVien = dbContext.NhanViens.FirstOrDefault(p => p.IdNhanvien == id);
+            return nhanVien?.TenNhanVien; // Giả sử tên nhân viên được lưu trong thuộc tính TenNhanVien
+        }
+
 
         public bool GetNhanVienByEmail(string email)
         {
