@@ -44,11 +44,11 @@
             btn_XoaSp.FlatStyle = FlatStyle.Flat;
             btn_XoaSp.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btn_XoaSp.ForeColor = Color.White;
-            btn_XoaSp.Location = new Point(557, 5);
+            btn_XoaSp.Location = new Point(532, 5);
             btn_XoaSp.Name = "btn_XoaSp";
-            btn_XoaSp.Size = new Size(97, 53);
+            btn_XoaSp.Size = new Size(122, 53);
             btn_XoaSp.TabIndex = 7;
-            btn_XoaSp.Text = "Cập nhật";
+            btn_XoaSp.Text = "Bỏ khỏi chương trình khuyến mại";
             btn_XoaSp.UseVisualStyleBackColor = false;
             btn_XoaSp.Click += btn_XoaSp_Click;
             // 
@@ -104,6 +104,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(661, 466);
             Controls.Add(btn_XoaSp);
             Controls.Add(btn_XoaLuaChon);

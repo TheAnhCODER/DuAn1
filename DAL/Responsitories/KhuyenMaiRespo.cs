@@ -80,7 +80,10 @@ namespace DAL.Responsitories
                 await _context.SaveChangesAsync();
             }
         }
-
+        public List<KhuyenMai> GetKMByName(string ten)
+        {
+            return _context.KhuyenMais.Where(p => p.TenKhuyenMai.Contains(ten)).ToList();
+        }
 
 
     }

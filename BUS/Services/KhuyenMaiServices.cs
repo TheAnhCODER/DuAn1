@@ -16,7 +16,11 @@ namespace BUS.Services
             _khuyenMaiRepos = new KhuyenMaiRespo();
 
         }
-        
+
+        public List<KhuyenMai> GetKMByName(string ten)
+        {
+           return _khuyenMaiRepos.GetKMByName(ten);
+        }
 
 
         public List<KhuyenMai> CNShow()

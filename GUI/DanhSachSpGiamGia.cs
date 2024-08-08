@@ -113,6 +113,8 @@ namespace GUI
                 sanPhamChiTietRespo.DeleteKhuyenMaiSpct(selectedProductIds, Guid.Parse(KhuyenMaiControl.makhuyenmai));
                 ShowSanPham_TheoKhuyenMai(KhuyenMaiControl.makhuyenmai); // Cập nhật lại danh sách sản phẩm nếu cần
                 MessageBox.Show("Đã xóa tất cả sản phẩm đã chọn và cập nhật giá sau giảm.");
+                GiamGiaSanPham giamGiaSanPham = new GiamGiaSanPham();
+                giamGiaSanPham.ShowSanPham_KhuyenMai();
                 this.Close();
             }
             else

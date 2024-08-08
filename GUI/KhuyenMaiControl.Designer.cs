@@ -179,6 +179,7 @@
             dtk_NgayBatDau_TimKiem.Name = "dtk_NgayBatDau_TimKiem";
             dtk_NgayBatDau_TimKiem.Size = new Size(200, 23);
             dtk_NgayBatDau_TimKiem.TabIndex = 1;
+            dtk_NgayBatDau_TimKiem.ValueChanged += dtk_NgayBatDau_TimKiem_ValueChanged;
             // 
             // label8
             // 
@@ -215,6 +216,7 @@
             textBox1.PlaceholderText = "Tìm kiếm tại đây...";
             textBox1.Size = new Size(225, 23);
             textBox1.TabIndex = 3;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // dgv_DanhSachKhuyenMai
             // 

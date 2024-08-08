@@ -194,6 +194,12 @@ namespace GUI
         {
             DanhSachSpGiamGia danhSachSpGiamGia = new DanhSachSpGiamGia();
             danhSachSpGiamGia.ShowDialog();
+            this.Close();
+        }
+
+        private void btn_LamMoi_Click(object sender, EventArgs e)
+        {
+            ShowSanPham_KhuyenMai();
         }
     }
 }

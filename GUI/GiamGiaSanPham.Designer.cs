@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GiamGiaSanPham));
             btn_BoChon = new Button();
             btn_chon = new Button();
             dgv_DanhSachSPKhuyenMai = new DataGridView();
@@ -38,6 +39,7 @@
             btn_DanhSachSanPham = new Button();
             label1 = new Label();
             tb_TenGiamGia = new TextBox();
+            btn_LamMoi = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_DanhSachSPKhuyenMai).BeginInit();
             SuspendLayout();
             // 
@@ -46,9 +48,9 @@
             btn_BoChon.BackColor = Color.FromArgb(29, 135, 209);
             btn_BoChon.FlatStyle = FlatStyle.Flat;
             btn_BoChon.ForeColor = Color.White;
-            btn_BoChon.Location = new Point(118, 12);
+            btn_BoChon.Location = new Point(120, 52);
             btn_BoChon.Name = "btn_BoChon";
-            btn_BoChon.Size = new Size(89, 64);
+            btn_BoChon.Size = new Size(89, 48);
             btn_BoChon.TabIndex = 22;
             btn_BoChon.Text = "Bỏ chọn tất cả";
             btn_BoChon.UseVisualStyleBackColor = false;
@@ -60,9 +62,9 @@
             btn_chon.FlatStyle = FlatStyle.Flat;
             btn_chon.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_chon.ForeColor = Color.White;
-            btn_chon.Location = new Point(12, 12);
+            btn_chon.Location = new Point(14, 52);
             btn_chon.Name = "btn_chon";
-            btn_chon.Size = new Size(89, 64);
+            btn_chon.Size = new Size(89, 48);
             btn_chon.TabIndex = 21;
             btn_chon.Text = "Chọn tất cả";
             btn_chon.UseVisualStyleBackColor = false;
@@ -74,7 +76,7 @@
             dgv_DanhSachSPKhuyenMai.BackgroundColor = Color.White;
             dgv_DanhSachSPKhuyenMai.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_DanhSachSPKhuyenMai.GridColor = SystemColors.ActiveBorder;
-            dgv_DanhSachSPKhuyenMai.Location = new Point(3, 95);
+            dgv_DanhSachSPKhuyenMai.Location = new Point(5, 180);
             dgv_DanhSachSPKhuyenMai.Name = "dgv_DanhSachSPKhuyenMai";
             dgv_DanhSachSPKhuyenMai.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_DanhSachSPKhuyenMai.Size = new Size(567, 343);
@@ -85,7 +87,7 @@
             button1.BackColor = Color.FromArgb(29, 135, 209);
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(387, 12);
+            button1.Location = new Point(295, 36);
             button1.Name = "button1";
             button1.Size = new Size(89, 64);
             button1.TabIndex = 23;
@@ -96,7 +98,7 @@
             // rb_vnd
             // 
             rb_vnd.AutoSize = true;
-            rb_vnd.Location = new Point(107, 70);
+            rb_vnd.Location = new Point(109, 155);
             rb_vnd.Name = "rb_vnd";
             rb_vnd.Size = new Size(49, 19);
             rb_vnd.TabIndex = 24;
@@ -107,7 +109,7 @@
             // rb_phantram
             // 
             rb_phantram.AutoSize = true;
-            rb_phantram.Location = new Point(172, 70);
+            rb_phantram.Location = new Point(174, 155);
             rb_phantram.Name = "rb_phantram";
             rb_phantram.Size = new Size(35, 19);
             rb_phantram.TabIndex = 25;
@@ -117,7 +119,7 @@
             // 
             // tb_giatrigiam
             // 
-            tb_giatrigiam.Location = new Point(213, 66);
+            tb_giatrigiam.Location = new Point(215, 151);
             tb_giatrigiam.Name = "tb_giatrigiam";
             tb_giatrigiam.Size = new Size(100, 23);
             tb_giatrigiam.TabIndex = 26;
@@ -127,7 +129,7 @@
             btn_DanhSachSanPham.BackColor = Color.FromArgb(29, 135, 209);
             btn_DanhSachSanPham.FlatStyle = FlatStyle.Flat;
             btn_DanhSachSanPham.ForeColor = Color.White;
-            btn_DanhSachSanPham.Location = new Point(481, 12);
+            btn_DanhSachSanPham.Location = new Point(388, 36);
             btn_DanhSachSanPham.Name = "btn_DanhSachSanPham";
             btn_DanhSachSanPham.Size = new Size(89, 64);
             btn_DanhSachSanPham.TabIndex = 30;
@@ -138,7 +140,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(213, 19);
+            label1.Location = new Point(14, 5);
             label1.Name = "label1";
             label1.Size = new Size(74, 15);
             label1.TabIndex = 32;
@@ -146,16 +148,31 @@
             // 
             // tb_TenGiamGia
             // 
-            tb_TenGiamGia.Location = new Point(213, 37);
+            tb_TenGiamGia.Location = new Point(14, 23);
             tb_TenGiamGia.Name = "tb_TenGiamGia";
             tb_TenGiamGia.Size = new Size(156, 23);
             tb_TenGiamGia.TabIndex = 31;
+            // 
+            // btn_LamMoi
+            // 
+            btn_LamMoi.BackColor = Color.FromArgb(29, 135, 209);
+            btn_LamMoi.FlatStyle = FlatStyle.Flat;
+            btn_LamMoi.ForeColor = Color.White;
+            btn_LamMoi.Location = new Point(483, 36);
+            btn_LamMoi.Name = "btn_LamMoi";
+            btn_LamMoi.Size = new Size(89, 64);
+            btn_LamMoi.TabIndex = 33;
+            btn_LamMoi.Text = "Làm mới";
+            btn_LamMoi.UseVisualStyleBackColor = false;
+            btn_LamMoi.Click += btn_LamMoi_Click;
             // 
             // GiamGiaSanPham
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(575, 443);
+            BackColor = Color.White;
+            ClientSize = new Size(575, 526);
+            Controls.Add(btn_LamMoi);
             Controls.Add(label1);
             Controls.Add(tb_TenGiamGia);
             Controls.Add(btn_DanhSachSanPham);
@@ -166,8 +183,12 @@
             Controls.Add(btn_BoChon);
             Controls.Add(btn_chon);
             Controls.Add(dgv_DanhSachSPKhuyenMai);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "GiamGiaSanPham";
-            Text = "GiamGiaSanPham";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Giảm giá sản phẩm";
             Load += GiamGiaSanPham_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_DanhSachSPKhuyenMai).EndInit();
             ResumeLayout(false);
@@ -186,5 +207,6 @@
         private Button btn_DanhSachSanPham;
         private Label label1;
         private TextBox tb_TenGiamGia;
+        private Button btn_LamMoi;
     }
 }

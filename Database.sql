@@ -86,7 +86,7 @@ CREATE TABLE KhuyenMai (
 	 id_sanpham_chitiet UNIQUEIDENTIFIER,
 	TenKhuyenMai nvarchar(255),
     GiamGia DECIMAL(18, 2),
-    NgayBatDau DATE NOT NULL default ,
+    NgayBatDau DATE NOT NULL,
     NgayKetThuc DATE NOT NULL,
     TrangThai BIT NOT NULL default 1,
     LoaiGiamGia BIT NOT NULL,
@@ -94,7 +94,13 @@ CREATE TABLE KhuyenMai (
 
 );
 
-
+CREATE TABLE KhuyenMaiSPCT (
+    Id UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
+    IdKhuyenMai UNIQUEIDENTIFIER,
+    IdSanphamChiTiet UNIQUEIDENTIFIER,
+    FOREIGN KEY (IdKhuyenMai) REFERENCES KhuyenMai(IdKhuyenMai),
+    FOREIGN KEY (IdSanphamChiTiet) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet)
+);
 CREATE PROCEDURE UpdateKhuyenMaiStatus
 AS
 BEGIN

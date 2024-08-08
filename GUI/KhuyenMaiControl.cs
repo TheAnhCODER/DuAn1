@@ -57,9 +57,9 @@ namespace GUI
             ShowKhuyenMai();
         }
 
-        
 
-       
+
+
 
 
         private void btn_themKhuyenMai_Click(object sender, EventArgs e)
@@ -189,7 +189,45 @@ namespace GUI
                 dgv_DanhSachKhuyenMai.Rows.Add(stt++, item.IdKhuyenMai, item.TenKhuyenMai, item.GiamGia, item.NgayBatDau, item.NgayKetThuc, trangThai, loaiGiamGiaText);
             }
         }
+        public void ShowKhuyenMai_TImKiem(List<KhuyenMai> khuyenMais)
+        {
 
+            dgv_DanhSachKhuyenMai.Rows.Clear();
+            dgv_DanhSachKhuyenMai.ColumnCount = 8;
+            int stt = 1;
+            dgv_DanhSachKhuyenMai.Columns[0].HeaderText = "Số thứ tự";
+            dgv_DanhSachKhuyenMai.Columns[1].HeaderText = "Mã khuyến mãi";
+            dgv_DanhSachKhuyenMai.Columns[2].HeaderText = "Tên khuyến mãi";
+            dgv_DanhSachKhuyenMai.Columns[3].HeaderText = "Giảm giá";
+            dgv_DanhSachKhuyenMai.Columns[4].HeaderText = "Ngày bắt đầu";
+            dgv_DanhSachKhuyenMai.Columns[5].HeaderText = "Ngày kết thúc";
+            dgv_DanhSachKhuyenMai.Columns[6].HeaderText = "Trạng thái";
+            dgv_DanhSachKhuyenMai.Columns[7].HeaderText = "Loại giảm giá";
+
+            dgv_DanhSachKhuyenMai.Columns[0].Visible = false;
+            dgv_DanhSachKhuyenMai.Columns[1].Visible = false;
+
+            dgv_DanhSachKhuyenMai.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_DanhSachKhuyenMai.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_DanhSachKhuyenMai.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_DanhSachKhuyenMai.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_DanhSachKhuyenMai.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_DanhSachKhuyenMai.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_DanhSachKhuyenMai.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_DanhSachKhuyenMai.Font, FontStyle.Bold);
+            dgv_DanhSachKhuyenMai.EnableHeadersVisualStyles = false;
+
+
+            foreach (var item in khuyenMais)
+            {
+                string loaiGiamGiaText = item.LoaiGiamGia ? "VND" : "%";
+                string trangThai = (item.TrangThai ?? false) ? "Đang hoạt động" : "Hết hạn"; // Xử lý giá trị bool? với giá trị mặc định
+
+                dgv_DanhSachKhuyenMai.Rows.Add(stt++, item.IdKhuyenMai, item.TenKhuyenMai, item.GiamGia, item.NgayBatDau, item.NgayKetThuc, trangThai, loaiGiamGiaText);
+            }
+        }
         private void btn_suaKhuyenMai_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tb_makhuyenmai.Text))
@@ -396,13 +434,25 @@ namespace GUI
             //    isChangingngaybatdau = false;
             //}
         }
-        private bool isChangingngayketthuc = false;
+
         private void dtp_NgayKetThuc_ValueChanged(object sender, EventArgs e)
         {
-         
+
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            List<KhuyenMai> khuyenMais = KhuyenMaiServices.GetKMByName(textBox1.Text);
+            ShowKhuyenMai_TImKiem(khuyenMais);
+
+        }
+
+        private void dtk_NgayBatDau_TimKiem_ValueChanged(object sender, EventArgs e)
         {
 
         }

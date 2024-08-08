@@ -85,10 +85,15 @@ namespace DAL.Responsitories
         // Lấy tất cả sản phẩm chi tiết từ các sản phẩm có trạng thái Đang Kinh Doanh
         public List<SanPhamChiTiet> GetAllSPDangKinhDoanh()
         {
-            return _duan1Context.SanPhamChiTiets
+            using (var context = new DuAn1Context())
+            {
+                return _duan1Context.SanPhamChiTiets
                 .Where(spct => spct.IdSanPhamNavigation.TrangThaiSanPham == true && spct.SoLuong > 0)
                 .ToList();
+            }
         }
+
+       
         public List<SanPhamChiTiet> GetAllSPDangKinhDoanhLoad()
         {
             using (var context = new DuAn1Context())
