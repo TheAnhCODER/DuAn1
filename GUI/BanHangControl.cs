@@ -612,13 +612,14 @@ namespace GUI
         {
 
             dgv_HoaDonChiTiet_BanHang.Rows.Clear();
-            dgv_HoaDonChiTiet_BanHang.ColumnCount = 6;
+            dgv_HoaDonChiTiet_BanHang.ColumnCount = 7;
             dgv_HoaDonChiTiet_BanHang.Columns[0].HeaderText = "Số thứ tự";
             dgv_HoaDonChiTiet_BanHang.Columns[1].HeaderText = "Tên sản phẩm";
             dgv_HoaDonChiTiet_BanHang.Columns[2].HeaderText = "Mã hóa đơn";
             dgv_HoaDonChiTiet_BanHang.Columns[3].HeaderText = "Đơn giá";
             dgv_HoaDonChiTiet_BanHang.Columns[4].HeaderText = "Số lượng";
             dgv_HoaDonChiTiet_BanHang.Columns[5].HeaderText = "MaSP";
+            dgv_HoaDonChiTiet_BanHang.Columns[6].HeaderText = "Giá sau giảm"; // Thêm tiêu đề cột giảm giá
             dgv_HoaDonChiTiet_BanHang.Columns[5].Visible = false;
             dgv_HoaDonChiTiet_BanHang.Columns[0].Visible = false;
             dgv_HoaDonChiTiet_BanHang.Columns[2].Visible = false;
@@ -649,8 +650,9 @@ namespace GUI
             dgv_HoaDonChiTiet_BanHang.EnableHeadersVisualStyles = false;
             Dictionary<Guid, string> sanPhamChiTietDict = sanPhamChiTietServices.GetMaSanPhamDict();
             Dictionary<Guid, string> sanphamDict = sanPhamServices.GetSanPhamDict();
-
+            Dictionary<Guid, decimal?> giamGiaDict = GetGiamGiaDict(); // Sử dụng dictionary kiểu decimal? để kiểm tra khuyến mại
             int stt = 1;
+     
             foreach (var hdct in hoaDonChiTiets)
             {
                 if (hdct.SoLuong == 0)
@@ -662,7 +664,9 @@ namespace GUI
             : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string tensp = sanphamDict.ContainsKey(Guid.Parse(masp)) ? sanphamDict[Guid.Parse(masp)]
             : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
-                dgv_HoaDonChiTiet_BanHang.Rows.Add(stt++, tensp, hdct.MaHoaDon, hdct.DonGia, hdct.SoLuong, hdct.MaSpct);
+                decimal? giaSauGiam = giamGiaDict.ContainsKey(hdct.MaSpct) ? giamGiaDict[hdct.MaSpct] : (decimal?)null;
+                string discountText = giaSauGiam.HasValue ? giaSauGiam.Value.ToString() : "Không có khuyến mại";
+                dgv_HoaDonChiTiet_BanHang.Rows.Add(stt++, tensp, hdct.MaHoaDon, hdct.DonGia, hdct.SoLuong, hdct.MaSpct, discountText);
             }
 
             if (tb_MaHoaDon_BanHang != null)
@@ -673,10 +677,33 @@ namespace GUI
                 tb_TienSauGiamGia.Text = TinhTongTienKhachPhaiTra(selectedHoaDon).ToString("#,##0 'VND'");
             }
         }
+        private Dictionary<Guid, decimal?> GetGiamGiaDict()
+        {
+            var giamGiaDict = new Dictionary<Guid, decimal?>();
+
+            try
+            {
+                // Lấy danh sách sản phẩm chi tiết từ cơ sở dữ liệu hoặc dịch vụ
+                var spctList = sanPhamChiTietServices.GetAllSPDangKinhDoanhAndSale();
+
+                foreach (var spct in spctList)
+                {
+                    // Thêm giá sau giảm vào dictionary, giá có thể là null
+                    giamGiaDict[spct.IdSanphamChitiet] = spct.GiaSauGiam;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi (log lỗi, thông báo người dùng, v.v.)
+                Console.WriteLine("Lỗi khi lấy dữ liệu giảm giá: " + ex.Message);
+            }
+
+            return giamGiaDict;
+        }
 
 
 
-       
+
         private void RefreshToanBoForm()
         {
             tb_SoDienThoai_BanHang.Text = string.Empty;
@@ -770,7 +797,8 @@ namespace GUI
                             {
                                 sodienthoaikhachhang = "0";
                             }
-                            hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 1, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang);
+                            DateTime ngaythanhtoan = DateTime.Now;
+                            hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 1, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang, ngaythanhtoan);
                             MessageBox.Show("Đã thanh toán hóa đơn!");
                             checkInHoaDon();
                             RefreshToanBoForm();
@@ -794,8 +822,8 @@ namespace GUI
                             {
                                 sodienthoaikhachhang = "0";
                             }
-
-                            hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 2, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang);
+                            DateTime ngaythanhtoan = DateTime.Now;
+                            hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 2, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang, ngaythanhtoan);
                             MessageBox.Show("Đã thanh toán hóa đơn!");
                             checkInHoaDon();
                             RefreshToanBoForm();
@@ -878,15 +906,17 @@ namespace GUI
                 gfx.DrawRectangle(XBrushes.LightGray, 20, yPosition, page.Width - 40, rowHeight);
                 gfx.DrawRectangle(XPens.Black, 20, yPosition, page.Width - 40, rowHeight);
                 gfx.DrawString("STT", fontBold, XBrushes.Black, new XRect(25, yPosition, 50, rowHeight), XStringFormats.Center);
-                gfx.DrawString("Tên sản phẩm", fontBold, XBrushes.Black, new XRect(75, yPosition, 200, rowHeight), XStringFormats.Center);
-                gfx.DrawString("Đơn giá", fontBold, XBrushes.Black, new XRect(275, yPosition, 100, rowHeight), XStringFormats.Center);
-                gfx.DrawString("Số lượng", fontBold, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
-                gfx.DrawString("Thành tiền", fontBold, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Tên sản phẩm", fontBold, XBrushes.Black, new XRect(75, yPosition, 150, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Đơn giá", fontBold, XBrushes.Black, new XRect(225, yPosition, 100, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Số lượng", fontBold, XBrushes.Black, new XRect(325, yPosition, 50, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Thành tiền", fontBold, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Giảm giá", fontBold, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
                 yPosition += rowHeight;
 
                 // Dữ liệu từ DataGridView
                 int stt = 1;
                 decimal totalAmount = 0;
+                decimal giam = 0;
                 foreach (DataGridViewRow row in dgv_HoaDonChiTiet_BanHang.Rows)
                 {
                     if (row.IsNewRow) continue;
@@ -898,18 +928,34 @@ namespace GUI
                     int soLuong = int.TryParse(soLuongStr, out soLuong) ? soLuong : 0;
                     decimal thanhTien = donGia * soLuong;
                     totalAmount += thanhTien;
+                    // Tính giảm giá
+                    decimal tonggiamgia;
+                    string giaSauGiamStr = row.Cells[6].Value?.ToString() ?? string.Empty;
+                    decimal giaSauGiam = decimal.TryParse(giaSauGiamStr, out giaSauGiam) ? giaSauGiam : 0;
+                    decimal giamGia = donGia - giaSauGiam;
+                    tonggiamgia = giamGia * soLuong;
+                    if (giaSauGiam == 0)
+                    {
+                        tonggiamgia = 0;
+                    }
+                  
 
+                    // Vẽ hình chữ nhật bao quanh hàng
                     gfx.DrawRectangle(XPens.Black, 20, yPosition, page.Width - 40, rowHeight);
-                    gfx.DrawLine(XPens.Black, 20 + 50, yPosition, 20 + 50, yPosition + rowHeight);
-                    gfx.DrawLine(XPens.Black, 20 + 50 + 200, yPosition, 20 + 50 + 200, yPosition + rowHeight);
-                    gfx.DrawLine(XPens.Black, 20 + 50 + 200 + 100, yPosition, 20 + 50 + 200 + 100, yPosition + rowHeight);
-                    gfx.DrawLine(XPens.Black, 20 + 50 + 200 + 100 + 100, yPosition, 20 + 50 + 200 + 100 + 100, yPosition + rowHeight);
+
+                    // Vẽ các đường kẻ cho các cột
+                    gfx.DrawLine(XPens.Black, 20 + 50, yPosition, 20 + 50, yPosition + rowHeight); // Cột 1
+                    gfx.DrawLine(XPens.Black, 20 + 50 + 150, yPosition, 20 + 50 + 150, yPosition + rowHeight); // Cột 2
+                    gfx.DrawLine(XPens.Black, 20 + 50 + 150 + 100, yPosition, 20 + 50 + 150 + 100, yPosition + rowHeight); // Cột 3
+                    gfx.DrawLine(XPens.Black, 20 + 50 + 150 + 100 + 50, yPosition, 20 + 50 + 150 + 100 + 50, yPosition + rowHeight); // Cột 4
+                    gfx.DrawLine(XPens.Black, 20 + 50 + 150 + 100 + 50 + 100, yPosition, 20 + 50 + 150 + 100 + 50 + 100, yPosition + rowHeight); // Cột 5
 
                     gfx.DrawString(stt.ToString(), font, XBrushes.Black, new XRect(25, yPosition, 50, rowHeight), XStringFormats.Center);
-                    gfx.DrawString(tenSanPham, font, XBrushes.Black, new XRect(75, yPosition, 200, rowHeight), XStringFormats.Center);
-                    gfx.DrawString(donGia.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(275, yPosition, 100, rowHeight), XStringFormats.Center);
-                    gfx.DrawString(soLuong.ToString(), font, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
-                    gfx.DrawString(thanhTien.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(tenSanPham, font, XBrushes.Black, new XRect(75, yPosition, 150, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(donGia.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(225, yPosition, 100, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(soLuong.ToString(), font, XBrushes.Black, new XRect(325, yPosition, 50, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(thanhTien.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(tonggiamgia.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
 
                     yPosition += rowHeight;
                     stt++;

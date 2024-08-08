@@ -27,7 +27,7 @@ namespace DAL.Responsitories
             _dbContext.SaveChanges();
         }
 
-        public void SuaTrangThai(Guid maHoaDon, int trangThai, int phuongthucthanhtoan, decimal tongtien, string sodienthoai)
+        public void SuaTrangThai(Guid maHoaDon, int trangThai, int phuongthucthanhtoan, decimal tongtien, string sodienthoai, DateTime ngaythanhtoan)
         {
             var hoaDonSua = _dbContext.HoaDons.Find(maHoaDon);
             if (hoaDonSua != null)
@@ -36,6 +36,7 @@ namespace DAL.Responsitories
                 hoaDonSua.IdPhuongthucthanhtoan = phuongthucthanhtoan;
                 hoaDonSua.TongSoTienHoaDon = tongtien;
                 hoaDonSua.SoDienThoai = sodienthoai;
+                hoaDonSua.NgayThanhToan = ngaythanhtoan;
             }
             _dbContext.SaveChanges();
         }

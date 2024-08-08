@@ -41,10 +41,10 @@ namespace BUS.Services
             hoaDonRespo.SuaSDT(mahd, sdt);
         }
 
-        public void SuaTrangThai(string maHoaDon, int trangThai, int phuongthuocthanhtoan, decimal tongtien, string sodienthoaikhachhang)
+        public void SuaTrangThai(string maHoaDon, int trangThai, int phuongthuocthanhtoan, decimal tongtien, string sodienthoaikhachhang, DateTime ngaythanhtoan)
         {
             var mahoadon = Guid.Parse(maHoaDon);
-            hoaDonRespo.SuaTrangThai(mahoadon, trangThai, phuongthuocthanhtoan, tongtien, sodienthoaikhachhang);
+            hoaDonRespo.SuaTrangThai(mahoadon, trangThai, phuongthuocthanhtoan, tongtien, sodienthoaikhachhang, ngaythanhtoan);
         }
         public List<HoaDon> GetHoaDonByTrangThai(int trangThai)
         {
