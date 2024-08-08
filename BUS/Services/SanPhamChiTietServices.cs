@@ -24,7 +24,10 @@ namespace BUS.Services
             return _repo.GetAll();
         }
 
-        
+        public async Task<List<SanPhamChiTiet>> GetSanPhamByKhuyenMaiIdAsync(Guid khuyenMaiId)
+        {
+            return await _repo.GetSanPhamByKhuyenMaiIdAsync(khuyenMaiId);
+        }
 
         // Thêm danh mục mới
         public string CNThem(string idSP, string idMauSac, string idKichCo, int SoLuong, decimal gia)
@@ -32,7 +35,7 @@ namespace BUS.Services
             var idmausac = Guid.Parse(idMauSac);
             var idkichco = Guid.Parse(idKichCo);
             var idsp = Guid.Parse(idSP);
-         
+
             if (IsProductExists(idmausac, idkichco, idsp))
             {
                 return "Sản phẩm đã tồn tại";
@@ -58,7 +61,7 @@ namespace BUS.Services
         // Sửa spct
         public string CNSua(string idSPCT, string idSP, string idMauSac, string idKichCo, int SoLuong, decimal gia)
         {
-            
+
             SanPhamChiTiet sanPhamChiTIet = new SanPhamChiTiet()
             {
                 IdSanphamChitiet = Guid.Parse(idSPCT),
@@ -102,6 +105,10 @@ namespace BUS.Services
         {
             return _repo.GetAllSPDangKinhDoanh();
         }
+        public List<SanPhamChiTiet> CNShowSPDangKinhDoanhLoad()
+        {
+            return _repo.GetAllSPDangKinhDoanhLoad();
+        }
         public List<SanPhamChiTiet> GetAllSPDangKinhDoanhAndSale()
         {
             return _repo.GetAllSPDangKinhDoanhAndSale();
@@ -109,7 +116,7 @@ namespace BUS.Services
 
         public List<SanPhamChiTiet> TimkiemSpBanHangTheoTen(string tensanpham)
         {
-            return _repo.SearchSanPhamByName( tensanpham);
+            return _repo.SearchSanPhamByName(tensanpham);
         }
 
         public bool IsProductExists(Guid idDanhMuc, Guid idThuongHieu, Guid idSp)
@@ -130,12 +137,17 @@ namespace BUS.Services
         {
 
             var sanPhamList = _repo.GetAll();
-            return sanPhamList.ToDictionary(sp => sp.IdSanphamChitiet, sp => Convert.ToString( sp.IdSanPham));
+            return sanPhamList.ToDictionary(sp => sp.IdSanphamChitiet, sp => Convert.ToString(sp.IdSanPham));
         }
         public void UpdateProductPrice(Guid productId, decimal newPrice)
         {
             _repo.UpdateProductPrice(productId, newPrice);
         }
+
+
+
+
+
 
     }
 }

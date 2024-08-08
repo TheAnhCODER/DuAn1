@@ -70,37 +70,17 @@ namespace DAL.Responsitories
 
         }
 
-        public Dictionary<Guid, List<KhuyenMai>> GetAllCurrentKhuyenMaiBySanPhamChiTiet()
+        public async Task UpdateProductPriceAsync(Guid productId, decimal newPrice)
         {
-            var khuyenMaiList = _context.KhuyenMais
-                .Where(km => km.TrangThai == true && km.NgayBatDau <= DateTime.Now && km.NgayKetThuc >= DateTime.Now)
-                .ToList();
-
-            Dictionary<Guid, List<KhuyenMai>> khuyenMaiDict = new Dictionary<Guid, List<KhuyenMai>>();
-
-            foreach (var km in khuyenMaiList)
+            var sanPham = await _context.SanPhamChiTiets.FindAsync(productId);
+            if (sanPham != null)
             {
-                var sanPhamChiTietId = km.IdSanphamChitiet;
-
-                if (sanPhamChiTietId != null)
-                {
-                    Guid sanPhamChiTietIdValue = sanPhamChiTietId.Value;
-
-                    if (khuyenMaiDict.ContainsKey(sanPhamChiTietIdValue))
-                    {
-                        khuyenMaiDict[sanPhamChiTietIdValue].Add(km);
-                    }
-                    else
-                    {
-                        khuyenMaiDict[sanPhamChiTietIdValue] = new List<KhuyenMai> { km };
-                    }
-                }
+                sanPham.GiaSauGiam = newPrice;
+                _context.SanPhamChiTiets.Update(sanPham);
+                await _context.SaveChangesAsync();
             }
-
-            return khuyenMaiDict;
         }
 
-       
 
 
     }

@@ -35,6 +35,9 @@
             rb_vnd = new RadioButton();
             rb_phantram = new RadioButton();
             tb_giatrigiam = new TextBox();
+            btn_DanhSachSanPham = new Button();
+            label1 = new Label();
+            tb_TenGiamGia = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgv_DanhSachSPKhuyenMai).BeginInit();
             SuspendLayout();
             // 
@@ -43,9 +46,9 @@
             btn_BoChon.BackColor = Color.FromArgb(29, 135, 209);
             btn_BoChon.FlatStyle = FlatStyle.Flat;
             btn_BoChon.ForeColor = Color.White;
-            btn_BoChon.Location = new Point(118, 23);
+            btn_BoChon.Location = new Point(118, 12);
             btn_BoChon.Name = "btn_BoChon";
-            btn_BoChon.Size = new Size(93, 42);
+            btn_BoChon.Size = new Size(89, 64);
             btn_BoChon.TabIndex = 22;
             btn_BoChon.Text = "Bỏ chọn tất cả";
             btn_BoChon.UseVisualStyleBackColor = false;
@@ -57,9 +60,9 @@
             btn_chon.FlatStyle = FlatStyle.Flat;
             btn_chon.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_chon.ForeColor = Color.White;
-            btn_chon.Location = new Point(12, 23);
+            btn_chon.Location = new Point(12, 12);
             btn_chon.Name = "btn_chon";
-            btn_chon.Size = new Size(90, 42);
+            btn_chon.Size = new Size(89, 64);
             btn_chon.TabIndex = 21;
             btn_chon.Text = "Chọn tất cả";
             btn_chon.UseVisualStyleBackColor = false;
@@ -79,18 +82,21 @@
             // 
             // button1
             // 
-            button1.Location = new Point(482, 12);
+            button1.BackColor = Color.FromArgb(29, 135, 209);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(387, 12);
             button1.Name = "button1";
-            button1.Size = new Size(88, 64);
+            button1.Size = new Size(89, 64);
             button1.TabIndex = 23;
             button1.Text = "Cập nhật sản phẩm khuyến mại";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // rb_vnd
             // 
             rb_vnd.AutoSize = true;
-            rb_vnd.Location = new Point(277, 23);
+            rb_vnd.Location = new Point(107, 70);
             rb_vnd.Name = "rb_vnd";
             rb_vnd.Size = new Size(49, 19);
             rb_vnd.TabIndex = 24;
@@ -101,7 +107,7 @@
             // rb_phantram
             // 
             rb_phantram.AutoSize = true;
-            rb_phantram.Location = new Point(342, 23);
+            rb_phantram.Location = new Point(172, 70);
             rb_phantram.Name = "rb_phantram";
             rb_phantram.Size = new Size(35, 19);
             rb_phantram.TabIndex = 25;
@@ -111,16 +117,48 @@
             // 
             // tb_giatrigiam
             // 
-            tb_giatrigiam.Location = new Point(277, 53);
+            tb_giatrigiam.Location = new Point(213, 66);
             tb_giatrigiam.Name = "tb_giatrigiam";
             tb_giatrigiam.Size = new Size(100, 23);
             tb_giatrigiam.TabIndex = 26;
+            // 
+            // btn_DanhSachSanPham
+            // 
+            btn_DanhSachSanPham.BackColor = Color.FromArgb(29, 135, 209);
+            btn_DanhSachSanPham.FlatStyle = FlatStyle.Flat;
+            btn_DanhSachSanPham.ForeColor = Color.White;
+            btn_DanhSachSanPham.Location = new Point(481, 12);
+            btn_DanhSachSanPham.Name = "btn_DanhSachSanPham";
+            btn_DanhSachSanPham.Size = new Size(89, 64);
+            btn_DanhSachSanPham.TabIndex = 30;
+            btn_DanhSachSanPham.Text = "Danh sách sản phẩm";
+            btn_DanhSachSanPham.UseVisualStyleBackColor = false;
+            btn_DanhSachSanPham.Click += btn_DanhSachSanPham_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(213, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(74, 15);
+            label1.TabIndex = 32;
+            label1.Text = "Tên giảm giá";
+            // 
+            // tb_TenGiamGia
+            // 
+            tb_TenGiamGia.Location = new Point(213, 37);
+            tb_TenGiamGia.Name = "tb_TenGiamGia";
+            tb_TenGiamGia.Size = new Size(156, 23);
+            tb_TenGiamGia.TabIndex = 31;
             // 
             // GiamGiaSanPham
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(575, 443);
+            Controls.Add(label1);
+            Controls.Add(tb_TenGiamGia);
+            Controls.Add(btn_DanhSachSanPham);
             Controls.Add(tb_giatrigiam);
             Controls.Add(rb_phantram);
             Controls.Add(rb_vnd);
@@ -145,5 +183,8 @@
         private RadioButton rb_vnd;
         private RadioButton rb_phantram;
         private TextBox tb_giatrigiam;
+        private Button btn_DanhSachSanPham;
+        private Label label1;
+        private TextBox tb_TenGiamGia;
     }
 }

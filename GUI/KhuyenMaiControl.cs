@@ -40,6 +40,12 @@ namespace GUI
 
         }
 
+        public void RefreshData()
+        {
+            // Logic để làm mới dữ liệu
+            ShowKhuyenMai(); // Giả sử LoadData() là phương thức để tải dữ liệu vào các control
+        }
+
 
 
         private void KhuyenMaiControl_Load(object sender, EventArgs e)
@@ -177,8 +183,10 @@ namespace GUI
 
             foreach (var item in khuyenMais)
             {
+                string loaiGiamGiaText = item.LoaiGiamGia ? "VND" : "%";
+                string trangThai = (item.TrangThai ?? false) ? "Đang hoạt động" : "Hết hạn"; // Xử lý giá trị bool? với giá trị mặc định
 
-                dgv_DanhSachKhuyenMai.Rows.Add(stt++, item.IdKhuyenMai, item.TenKhuyenMai, item.GiamGia, item.NgayBatDau, item.NgayKetThuc, item.TrangThai, item.LoaiGiamGia);
+                dgv_DanhSachKhuyenMai.Rows.Add(stt++, item.IdKhuyenMai, item.TenKhuyenMai, item.GiamGia, item.NgayBatDau, item.NgayKetThuc, trangThai, loaiGiamGiaText);
             }
         }
 
@@ -289,8 +297,8 @@ namespace GUI
                 decimal giamGia = decimal.Parse(row.Cells[3].Value.ToString());
                 DateTime ngayBatDau = DateTime.Parse(row.Cells[4].Value.ToString());
                 DateTime ngayKetThuc = DateTime.Parse(row.Cells[5].Value.ToString());
-                bool trangThai = bool.Parse(row.Cells[6].Value.ToString());
-                bool loaiGiamGia = bool.Parse(row.Cells[7].Value.ToString());
+                string trangThai = row.Cells[6].Value.ToString();
+                string loaiGiamGia = row.Cells[7].Value.ToString();
 
                 // Cập nhật các điều khiển trên form với thông tin chi tiết của khuyến mãi
                 tb_makhuyenmai.Text = idKhuyenMai;
@@ -302,21 +310,41 @@ namespace GUI
 
 
                 // Đặt trạng thái cho các RadioButton dựa trên giá trị của loaiGiamGia
-                rb_VND.Checked = loaiGiamGia;
-                rb_PhanTram.Checked = !loaiGiamGia;
+                if (loaiGiamGia == "VND")
+                {
+                    rb_VND.Checked = true;
+                    rb_PhanTram.Checked = false;
+                }
+                else
+                {
+                    rb_VND.Checked = false;
+                    rb_PhanTram.Checked = true;
+                }
             }
         }
 
-        public static string giatrigiam;
-        public static bool radiobt = true;
 
+        public static string giatrigiam, tenkhuyenmai, makhuyenmai;
+        public static bool radiobt = true;
         private void dgv_DanhSachKhuyenMai_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Đảm bảo rằng hàng có chỉ số hợp lệ
             {
                 DataGridViewRow row = dgv_DanhSachKhuyenMai.Rows[e.RowIndex];
-                bool trangThai = bool.Parse(row.Cells[6].Value.ToString()); // Cột trạng thái
+                bool checktrangthai = false;
+
+                string trangThai = row.Cells[6].Value.ToString(); // Cột trạng thái
+                if (trangThai == "Đang hoạt động")
+                {
+                    checktrangthai = true;
+                }
+                else
+                {
+                    checktrangthai = false;
+                }
                 giatrigiam = row.Cells[3].Value.ToString();
+                tenkhuyenmai = row.Cells[2].Value.ToString();
+                makhuyenmai = row.Cells[1].Value.ToString();
                 if (rb_VND.Checked)
                 {
                     radiobt = true;
@@ -324,8 +352,8 @@ namespace GUI
                 else if (rb_PhanTram.Checked)
                 {
                     radiobt = false;
-                }; 
-                if (trangThai)
+                };
+                if (checktrangthai)
                 {
                     GiamGiaSanPham giamGiaSanPham = new GiamGiaSanPham();
                     giamGiaSanPham.ShowDialog();

@@ -500,9 +500,13 @@ namespace GUI
                     return;
                 }
                 var khachHang = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text);
+                // Nếu khách hàng không tồn tại, thêm khách hàng mới vào cơ sở dữ liệu
+                if (string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
+                {
+                    khachHang = khachHangServices.GetKhachHangBySDT("0");
+                }
                 if (khachHang == null)
                 {
-                    // Nếu khách hàng không tồn tại, thêm khách hàng mới vào cơ sở dữ liệu
                     if (!KhachHangControl.IsVietnamesePhoneNumber(tb_SoDienThoai_BanHang.Text))
                     {
                         MessageBox.Show("Sai định dạng số điện thoại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -516,6 +520,10 @@ namespace GUI
                 {
                     tb_TenKhachHang_BanHang.Text = khachHang.TenKhachHang;
                     string sdt = tb_SoDienThoai_BanHang.Text;
+                    if (string.IsNullOrEmpty(sdt))
+                    {
+                        sdt = "0";
+                    }
                     string mahd = tb_MaHoaDon_BanHang.Text;
                     if (string.IsNullOrEmpty(mahd))
                     {
@@ -735,12 +743,16 @@ namespace GUI
                 DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán không?", "Xác nhận thanh toán hóa đơn", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    if (string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
+                    if (string.IsNullOrEmpty(tb_TenKhachHang_BanHang.Text))
                     {
                         MessageBox.Show("Vui lòng chọn khách hàng?", "Xác nhận thêm khách hàng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     var khachHang = khachHangServices.GetKhachHangBySDT(tb_SoDienThoai_BanHang.Text);
+                    if (string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
+                    {
+                        khachHang = khachHangServices.GetKhachHangBySDT("0");
+                    }
                     if (khachHang == null)
                     {
                         MessageBox.Show("SĐT khách hàng không hợp lệ!");
@@ -754,6 +766,10 @@ namespace GUI
                         {
                             var tongSoTien = TinhTongTienKhachPhaiTra(tb_MaHoaDon_BanHang.Text.ToString());
                             string sodienthoaikhachhang = tb_SoDienThoai_BanHang.Text;
+                            if (string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
+                            {
+                                sodienthoaikhachhang = "0";
+                            }
                             hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 1, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang);
                             MessageBox.Show("Đã thanh toán hóa đơn!");
                             checkInHoaDon();
@@ -774,6 +790,11 @@ namespace GUI
                         if (formBank.tinhtrangtrangtoan)
                         {
                             string sodienthoaikhachhang = tb_SoDienThoai_BanHang.Text;
+                            if (string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
+                            {
+                                sodienthoaikhachhang = "0";
+                            }
+
                             hoaDonServices.SuaTrangThai(tb_MaHoaDon_BanHang.Text, 1, 2, Convert.ToDecimal(tongSoTien), sodienthoaikhachhang);
                             MessageBox.Show("Đã thanh toán hóa đơn!");
                             checkInHoaDon();
@@ -837,31 +858,35 @@ namespace GUI
                 gfx.DrawString("Hóa đơn bán hàng", titleFont, XBrushes.Black, new XRect(0, 60, page.Width, 40), XStringFormats.TopCenter);
                 // Vẽ đường kẻ chia ranh giới giữa tiêu đề và bảng
                 gfx.DrawLine(XPens.Black, 20, 140, page.Width - 20, 140);
-                gfx.DrawString("Ngày tạo: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), font, XBrushes.Black, new XRect(20, 110, page.Width - 40, 20), XStringFormats.TopLeft);
+                gfx.DrawString("Ngày thanh toán: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), font, XBrushes.Black, new XRect(20, 110, page.Width - 40, 20), XStringFormats.TopLeft);
 
+                // Thông tin khách hàng
+                int yPosition = 150;
+                int rowHeight = 20; // Chiều cao của mỗi hàng
+                gfx.DrawString("Khách hàng:" + tb_TenKhachHang_BanHang.Text, fontBold, XBrushes.Black, new XRect(20, yPosition, page.Width - 40, rowHeight), XStringFormats.TopLeft);
+                yPosition += rowHeight;
 
+                if (!string.IsNullOrEmpty(tb_SoDienThoai_BanHang.Text))
+                {
+                    yPosition += rowHeight;
+                    gfx.DrawString("Số điện thoại: " + tb_SoDienThoai_BanHang.Text, font, XBrushes.Black, new XRect(20, yPosition, page.Width - 40, rowHeight), XStringFormats.TopLeft);
+                }
+
+                yPosition += rowHeight;
 
                 // Vẽ bảng từ DataGridView
-                int yPosition = 150;
-                int rowHeight = 25;
-                int[] columnWidths = { 50, 200, 100, 100, 100 }; // Đặt chiều rộng các cột
-
-                // Tiêu đề cột
-                XSolidBrush headerBackground = new XSolidBrush(XColor.FromArgb(29, 135, 209));
-                XSolidBrush headerForeground = XBrushes.White;
-                gfx.DrawRectangle(headerBackground, 20, yPosition, page.Width - 40, rowHeight);
+                gfx.DrawRectangle(XBrushes.LightGray, 20, yPosition, page.Width - 40, rowHeight);
                 gfx.DrawRectangle(XPens.Black, 20, yPosition, page.Width - 40, rowHeight);
-                gfx.DrawString("STT", fontBold, headerForeground, new XRect(25, yPosition, columnWidths[0], rowHeight), XStringFormats.Center);
-                gfx.DrawString("Tên sản phẩm", fontBold, headerForeground, new XRect(75, yPosition, columnWidths[1], rowHeight), XStringFormats.Center);
-                gfx.DrawString("Đơn giá", fontBold, headerForeground, new XRect(275, yPosition, columnWidths[2], rowHeight), XStringFormats.Center);
-                gfx.DrawString("Số lượng", fontBold, headerForeground, new XRect(375, yPosition, columnWidths[3], rowHeight), XStringFormats.Center);
-                gfx.DrawString("Thành tiền", fontBold, headerForeground, new XRect(475, yPosition, columnWidths[4], rowHeight), XStringFormats.Center);
+                gfx.DrawString("STT", fontBold, XBrushes.Black, new XRect(25, yPosition, 50, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Tên sản phẩm", fontBold, XBrushes.Black, new XRect(75, yPosition, 200, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Đơn giá", fontBold, XBrushes.Black, new XRect(275, yPosition, 100, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Số lượng", fontBold, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
+                gfx.DrawString("Thành tiền", fontBold, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
                 yPosition += rowHeight;
 
                 // Dữ liệu từ DataGridView
                 int stt = 1;
                 decimal totalAmount = 0;
-                XPen borderPen = new XPen(XColors.Black, 1);
                 foreach (DataGridViewRow row in dgv_HoaDonChiTiet_BanHang.Rows)
                 {
                     if (row.IsNewRow) continue;
@@ -874,17 +899,17 @@ namespace GUI
                     decimal thanhTien = donGia * soLuong;
                     totalAmount += thanhTien;
 
-                    gfx.DrawRectangle(borderPen, 20, yPosition, page.Width - 40, rowHeight);
-                    gfx.DrawLine(borderPen, 20 + columnWidths[0], yPosition, 20 + columnWidths[0], yPosition + rowHeight);
-                    gfx.DrawLine(borderPen, 20 + columnWidths[0] + columnWidths[1], yPosition, 20 + columnWidths[0] + columnWidths[1], yPosition + rowHeight);
-                    gfx.DrawLine(borderPen, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2], yPosition, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2], yPosition + rowHeight);
-                    gfx.DrawLine(borderPen, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], yPosition, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], yPosition + rowHeight);
+                    gfx.DrawRectangle(XPens.Black, 20, yPosition, page.Width - 40, rowHeight);
+                    gfx.DrawLine(XPens.Black, 20 + 50, yPosition, 20 + 50, yPosition + rowHeight);
+                    gfx.DrawLine(XPens.Black, 20 + 50 + 200, yPosition, 20 + 50 + 200, yPosition + rowHeight);
+                    gfx.DrawLine(XPens.Black, 20 + 50 + 200 + 100, yPosition, 20 + 50 + 200 + 100, yPosition + rowHeight);
+                    gfx.DrawLine(XPens.Black, 20 + 50 + 200 + 100 + 100, yPosition, 20 + 50 + 200 + 100 + 100, yPosition + rowHeight);
 
-                    gfx.DrawString(stt.ToString(), font, XBrushes.Black, new XRect(25, yPosition, columnWidths[0], rowHeight), XStringFormats.Center);
-                    gfx.DrawString(tenSanPham, font, XBrushes.Black, new XRect(75, yPosition, columnWidths[1], rowHeight), XStringFormats.Center);
-                    gfx.DrawString(donGia.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(275, yPosition, columnWidths[2], rowHeight), XStringFormats.Center);
-                    gfx.DrawString(soLuong.ToString(), font, XBrushes.Black, new XRect(375, yPosition, columnWidths[3], rowHeight), XStringFormats.Center);
-                    gfx.DrawString(thanhTien.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(475, yPosition, columnWidths[4], rowHeight), XStringFormats.Center);
+                    gfx.DrawString(stt.ToString(), font, XBrushes.Black, new XRect(25, yPosition, 50, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(tenSanPham, font, XBrushes.Black, new XRect(75, yPosition, 200, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(donGia.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(275, yPosition, 100, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(soLuong.ToString(), font, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
+                    gfx.DrawString(thanhTien.ToString("#,##0 'VND'"), font, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
 
                     yPosition += rowHeight;
                     stt++;
@@ -895,8 +920,26 @@ namespace GUI
 
                 // Tổng cộng
                 yPosition += 20;
-                gfx.DrawString("Tổng cộng:", fontBold, XBrushes.Black, new XRect(375, yPosition, columnWidths[3], rowHeight), XStringFormats.Center);
-                gfx.DrawString(totalAmount.ToString("#,##0 'VND'"), fontBold, XBrushes.Black, new XRect(475, yPosition, columnWidths[4], rowHeight), XStringFormats.Center);
+                gfx.DrawString("Tổng cộng:", fontBold, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
+                gfx.DrawString(totalAmount.ToString("#,##0 'VND'"), fontBold, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
+
+                // Tiền giảm giá
+                yPosition += rowHeight;
+                string giamGiaText = tb_GiamGia.Text;
+                string giamGiaCleaned = giamGiaText.Replace("VND", "").Trim(); // Loại bỏ ký tự 'VND' và trim khoảng trắng
+
+                // Chuyển đổi chuỗi đã làm sạch sang decimal
+                decimal giamgia = decimal.Parse(giamGiaCleaned);
+                gfx.DrawString("Giảm giá:", fontBold, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
+                gfx.DrawString(giamgia.ToString("#,##0 'VND'"), fontBold, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
+
+                // Tiền thực cần trả
+                yPosition += rowHeight;
+                string tientraText = tb_TienSauGiamGia.Text;
+                string tientraCleaned = tientraText.Replace("VND", "").Trim(); // Loại bỏ ký tự 'VND' và trim khoảng trắng
+                decimal tiencantra = decimal.Parse(tientraCleaned);
+                gfx.DrawString("Tiền thực cần trả:", fontBold, XBrushes.Black, new XRect(375, yPosition, 100, rowHeight), XStringFormats.Center);
+                gfx.DrawString(tiencantra.ToString("#,##0 'VND'"), fontBold, XBrushes.Black, new XRect(475, yPosition, 100, rowHeight), XStringFormats.Center);
 
                 // Thông điệp cảm ơn
                 yPosition += rowHeight + 20;
@@ -911,13 +954,9 @@ namespace GUI
             {
                 MessageBox.Show("Không có quyền truy cập thư mục: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (IOException ex)
-            {
-                MessageBox.Show("Lỗi IO: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show("Đã xảy ra lỗi: " + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1009,6 +1048,66 @@ namespace GUI
 
                     MessageBox.Show("Đã xóa sản phẩm và cập nhật lại số lượng sản phẩm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
+        public void RefreshData()
+        {
+            // Logic để làm mới dữ liệu
+            LoadHoaDonCho();// Giả sử LoadData() là phương thức để tải dữ liệu vào các control
+            dgv_DangGiamGia.Rows.Clear();
+            dgv_TatCaSanPham.Rows.Clear();
+            List<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietServices.CNShowSPDangKinhDoanhLoad();
+            refreshSanPham_BanHang(sanPhamChiTiets);
+            ShowSanPham_BanHangGiamGia();
+
+        }
+        public void refreshSanPham_BanHang(List<SanPhamChiTiet> sanPhamChiTiets)
+        {
+
+            dgv_TatCaSanPham.Rows.Clear();
+            dgv_TatCaSanPham.ColumnCount = 8;
+            int stt = 1;
+            dgv_TatCaSanPham.Columns[0].HeaderText = "Số thứ tự";
+            dgv_TatCaSanPham.Columns[1].HeaderText = "Mã sản phẩm chi tiết";
+            dgv_TatCaSanPham.Columns[2].HeaderText = "Tên sản phẩm";
+            dgv_TatCaSanPham.Columns[3].HeaderText = "Màu sắc";
+            dgv_TatCaSanPham.Columns[4].HeaderText = "Kích cỡ";
+            dgv_TatCaSanPham.Columns[5].HeaderText = "Số lượng";
+            dgv_TatCaSanPham.Columns[6].HeaderText = "Giá";
+            dgv_TatCaSanPham.Columns[7].HeaderText = "Giá sau giảm";
+
+            dgv_TatCaSanPham.Columns[0].Visible = false;
+            dgv_TatCaSanPham.Columns[1].Visible = false;
+
+            dgv_TatCaSanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt chiều cao cho hàng tiêu đề
+            dgv_TatCaSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_TatCaSanPham.ColumnHeadersHeight = 50; // Đặt chiều cao tùy ý
+
+            // Thiết lập màu sắc và kiểu chữ cho hàng tiêu đề
+            dgv_TatCaSanPham.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(29, 135, 209);
+            dgv_TatCaSanPham.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv_TatCaSanPham.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_TatCaSanPham.ColumnHeadersDefaultCellStyle.Font = new Font(dgv_TatCaSanPham.Font, FontStyle.Bold);
+            dgv_TatCaSanPham.EnableHeadersVisualStyles = false;
+            Dictionary<Guid, string> sanPhamDict = sanPhamServices.GetSanPhamDict();
+            Dictionary<Guid, string> mauSacDict = mauSacServices.GetMauSacDict();
+            Dictionary<Guid, string> kichCoDict = kichCoServices.GetKichCoDict();
+
+            foreach (var item in sanPhamChiTiets)
+            {
+                string mausac = mauSacDict.ContainsKey(item.IdMauSac.Value)
+           ? mauSacDict[item.IdMauSac.Value]
+           : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
+                string kichco = kichCoDict.ContainsKey(item.IdKichCo.Value)
+           ? kichCoDict[item.IdKichCo.Value]
+           : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
+                string tenSanPham = sanPhamDict.ContainsKey(item.IdSanPham.Value)
+           ? sanPhamDict[item.IdSanPham.Value]
+           : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy tên sản phẩm
+
+                string giaSauGiam = item.GiaSauGiam.HasValue ? item.GiaSauGiam.Value.ToString("F2") : "Không có";
+                dgv_TatCaSanPham.Rows.Add(stt++, item.IdSanphamChitiet, tenSanPham, mausac, kichco, item.SoLuong, item.Gia, giaSauGiam);
             }
         }
 

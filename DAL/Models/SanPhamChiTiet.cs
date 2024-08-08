@@ -8,7 +8,7 @@ namespace DAL.Models
         public SanPhamChiTiet()
         {
             HoaDonChiTiets = new HashSet<HoaDonChiTiet>();
-            KhuyenMais = new HashSet<KhuyenMai>();
+            KhuyenMaiSpcts = new HashSet<KhuyenMaiSpct>();
         }
 
         public Guid IdSanphamChitiet { get; set; }
@@ -23,6 +23,6 @@ namespace DAL.Models
         public virtual MauSac? IdMauSacNavigation { get; set; }
         public virtual SanPham? IdSanPhamNavigation { get; set; }
         public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; }
-        public virtual ICollection<KhuyenMai> KhuyenMais { get; set; }
+        public virtual ICollection<KhuyenMaiSpct> KhuyenMaiSpcts { get; set; }
     }
 }

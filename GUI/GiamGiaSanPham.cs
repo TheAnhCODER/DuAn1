@@ -21,6 +21,7 @@ namespace GUI
         MauSacServices mauSacServices;
         SanPhamServices sanPhamServices;
         KhuyenMaiServices KhuyenMaiServices;
+        KhuyenMaiSPCTService _KhuyenMaiSPCTService = new KhuyenMaiSPCTService();
         public GiamGiaSanPham()
         {
             InitializeComponent();
@@ -95,7 +96,7 @@ namespace GUI
             Dictionary<Guid, string> sanPhamDict = sanPhamServices.GetSanPhamDict();
             Dictionary<Guid, string> mauSacDict = mauSacServices.GetMauSacDict();
             Dictionary<Guid, string> kichCoDict = kichCoServices.GetKichCoDict();
-            Dictionary<Guid, List<KhuyenMai>> khuyenMaiDict = KhuyenMaiServices.GetAllCurrentKhuyenMaiBySanPhamChiTiet();
+
             foreach (var item in sanPhamChiTiets)
             {
                 if (item.GiaSauGiam != null)
@@ -121,8 +122,12 @@ namespace GUI
             }
         }
 
+
         private void GiamGiaSanPham_Load(object sender, EventArgs e)
         {
+            tb_giatrigiam.Visible = false;
+            rb_phantram.Visible = false;
+            rb_vnd.Visible = false;
             ShowSanPham_KhuyenMai();
             tb_giatrigiam.Text = KhuyenMaiControl.giatrigiam;
             if (KhuyenMaiControl.radiobt)
@@ -133,6 +138,7 @@ namespace GUI
             {
                 rb_phantram.Checked = true;
             }
+            tb_TenGiamGia.Text = KhuyenMaiControl.tenkhuyenmai;
 
         }
 
@@ -141,14 +147,15 @@ namespace GUI
             decimal discountValue = decimal.Parse(tb_giatrigiam.Text); // Giá trị giảm giá từ form này
             bool isPercentage = rb_phantram.Checked; // Kiểm tra kiểu giảm giá
             UpdatePrices(discountValue, isPercentage);
+            ShowSanPham_KhuyenMai();
         }
 
-        public void UpdatePrices(decimal discountValue, bool isPercentage)
+        public async void UpdatePrices(decimal discountValue, bool isPercentage)
         {
+            string idkhuyenmai = KhuyenMaiControl.makhuyenmai;
             foreach (DataGridViewRow row in dgv_DanhSachSPKhuyenMai.Rows)
             {
-                DataGridViewCheckBoxCell chkCell = row.Cells["chkChon"] as DataGridViewCheckBoxCell;
-                if (chkCell != null && Convert.ToBoolean(chkCell.Value))
+                if (row.Cells["chkChon"].Value != null && Convert.ToBoolean(row.Cells["chkChon"].Value))
                 {
                     decimal giaGoc = decimal.Parse(row.Cells[6].Value.ToString());
                     decimal giamGia = 0;
@@ -165,24 +172,28 @@ namespace GUI
                     decimal giaSauGiam = giaGoc - giamGia;
                     row.Cells[7].Value = giaSauGiam.ToString("F2");
 
-                    // Cập nhật giá vào cơ sở dữ liệu
+                    // Lấy thông tin sản phẩm và khuyến mại
                     Guid productId = Guid.Parse(row.Cells[1].Value.ToString());
+                    Guid khuyenMaiId = Guid.Parse(idkhuyenmai);/* Lấy ID khuyến mại từ form hoặc trạng thái ứng dụng */
 
-                    // Kiểm tra xem sản phẩm đã có giá giảm chưa
-                    sanPhamChiTietServices.UpdateProductPrice(productId, giaSauGiam);
-                    MessageBox.Show("Thêm khuyến mãi thành công");
-                    this.Close();
+                    // Cập nhật giá vào cơ sở dữ liệu
+                    await KhuyenMaiServices.UpdateProductPriceAsync(productId, giaSauGiam);
+
+                    // Lưu thông tin vào bảng KhuyenMaiSPCT
+                    await _KhuyenMaiSPCTService.AddOrUpdateKhuyenMaiSPCTAsync(khuyenMaiId, productId, giaSauGiam);
+
+                    MessageBox.Show("Cập nhật khuyến mãi thành công");
                 }
             }
+
+            // Đóng form sau khi hoàn tất
+            this.Close();
         }
 
-
-
-
-
-
-
-
-
+        private void btn_DanhSachSanPham_Click(object sender, EventArgs e)
+        {
+            DanhSachSpGiamGia danhSachSpGiamGia = new DanhSachSpGiamGia();
+            danhSachSpGiamGia.ShowDialog();
+        }
     }
 }

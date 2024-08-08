@@ -67,6 +67,7 @@ namespace GUI
         {
             MoveSidePanel(btn_BanHang);
             banHangControl1.BringToFront();
+            banHangControl1.RefreshData();
         }
 
         private void btn_SanPham_Click(object sender, EventArgs e)

@@ -84,12 +84,11 @@ namespace BUS.Services
             return _khuyenMaiRepos.IsProductExists(tenkhuyenmai, giamGia,ngayBatDau,NgayKetThuc,LoaiGiamGia);
         }
 
-        public Dictionary<Guid, List<KhuyenMai>> GetAllCurrentKhuyenMaiBySanPhamChiTiet()
+        public async Task UpdateProductPriceAsync(Guid productId, decimal newPrice)
         {
-            return _khuyenMaiRepos.GetAllCurrentKhuyenMaiBySanPhamChiTiet();
+            _khuyenMaiRepos.UpdateProductPriceAsync(productId, newPrice);
         }
 
-       
 
 
     }

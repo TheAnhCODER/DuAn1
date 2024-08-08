@@ -5,8 +5,12 @@ namespace DAL.Models
 {
     public partial class KhuyenMai
     {
+        public KhuyenMai()
+        {
+            KhuyenMaiSpcts = new HashSet<KhuyenMaiSpct>();
+        }
+
         public Guid IdKhuyenMai { get; set; }
-        public Guid? IdSanphamChitiet { get; set; }
         public string? TenKhuyenMai { get; set; }
         public decimal? GiamGia { get; set; }
         public DateTime NgayBatDau { get; set; }
@@ -14,6 +18,6 @@ namespace DAL.Models
         public bool? TrangThai { get; set; }
         public bool LoaiGiamGia { get; set; }
 
-        public virtual SanPhamChiTiet? IdSanphamChitietNavigation { get; set; }
+        public virtual ICollection<KhuyenMaiSpct> KhuyenMaiSpcts { get; set; }
     }
 }
