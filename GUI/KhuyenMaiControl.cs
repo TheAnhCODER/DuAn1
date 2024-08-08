@@ -454,7 +454,21 @@ namespace GUI
 
         private void dtk_NgayBatDau_TimKiem_ValueChanged(object sender, EventArgs e)
         {
+            DateTimePicker dateTimePicker = sender as DateTimePicker;
+            if (dateTimePicker != null)
+            {
+                DateTime currentDate = DateTime.Now.Date;
 
+                // Kiểm tra nếu ngày được chọn lớn hơn ngày hiện tại
+                if (dateTimePicker.Value.Date > currentDate)
+                {
+                    // Đặt giá trị của DateTimePicker về ngày hiện tại
+                    dateTimePicker.Value = currentDate;
+
+                    // Hiển thị thông báo cho người dùng (tuỳ chọn)
+                    MessageBox.Show("Ngày không thể vượt quá ngày hiện tại.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
     }
 }

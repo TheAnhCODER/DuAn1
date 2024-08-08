@@ -81,34 +81,49 @@ CREATE TABLE SanPham_ChiTiet (
     FOREIGN KEY (id_mau_sac) REFERENCES MauSac(id_mau_sac),
     FOREIGN KEY (id_kich_co) REFERENCES KichCo(id_kich_co)
 );
+CREATE TABLE KhuyenMaiSPCT (
+    Id UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
+    IdKhuyenMai UNIQUEIDENTIFIER NOT NULL,
+    IdSanPhamChiTiet UNIQUEIDENTIFIER NOT NULL,
+    FOREIGN KEY (IdKhuyenMai) REFERENCES KhuyenMai(IdKhuyenMai),
+    FOREIGN KEY (IdSanPhamChiTiet) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet)
+);
+
 CREATE TABLE KhuyenMai (
     IdKhuyenMai UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
-	 id_sanpham_chitiet UNIQUEIDENTIFIER,
 	TenKhuyenMai nvarchar(255),
     GiamGia DECIMAL(18, 2),
     NgayBatDau DATE NOT NULL,
     NgayKetThuc DATE NOT NULL,
     TrangThai BIT NOT NULL default 1,
     LoaiGiamGia BIT NOT NULL,
-	FOREIGN KEY (id_sanpham_chitiet) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet)
-
 );
 
-CREATE TABLE KhuyenMaiSPCT (
-    Id UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
-    IdKhuyenMai UNIQUEIDENTIFIER,
-    IdSanphamChiTiet UNIQUEIDENTIFIER,
-    FOREIGN KEY (IdKhuyenMai) REFERENCES KhuyenMai(IdKhuyenMai),
-    FOREIGN KEY (IdSanphamChiTiet) REFERENCES SanPham_ChiTiet(id_sanpham_chitiet)
-);
+
 CREATE PROCEDURE UpdateKhuyenMaiStatus
 AS
 BEGIN
+    -- Cập nhật trạng thái của khuyến mãi
     UPDATE KhuyenMai
-    SET Trang_thai = 0
-    WHERE Ngay_ket_thuc < CAST(GETDATE() AS DATE) AND Trang_thai = 1;
+    SET TrangThai = 0
+    WHERE NgayKetThuc < CAST(GETDATE() AS DATE) AND TrangThai = 1;
+
+    -- Cập nhật giá sau giảm của sản phẩm chi tiết về NULL cho các khuyến mãi đã kết thúc
+    UPDATE SanPham_ChiTiet
+    SET Gia_sau_giam = NULL
+    WHERE id_sanpham_chitiet IN (
+        SELECT IdSanPhamChiTiet
+        FROM KhuyenMaiSPCT
+        WHERE IdKhuyenMai IN (
+            SELECT IdKhuyenMai
+            FROM KhuyenMai
+            WHERE NgayKetThuc < CAST(GETDATE() AS DATE) AND TrangThai = 0
+        )
+    );
 END
 GO
+
+drop proc UpdateKhuyenMaiStatus
 
 
 CREATE TABLE HoaDon (
