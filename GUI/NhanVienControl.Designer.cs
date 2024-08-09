@@ -278,7 +278,7 @@
             groupBox1.Size = new Size(858, 278);
             groupBox1.TabIndex = 34;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Thiết lập thông tin nhân viên";
+            groupBox1.Text = "SS";
             // 
             // cb_trangthai_NhanVien
             // 

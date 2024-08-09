@@ -52,11 +52,12 @@ namespace BUS.Services
             return nhanVienRespo.GetNhanVienByEmail(email);
         }
         // Thêm nhân viên mới
-        public string CNThem(string tenNhanVien, string? gioiTinh, DateTime? ngaySinh, string? diaChi, string? dienThoai, string? email, string? matKhau, bool trangThai)
+        public string CNThem(string tenNhanVien, string? gioiTinh, DateTime? ngaySinh, string? diaChi, string? dienThoai, string? email, string? matKhau, bool trangThai ,int idChucvu)
         {
             NhanVien nhanVien = new NhanVien()
             {
                 IdNhanvien = Guid.NewGuid(), // Tạo một Id mới cho nhân viên
+                IdChucvu = 2, // Gán giá trị IdChucvu là 2
                 TenNhanVien = tenNhanVien,
                 GioiTinh = gioiTinh,
                 NgaySinh = ngaySinh.Value,
@@ -125,6 +126,14 @@ namespace BUS.Services
             var nhanViens = nhanVienRespo.GetAll();
             return nhanViens.ToDictionary(ms => ms.IdNhanvien, ms => ms.TenNhanVien);
         }
-
+        public bool IsPhoneNumberExists(string phoneNumber)
+        {
+            // Gọi phương thức Repository để kiểm tra sự tồn tại của số điện thoại
+            return nhanVienRespo.IsPhoneNumberExists(phoneNumber);
+        }
+        public bool IsEmailExists(string email)
+        {
+            return nhanVienRespo.IsEmailExists(email);
+        }
     }
 }

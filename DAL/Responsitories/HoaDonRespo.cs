@@ -63,21 +63,22 @@ namespace DAL.Responsitories
 
             // Truy vấn dữ liệu từ cơ sở dữ liệu
             return _dbContext.HoaDons
-                .Where(hd => hd.NgayTao >= startOfDay && hd.NgayTao <= endOfDay)
+                .Where(hd => hd.NgayThanhToan >= startOfDay && hd.NgayThanhToan <= endOfDay)
                 .ToList();
         }
 
         public List<HoaDon> GetHoaDonByPhoneNumber(string phoneNumber)
         {
             return _dbContext.HoaDons
-                .Where(hd => hd.SoDienThoai.Contains(phoneNumber)) // Giả sử 'Sdt' là trường số điện thoại
-                .ToList();
+                            .Where(hd => hd.SoDienThoai == phoneNumber && hd.TrangThaiThanhToan == 1)
+                            .ToList();
         }
+
         public List<HoaDon> GetHoaDonsByDateRange(DateTime startDate, DateTime endDate)
         {
             return _dbContext.HoaDons
-                .Where(hd => hd.NgayTao >= startDate && hd.NgayTao <= endDate)
-                .ToList();
+               .Where(hd => hd.NgayThanhToan >= startDate && hd.NgayThanhToan <= endDate && hd.TrangThaiThanhToan != 0)
+               .ToList();
         }
 
 
@@ -87,8 +88,8 @@ namespace DAL.Responsitories
         public IEnumerable<int> GetAvailableYears()
         {
             return _dbContext.HoaDons
-                .Where(h => h.NgayTao.HasValue)
-                .Select(h => h.NgayTao.Value.Year)
+                .Where(h => h.NgayThanhToan.HasValue)
+                .Select(h => h.NgayThanhToan.Value.Year)
                 .Distinct()
                 .OrderBy(year => year)
                 .ToList();
@@ -118,13 +119,13 @@ namespace DAL.Responsitories
         public decimal GetTotalRevenueByMonth(int month, int year)
         {
             return _dbContext.HoaDons
-                .Where(h => h.NgayTao.HasValue && h.NgayTao.Value.Month == month && h.NgayTao.Value.Year == year)
+                .Where(h => h.NgayThanhToan.HasValue && h.NgayThanhToan.Value.Month == month && h.NgayThanhToan.Value.Year == year)
                 .Sum(h => h.TongSoTienHoaDon);
         }
         public decimal GetTotalRevenueByYear(int year)
         {
             return _dbContext.HoaDons
-                .Where(h => h.NgayTao.HasValue && h.NgayTao.Value.Year == year)
+                .Where(h => h.NgayThanhToan.HasValue && h.NgayThanhToan.Value.Year == year)
                 .Sum(h => h.TongSoTienHoaDon);
         }
 
@@ -132,21 +133,21 @@ namespace DAL.Responsitories
         public int CountInvoicesByMonth(int month, int year)
         {
             return _dbContext.HoaDons
-                .Count(hd => hd.NgayTao.HasValue && hd.NgayTao.Value.Month == month && hd.NgayTao.Value.Year == year);
+                .Count(hd => hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value.Month == month && hd.NgayThanhToan.Value.Year == year);
         }
 
         // Đếm số hóa đơn theo năm
         public int CountInvoicesByYear(int year)
         {
             return _dbContext.HoaDons
-                .Count(hd => hd.NgayTao.HasValue && hd.NgayTao.Value.Year == year);
+                .Count(hd => hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value.Year == year);
         }
 
         public Dictionary<Guid, int> GetProductSalesCountsByMonth(int month, int year)
         {
             var query = from hd in _dbContext.HoaDons
                         join hdc in _dbContext.HoaDonChiTiets on hd.IdHoadon equals hdc.MaHoaDon
-                        where hd.NgayTao.HasValue && hd.NgayTao.Value.Year == year && hd.NgayTao.Value.Month == month
+                        where hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value.Year == year && hd.NgayThanhToan.Value.Month == month
                         group hdc by hdc.MaSpct into g
                         select new
                         {
@@ -162,8 +163,8 @@ namespace DAL.Responsitories
         {
             // Thay đổi phương thức này để lấy các tháng có dữ liệu
             var months = _dbContext.HoaDons
-                        .Where(hd => hd.NgayTao.HasValue && hd.NgayTao.Value.Year == year)
-                        .Select(hd => hd.NgayTao.Value.Month)
+                        .Where(hd => hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value.Year == year)
+                        .Select(hd => hd.NgayThanhToan.Value.Month)
                         .Distinct()
                         .OrderBy(month => month)
                         .ToList();
@@ -174,7 +175,7 @@ namespace DAL.Responsitories
         {
             var query = from hd in _dbContext.HoaDons
                         join hdc in _dbContext.HoaDonChiTiets on hd.IdHoadon equals hdc.MaHoaDon
-                        where hd.NgayTao.HasValue && hd.NgayTao.Value.Year == year
+                        where hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value.Year == year
                         group hdc by hdc.MaSpct into g
                         select new
                         {
@@ -189,14 +190,14 @@ namespace DAL.Responsitories
         public decimal GetTotalRevenue(DateTime startDate, DateTime endDate)
         {
             return _dbContext.HoaDons
-                .Where(hd => hd.NgayTao.HasValue && hd.NgayTao.Value >= startDate && hd.NgayTao.Value <= endDate)
+                .Where(hd => hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value >= startDate && hd.NgayThanhToan.Value <= endDate)
                 .Sum(hd => hd.TongSoTienHoaDon);
         }
 
         public int GetInvoiceCount(DateTime startDate, DateTime endDate)
         {
             return _dbContext.HoaDons
-                .Count(hd => hd.NgayTao.HasValue && hd.NgayTao.Value >= startDate && hd.NgayTao.Value <= endDate);
+                .Count(hd => hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value >= startDate && hd.NgayThanhToan.Value <= endDate);
         }
 
         public int GetProductCount(DateTime startDate, DateTime endDate)
@@ -207,7 +208,7 @@ namespace DAL.Responsitories
                     hdc => hdc.MaHoaDon,
                     hd => hd.IdHoadon,
                     (hdc, hd) => new { hdc, hd })
-                .Where(x => x.hd.NgayTao.HasValue && x.hd.NgayTao.Value >= startDate && x.hd.NgayTao.Value <= endDate)
+                .Where(x => x.hd.NgayThanhToan.HasValue && x.hd.NgayThanhToan.Value >= startDate && x.hd.NgayThanhToan.Value <= endDate)
                 .Sum(x => x.hdc.SoLuong ?? 0);
         }
 
@@ -215,7 +216,7 @@ namespace DAL.Responsitories
         {
             // Số lượng khách hàng duy nhất có hóa đơn trong khoảng thời gian
             return _dbContext.HoaDons
-                .Where(hd => hd.NgayTao.HasValue && hd.NgayTao.Value >= startDate && hd.NgayTao.Value <= endDate)
+                .Where(hd => hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value >= startDate && hd.NgayThanhToan.Value <= endDate)
                 .Select(hd => hd.SoDienThoai)
                 .Distinct()
                 .Count();
@@ -224,16 +225,16 @@ namespace DAL.Responsitories
         public List<HoaDon> GetHoaDonsByYearAndMonth(int year, int month)
         {
             return _dbContext.HoaDons
-                .Where(hd => hd.NgayTao.HasValue
-                    && hd.NgayTao.Value.Year == year
-                    && hd.NgayTao.Value.Month == month)
+                .Where(hd => hd.NgayThanhToan.HasValue
+                    && hd.NgayThanhToan.Value.Year == year
+                    && hd.NgayThanhToan.Value.Month == month)
                 .ToList();
         }
 
         public List<HoaDon> GetInvoicesByYear(int year)
         {
             return _dbContext.HoaDons
-                .Where(hd => hd.NgayTao.HasValue && hd.NgayTao.Value.Year == year)
+                .Where(hd => hd.NgayThanhToan.HasValue && hd.NgayThanhToan.Value.Year == year)
                 .ToList();
         }
 
@@ -247,9 +248,9 @@ namespace DAL.Responsitories
         public List<HoaDon> GetHoaDonsByDateRanges(DateTime startDate, DateTime endDate)
         {
             return _dbContext.HoaDons
-                .Where(hd => hd.NgayTao.HasValue
-                             && hd.NgayTao.Value >= startDate
-                             && hd.NgayTao.Value <= endDate)
+                .Where(hd => hd.NgayThanhToan.HasValue
+                             && hd.NgayThanhToan.Value >= startDate
+                             && hd.NgayThanhToan.Value <= endDate)
                 .ToList();
         }
     }

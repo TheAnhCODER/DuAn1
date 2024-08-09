@@ -305,7 +305,7 @@
             btn_TimKiem.FlatStyle = FlatStyle.Flat;
             btn_TimKiem.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_TimKiem.ForeColor = Color.White;
-            btn_TimKiem.Location = new Point(563, 19);
+            btn_TimKiem.Location = new Point(553, 19);
             btn_TimKiem.Name = "btn_TimKiem";
             btn_TimKiem.Size = new Size(75, 39);
             btn_TimKiem.TabIndex = 2;

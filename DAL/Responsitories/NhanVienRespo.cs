@@ -41,7 +41,8 @@ namespace DAL.Responsitories
         public List<NhanVien> TimNhanVien(string tim)
         {
             return dbContext.NhanViens
-                            .Where(p => p.DienThoai.Contains(tim) || p.TenNhanVien.Contains(tim))
+                            .Where(p => p.IdChucvu == 2 &&
+                                        (p.DienThoai.Contains(tim) || p.TenNhanVien.Contains(tim)))
                             .ToList();
         }
         public NhanVien GetNhanVienByPhoneNumber(string phoneNumber)
@@ -116,7 +117,7 @@ namespace DAL.Responsitories
                 if (updateItem != null)
                 {
                     // Gán giá trị mới
-                    updateItem.MatKhau = matkhaumoi; 
+                    updateItem.MatKhau = matkhaumoi;
                     dbContext.NhanViens.Update(updateItem);
                     dbContext.SaveChanges(); // Lưu lại thay đổi
                     return true;
@@ -128,7 +129,16 @@ namespace DAL.Responsitories
                 return false;
             }
         }
+        public bool IsPhoneNumberExists(string phoneNumber)
+        {
+            // Kiểm tra sự tồn tại của số điện thoại trong cơ sở dữ liệu
+            return dbContext.NhanViens.Any(nv => nv.DienThoai == phoneNumber);
+        }
 
+        public bool IsEmailExists(string email)
+        {
+            return dbContext.NhanViens.Any(nv => nv.Email == email);
+        }
     }
 }
 //Data Source=DESKTOP-BQH9I25;Initial Catalog=DuAn1;Integrated Security=True

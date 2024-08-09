@@ -46,7 +46,7 @@ namespace GUI
         {
             List<HoaDon> hoaDons = hoaDonServices.GetAllHoaDons();
             dgv_hoadon_HoaDon.Rows.Clear();
-            dgv_hoadon_HoaDon.ColumnCount = 8;
+            dgv_hoadon_HoaDon.ColumnCount = 9;
             int stt = 1;
 
             dgv_hoadon_HoaDon.Columns[0].HeaderText = "STT";
@@ -57,6 +57,7 @@ namespace GUI
             dgv_hoadon_HoaDon.Columns[5].HeaderText = "Trạng thái thanh toán";
             dgv_hoadon_HoaDon.Columns[6].HeaderText = "Tổng số tiền hóa đơn";
             dgv_hoadon_HoaDon.Columns[7].HeaderText = "Ngày tạo";
+            dgv_hoadon_HoaDon.Columns[8].HeaderText = "Ngày thanh toán";
 
             dgv_hoadon_HoaDon.Columns[0].Visible = false;
             dgv_hoadon_HoaDon.Columns[1].Visible = false;
@@ -82,15 +83,15 @@ namespace GUI
                 : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string phuongthucthanhtoan = item.IdPhuongthucthanhtoan == 1 ? "Tiền mặt" : "Chuyển khoản";
 
-                string status = item.TrangThaiThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
-                dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"));
+                string status = "Đã thanh toán"; // Chỉ có trạng thái "Đã thanh toán"
+                dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"), item.NgayThanhToan?.ToString("dd/MM/yyyy"));
             }
         }
         public void LoadHoaDon()
         {
             List<HoaDon> hoaDons = hoaDonServices.GetAllHoaDonChos();
             dgv_hoadon_HoaDon.Rows.Clear();
-            dgv_hoadon_HoaDon.ColumnCount = 8;
+            dgv_hoadon_HoaDon.ColumnCount = 9;
             int stt = 1;
 
             dgv_hoadon_HoaDon.Columns[0].HeaderText = "STT";
@@ -101,6 +102,7 @@ namespace GUI
             dgv_hoadon_HoaDon.Columns[5].HeaderText = "Trạng thái thanh toán";
             dgv_hoadon_HoaDon.Columns[6].HeaderText = "Tổng số tiền hóa đơn";
             dgv_hoadon_HoaDon.Columns[7].HeaderText = "Ngày tạo";
+            dgv_hoadon_HoaDon.Columns[8].HeaderText = "Ngày thanh toán";
 
             dgv_hoadon_HoaDon.Columns[0].Visible = false;
             dgv_hoadon_HoaDon.Columns[1].Visible = false;
@@ -125,15 +127,15 @@ namespace GUI
                 ? nhanVienDict[item.IdNhanvien.Value]
                 : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string phuongthucthanhtoan = item.IdPhuongthucthanhtoan == 1 ? "Tiền mặt" : "Chuyển khoản";
-                string status = item.TrangThaiThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
-                dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"));
+                string status = "Đã thanh toán"; // Chỉ có trạng thái "Đã thanh toán"
+                dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"), item.NgayThanhToan?.ToString("dd/MM/yyyy"));
             }
         }
         public void LoadHoaDon1()
         {
             List<HoaDon> hoaDon1 = hoaDonServices.GetAllHoaDon1();
             dgv_hoadon_HoaDon.Rows.Clear();
-            dgv_hoadon_HoaDon.ColumnCount = 8;
+            dgv_hoadon_HoaDon.ColumnCount = 9;
             int stt = 1;
 
             dgv_hoadon_HoaDon.Columns[0].HeaderText = "STT";
@@ -144,6 +146,7 @@ namespace GUI
             dgv_hoadon_HoaDon.Columns[5].HeaderText = "Trạng thái thanh toán";
             dgv_hoadon_HoaDon.Columns[6].HeaderText = "Tổng số tiền hóa đơn";
             dgv_hoadon_HoaDon.Columns[7].HeaderText = "Ngày tạo";
+            dgv_hoadon_HoaDon.Columns[8].HeaderText = "Ngày thanh toán";
 
             dgv_hoadon_HoaDon.Columns[0].Visible = false;
             dgv_hoadon_HoaDon.Columns[1].Visible = false;
@@ -169,14 +172,14 @@ namespace GUI
                 ? nhanVienDict[item.IdNhanvien.Value]
                 : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string phuongthucthanhtoan = item.IdPhuongthucthanhtoan == 1 ? "Tiền mặt" : "Chuyển khoản";
-                string status = item.TrangThaiThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
-                dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"));
+                string status = "Đã thanh toán"; // Chỉ có trạng thái "Đã thanh toán"
+                dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"), item.NgayThanhToan?.ToString("dd/MM/yyyy"));
             }
         }
         public void ShowHoaDon(List<HoaDon> hoaDonList)
         {
             dgv_hoadon_HoaDon.Rows.Clear();
-            dgv_hoadon_HoaDon.ColumnCount = 8;
+            dgv_hoadon_HoaDon.ColumnCount = 9;
             int stt = 1;
 
             dgv_hoadon_HoaDon.Columns[0].HeaderText = "STT";
@@ -187,6 +190,7 @@ namespace GUI
             dgv_hoadon_HoaDon.Columns[5].HeaderText = "Trạng thái thanh toán";
             dgv_hoadon_HoaDon.Columns[6].HeaderText = "Tổng số tiền hóa đơn";
             dgv_hoadon_HoaDon.Columns[7].HeaderText = "Ngày tạo";
+            dgv_hoadon_HoaDon.Columns[8].HeaderText = "Ngày thanh toán";
 
             dgv_hoadon_HoaDon.Columns[0].Visible = false;
             dgv_hoadon_HoaDon.Columns[1].Visible = false;
@@ -211,8 +215,8 @@ namespace GUI
                 : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
 
                 string phuongthucthanhtoan = item.IdPhuongthucthanhtoan == 1 ? "Tiền mặt" : "Chuyển khoản";
-                string status = item.TrangThaiThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
-                dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"));
+                string status = "Đã thanh toán"; // Chỉ có trạng thái "Đã thanh toán"
+                dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"), item.NgayThanhToan?.ToString("dd/MM/yyyy"));
             }
         }
         private void LoadData_dgvHoaDonChiTiet(List<HoaDonChiTiet> hoaDonChiTiets)
@@ -261,9 +265,7 @@ namespace GUI
             {
                 var trangThaiList = new Dictionary<int, string>
                 {
-                    { -1, "Tất cả" }, // Thêm tùy chọn "Tất cả" với giá trị là -1
-                    { 0, "Chưa thanh toán" },
-                    { 1, "Đã thanh toán" },
+                    { 1, "Đã thanh toán" } // Chỉ có trạng thái "Đã thanh toán"
                 };
                 cb_trangthai_HoaDon.DataSource = new BindingSource(trangThaiList, null);
                 cb_trangthai_HoaDon.DisplayMember = "Value";
@@ -505,7 +507,7 @@ namespace GUI
                 return;
             }
             DateTime startDate = dtp_NgayBatDau.Value.Date;
-            DateTime endDate = dtp_NgayKetThuc.Value.Date;
+            DateTime endDate = dtp_NgayKetThuc.Value.Date.AddDays(1).Date;
             List<HoaDon> hoaDons = hoaDonServices.GetHoaDonsByDateRange(startDate, endDate);
             ShowHoaDon(hoaDons);
 

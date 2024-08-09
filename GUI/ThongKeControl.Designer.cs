@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThongKeControl));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
@@ -321,7 +322,7 @@
             groupBox1.Size = new Size(856, 409);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Tìm kiếm thời gian";
+            groupBox1.Text = "SS";
             // 
             // pn_timtheokhoang_ThongKe
             // 
@@ -332,7 +333,7 @@
             pn_timtheokhoang_ThongKe.Controls.Add(date_ngayketthuc_ThongKe);
             pn_timtheokhoang_ThongKe.Location = new Point(275, 22);
             pn_timtheokhoang_ThongKe.Name = "pn_timtheokhoang_ThongKe";
-            pn_timtheokhoang_ThongKe.Size = new Size(414, 91);
+            pn_timtheokhoang_ThongKe.Size = new Size(408, 91);
             pn_timtheokhoang_ThongKe.TabIndex = 12;
             pn_timtheokhoang_ThongKe.Visible = false;
             // 
@@ -395,8 +396,18 @@
             // dgv_loadsanpham_ThongKe
             // 
             dgv_loadsanpham_ThongKe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgv_loadsanpham_ThongKe.DefaultCellStyle = dataGridViewCellStyle1;
             dgv_loadsanpham_ThongKe.Location = new Point(9, 21);
             dgv_loadsanpham_ThongKe.Name = "dgv_loadsanpham_ThongKe";
+            dgv_loadsanpham_ThongKe.ReadOnly = true;
+            dgv_loadsanpham_ThongKe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_loadsanpham_ThongKe.Size = new Size(829, 246);
             dgv_loadsanpham_ThongKe.TabIndex = 0;
             // 

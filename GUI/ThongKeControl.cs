@@ -240,21 +240,19 @@ namespace GUI
         private void btn_timKiem_ThongKe_Click(object sender, EventArgs e)
         {
             DateTime startDate = date_ngaybatdau_ThongKe.Value.Date;
-            // Đặt endDate đến cuối ngày (23:59:59)
-            DateTime endDate = date_ngayketthuc_ThongKe.Value.Date;
+            DateTime endDate = date_ngayketthuc_ThongKe.Value.Date.AddDays(1).AddTicks(-1); // Bao gồm cả ngày kết thúc
             DateTime currentDate = DateTime.Now.Date;
             if (startDate > endDate)
             {
-                MessageBox.Show("Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ngày kết thúc phải lớn hơn ngày bắt đầu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (endDate > currentDate)
+            if (endDate > currentDate.AddDays(1))
             {
                 MessageBox.Show("Ngày kết thúc không thể lớn hơn ngày hiện tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            // Sau khi kiểm tra, điều chỉnh endDate để bao gồm toàn bộ ngày trong truy vấn
-            DateTime endOfDay = endDate.AddDays(1).AddTicks(-1);
+
             // Tính toán tổng doanh thu, số lượng hóa đơn, số lượng sản phẩm và số lượng khách hàng trong khoảng thời gian
             decimal totalRevenue = hoaDonServices.GetTotalRevenue(startDate, endDate);
             int invoiceCount = hoaDonServices.GetInvoiceCount(startDate, endDate);
@@ -267,6 +265,7 @@ namespace GUI
             txt_sanpham_ThongKe.Text = productCount.ToString();
             txt_khachhang_ThongKe.Text = customerCount.ToString();
             LoadInvoiceDetailsForDateRange(startDate, endDate);
+
         }
 
         private void rb_timtheokhoang_ThongKe_CheckedChanged(object sender, EventArgs e)

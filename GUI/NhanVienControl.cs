@@ -177,8 +177,19 @@ namespace GUI
                     }
                     if (IsVietnamesePhoneNumber(tb_sdt_NhanVien.Text))
                     {
+                        if (nhanVienServices.IsPhoneNumberExists(tb_sdt_NhanVien.Text))
+                        {
+                            MessageBox.Show("Số điện thoại đã tồn tại. Vui lòng nhập số điện thoại khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
                         if (IsEmail(tb_email_NhanVien.Text))
                         {
+                            if (nhanVienServices.IsEmailExists(tb_email_NhanVien.Text))
+                            {
+                                MessageBox.Show("Email đã tồn tại. Vui lòng nhập email khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
                             string tenNhanVien = tb_ten_NhanVien.Text;
                             string? gioiTinh = rb_nam_NhanVien.Checked ? "Nam" : rb_nu_NhanVien.Checked ? "Nữ" : null;
                             DateTime ngaySinh = dateTime_ngaysinh_NhanVien.Value; // Sử dụng thuộc tính Value để lấy giá trị DateTime
@@ -186,8 +197,9 @@ namespace GUI
                             string dienThoai = tb_sdt_NhanVien.Text;
                             string email = tb_email_NhanVien.Text;
                             string matKhau = tb_matkhau_NhanVien.Text;
+                            int idChucvu = 2;
                             bool trangThai = (bool)cb_trangthai_NhanVien.SelectedValue;
-                            string kq = nhanVienServices.CNThem(tenNhanVien, gioiTinh, ngaySinh, diaChi, dienThoai, email, matKhau, trangThai);
+                            string kq = nhanVienServices.CNThem(tenNhanVien, gioiTinh, ngaySinh, diaChi, dienThoai, email, matKhau, trangThai, idChucvu);
                             MessageBox.Show(kq);
                             LoadNhanVien();
                             return;
@@ -224,6 +236,11 @@ namespace GUI
                 {
                     if (IsVietnamesePhoneNumber(tb_sdt_NhanVien.Text))
                     {
+                        if (nhanVienServices.IsPhoneNumberExists(tb_sdt_NhanVien.Text))
+                        {
+                            MessageBox.Show("Số điện thoại đã tồn tại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         if (IdNhanVien == "")
                         {
                             MessageBox.Show("Vui lòng chọn một nhân viên để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -231,6 +248,11 @@ namespace GUI
                         }
                         if (IsEmail(tb_email_NhanVien.Text))
                         {
+                            if (nhanVienServices.IsEmailExists(tb_email_NhanVien.Text))
+                            {
+                                MessageBox.Show("Email đã tồn tại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
                             string tenNhanVien = tb_ten_NhanVien.Text;
                             string? gioiTinh = rb_nam_NhanVien.Checked ? "Nam" : rb_nu_NhanVien.Checked ? "Nữ" : null;
                             DateTime ngaySinh = dateTime_ngaysinh_NhanVien.Value; // Sử dụng thuộc tính Value để lấy giá trị DateTime
