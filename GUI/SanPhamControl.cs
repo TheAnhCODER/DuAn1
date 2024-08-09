@@ -1691,5 +1691,24 @@ namespace GUI
                 }
             }
         }
+
+
+
+        public void RefreshData()
+        {
+            LoadSanPhamCT();
+
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 }

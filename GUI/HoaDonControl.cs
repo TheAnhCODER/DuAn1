@@ -42,6 +42,12 @@ namespace GUI
                 Application.Exit();
             }
         }
+
+        public void RefreshData()
+        {
+            LoadHoaDonAll();
+
+        }
         public void LoadHoaDonAll()
         {
             List<HoaDon> hoaDons = hoaDonServices.GetAllHoaDons();
@@ -467,12 +473,7 @@ namespace GUI
         {
             LoadHoaDonAll();
 
-            dateTime_ngaytaohoadon_HoaDon.CustomFormat = " ";
-            dateTime_ngaytaohoadon_HoaDon.Format = DateTimePickerFormat.Custom;
-            dtp_NgayKetThuc.CustomFormat = " ";
-            dtp_NgayKetThuc.Format = DateTimePickerFormat.Custom;
-            dtp_NgayBatDau.CustomFormat = " ";
-            dtp_NgayBatDau.Format = DateTimePickerFormat.Custom;
+          
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -18,8 +18,12 @@ namespace DAL.Responsitories
 
         public List<HoaDon> GetAllHoaDons()
         {
-            return _dbContext.HoaDons.ToList();
+            using (var context = new DuAn1Context())
+            {
+                return context.HoaDons.ToList();
+            }
         }
+
 
         public void TaoHoaDonCho(HoaDon hoaDon)
         {

@@ -20,9 +20,11 @@ namespace DAL.Responsitories
         // Lấy tất cả san pham ct
         public List<SanPhamChiTiet> GetAll()
         {
-            return _duan1Context.SanPhamChiTiets.ToList();
+            using (var context = new DuAn1Context()) // Giả sử DuAn1Context là tên DbContext của bạn
+            {
+                return context.SanPhamChiTiets.ToList();
+            }
         }
-
         // Lấy spct theo ma sp
         public List<SanPhamChiTiet> GetSPCTByMASP(Guid maSP)
         {

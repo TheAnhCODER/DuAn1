@@ -74,6 +74,7 @@ namespace GUI
         {
             MoveSidePanel(btn_SanPham);
             sanPhamControl1.BringToFront();
+            sanPhamControl1.RefreshData();
         }
 
         private void btn_KhachHang_Click(object sender, EventArgs e)
@@ -101,7 +102,7 @@ namespace GUI
         {
             MoveSidePanel(btn_HoaDon);
             hoaDonControl1.BringToFront();
-
+            hoaDonControl1.RefreshData();
         }
 
         private void btn_ThongKe_Click_1(object sender, EventArgs e)
