@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThongKeControl));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
@@ -322,7 +322,7 @@
             groupBox1.Size = new Size(856, 409);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
-            groupBox1.Text = "SS";
+            groupBox1.Text = "Thống kê theo thời gian";
             // 
             // pn_timtheokhoang_ThongKe
             // 
@@ -396,14 +396,14 @@
             // dgv_loadsanpham_ThongKe
             // 
             dgv_loadsanpham_ThongKe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgv_loadsanpham_ThongKe.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgv_loadsanpham_ThongKe.DefaultCellStyle = dataGridViewCellStyle2;
             dgv_loadsanpham_ThongKe.Location = new Point(9, 21);
             dgv_loadsanpham_ThongKe.Name = "dgv_loadsanpham_ThongKe";
             dgv_loadsanpham_ThongKe.ReadOnly = true;
@@ -483,6 +483,7 @@
             Controls.Add(panel1);
             Name = "ThongKeControl";
             Size = new Size(868, 628);
+            Load += ThongKeControl_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

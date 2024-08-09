@@ -36,7 +36,7 @@ namespace DAL.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=VUANHDUC\\SQLEXPRESS;Database=DuAn1;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-BQH9I25;Database=DuAn1;Trusted_Connection=True;");
             }
         }
 
@@ -45,7 +45,7 @@ namespace DAL.Models
             modelBuilder.Entity<ChucVu>(entity =>
             {
                 entity.HasKey(e => e.IdChucvu)
-                    .HasName("PK__ChucVu__B4FC39BFEF7B082C");
+                    .HasName("PK__ChucVu__B4FC39BF7E205319");
 
                 entity.ToTable("ChucVu");
 
@@ -59,7 +59,7 @@ namespace DAL.Models
             modelBuilder.Entity<DanhMuc>(entity =>
             {
                 entity.HasKey(e => e.IdDanhMuc)
-                    .HasName("PK__DanhMuc__8CE82CD10D647B63");
+                    .HasName("PK__DanhMuc__8CE82CD125E737FF");
 
                 entity.ToTable("DanhMuc");
 
@@ -75,7 +75,7 @@ namespace DAL.Models
             modelBuilder.Entity<HoaDon>(entity =>
             {
                 entity.HasKey(e => e.IdHoadon)
-                    .HasName("PK__HoaDon__F9F513311C07FDB6");
+                    .HasName("PK__HoaDon__F9F5133196B1CE1F");
 
                 entity.ToTable("HoaDon");
 
@@ -111,23 +111,23 @@ namespace DAL.Models
                 entity.HasOne(d => d.IdNhanvienNavigation)
                     .WithMany(p => p.HoaDons)
                     .HasForeignKey(d => d.IdNhanvien)
-                    .HasConstraintName("FK__HoaDon__ID_nhanv__693CA210");
+                    .HasConstraintName("FK__HoaDon__ID_nhanv__6C190EBB");
 
                 entity.HasOne(d => d.IdPhuongthucthanhtoanNavigation)
                     .WithMany(p => p.HoaDons)
                     .HasForeignKey(d => d.IdPhuongthucthanhtoan)
-                    .HasConstraintName("FK__HoaDon__id_phuon__6A30C649");
+                    .HasConstraintName("FK__HoaDon__id_phuon__6D0D32F4");
 
                 entity.HasOne(d => d.SoDienThoaiNavigation)
                     .WithMany(p => p.HoaDons)
                     .HasForeignKey(d => d.SoDienThoai)
-                    .HasConstraintName("FK__HoaDon__So_dien___68487DD7");
+                    .HasConstraintName("FK__HoaDon__So_dien___6B24EA82");
             });
 
             modelBuilder.Entity<HoaDonChiTiet>(entity =>
             {
                 entity.HasKey(e => new { e.MaSpct, e.MaHoaDon })
-                    .HasName("PK__HoaDonCh__36E3C8547B53EF56");
+                    .HasName("PK__HoaDonCh__36E3C8547843BA4C");
 
                 entity.ToTable("HoaDonChiTiet");
 
@@ -139,19 +139,19 @@ namespace DAL.Models
                     .WithMany(p => p.HoaDonChiTiets)
                     .HasForeignKey(d => d.MaHoaDon)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__HoaDonChi__MaHoa__6E01572D");
+                    .HasConstraintName("FK__HoaDonChi__MaHoa__70DDC3D8");
 
                 entity.HasOne(d => d.MaSpctNavigation)
                     .WithMany(p => p.HoaDonChiTiets)
                     .HasForeignKey(d => d.MaSpct)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__HoaDonChi__MaSPC__6D0D32F4");
+                    .HasConstraintName("FK__HoaDonChi__MaSPC__6FE99F9F");
             });
 
             modelBuilder.Entity<Khach>(entity =>
             {
                 entity.HasKey(e => e.SoDienThoai)
-                    .HasName("PK__Khach__F0FE0FA4C39538B3");
+                    .HasName("PK__Khach__F0FE0FA4DEEF4962");
 
                 entity.ToTable("Khach");
 
@@ -171,7 +171,7 @@ namespace DAL.Models
             modelBuilder.Entity<KhuyenMai>(entity =>
             {
                 entity.HasKey(e => e.IdKhuyenMai)
-                    .HasName("PK__KhuyenMa__5B621D09BD7FDFF5");
+                    .HasName("PK__KhuyenMa__5B621D09F9581E39");
 
                 entity.ToTable("KhuyenMai");
 
@@ -200,19 +200,19 @@ namespace DAL.Models
                     .WithMany(p => p.KhuyenMaiSpcts)
                     .HasForeignKey(d => d.IdKhuyenMai)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__KhuyenMai__IdKhu__60A75C0F");
+                    .HasConstraintName("FK__KhuyenMai__IdKhu__6383C8BA");
 
                 entity.HasOne(d => d.IdSanPhamChiTietNavigation)
                     .WithMany(p => p.KhuyenMaiSpcts)
                     .HasForeignKey(d => d.IdSanPhamChiTiet)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__KhuyenMai__IdSan__619B8048");
+                    .HasConstraintName("FK__KhuyenMai__IdSan__6477ECF3");
             });
 
             modelBuilder.Entity<KichCo>(entity =>
             {
                 entity.HasKey(e => e.IdKichCo)
-                    .HasName("PK__KichCo__EBB498AF5ABDB80F");
+                    .HasName("PK__KichCo__EBB498AFEC44B040");
 
                 entity.ToTable("KichCo");
 
@@ -228,7 +228,7 @@ namespace DAL.Models
             modelBuilder.Entity<MauSac>(entity =>
             {
                 entity.HasKey(e => e.IdMauSac)
-                    .HasName("PK__MauSac__5D8EF426BA3B1099");
+                    .HasName("PK__MauSac__5D8EF4262F2613CE");
 
                 entity.ToTable("MauSac");
 
@@ -244,7 +244,7 @@ namespace DAL.Models
             modelBuilder.Entity<NhanVien>(entity =>
             {
                 entity.HasKey(e => e.IdNhanvien)
-                    .HasName("PK__NhanVien__38E5C90548E66F70");
+                    .HasName("PK__NhanVien__38E5C905EB362BF4");
 
                 entity.ToTable("NhanVien");
 
@@ -288,13 +288,13 @@ namespace DAL.Models
                 entity.HasOne(d => d.IdChucvuNavigation)
                     .WithMany(p => p.NhanViens)
                     .HasForeignKey(d => d.IdChucvu)
-                    .HasConstraintName("FK__NhanVien__Trang___3B75D760");
+                    .HasConstraintName("FK__NhanVien__Trang___4222D4EF");
             });
 
             modelBuilder.Entity<PhuongThucThanhToan>(entity =>
             {
                 entity.HasKey(e => e.IdPhuongthucthanhtoan)
-                    .HasName("PK__PhuongTh__99624A7B4AD26D67");
+                    .HasName("PK__PhuongTh__99624A7B7AD16A29");
 
                 entity.ToTable("PhuongThucThanhToan");
 
@@ -308,7 +308,7 @@ namespace DAL.Models
             modelBuilder.Entity<SanPham>(entity =>
             {
                 entity.HasKey(e => e.IdSanPham)
-                    .HasName("PK__SanPham__5776A52973B12B44");
+                    .HasName("PK__SanPham__5776A52915FDD328");
 
                 entity.ToTable("SanPham");
 
@@ -331,18 +331,18 @@ namespace DAL.Models
                 entity.HasOne(d => d.IdDanhMucNavigation)
                     .WithMany(p => p.SanPhams)
                     .HasForeignKey(d => d.IdDanhMuc)
-                    .HasConstraintName("FK__SanPham__id_danh__4F7CD00D");
+                    .HasConstraintName("FK__SanPham__id_danh__5629CD9C");
 
                 entity.HasOne(d => d.IdThuongHieuNavigation)
                     .WithMany(p => p.SanPhams)
                     .HasForeignKey(d => d.IdThuongHieu)
-                    .HasConstraintName("FK__SanPham__id_thuo__4E88ABD4");
+                    .HasConstraintName("FK__SanPham__id_thuo__5535A963");
             });
 
             modelBuilder.Entity<SanPhamChiTiet>(entity =>
             {
                 entity.HasKey(e => e.IdSanphamChitiet)
-                    .HasName("PK__SanPham___A718EABE7CE13258");
+                    .HasName("PK__SanPham___A718EABE78E74350");
 
                 entity.ToTable("SanPham_ChiTiet");
 
@@ -367,23 +367,23 @@ namespace DAL.Models
                 entity.HasOne(d => d.IdKichCoNavigation)
                     .WithMany(p => p.SanPhamChiTiets)
                     .HasForeignKey(d => d.IdKichCo)
-                    .HasConstraintName("FK__SanPham_C__id_ki__5535A963");
+                    .HasConstraintName("FK__SanPham_C__id_ki__5BE2A6F2");
 
                 entity.HasOne(d => d.IdMauSacNavigation)
                     .WithMany(p => p.SanPhamChiTiets)
                     .HasForeignKey(d => d.IdMauSac)
-                    .HasConstraintName("FK__SanPham_C__id_ma__5441852A");
+                    .HasConstraintName("FK__SanPham_C__id_ma__5AEE82B9");
 
                 entity.HasOne(d => d.IdSanPhamNavigation)
                     .WithMany(p => p.SanPhamChiTiets)
                     .HasForeignKey(d => d.IdSanPham)
-                    .HasConstraintName("FK__SanPham_C__id_sa__534D60F1");
+                    .HasConstraintName("FK__SanPham_C__id_sa__59FA5E80");
             });
 
             modelBuilder.Entity<ThuongHieu>(entity =>
             {
                 entity.HasKey(e => e.IdThuongHieu)
-                    .HasName("PK__ThuongHi__37E13EF331A93445");
+                    .HasName("PK__ThuongHi__37E13EF3E193C709");
 
                 entity.ToTable("ThuongHieu");
 

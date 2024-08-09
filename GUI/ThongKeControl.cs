@@ -402,5 +402,10 @@ namespace GUI
         {
             throw new NotImplementedException();
         }
+
+        private void ThongKeControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

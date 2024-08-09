@@ -81,15 +81,7 @@ namespace GUI
                 return;
             }
 
-            // Check if the new password length is valid
-            if (matKhauMoi.Length > 9)
-            {
-                MessageBox.Show("Mật khẩu mới không được quá 9 ký tự.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                tb_matkhaumoi.Clear();
-                tb_nhaplaimatkhau.Clear();
-                return;
-            }
-
+            
             // Check if the new password and confirmation match
             if (matKhauMoi != xacNhanMatKhau)
             {
@@ -112,7 +104,7 @@ namespace GUI
             }
             else
             {
-                MessageBox.Show("Tài khoản hoặc mật khẩu cũ không đúng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Mật khẩu cũ không đúng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 ClearFields();
                 GenerateCaptcha();
             }
