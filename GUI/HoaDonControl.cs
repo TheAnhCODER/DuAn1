@@ -89,7 +89,7 @@ namespace GUI
                 : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string phuongthucthanhtoan = item.IdPhuongthucthanhtoan == 1 ? "Tiền mặt" : "Chuyển khoản";
 
-                string status = "Đã thanh toán"; // Chỉ có trạng thái "Đã thanh toán"
+                string status = item.TrangThaiThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
                 dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"), item.NgayThanhToan?.ToString("dd/MM/yyyy"));
             }
         }
@@ -133,7 +133,7 @@ namespace GUI
                 ? nhanVienDict[item.IdNhanvien.Value]
                 : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string phuongthucthanhtoan = item.IdPhuongthucthanhtoan == 1 ? "Tiền mặt" : "Chuyển khoản";
-                string status = "Đã thanh toán"; // Chỉ có trạng thái "Đã thanh toán"
+                string status = item.TrangThaiThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
                 dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"), item.NgayThanhToan?.ToString("dd/MM/yyyy"));
             }
         }
@@ -178,7 +178,7 @@ namespace GUI
                 ? nhanVienDict[item.IdNhanvien.Value]
                 : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
                 string phuongthucthanhtoan = item.IdPhuongthucthanhtoan == 1 ? "Tiền mặt" : "Chuyển khoản";
-                string status = "Đã thanh toán"; // Chỉ có trạng thái "Đã thanh toán"
+                string status = item.TrangThaiThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
                 dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"), item.NgayThanhToan?.ToString("dd/MM/yyyy"));
             }
         }
@@ -221,7 +221,7 @@ namespace GUI
                 : "N/A"; // Thay "N/A" bằng chuỗi bạn muốn hiển thị khi không tìm thấy 
 
                 string phuongthucthanhtoan = item.IdPhuongthucthanhtoan == 1 ? "Tiền mặt" : "Chuyển khoản";
-                string status = "Đã thanh toán"; // Chỉ có trạng thái "Đã thanh toán"
+                string status = item.TrangThaiThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
                 dgv_hoadon_HoaDon.Rows.Add(stt++, item.IdHoadon, item.SoDienThoai, nhanVien, phuongthucthanhtoan, status, item.TongSoTienHoaDon, item.NgayTao?.ToString("dd/MM/yyyy"), item.NgayThanhToan?.ToString("dd/MM/yyyy"));
             }
         }
@@ -271,7 +271,9 @@ namespace GUI
             {
                 var trangThaiList = new Dictionary<int, string>
                 {
-                    { 1, "Đã thanh toán" } // Chỉ có trạng thái "Đã thanh toán"
+                    { -1, "Tất cả" }, // Thêm tùy chọn "Tất cả" với giá trị là -1
+                    { 0, "Chưa thanh toán" },
+                    { 1, "Đã thanh toán" },
                 };
                 cb_trangthai_HoaDon.DataSource = new BindingSource(trangThaiList, null);
                 cb_trangthai_HoaDon.DisplayMember = "Value";
@@ -483,7 +485,7 @@ namespace GUI
 
         private void refreshForm()
         {
-            cb_trangthai_HoaDon.SelectedIndex = -1;
+            cb_trangthai_HoaDon.SelectedValue = -1;
             txt_timkiem_HoaDon.Clear();
             dateTime_ngaytaohoadon_HoaDon.CustomFormat = " ";
             dateTime_ngaytaohoadon_HoaDon.Format = DateTimePickerFormat.Custom;
@@ -492,7 +494,6 @@ namespace GUI
             dtp_NgayBatDau.CustomFormat = " ";
             dtp_NgayBatDau.Format = DateTimePickerFormat.Custom;
             dgv_hoadonchitiet_HoaDon.Rows.Clear();
-      
         }
 
         private void btn_TimKiem_Click(object sender, EventArgs e)

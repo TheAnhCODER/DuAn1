@@ -74,7 +74,7 @@ namespace DAL.Responsitories
         public List<HoaDon> GetHoaDonByPhoneNumber(string phoneNumber)
         {
             return _dbContext.HoaDons
-                            .Where(hd => hd.SoDienThoai == phoneNumber && hd.TrangThaiThanhToan == 1)
+                            .Where(hd => hd.SoDienThoai == phoneNumber && hd.TrangThaiThanhToan != 0)
                             .ToList();
         }
 
