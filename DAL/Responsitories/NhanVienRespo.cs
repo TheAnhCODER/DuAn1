@@ -139,6 +139,28 @@ namespace DAL.Responsitories
         {
             return dbContext.NhanViens.Any(nv => nv.Email == email);
         }
+
+        public NhanVien GetNhanVienByEmailOrPhone(Guid idnhanvien)
+        {
+            return dbContext.NhanViens
+            .SingleOrDefault(nv => nv.IdNhanvien == idnhanvien);
+        }
+
+        public bool UpdateNhanVien(NhanVien nhanVien)
+        {
+            try
+            {
+                dbContext.NhanViens.Update(nhanVien);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                // Xử lý lỗi nếu cần
+                return false;
+            }
+
+        }
     }
 }
 //Data Source=DESKTOP-BQH9I25;Initial Catalog=DuAn1;Integrated Security=True

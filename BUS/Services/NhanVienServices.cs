@@ -135,5 +135,29 @@ namespace BUS.Services
         {
             return nhanVienRespo.IsEmailExists(email);
         }
+
+
+         public bool ThayDoiMatKhau(string idnhanvien, string matKhauCu, string matKhauMoi)
+        {
+            var nhanVien = nhanVienRespo.GetNhanVienByEmailOrPhone(Guid.Parse(idnhanvien));
+
+            if (nhanVien == null)
+            {
+                // Nhân viên không tồn tại
+                return false;
+            }
+
+            if (nhanVien.MatKhau == null || nhanVien.MatKhau != matKhauCu)
+            {
+                // Mật khẩu cũ không đúng
+                return false;
+            }
+
+            // Cập nhật mật khẩu mới
+            nhanVien.MatKhau = matKhauMoi;
+
+            return nhanVienRespo.UpdateNhanVien(nhanVien);
+        }
+
     }
 }
